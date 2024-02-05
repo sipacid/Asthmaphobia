@@ -1,0 +1,37 @@
+#pragma once
+#include <chrono>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <string>
+#include <thread>
+#include <Windows.h>
+
+#include "gamestate.h"
+#include "config/config.h"
+#include "feature/feature.h"
+#include "helper/helper.h"
+#include "logger/logger.h"
+#include "renderer/renderer.h"
+#include "sdk/sdk.h"
+#include "notifications/notifications.h"
+
+namespace Asthmaphobia
+{
+	inline HMODULE globalModule{};
+	inline HANDLE mainThread{};
+	inline DWORD mainThreadId{};
+	inline bool globalRunning{true};
+	inline float dpiScale = GetDpiForSystem() / 96.0f;
+
+	inline const char* cheatName =
+#ifdef _DEBUG
+		"[DEV] Asthmaphobia";
+#else
+	"Asthmaphobia";
+#endif
+
+	inline auto buildDate = __DATE__;
+	inline auto buildTime = __TIME__;
+	inline auto creditsText = "Made with love by Eve [sipacid.com]";
+}

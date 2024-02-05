@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{bbfcb896-802c-4afc-952c-e9cbfd5073b2}</ProjectGuid>
+    <RootNamespace>cheat</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;CHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;CHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;CHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>libraries/detours/lib/detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;CHEAT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>libraries/detours/lib/detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="libraries\detours\include\detours.h" />
+    <ClInclude Include="libraries\detours\include\detver.h" />
+    <ClInclude Include="libraries\detours\include\syelog.h" />
+    <ClInclude Include="libraries\imgui\imconfig.h" />
+    <ClInclude Include="libraries\imgui\imgui.h" />
+    <ClInclude Include="libraries\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="libraries\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="libraries\imgui\imgui_internal.h" />
+    <ClInclude Include="libraries\imgui\imgui_stdlib.h" />
+    <ClInclude Include="libraries\imgui\imstb_rectpack.h" />
+    <ClInclude Include="libraries\imgui\imstb_textedit.h" />
+    <ClInclude Include="libraries\imgui\imstb_truetype.h" />
+    <ClInclude Include="libraries\json\json.hpp" />
+    <ClInclude Include="resources\fonts\RobotoMonoMediumFont.h" />
+    <ClCompile Include="source\config\config.cpp" />
+    <ClCompile Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.cpp" />
+    <ClCompile Include="source\feature\feature.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\antikick\antikick.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\autokey\autokey.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\godmode\godmode.cpp" />
+    <ClCompile Include="source\feature\movement\infinitestamina\infinitestamina.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp" />
+    <ClCompile Include="source\feature\movement\noclip\noclip.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.cpp" />
+    <ClCompile Include="source\feature\movement\speed\speed.cpp" />
+    <ClCompile Include="source\feature\movement\teleport\teleport.cpp" />
+    <ClCompile Include="source\feature\players\playermodifier\playermodifier.cpp" />
+    <ClCompile Include="source\feature\visuals\evidenceesp\evidenceesp.cpp" />
+    <ClCompile Include="source\feature\visuals\fuseboxesp\fuseboxesp.cpp" />
+    <ClCompile Include="source\feature\visuals\ghostesp\ghostesp.cpp" />
+    <ClCompile Include="source\feature\visuals\ghostwindow\ghostwindow.cpp" />
+    <ClCompile Include="source\feature\visuals\flashlightmodifier\FlashlightModifier.cpp" />
+    <ClCompile Include="source\feature\visuals\playeresp\playeresp.cpp" />
+    <ClCompile Include="source\feature\visuals\watermark\watermark.cpp" />
+    <ClCompile Include="source\helper\helper.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkDeadZoneController_Awake.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkEvidenceController_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkExitLevel_Exit.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkExitLevel_ThereAreAlivePlayersOutsideTheTruck.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkFirstPersonController_Update.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkFuseBox_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkGameController_Exit.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkGhostAI_Hunting.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkGhostAI_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkKey_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInestigationBonus.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPauseMenuController_Leave.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPCDisablePlayerComponents_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPCFlashlight_Update.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPlayerStamina_Update.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPlayer_StartKillingPlayerNetworked.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkServerManager_KickPlayerNetworked.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkTarotCard_SetCard.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkTorch_Update.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkWndProc.cpp" />
+    <ClInclude Include="source\config\config.h" />
+    <ClInclude Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.h" />
+    <ClInclude Include="source\feature\feature.h" />
+    <ClInclude Include="source\feature\miscellaneous\antikick\antikick.h" />
+    <ClInclude Include="source\feature\miscellaneous\autokey\autokey.h" />
+    <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
+    <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
+    <ClInclude Include="source\feature\miscellaneous\godmode\godmode.h" />
+    <ClInclude Include="source\feature\movement\infinitestamina\infinitestamina.h" />
+    <ClInclude Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.h" />
+    <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h" />
+    <ClInclude Include="source\feature\movement\noclip\noclip.h" />
+    <ClInclude Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.h" />
+    <ClInclude Include="source\feature\movement\speed\speed.h" />
+    <ClInclude Include="source\feature\movement\teleport\teleport.h" />
+    <ClInclude Include="source\feature\players\playermodifier\playermodifier.h" />
+    <ClInclude Include="source\feature\setting.h" />
+    <ClInclude Include="source\feature\visuals\evidenceesp\evidenceesp.h" />
+    <ClInclude Include="source\feature\visuals\fuseboxesp\fuseboxesp.h" />
+    <ClInclude Include="source\feature\visuals\ghostesp\ghostesp.h" />
+    <ClInclude Include="source\feature\visuals\ghostwindow\ghostwindow.h" />
+    <ClInclude Include="source\feature\visuals\flashlightmodifier\FlashlightModifier.h" />
+    <ClInclude Include="source\feature\visuals\playeresp\playeresp.h" />
+    <ClInclude Include="source\feature\visuals\watermark\watermark.h" />
+    <ClInclude Include="source\gamestate.h" />
+    <ClInclude Include="source\helper\helper.h" />
+    <ClInclude Include="source\hooking\hooks\hooks.h" />
+    <ClInclude Include="source\menu\menu.h" />
+    <ClCompile Include="source\hooking\hooks\hkPresent.cpp" />
+    <ClInclude Include="source\notifications\notifications.h" />
+    <ClInclude Include="source\renderer\renderer.h" />
+    <ClInclude Include="source\common.h" />
+    <ClInclude Include="source\hooking\hooking.h" />
+    <ClInclude Include="source\logger\logger.h" />
+    <ClInclude Include="source\sdk\Camera.h" />
+    <ClInclude Include="source\sdk\Collider.h" />
+    <ClInclude Include="source\sdk\Component.h" />
+    <ClInclude Include="source\sdk\Cursor.h" />
+    <ClInclude Include="source\sdk\DeadZoneController.h" />
+    <ClInclude Include="source\sdk\Door.h" />
+    <ClInclude Include="source\sdk\EMF.h" />
+    <ClInclude Include="source\sdk\Evidence.h" />
+    <ClInclude Include="source\sdk\EvidenceController.h" />
+    <ClInclude Include="source\sdk\ExitLevel.h" />
+    <ClInclude Include="source\sdk\FirstPersonController.h" />
+    <ClInclude Include="source\sdk\FuseBox.h" />
+    <ClInclude Include="source\sdk\GameController.h" />
+    <ClInclude Include="source\sdk\GhostAI.h" />
+    <ClInclude Include="source\sdk\GhostEvidence.h" />
+    <ClInclude Include="source\sdk\GhostInfo.h" />
+    <ClInclude Include="source\sdk\GhostTraits.h" />
+    <ClInclude Include="source\sdk\Key.h" />
+    <ClInclude Include="source\sdk\LevelController.h" />
+    <ClInclude Include="source\sdk\LevelRoom.h" />
+    <ClInclude Include="source\sdk\LevelValues.h" />
+    <ClInclude Include="source\sdk\Light.h" />
+    <ClInclude Include="source\sdk\MapController.h" />
+    <ClInclude Include="source\sdk\Marshal.h" />
+    <ClInclude Include="source\sdk\MethodInfo.h" />
+    <ClInclude Include="source\sdk\MonoBehaviour.h" />
+    <ClInclude Include="source\sdk\Network.h" />
+    <ClInclude Include="source\sdk\PauseMenuController.h" />
+    <ClInclude Include="source\sdk\PCDisablePlayerComponents.h" />
+    <ClInclude Include="source\sdk\PCFlashlight.h" />
+    <ClInclude Include="source\sdk\PhotonNetwork.h" />
+    <ClInclude Include="source\sdk\PhotoValues.h" />
+    <ClInclude Include="source\sdk\Player.h" />
+    <ClInclude Include="source\sdk\PlayerSanity.h" />
+    <ClInclude Include="source\sdk\PlayerStamina.h" />
+    <ClInclude Include="source\sdk\Quaternion.h" />
+    <ClInclude Include="source\sdk\Resolution.h" />
+    <ClInclude Include="source\sdk\Screen.h" />
+    <ClInclude Include="source\sdk\sdk.h" />
+    <ClInclude Include="source\sdk\ServerManager.h" />
+    <ClInclude Include="source\sdk\String.h" />
+    <ClInclude Include="source\sdk\TarotCard.h" />
+    <ClInclude Include="source\sdk\TarotCards.h" />
+    <ClInclude Include="source\sdk\Time.h" />
+    <ClInclude Include="source\sdk\Torch.h" />
+    <ClInclude Include="source\sdk\Transform.h" />
+    <ClInclude Include="source\sdk\Vector2.h" />
+    <ClInclude Include="source\sdk\Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libraries\imgui\imgui.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_demo.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_draw.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_tables.cpp" />
+    <ClCompile Include="libraries\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="source\menu\menu.cpp" />
+    <ClCompile Include="source\renderer\renderer.cpp" />
+    <ClCompile Include="source\dllmain.cpp" />
+    <ClCompile Include="source\hooking\hooking.cpp" />
+    <ClCompile Include="source\logger\logger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libraries\detours\lib\detours.lib" />
+    <Library Include="libraries\detours\lib\syelog.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libraries\detours\lib\detours.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="libraries\imgui\LICENSE.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
