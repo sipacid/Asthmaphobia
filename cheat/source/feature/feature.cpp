@@ -20,7 +20,6 @@
 #include "movement/teleport/teleport.h"
 #include "players/playermodifier/playermodifier.h"
 #include "visuals/evidenceesp/evidenceesp.h"
-#include "visuals/flashlightmodifier/FlashlightModifier.h"
 #include "visuals/fuseboxesp/fuseboxesp.h"
 #include "visuals/ghostesp/ghostesp.h"
 #include "visuals/ghostwindow/ghostwindow.h"
@@ -58,7 +57,6 @@ FeatureManager::FeatureManager()
 	AddFeature("Visuals::PlayerESP", new Features::Visuals::PlayerESP());
 	AddFeature("Visuals::EvidenceESP", new Features::Visuals::EvidenceESP());
 	AddFeature("Visuals::FuseBoxESP", new Features::Visuals::FuseBoxESP());
-	AddFeature("Visuals::FlashlightModifier", new Features::Visuals::FlashlightModifier());
 
 	AddFeature("Players::PlayerModifier", new Features::Players::PlayerModifier());
 

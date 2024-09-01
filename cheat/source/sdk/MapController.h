@@ -8,12 +8,8 @@ namespace SDK
 		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
 		void* PlayerIcons; // List<RectTransform>
 		ListPlayer* Players; // List<Player>
-		Transform* BasementFloor; // Transform
-		Transform* FirstFloor; // Transform
-		Transform* SecondFloor; // Transform
+		void* AllFloors;
 		int32_t Index;
-		int32_t MinFloorIndex;
-		int32_t MaxFloorIndex;
 		float IconScale;
 		float PlayerIconScale;
 		void* MotionSensorData; // MotionSensorData
@@ -30,5 +26,5 @@ namespace SDK
 		MapControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), 0x196CEE0);
+	DECLARE_FUNCTION_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), 0x17F2E40);
 }

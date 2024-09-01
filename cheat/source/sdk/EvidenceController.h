@@ -27,5 +27,5 @@ namespace SDK
 		EvidenceControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(EvidenceController_Start, void(*)(EvidenceController* evidenceController, MethodInfo* methodInfo), 0x18AE530);
+	DECLARE_FUNCTION_POINTER(EvidenceController_Start, void(*)(EvidenceController* evidenceController, MethodInfo* methodInfo), 0x1768CF0);
 }

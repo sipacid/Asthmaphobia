@@ -6,15 +6,14 @@ namespace SDK
 	struct LevelRoomFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		ListPlayer* Players; // List<Player>
 		void* Field1; // List<LightSwitch>
 		void* Field2; // Door[]
 		void* RoomColliders; // List<Collider>
 		Transform* Field4; // Transform
 		void* AudioReverbZone; // AudioReverbZone
-		void* Field6; // LevelRoom.???
+		int32_t Field5;
 		void* Field7; // BoxCollider
-		void* Field8; // LevelRoom.???
+		int32_t Field6;
 		String* RoomName; // String
 		float Field10;
 		float Field11;

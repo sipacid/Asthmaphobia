@@ -22,10 +22,7 @@ namespace Asthmaphobia
 		static void hkFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);
 		static void hkTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo);
 		static void hkKey_Start(SDK::Key* key, SDK::MethodInfo* methodInfo);
-		static void hkPCFlashlight_Update(SDK::PCFlashlight* pcFlashlight, SDK::MethodInfo* methodInfo);
-		static void hkTorch_Update(SDK::Torch* torch, SDK::MethodInfo* methodInfo);
-		static int32_t hkLevelValues_GetInestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
+		static int32_t hkLevelValues_GetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
 		static void hkDeadZoneController_Awake(SDK::DeadZoneController* deadZoneController, SDK::MethodInfo* methodInfo);
-		static void hkPCDisablePlayerComponents_Start(SDK::PCDisablePlayerComponents* pcDisablePlayerComponents, SDK::MethodInfo* methodInfo);
 	};
 }

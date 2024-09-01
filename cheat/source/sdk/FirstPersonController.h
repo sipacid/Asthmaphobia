@@ -8,8 +8,9 @@ namespace SDK
 		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
 		bool CanMove;
 		bool CanTurn;
-		bool IsWalking;
-		bool CanSprint;
+		bool IsSprinting;
+		bool IsMoving;
+		bool canSprint;
 		float RunstepLength; // range 0 - 1
 		float StickToGroundForce;
 		float GravityMultiplier;
@@ -24,11 +25,8 @@ namespace SDK
 		Vector2 Input; // Vector2
 		Vector3 MoveDir; // Vector3
 		void* CharacterController; // CharacterController
-		int32_t CollisionFlags; // CollisionFlags
-		float StepCycle;
-		float NextStep;
+		int32_t WalkAlongLayers; // LayerMask
 		bool Crouching;
-		bool WasWalking;
 		float CurrentSpeed;
 		Vector3 DesiredMove; // Vector3
 		void* HitInfo; // RaycastHit
@@ -44,5 +42,5 @@ namespace SDK
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x430E20);
+	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x41F990);
 }

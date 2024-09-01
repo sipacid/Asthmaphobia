@@ -13,7 +13,8 @@ namespace SDK
 		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
 		void* Field0; // PhotonView
 		bool IsDead;
-		int Field2;
+		bool Field1;
+		int32_t Field2;
 		void* Field3; // PlayerCharacter
 		void* Field4; // ClosetZone
 		void* Field5; // GameObject
@@ -26,7 +27,7 @@ namespace SDK
 		void* Field12; // PhotonObjectInteract
 		void* Field13; // GameObject[]
 		void* Field14; // GameObject
-		void* Field15; // LayerMask
+		int32_t Field15; // LayerMask
 		void* Field16; // HeadMountedSocket
 		Transform* Field17; // Transform
 		Transform* Field18; // Transform
@@ -100,10 +101,10 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x9B5950)
-	DECLARE_FUNCTION_POINTER(Player_RevivePlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x9B5C30)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x9B5F70)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x9B5EB0)
-	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x9B6890)
-	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x9B69A0)
+	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x941670)
+	DECLARE_FUNCTION_POINTER(Player_RevivePlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x941950)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x941C40)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x941B80)
+	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x942660)
+	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x942770)
 }

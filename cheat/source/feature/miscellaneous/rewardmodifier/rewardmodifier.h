@@ -13,7 +13,7 @@ namespace Asthmaphobia::Features::Miscellaneous
 		void OnDraw() override;
 		void OnMenu() override;
 
-		int32_t OnGetInestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
+		int32_t OnGetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
 
 	private:
 		std::shared_ptr<Setting> InvestigationBonusSetting;

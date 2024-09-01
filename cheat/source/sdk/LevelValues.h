@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(LevelValues_GetInestigationBonus, int(*)(LevelValues* levelValues, MethodInfo* methodInfo), 0x195D240);
+	DECLARE_FUNCTION_POINTER(LevelValues_GetInvestigationBonus, int(*)(LevelValues* levelValues, MethodInfo* methodInfo), 0x17E4B10);
 }

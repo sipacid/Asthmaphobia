@@ -23,6 +23,7 @@ namespace SDK
 		bool Field12;
 		bool Field13;
 		bool Field14;
+		bool Field15;
 		float Field17;
 		float Field18;
 		float Field19;
@@ -37,5 +38,5 @@ namespace SDK
 		PlayerStaminaFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), 0x9E2A50);
+	DECLARE_FUNCTION_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), 0x979EF0);
 }

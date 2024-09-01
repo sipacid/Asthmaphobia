@@ -42,15 +42,16 @@ namespace SDK
 		void* Field6; // GhostInteraction
 		void* GhostActivity; // GhostActivity
 		void* Field8; // GhostModel
+		void* Field81; // GhostModel
 		void* Field9; // GhostModel[]
 		void* Field10; // GhostModel[]
-		//bool Field11;
+		bool Field11;
+		int Field111;
 		void* Field12; // ShadowCastingMode
+		float Field121;
 		void* Field13; // List<Vector3>
-		float Field14;
-		void* Field15; // SanityDrainer
-		//bool Field16;
-		void* Field17; // LayerMask
+		bool Field14;
+		int32_t Field17; // LayerMask
 		Transform* Field18; // Transform
 		Transform* Field19; // Transform
 		Transform* Field20; // Transform
@@ -64,6 +65,7 @@ namespace SDK
 		bool Field28;
 		bool Field29;
 		bool Field30;
+		bool Field301;
 		void* Field31; // WhiteSage
 		float Field32;
 		bool Field33;
@@ -97,6 +99,6 @@ namespace SDK
 		GhostAIFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x1630940);
-	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x162ECC0);
+	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x1536050);
+	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x15341E0);
 }

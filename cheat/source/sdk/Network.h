@@ -23,11 +23,14 @@ namespace SDK
 		int PrestigeIndex;
 		bool PrestigeTheme;
 		void* VotedContract; // Contract
-		void* PlatformType; // StoreSDKManager.???
-		int LegacyLevel;
-		int LegacyAccent;
-		int LegacyBackground;
-		int LegacyColor;
+		int32_t PlatformType; // StoreSDKManager.???
+		int32_t LegacyLevel;
+		int32_t LegacyAccent;
+		int32_t LegacyBackground;
+		int32_t LegacyColor;
+		void* PlayerEquipment;
+		bool hasBroughtItems;
+		int32_t totalEquipmentCost;
 	};
 
 	struct NetworkPlayerSpot
@@ -75,6 +78,13 @@ namespace SDK
 		void* Field8; // Network.???
 		void* Field9; // UnityEvent
 		void* Field10; // ???
+		void* Field12; // ???
+		void* Field13; // ???
+		void* Field14; // ???
+		void* Field15; // ???
+		void* Field16; // ???
+		void* Field17; // ???
+		void* Field18; // ???
 		bool Field11;
 	};
 
@@ -85,5 +95,5 @@ namespace SDK
 		NetworkFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x197D020);
+	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x18123B0);
 }

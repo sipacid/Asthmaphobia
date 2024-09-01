@@ -156,8 +156,11 @@ std::string Helper::EnumToString(const SDK::GhostEvidence* ghostEvidence)
 
 bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScreenPosition)
 {
-	const auto screenResolution = SDK::Screen_Get_CurrentResolution_ptr(nullptr);
-	const auto screenHeight = screenResolution.Height;
+	RECT rect;
+	const HWND hGame = FindWindowA(nullptr, "Phasmophobia");
+	GetWindowRect(hGame, &rect);
+
+	const auto screenHeight = rect.bottom - rect.top;
 	const auto camera = GetLocalPlayer()->Fields.Camera;
 	if (camera == nullptr)
 		return false;

@@ -41,7 +41,7 @@ namespace SDK
 		bool Field5;
 		String* Name;
 		int32_t Field7;
-		int Field8;
+		int32_t Field8;
 		bool Field9;
 		int32_t Field10;
 		int32_t Field11;

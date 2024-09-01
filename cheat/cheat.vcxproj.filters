@@ -162,12 +162,6 @@
     <ClInclude Include="source\sdk\PlayerSanity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\sdk\Resolution.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sdk\Screen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\sdk\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -270,18 +264,6 @@
     <ClInclude Include="source\sdk\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\sdk\PCFlashlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sdk\Torch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sdk\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\feature\visuals\flashlightmodifier\FlashlightModifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\sdk\Marshal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -295,9 +277,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\DeadZoneController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\sdk\PCDisablePlayerComponents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -452,19 +431,10 @@
     <ClCompile Include="source\hooking\hooks\hkKey_Start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\hooking\hooks\hkPCFlashlight_Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\hooking\hooks\hkTorch_Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\feature\visuals\flashlightmodifier\FlashlightModifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInestigationBonus.cpp">
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.cpp">
@@ -474,9 +444,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkDeadZoneController_Awake.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\hooking\hooks\hkPCDisablePlayerComponents_Start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

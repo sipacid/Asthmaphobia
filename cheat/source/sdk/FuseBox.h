@@ -9,9 +9,11 @@ namespace SDK
 		int32_t FuseBoxType; // FuseBox.???
 		void* Rends; // Renderer[]
 		void* Lights; // Light[]
+		void* VolumetricLights;
 		void* LightPulse; // LightPulse[]
 		void* RendsToTurnOff; // Renderer[]
 		void* LightSourcesWithoutSwitches; // LightSource[]
+		void* RotatingObjects;
 		void* LoopSource; // AudioSource
 		void* Noise; // Noise
 		Transform* Field8; // Transform
@@ -39,5 +41,5 @@ namespace SDK
 		FuseBoxFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FuseBox_Start, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), 0x1BE8AA0);
+	DECLARE_FUNCTION_POINTER(FuseBox_Start, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), 0x1A69150);
 }

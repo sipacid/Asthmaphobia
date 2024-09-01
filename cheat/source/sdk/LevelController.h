@@ -18,7 +18,6 @@ namespace SDK
 		LevelRoom* Field9; // LevelRoom
 		bool Field10;
 		FuseBox* Field11; // FuseBox
-		void* Field12; // List<JournalController>
 		GameController* GameController; // GameController
 		void* SoundController; // SoundController
 		void* Field15; // ItemSpawner
@@ -35,7 +34,6 @@ namespace SDK
 		int IntermediateZonesBlocked;
 		int ProZonesBlocked;
 		int NightmareZonesBlocked;
-		void* Field28; // ObiSolver
 		void* Field29; // Transform[]
 		void* Field30; // List<float>
 	};
