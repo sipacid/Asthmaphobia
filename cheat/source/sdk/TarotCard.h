@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(TarotCard_SetCard, void(*)(TarotCard* tarotCard, TarotCardType type, MethodInfo* methodInfo), 0x1C7CA40);
+	DECLARE_FUNCTION_POINTER(TarotCard_SetCard, void(*)(TarotCard* tarotCard, TarotCardType type, MethodInfo* methodInfo), 0x55A300);
 }

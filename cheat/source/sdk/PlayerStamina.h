@@ -38,5 +38,5 @@ namespace SDK
 		PlayerStaminaFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), 0x979EF0);
+	DECLARE_FUNCTION_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), 0xA332F0);
 }

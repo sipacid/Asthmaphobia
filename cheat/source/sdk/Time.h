@@ -4,5 +4,5 @@
 namespace SDK
 {
 	// UnityEngine.CoreModule.UnityEngine.Time
-	DECLARE_FUNCTION_POINTER(Time_Get_DeltaTime, float(*)(MethodInfo* methodInfo), 0x4167720);
+	DECLARE_FUNCTION_POINTER(Time_Get_DeltaTime, float(*)(MethodInfo* methodInfo), 0x4709EC0);
 }

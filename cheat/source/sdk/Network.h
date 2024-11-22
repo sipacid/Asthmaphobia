@@ -95,5 +95,5 @@ namespace SDK
 		NetworkFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x18123B0);
+	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x1C80290);
 }

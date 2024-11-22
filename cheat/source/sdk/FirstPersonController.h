@@ -24,8 +24,8 @@ namespace SDK
 		Camera* Camera; // Camera
 		Vector2 Input; // Vector2
 		Vector3 MoveDir; // Vector3
-		void* CharacterController; // CharacterController
-		int32_t WalkAlongLayers; // LayerMask
+		void* CharacterController; // PhysicsCharacterController
+		bool Field0;
 		bool Crouching;
 		float CurrentSpeed;
 		Vector3 DesiredMove; // Vector3
@@ -42,5 +42,5 @@ namespace SDK
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x41F990);
+	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x1010EE0);
 }

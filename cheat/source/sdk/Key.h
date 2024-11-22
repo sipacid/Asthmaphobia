@@ -7,6 +7,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Key_Start, void(*)(Key* key, MethodInfo* methodInfo), 0x1BB1AD0);
-	DECLARE_FUNCTION_POINTER(Key_GrabbedKey, void(*)(Key* key, MethodInfo* methodInfo), 0x1BB19C0);
+	DECLARE_FUNCTION_POINTER(Key_Start, void(*)(Key* key, MethodInfo* methodInfo), 0x20A7B00);
+	DECLARE_FUNCTION_POINTER(Key_GrabbedKey, void(*)(Key* key, MethodInfo* methodInfo), 0x20A79F0);
 }

@@ -26,5 +26,5 @@ namespace SDK
 		MapControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), 0x17F2E40);
+	DECLARE_FUNCTION_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), 0x1C672C0);
 }
