@@ -42,6 +42,6 @@ namespace SDK
 		GameControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(GameController_Exit, void(*)(GameController* gameController, void* photoMessageInfo, MethodInfo* methodInfo), 0x1BB16D0);
-	DECLARE_FUNCTION_POINTER(GameController_GetAveragePlayerInsanity, float(*)(GameController* gameController, MethodInfo* methodInfo), 0x1BB1880);
+	DECLARE_FUNCTION_POINTER(GameController_Exit, void(*)(GameController* gameController, void* photoMessageInfo, MethodInfo* methodInfo), 0x1C559B0);
+	DECLARE_FUNCTION_POINTER(GameController_GetAveragePlayerInsanity, float(*)(GameController* gameController, MethodInfo* methodInfo), 0x1C55AF0);
 }

@@ -8,5 +8,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Component_Get_Transform, Transform * (*)(Component* component, MethodInfo* methodInfo), 0x46F8DE0);
+	DECLARE_FUNCTION_POINTER(Component_Get_Transform, Transform * (*)(Component* component, MethodInfo* methodInfo), 0x47A6CC0);
 }

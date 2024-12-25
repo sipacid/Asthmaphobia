@@ -101,10 +101,10 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x9FA5A0)
-	DECLARE_FUNCTION_POINTER(Player_RevivePlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x9FA880)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x9FAC50)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x9FAB90)
-	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x9FB5E0)
-	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x9FB6F0)
+	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0xA4FA90)
+	DECLARE_FUNCTION_POINTER(Player_RevivePlayer, void(*)(Player* player, MethodInfo* methodInfo), 0xA4FD70)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0xA50140)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0xA50080)
+	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0xA50A50)
+	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0xA50B60)
 }

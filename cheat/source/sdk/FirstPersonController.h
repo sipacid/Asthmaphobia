@@ -42,5 +42,5 @@ namespace SDK
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x1010EE0);
+	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x100ABD0);
 }
