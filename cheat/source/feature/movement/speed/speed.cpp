@@ -33,10 +33,19 @@ void Speed::OnMenu()
 
 void Speed::OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
 {
+	static bool WasEnabled = false;
 	if (std::get<bool>(EnabledSetting->GetValue()))
+	{
+		WasEnabled = true;
 		firstPersonController->Fields.CurrentSpeed = !firstPersonController->Fields.IsSprinting
-			                                             ? std::get<float>(WalkSpeedSetting->GetValue())
-			                                             : std::get<float>(RunSpeedSetting->GetValue());
+			? std::get<float>(WalkSpeedSetting->GetValue())
+			: std::get<float>(RunSpeedSetting->GetValue());
+	}
 	else
-		firstPersonController->Fields.CurrentSpeed = !firstPersonController->Fields.IsSprinting ? DefaultWalkSpeed : DefaultRunSpeed;
+	{
+		if (WasEnabled)
+			firstPersonController->Fields.CurrentSpeed = !firstPersonController->Fields.IsSprinting ? DefaultWalkSpeed : DefaultRunSpeed;
+		WasEnabled = false;
+	}
+
 }
