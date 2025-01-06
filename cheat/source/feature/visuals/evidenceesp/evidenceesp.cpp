@@ -84,7 +84,7 @@ void EvidenceESP::OnDraw()
 			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
 			text = "Haunted Mirror";
 			break;
-		case SDK::EvidenceType::VoodooDoll:
+		case SDK::EvidenceType::VoodooDoll: //somehow salt displays here???
 			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
 			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
 			text = "Voodoo Doll";

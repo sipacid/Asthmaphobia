@@ -15,5 +15,6 @@ namespace Asthmaphobia::Features::Visuals
 
 	private:
 		std::shared_ptr<Setting> ColorSetting;
+		std::shared_ptr<Setting> ForceAppearSetting;
 	};
 }

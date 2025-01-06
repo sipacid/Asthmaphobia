@@ -101,6 +101,7 @@ namespace SDK
 		GhostAIFields Fields;
 	};
 
+	DECLARE_FUNCTION_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int time, MethodInfo* methodInfo), 0x19DE620);
 	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19E1830);
 	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x19DF720);
 }
