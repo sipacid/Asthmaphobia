@@ -38,7 +38,7 @@ namespace SDK
 		float RunstepLength; // range 0 - 1
 		float StickToGroundForce;
 		float GravityMultiplier;
-		void* MouseLook; // MouseLook
+		MouseLook* MouseLook; // MouseLook
 		bool UseFovKick;
 		void* FovKick; // FOVKick
 		bool UseHeadBob;
