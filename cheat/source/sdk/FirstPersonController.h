@@ -3,6 +3,30 @@
 
 namespace SDK
 {
+
+
+	struct MouseLookFields
+	{
+	float XSensitivity;                // Horizontal sensitivity
+	float YSensitivity;                // Vertical sensitivity
+	bool clampVerticalRotation;        // Whether to clamp vertical rotation
+	float MinimumX;                    // Minimum horizontal rotation angle
+	float MaximumX;                    // Maximum horizontal rotation angle
+	bool smooth;                        // Whether smooth movement is enabled
+	float smoothTime;                  // Smooth time for interpolation
+	bool lockCursor;                   // Whether the cursor is locked
+	bool m_cursorIsLocked;             // Whether the cursor is currently locked
+	float horizontalLook;              // Horizontal look angle
+	float verticalLook;                // Vertical look angle
+	};
+
+
+	struct MouseLook {
+	void* klass;
+	void* monitor;
+	MouseLookFields Fields;
+	};
+
 	struct FirstPersonControllerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
