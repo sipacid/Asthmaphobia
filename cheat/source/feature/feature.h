@@ -45,6 +45,7 @@ namespace Asthmaphobia
 		std::string Description;
 		FeatureCategory Category;
 		std::shared_ptr<Setting> EnabledSetting;
+		std::shared_ptr<Setting> MouseLookAdjustmentSetting;
 		std::unique_ptr<Settings> Settings_;
 	};
 
