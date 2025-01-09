@@ -31,7 +31,7 @@ void Speed::OnMenu()
 {
 
 
-	//ImGui::Checkbox("Break##Neck", &std::get<bool>(Breaknecksetting->GetValue()));
+	
 	ImGui::Checkbox("Enabled##speed", &std::get<bool>(EnabledSetting->GetValue()));
 	ImGui::SliderFloat("Walk Speed##speed", &std::get<float>(WalkSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
 	ImGui::SliderFloat("Run Speed##speed", &std::get<float>(RunSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
