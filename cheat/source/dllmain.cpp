@@ -44,15 +44,14 @@ DWORD WINAPI MainThread()
 #ifdef _DEBUG
 	logger->Log(Logger::LogType::Info, "Successfully loaded.");
 #endif
+	Notifications::AddNotification("Menu Loaded", Notifications::NotificationType::Info, 3.0f);
 
-	do
+	while (globalRunning)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500)); //wait on features to finish loading
+		ConfigManager::SaveConfig();
+		ImGui::SaveIniSettingsToDisk((ConfigManager::GetConfigDirectoryPath() + "\\menu.ini").c_str());	
 	}
-	while (globalRunning);
-
-	ConfigManager::SaveConfig();
-	ImGui::SaveIniSettingsToDisk((ConfigManager::GetConfigDirectoryPath() + "\\menu.ini").c_str());
 
 	featureManagerInstance.reset();
 	hookingInstance.reset();

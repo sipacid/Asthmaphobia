@@ -82,9 +82,7 @@ void Menu::Render()
 		if (ImGui::BeginTabItem("Settings"))
 		{
 			if (ImGui::Button("Unload cheat"))
-			{
 				globalRunning = false;
-			}
 
 			ImGui::Text("Built on: %s %s", buildDate, buildTime);
 			ImGui::Text("%s", creditsText);

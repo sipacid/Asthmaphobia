@@ -83,9 +83,7 @@ FeatureManager::~FeatureManager()
 	Features.clear();
 
 	for (const auto& feature : Features | std::views::values)
-	{
 		delete feature;
-	}
 
 	featureManager = nullptr;
 }
@@ -105,9 +103,7 @@ void FeatureManager::OnDraw() const
 	for (const auto& feature : Features | std::views::values)
 	{
 		if (feature->IsEnabled())
-		{
 			feature->OnDraw();
-		}
 	}
 }
 
@@ -130,9 +126,7 @@ void FeatureManager::OnMenu() const
 					feature->OnMenu();
 
 					if (feature->ShouldDrawSection)
-					{
 						ImGui::Separator();
-					}
 				}
 			}
 
