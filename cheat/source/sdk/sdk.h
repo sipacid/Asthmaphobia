@@ -50,3 +50,4 @@ namespace SDK
 #include "Marshal.h"
 #include "LevelValues.h"
 #include "DeadZoneController.h"
+#include "MouseLook.h"

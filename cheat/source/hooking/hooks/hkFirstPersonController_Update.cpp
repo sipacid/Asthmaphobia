@@ -1,4 +1,5 @@
 #include "source/common.h"
+#include "source/feature/miscellaneous/freemouselook/freemouselook.h"
 #include "source/feature/movement/noclip/noclip.h"
 #include "source/feature/movement/speed/speed.h"
 #include "source/hooking/hooking.h"
@@ -13,4 +14,6 @@ void Hooks::hkFirstPersonController_Update(SDK::FirstPersonController* firstPers
 
 	dynamic_cast<Features::Movement::Speed*>(featureManager->GetFeatureByName("Movement::Speed"))->OnFirstPersonController_Update(firstPersonController, methodInfo);
 	dynamic_cast<Features::Movement::NoClip*>(featureManager->GetFeatureByName("Movement::NoClip"))->OnFirstPersonController_Update(firstPersonController, methodInfo);
+	dynamic_cast<Features::Miscellaneous::FreeMouseLook*>(featureManager->GetFeatureByName("Miscellaneous::FreeMouseLook"))->OnFirstPersonController_Update(
+		firstPersonController, methodInfo);
 }

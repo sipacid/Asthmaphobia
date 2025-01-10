@@ -10,6 +10,7 @@
 #include "miscellaneous/autokey/autokey.h"
 #include "miscellaneous/customname/customname.h"
 #include "miscellaneous/doormodifier/doormodifier.h"
+#include "miscellaneous/freemouselook/freemouselook.h"
 #include "miscellaneous/godmode/godmode.h"
 #include "miscellaneous/joinrandomroom/joinrandomroom.h"
 #include "miscellaneous/leavepeople/leavepeople.h"
@@ -73,6 +74,7 @@ FeatureManager::FeatureManager()
 	AddFeature("Miscellaneous::DoorModifier", new Features::Miscellaneous::DoorModifier());
 	AddFeature("Miscellaneous::CustomName", new Features::Miscellaneous::CustomName());
 	AddFeature("Miscellaneous::RewardModifier", new Features::Miscellaneous::RewardModifier());
+	AddFeature("Miscellaneous::FreeMouseLook", new Features::Miscellaneous::FreeMouseLook());
 	AddFeature("Movement::Teleport", new Features::Movement::Teleport());
 
 	featureManager = this;

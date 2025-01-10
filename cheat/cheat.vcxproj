@@ -176,6 +176,7 @@
     <ClCompile Include="source\feature\miscellaneous\autokey\autokey.cpp" />
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
     <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp" />
     <ClCompile Include="source\feature\miscellaneous\godmode\godmode.cpp" />
     <ClCompile Include="source\feature\movement\infinitestamina\infinitestamina.cpp" />
     <ClCompile Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="source\feature\miscellaneous\autokey\autokey.h" />
     <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
     <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
+    <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h" />
     <ClInclude Include="source\feature\miscellaneous\godmode\godmode.h" />
     <ClInclude Include="source\feature\movement\infinitestamina\infinitestamina.h" />
     <ClInclude Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.h" />
@@ -268,6 +270,7 @@
     <ClInclude Include="source\sdk\Marshal.h" />
     <ClInclude Include="source\sdk\MethodInfo.h" />
     <ClInclude Include="source\sdk\MonoBehaviour.h" />
+    <ClInclude Include="source\sdk\MouseLook.h" />
     <ClInclude Include="source\sdk\Network.h" />
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
