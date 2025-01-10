@@ -38,8 +38,8 @@ void Speed::OnFirstPersonController_Update(SDK::FirstPersonController* firstPers
 	{
 		WasEnabled = true;
 		firstPersonController->Fields.CurrentSpeed = !firstPersonController->Fields.IsSprinting
-			? std::get<float>(WalkSpeedSetting->GetValue())
-			: std::get<float>(RunSpeedSetting->GetValue());
+			                                             ? std::get<float>(WalkSpeedSetting->GetValue())
+			                                             : std::get<float>(RunSpeedSetting->GetValue());
 	}
 	else
 	{
@@ -47,5 +47,4 @@ void Speed::OnFirstPersonController_Update(SDK::FirstPersonController* firstPers
 			firstPersonController->Fields.CurrentSpeed = !firstPersonController->Fields.IsSprinting ? DefaultWalkSpeed : DefaultRunSpeed;
 		WasEnabled = false;
 	}
-
 }
