@@ -39,6 +39,7 @@ DWORD WINAPI MainThread()
 	hooking->AddHook("Key_Start", &reinterpret_cast<PVOID&>(SDK::Key_Start_ptr), Hooks::hkKey_Start);
 	hooking->AddHook("LevelValues_InvestigationBonusReward", &reinterpret_cast<PVOID&>(SDK::LevelValues_GetInvestigationBonus_ptr), Hooks::hkLevelValues_GetInvestigationBonus);
 	hooking->AddHook("DeadZoneController_Awake", &reinterpret_cast<PVOID&>(SDK::DeadZoneController_Awake_ptr), Hooks::hkDeadZoneController_Awake);
+	hooking->AddHook("StoreItem_setAmmount", &reinterpret_cast<PVOID&>(SDK::StoreItem_SetAmmount_ptr), Hooks::hkStoreItem_set_amountOwned);
 	hooking->ApplyHooks();
 
 #ifdef _DEBUG
