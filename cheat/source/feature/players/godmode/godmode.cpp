@@ -1,10 +1,9 @@
 #include "godmode.h"
 
-using namespace Asthmaphobia::Features::Miscellaneous;
+using namespace Asthmaphobia::Features::Players;
 
-GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body when attacked by ghost", FeatureCategory::Miscellaneous)
+GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body when attacked by ghost", FeatureCategory::Players)
 {
-	ShouldDrawSection = false;
 }
 
 GodMode::~GodMode() = default;
@@ -23,7 +22,7 @@ void GodMode::OnDraw()
 
 void GodMode::OnMenu()
 {
-	ImGui::Checkbox("God Mode", &std::get<bool>(EnabledSetting->GetValue()));
+	ImGui::Checkbox("Enabled", &std::get<bool>(EnabledSetting->GetValue()));
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("%s", Description.c_str());
 }

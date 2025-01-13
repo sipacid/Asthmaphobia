@@ -9,6 +9,7 @@ namespace Asthmaphobia
 	{
 		Visuals,
 		Players,
+		Ghost,
 		CursedItems,
 		Miscellaneous,
 		Movement,

@@ -6,12 +6,12 @@
 #include "source/notifications/notifications.h"
 
 #include "curseditems/tarotcardmodifier/tarotcardmodifier.h"
+#include "ghost/ghostmodifier/ghostmodifier.h"
 #include "miscellaneous/antikick/antikick.h"
 #include "miscellaneous/autokey/autokey.h"
 #include "miscellaneous/customname/customname.h"
 #include "miscellaneous/doormodifier/doormodifier.h"
 #include "miscellaneous/freemouselook/freemouselook.h"
-#include "miscellaneous/godmode/godmode.h"
 #include "miscellaneous/joinrandomroom/joinrandomroom.h"
 #include "miscellaneous/leavepeople/leavepeople.h"
 #include "miscellaneous/rewardmodifier/rewardmodifier.h"
@@ -19,6 +19,7 @@
 #include "movement/noclip/noclip.h"
 #include "movement/speed/speed.h"
 #include "movement/teleport/teleport.h"
+#include "players/godmode/godmode.h"
 #include "players/playermodifier/playermodifier.h"
 #include "visuals/evidenceesp/evidenceesp.h"
 #include "visuals/fuseboxesp/fuseboxesp.h"
@@ -37,6 +38,8 @@ const char* Asthmaphobia::FeatureTypeToString(const FeatureCategory category)
 		return "Visuals";
 	case Players:
 		return "Players";
+	case Ghost:
+		return "Ghost";
 	case CursedItems:
 		return "Cursed items";
 	case Miscellaneous:
@@ -59,22 +62,25 @@ FeatureManager::FeatureManager()
 	AddFeature("Visuals::EvidenceESP", new Features::Visuals::EvidenceESP());
 	AddFeature("Visuals::FuseBoxESP", new Features::Visuals::FuseBoxESP());
 
+	AddFeature("Players::GodMode", new Features::Players::GodMode());
 	AddFeature("Players::PlayerModifier", new Features::Players::PlayerModifier());
+
+	AddFeature("Ghost::GhostModifier", new Features::Ghost::GhostModifier());
 
 	AddFeature("CursedItems::TarotCardModifier", new Features::CursedItems::TarotCardModifier());
 
-	AddFeature("Miscellaneous::GodMode", new Features::Miscellaneous::GodMode());
 	AddFeature("Miscellaneous::LeavePeople", new Features::Miscellaneous::LeavePeople());
 	AddFeature("Miscellaneous::AntiKick", new Features::Miscellaneous::AntiKick());
-	AddFeature("Movement::InfiniteStamina", new Features::Movement::InfiniteStamina());
 	AddFeature("Miscellaneous::AutoKey", new Features::Miscellaneous::AutoKey());
 	AddFeature("Miscellaneous::JoinRandomRoom", new Features::Miscellaneous::JoinRandomRoom());
-	AddFeature("Movement::NoClip", new Features::Movement::NoClip());
-	AddFeature("Movement::Speed", new Features::Movement::Speed());
 	AddFeature("Miscellaneous::DoorModifier", new Features::Miscellaneous::DoorModifier());
 	AddFeature("Miscellaneous::CustomName", new Features::Miscellaneous::CustomName());
 	AddFeature("Miscellaneous::RewardModifier", new Features::Miscellaneous::RewardModifier());
 	AddFeature("Miscellaneous::FreeMouseLook", new Features::Miscellaneous::FreeMouseLook());
+
+	AddFeature("Movement::InfiniteStamina", new Features::Movement::InfiniteStamina());
+	AddFeature("Movement::NoClip", new Features::Movement::NoClip());
+	AddFeature("Movement::Speed", new Features::Movement::Speed());
 	AddFeature("Movement::Teleport", new Features::Movement::Teleport());
 
 	featureManager = this;
@@ -115,7 +121,7 @@ void FeatureManager::OnDraw() const
 
 void FeatureManager::OnMenu() const
 {
-	for (const auto& featureType : {Visuals, Players, CursedItems, Movement, Miscellaneous})
+	for (const auto& featureType : {Visuals, Players, Ghost, CursedItems, Movement, Miscellaneous})
 	{
 		if (ImGui::BeginTabItem(FeatureTypeToString(featureType)))
 		{

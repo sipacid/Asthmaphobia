@@ -11,4 +11,6 @@ void Hooks::hkKey_Start(SDK::Key* key, SDK::MethodInfo* methodInfo)
 		return SDK::Key_Start_ptr(key, methodInfo);
 
 	dynamic_cast<Features::Miscellaneous::AutoKey*>(featureManager->GetFeatureByName("Miscellaneous::AutoKey"))->OnKey_Start(key, methodInfo);
+
+	SDK::Key_Start_ptr(key, methodInfo);
 }

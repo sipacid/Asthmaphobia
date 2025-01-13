@@ -28,12 +28,12 @@ void NoClip::OnMenu()
 	ImGui::SliderFloat("Speed##noClip", &std::get<float>(SpeedSetting->GetValue()), 0.0f, 10.0f, "%.1f");
 }
 
-void NoClip::OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
+void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
 {
 	SDK::Collider_Set_Enabled_ptr(static_cast<SDK::Collider*>(firstPersonController->Fields.CharacterController), !std::get<bool>(EnabledSetting->GetValue()), nullptr);
 
 	if (!std::get<bool>(EnabledSetting->GetValue()))
-		return SDK::FirstPersonController_Update_ptr(firstPersonController, methodInfo);
+		return;
 
 	const auto transform = SDK::Component_Get_Transform_ptr(static_cast<SDK::Component*>(firstPersonController->Fields.CharacterController), nullptr);
 	SDK::Vector3 position = {0, 0, 0};
@@ -81,5 +81,4 @@ void NoClip::OnFirstPersonController_Update(SDK::FirstPersonController* firstPer
 	position += worldPosition;
 
 	SDK::Transform_Set_Position_ptr(transform, position, nullptr);
-	SDK::FirstPersonController_Update_ptr(firstPersonController, methodInfo);
 }

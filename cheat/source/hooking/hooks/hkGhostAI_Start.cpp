@@ -10,6 +10,5 @@ void Hooks::hkGhostAI_Start(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo)
 		return SDK::GhostAI_Start_ptr(ghostAI, methodInfo);
 
 	GameState::ghostAI = ghostAI;
-
 	SDK::GhostAI_Start_ptr(ghostAI, methodInfo);
 }

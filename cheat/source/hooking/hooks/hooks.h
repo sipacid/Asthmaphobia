@@ -11,6 +11,7 @@ namespace Asthmaphobia
 		static void hkPauseMenuController_Leave(SDK::PauseMenuController* pauseMenuController, SDK::MethodInfo* methodInfo);
 		static void hkGameController_Exit(SDK::GameController* gameController, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
 		static void hkGhostAI_Start(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo);
+		static void hkGhostAI_Update(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo);
 		static void hkGhostAI_Hunting(SDK::GhostAI* ghostAI, bool isHunting, int a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
 		static void hkEvidenceController_Start(SDK::EvidenceController* evidenceController, SDK::MethodInfo* methodInfo);
 		static void hkMapController_Start(SDK::MapController* mapController, SDK::MethodInfo* methodInfo);

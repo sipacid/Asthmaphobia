@@ -28,7 +28,7 @@ void RewardModifier::OnMenu()
 	ImGui::InputInt("Investigation bonus##rewardModifier", &std::get<int>(InvestigationBonusSetting->GetValue()));
 }
 
-int32_t RewardModifier::OnGetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo)
+int32_t RewardModifier::OnGetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo) const
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()))
 		return SDK::LevelValues_GetInvestigationBonus_ptr(levelValues, methodInfo);

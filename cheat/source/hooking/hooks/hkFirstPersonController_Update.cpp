@@ -16,4 +16,6 @@ void Hooks::hkFirstPersonController_Update(SDK::FirstPersonController* firstPers
 	dynamic_cast<Features::Movement::NoClip*>(featureManager->GetFeatureByName("Movement::NoClip"))->OnFirstPersonController_Update(firstPersonController, methodInfo);
 	dynamic_cast<Features::Miscellaneous::FreeMouseLook*>(featureManager->GetFeatureByName("Miscellaneous::FreeMouseLook"))->OnFirstPersonController_Update(
 		firstPersonController, methodInfo);
+
+	SDK::FirstPersonController_Update_ptr(firstPersonController, methodInfo);
 }

@@ -10,6 +10,5 @@ void Hooks::hkMapController_Start(SDK::MapController* mapController, SDK::Method
 		return SDK::MapController_Start_ptr(mapController, methodInfo);
 
 	GameState::mapController = mapController;
-
 	SDK::MapController_Start_ptr(mapController, methodInfo);
 }

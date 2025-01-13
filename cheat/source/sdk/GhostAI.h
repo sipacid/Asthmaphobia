@@ -57,7 +57,7 @@ namespace SDK
 		Transform* Field18; // Transform
 		Transform* Field19; // Transform
 		Transform* Field20; // Transform
-		float Field21;
+		float Speed;
 		float Field22;
 		float Field23;
 		bool Field24;
@@ -102,5 +102,6 @@ namespace SDK
 	};
 
 	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19E1830);
+	DECLARE_FUNCTION_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19F3F80);
 	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x19DF720);
 }

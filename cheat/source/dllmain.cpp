@@ -25,6 +25,7 @@ DWORD WINAPI MainThread()
 	hooking->AddHook("PauseMenuController_Leave", &reinterpret_cast<PVOID&>(SDK::PauseMenuController_Leave_ptr), Hooks::hkPauseMenuController_Leave);
 	hooking->AddHook("GameController_Exit", &reinterpret_cast<PVOID&>(SDK::GameController_Exit_ptr), Hooks::hkGameController_Exit);
 	hooking->AddHook("GhostAI_Start", &reinterpret_cast<PVOID&>(SDK::GhostAI_Start_ptr), Hooks::hkGhostAI_Start);
+	hooking->AddHook("GhostAI_Update", &reinterpret_cast<PVOID&>(SDK::GhostAI_Update_ptr), Hooks::hkGhostAI_Update);
 	hooking->AddHook("GhostAI_Hunting", &reinterpret_cast<PVOID&>(SDK::GhostAI_Hunting_ptr), Hooks::hkGhostAI_Hunting);
 	hooking->AddHook("EvidenceController_Start", &reinterpret_cast<PVOID&>(SDK::EvidenceController_Start_ptr), Hooks::hkEvidenceController_Start);
 	hooking->AddHook("MapController_Start", &reinterpret_cast<PVOID&>(SDK::MapController_Start_ptr), Hooks::hkMapController_Start);

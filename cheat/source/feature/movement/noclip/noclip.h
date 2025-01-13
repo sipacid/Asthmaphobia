@@ -13,7 +13,7 @@ namespace Asthmaphobia::Features::Movement
 		void OnDraw() override;
 		void OnMenu() override;
 
-		void OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const;
+		void OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const;
 
 	private:
 		std::shared_ptr<Setting> SpeedSetting;

@@ -30,8 +30,6 @@ void AutoKey::OnMenu()
 
 void AutoKey::OnKey_Start(SDK::Key* key, SDK::MethodInfo* methodInfo) const
 {
-	SDK::Key_Start_ptr(key, methodInfo);
-
 	if (std::get<bool>(EnabledSetting->GetValue()))
 		SDK::Key_GrabbedKey_ptr(key, nullptr);
 }

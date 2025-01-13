@@ -32,6 +32,4 @@ void InfiniteStamina::OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, 
 {
 	if (std::get<bool>(EnabledSetting->GetValue()) && playerStamina->Fields.Field18 != 3.0f)
 		playerStamina->Fields.Field18 = 3.0f;
-
-	SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
 }

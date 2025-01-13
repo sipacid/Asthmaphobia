@@ -111,7 +111,7 @@
     <ClInclude Include="source\sdk\GameController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\godmode\godmode.h">
+    <ClInclude Include="source\feature\players\godmode\godmode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h">
@@ -285,6 +285,9 @@
     <ClInclude Include="source\sdk\MouseLook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\feature\ghost\ghostmodifier\ghostmodifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -332,7 +335,7 @@
     <ClCompile Include="source\hooking\hooks\hkWndProc.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\godmode\godmode.cpp">
+    <ClCompile Include="source\feature\players\godmode\godmode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp">
@@ -453,6 +456,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

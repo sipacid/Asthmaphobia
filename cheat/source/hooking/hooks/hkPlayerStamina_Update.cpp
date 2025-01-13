@@ -11,4 +11,6 @@ void Hooks::hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::Metho
 		return SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
 
 	dynamic_cast<Features::Movement::InfiniteStamina*>(featureManager->GetFeatureByName("Movement::InfiniteStamina"))->OnPlayerStamina_Update(playerStamina, methodInfo);
+
+	SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
 }

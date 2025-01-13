@@ -172,12 +172,13 @@
     <ClCompile Include="source\config\config.cpp" />
     <ClCompile Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.cpp" />
     <ClCompile Include="source\feature\feature.cpp" />
+    <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp" />
     <ClCompile Include="source\feature\miscellaneous\antikick\antikick.cpp" />
     <ClCompile Include="source\feature\miscellaneous\autokey\autokey.cpp" />
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
     <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
     <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp" />
-    <ClCompile Include="source\feature\miscellaneous\godmode\godmode.cpp" />
+    <ClCompile Include="source\feature\players\godmode\godmode.cpp" />
     <ClCompile Include="source\feature\movement\infinitestamina\infinitestamina.cpp" />
     <ClCompile Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.cpp" />
     <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="source\hooking\hooks\hkGameController_Exit.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Hunting.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkKey_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp" />
     <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
@@ -214,12 +216,13 @@
     <ClInclude Include="source\config\config.h" />
     <ClInclude Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.h" />
     <ClInclude Include="source\feature\feature.h" />
+    <ClInclude Include="source\feature\ghost\ghostmodifier\ghostmodifier.h" />
     <ClInclude Include="source\feature\miscellaneous\antikick\antikick.h" />
     <ClInclude Include="source\feature\miscellaneous\autokey\autokey.h" />
     <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
     <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
     <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h" />
-    <ClInclude Include="source\feature\miscellaneous\godmode\godmode.h" />
+    <ClInclude Include="source\feature\players\godmode\godmode.h" />
     <ClInclude Include="source\feature\movement\infinitestamina\infinitestamina.h" />
     <ClInclude Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.h" />
     <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h" />
