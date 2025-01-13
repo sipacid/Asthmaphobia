@@ -51,3 +51,4 @@ namespace SDK
 #include "LevelValues.h"
 #include "DeadZoneController.h"
 #include "MouseLook.h"
+#include "StoreItems.h"
