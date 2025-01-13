@@ -36,4 +36,6 @@ void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* method
 		return;
 
 	ghost->Fields.Speed = std::get<float>(GhostSpeedSetting->GetValue());
+	ghost->Fields.Field22 = std::get<float>(GhostSpeedSetting->GetValue());
+	ghost->Fields.Field23 = std::get<float>(GhostSpeedSetting->GetValue());
 }
