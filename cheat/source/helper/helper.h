@@ -20,6 +20,7 @@ namespace Asthmaphobia::Helper
 	void TeleportPlayerTo(SDK::Player* player, SDK::Transform* transform);
 	SDK::ListPlayer* GetPlayers();
 	float GetPlayerInsanity(const SDK::Player* player);
+	float GetPlayerSanity(const SDK::Player* player);
 	std::string SystemStringToString(const SDK::String& string);
 	SDK::String* StringToSystemString(const std::string& string);
 	std::wstring StringToWString(const std::string& string);

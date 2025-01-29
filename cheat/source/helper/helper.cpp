@@ -235,6 +235,11 @@ float Helper::GetPlayerInsanity(const SDK::Player* player)
 	return player->Fields.PlayerSanity->Fields.Insanity;
 }
 
+float Helper::GetPlayerSanity(const SDK::Player* player)
+{
+	return 100 - player->Fields.PlayerSanity->Fields.Insanity;
+}
+
 std::string Helper::SystemStringToString(const SDK::String& string)
 {
 	const int32_t stringLength = string.Fields.StringLength;
