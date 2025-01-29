@@ -22,54 +22,94 @@ void PlayerModifier::OnDraw()
 
 void PlayerModifier::OnMenu()
 {
+	static SDK::Player* selectedPlayer;
+	static std::vector<SDK::Player*> frozenPlayers;
 	const auto players = Helper::GetPlayers();
+
 	if (!players)
-		return ImGui::Text("You need to be in-game to view this.");
-
-	for (int playerIndex = 0; playerIndex < players->Fields.Size; playerIndex++)
 	{
-		const auto player = players->Fields.Items->Vector[playerIndex];
-		ImGui::Text("Player: %s", Helper::GetPlayerName(player).c_str());
-		ImGui::Text("Sanity: %s", player->Fields.IsDead ? "DEAD" : std::to_string(static_cast<int>(100.f - Helper::GetPlayerInsanity(player))).c_str());
-		if (const auto levelRoom = player->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
-			ImGui::Text("Current room: %s", Helper::SystemStringToString(*player->Fields.LevelRoom->Fields.RoomName).c_str());
-
-		if (player != Helper::GetLocalPlayer())
-		{
-			const auto teleportToLabel = std::format("Teleport to##{}", playerIndex);
-			if (ImGui::Button(teleportToLabel.c_str()))
-				Helper::TeleportPlayerTo(Helper::GetLocalPlayer(), player);
-		}
-
-		if (const auto isLocalMasterClient = Helper::IsLocalMasterClient(); player == Helper::GetLocalPlayer() || isLocalMasterClient)
-		{
-			const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
-			if (ImGui::Button(killPlayerLabel.c_str()))
-				isLocalMasterClient ? SDK::Player_StartKillingPlayer_ptr(player, nullptr) : SDK::Player_KillPlayer_ptr(player, true, nullptr);
-			if (isLocalMasterClient)
-			{
-				ImGui::SameLine();
-				const auto revivePlayerLabel = std::format("Revive player##{}", playerIndex);
-				if (ImGui::Button(revivePlayerLabel.c_str()))
-					SDK::Player_RevivePlayer_ptr(player, nullptr);
-			}
-
-			const auto freezePlayerLabel = std::format("Freeze player##{}", playerIndex);
-			if (ImGui::Button(freezePlayerLabel.c_str()))
-				SDK::Player_ToggleFreezePlayer_ptr(player, true, nullptr);
-			ImGui::SameLine();
-			const auto unfreezePlayerLabel = std::format("Unfreeze player##{}", playerIndex);
-			if (ImGui::Button(unfreezePlayerLabel.c_str()))
-				SDK::Player_ToggleFreezePlayer_ptr(player, false, nullptr);
-
-			const auto sanityLabel = std::format("Sanity##i{}", playerIndex);
-			ImGui::SliderInt(sanityLabel.c_str(), &SanityArray[playerIndex], 0, 100);
-			ImGui::SameLine();
-			const auto setSanityLabel = std::format("Set sanity##i{}", playerIndex);
-			if (ImGui::Button(setSanityLabel.c_str()))
-				SDK::PlayerSanity_SetInsanity_ptr(player->Fields.PlayerSanity, 100 - SanityArray[playerIndex], nullptr);
-		}
-
-		ImGui::Separator();
+		frozenPlayers.clear();
+		selectedPlayer = nullptr;
+		return ImGui::Text("You need to be in-game to view this.");
 	}
+	else if (selectedPlayer == nullptr)
+		selectedPlayer = Helper::GetLocalPlayer();
+
+	ImGui::BeginGroup();
+	{
+		ImGui::BeginListBox("Players", ImVec2(200, 27 * players->Fields.Size));
+		{
+			for (int i = 0; i < players->Fields.Size; i++)
+			{
+				const auto player = players->Fields.Items->Vector[i];
+				std::string name = Helper::GetPlayerName(player);
+				bool isSelectedPlayer = name == Helper::GetPlayerName(selectedPlayer);
+				bool isLocalPlayer = player == Helper::GetLocalPlayer();
+
+				//long ass line but does as expected
+				isSelectedPlayer ? ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)) : ImGui::PushStyleColor(ImGuiCol_Text, isLocalPlayer ? ImVec4(0.2f, 1.0f, 0.2f, 1.0f) : ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+				if (ImGui::Button(name.c_str()))
+					selectedPlayer = player;
+				ImGui::PopStyleColor();
+			}
+		}
+		ImGui::EndListBox();
+	}
+	ImGui::EndGroup();
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	{
+		bool isFrozen = std::find(frozenPlayers.begin(), frozenPlayers.end(), selectedPlayer) != frozenPlayers.end();
+		bool isMasterClient = SDK::PhotonNetwork_Get_MasterClient_ptr(nullptr) == selectedPlayer;
+		bool isLocalPlayer = selectedPlayer == Helper::GetLocalPlayer();
+		std::string name = Helper::GetPlayerName(selectedPlayer);
+		static int sanity = 0;
+
+		ImGui::Text(name.c_str());
+		ImGui::Text("Sanity: %s", selectedPlayer->Fields.IsDead ? "DEAD" : std::to_string(Helper::GetPlayerSanity(selectedPlayer)).c_str());
+		if (const auto levelRoom = selectedPlayer->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
+			ImGui::Text("Current room: %s", Helper::SystemStringToString(*selectedPlayer->Fields.LevelRoom->Fields.RoomName).c_str());
+
+		if (!isLocalPlayer)
+		{
+			if (ImGui::Button("Teleport"))
+				Helper::TeleportPlayerTo(Helper::GetLocalPlayer(), selectedPlayer);
+		}
+		else //add local only features here
+		{
+		}
+
+		if (ImGui::Button("Kill"))
+			Helper::IsLocalMasterClient() ? SDK::Player_StartKillingPlayer_ptr(selectedPlayer, nullptr) : SDK::Player_KillPlayer_ptr(selectedPlayer, true, nullptr);
+
+		if (Helper::IsLocalMasterClient()) //Master client only options, try to keep these to a minimum
+		{
+			ImGui::SameLine();
+			if (ImGui::Button("Revive"))
+				SDK::Player_RevivePlayer_ptr(selectedPlayer, nullptr);
+		}
+
+		if (isLocalPlayer || Helper::IsLocalMasterClient())
+		{
+			if (ImGui::Button(isFrozen ? "UnFreeze" : "Freeze"))
+			{
+				SDK::Player_ToggleFreezePlayer_ptr(selectedPlayer, !isFrozen, nullptr);
+				if (isFrozen)
+				{
+					auto it = std::find(frozenPlayers.begin(), frozenPlayers.end(), selectedPlayer);
+					if (it != frozenPlayers.end())
+						frozenPlayers.erase(it);
+				}
+				else
+					frozenPlayers.push_back(selectedPlayer);
+			}
+			ImGui::PushItemWidth(200);
+			ImGui::SliderInt("Santity", &sanity, 0, 100, "%d");
+			ImGui::PopItemWidth();
+			ImGui::SameLine();
+			if (ImGui::Button("Set"))
+				SDK::PlayerSanity_SetInsanity_ptr(selectedPlayer->Fields.PlayerSanity, 100 - sanity, nullptr);
+		}
+	}
+	ImGui::EndGroup();
 }
