@@ -287,3 +287,8 @@ std::string Helper::GetPlayerName(const SDK::Player* player)
 
 	return SystemStringToString(*networkPlayerSpot->Fields.AccountName);
 }
+
+float Helper::RandomNumber(const float min, const float max)
+{
+	return min + static_cast<float>(rand()) / (RAND_MAX / (max - min));
+}

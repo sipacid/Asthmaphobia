@@ -5,7 +5,7 @@ using namespace Asthmaphobia::Features::Miscellaneous;
 RewardModifier::RewardModifier() : Feature("Reward modifier", "Modifies the reward you get from a game", FeatureCategory::Miscellaneous)
 {
 	InvestigationBonusSetting = std::make_shared<Setting>("Investigation bonus", "The bonus you get from investigating", 1000);
-	PerfectGameSetting = std::make_shared<Setting>("Perfect Game", "Always have a perfect game", true);
+	PerfectGameSetting = std::make_shared<Setting>("Perfect Game", "Always have a perfect game", false);
 	Settings_->AddSetting(InvestigationBonusSetting);
 	Settings_->AddSetting(PerfectGameSetting);
 }

@@ -259,6 +259,7 @@
     <ClInclude Include="source\sdk\FirstPersonController.h" />
     <ClInclude Include="source\sdk\FuseBox.h" />
     <ClInclude Include="source\sdk\GameController.h" />
+    <ClInclude Include="source\sdk\GameObject.h" />
     <ClInclude Include="source\sdk\GhostAI.h" />
     <ClInclude Include="source\sdk\GhostEvidence.h" />
     <ClInclude Include="source\sdk\GhostInfo.h" />

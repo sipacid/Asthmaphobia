@@ -25,5 +25,6 @@ namespace Asthmaphobia::Features::Movement
 		std::shared_ptr<Setting> TargetSetting;
 
 		void Run(const SDK::Player* player) const;
+		static void TeleportItems();
 	};
 }
