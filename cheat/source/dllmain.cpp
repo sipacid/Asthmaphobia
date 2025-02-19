@@ -40,6 +40,7 @@ DWORD WINAPI MainThread()
 	hooking->AddHook("LevelValues_InvestigationBonusReward", &reinterpret_cast<PVOID&>(SDK::LevelValues_GetInvestigationBonus_ptr), Hooks::hkLevelValues_GetInvestigationBonus);
 	hooking->AddHook("LevelValues_IsPerfectGame", &reinterpret_cast<PVOID&>(SDK::LevelValues_IsPerfectGame_ptr), Hooks::hkLevelValues_IsPerfectGame);
 	hooking->AddHook("DeadZoneController_Awake", &reinterpret_cast<PVOID&>(SDK::DeadZoneController_Awake_ptr), Hooks::hkDeadZoneController_Awake);
+	hooking->AddHook("StoreItem_setAmmount", &reinterpret_cast<PVOID&>(SDK::StoreItem_SetAmmount_ptr), Hooks::hkStoreItem_set_amountOwned);
 	hooking->ApplyHooks();
 
 #ifdef _DEBUG
