@@ -39,6 +39,7 @@ DWORD WINAPI MainThread()
 	hooking->AddHook("TarotCard_SetCard", &reinterpret_cast<PVOID&>(SDK::TarotCard_SetCard_ptr), Hooks::hkTarotCard_SetCard);
 	hooking->AddHook("Key_Start", &reinterpret_cast<PVOID&>(SDK::Key_Start_ptr), Hooks::hkKey_Start);
 	hooking->AddHook("LevelValues_InvestigationBonusReward", &reinterpret_cast<PVOID&>(SDK::LevelValues_GetInvestigationBonus_ptr), Hooks::hkLevelValues_GetInvestigationBonus);
+	hooking->AddHook("LevelValues_IsPerfectGame", &reinterpret_cast<PVOID&>(SDK::LevelValues_IsPerfectGame_ptr), Hooks::hkLevelValues_IsPerfectGame);
 	hooking->AddHook("DeadZoneController_Awake", &reinterpret_cast<PVOID&>(SDK::DeadZoneController_Awake_ptr), Hooks::hkDeadZoneController_Awake);
 	hooking->ApplyHooks();
 

@@ -3,6 +3,8 @@
 
 namespace SDK
 {
+	struct Network;
+
 	struct __declspec(align(8)) NetworkPlayerSpotFields
 	{
 		bool PlayerReady;
@@ -24,6 +26,8 @@ namespace SDK
 		bool PrestigeTheme;
 		void* VotedContract; // Contract
 		int32_t PlatformType; // StoreSDKManager.???
+		bool HasReceivedPlayerInformation;
+		bool PlayerIsBlocked;
 		int32_t LegacyLevel;
 		int32_t LegacyAccent;
 		int32_t LegacyBackground;
@@ -31,6 +35,7 @@ namespace SDK
 		void* PlayerEquipment;
 		bool hasBroughtItems;
 		int32_t totalEquipmentCost;
+		void* OnBlockMuteStateChanged;
 	};
 
 	struct NetworkPlayerSpot

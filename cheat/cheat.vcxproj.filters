@@ -464,6 +464,9 @@
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_IsPerfectGame.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libraries\detours\lib\detours.lib" />

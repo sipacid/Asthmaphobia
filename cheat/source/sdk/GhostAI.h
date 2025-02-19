@@ -34,29 +34,29 @@ namespace SDK
 	{
 		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
 		void* Field0; // ???
-		GhostState Field1; // GhostState
-		void* Field2; // PhotonView
+		GhostState GhostState; // GhostState
+		void* PhotonView; // PhotonView
 		GhostInfo* GhostInfo; // GhostInfo
-		void* Field4; // NavMeshAgent
-		void* Field5; // GhostAudio
-		void* Field6; // GhostInteraction
+		void* NavMeshAgent; // NavMeshAgent
+		void* GhostAudio; // GhostAudio
+		void* GhostInteraction; // GhostInteraction
 		void* GhostActivity; // GhostActivity
-		void* Field8; // GhostModel
+		void* NormalModel; // GhostModel
 		void* HalloweenModel; // GhostModel
 		void* HolidayModel; // GhostModel
 		void* EasterModel; // GhostModel
-		void* Field9; // GhostModel[]
-		void* Field10; // GhostModel[]
+		void* GhostModels0; // GhostModel[]
+		void* GhostModels1; // GhostModel[]
 		bool Field11;
-		void* Field12; // ShadowCastingMode
+		int32_t ShadowCastingMode; // ShadowCastingMode
 		void* Field13; // List<Vector3>
 		float Field121;
-		void* Field131; // SanityDrainer
+		void* SanityDrainer; // SanityDrainer
 		bool Field14;
-		int32_t Field17; // LayerMask
-		Transform* Field18; // Transform
-		Transform* Field19; // Transform
-		Transform* Field20; // Transform
+		int32_t LayerMask; // LayerMask
+		Transform* Transform0; // Transform
+		Transform* Transform1; // Transform
+		Transform* Transform2; // Transform
 		float Speed;
 		float Field22;
 		float Field23;

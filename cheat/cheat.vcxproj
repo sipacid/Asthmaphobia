@@ -240,6 +240,7 @@
     <ClInclude Include="source\feature\visuals\watermark\watermark.h" />
     <ClInclude Include="source\gamestate.h" />
     <ClInclude Include="source\helper\helper.h" />
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_IsPerfectGame.cpp" />
     <ClInclude Include="source\hooking\hooks\hooks.h" />
     <ClInclude Include="source\menu\menu.h" />
     <ClCompile Include="source\hooking\hooks\hkPresent.cpp" />

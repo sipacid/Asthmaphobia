@@ -184,7 +184,7 @@ SDK::Vector3 Helper::GetWorldPosition(const SDK::Player* player)
 
 SDK::Vector3 Helper::GetWorldPosition(const SDK::GhostAI* ghostAI)
 {
-	return GetWorldPosition(ghostAI->Fields.Field19);
+	return GetWorldPosition(ghostAI->Fields.Transform1);
 }
 
 SDK::Vector3 Helper::GetWorldPosition(SDK::Component* component)
