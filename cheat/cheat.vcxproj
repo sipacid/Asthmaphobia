@@ -174,7 +174,6 @@
     <ClCompile Include="source\feature\feature.cpp" />
     <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp" />
     <ClCompile Include="source\feature\miscellaneous\antikick\antikick.cpp" />
-    <ClCompile Include="source\feature\miscellaneous\autokey\autokey.cpp" />
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
     <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
     <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp" />
@@ -204,7 +203,6 @@
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Hunting.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp" />
-    <ClCompile Include="source\hooking\hooks\hkKey_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp" />
     <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPauseMenuController_Leave.cpp" />
@@ -218,7 +216,6 @@
     <ClInclude Include="source\feature\feature.h" />
     <ClInclude Include="source\feature\ghost\ghostmodifier\ghostmodifier.h" />
     <ClInclude Include="source\feature\miscellaneous\antikick\antikick.h" />
-    <ClInclude Include="source\feature\miscellaneous\autokey\autokey.h" />
     <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
     <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
     <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h" />
@@ -266,7 +263,6 @@
     <ClInclude Include="source\sdk\GhostEvidence.h" />
     <ClInclude Include="source\sdk\GhostInfo.h" />
     <ClInclude Include="source\sdk\GhostTraits.h" />
-    <ClInclude Include="source\sdk\Key.h" />
     <ClInclude Include="source\sdk\LevelController.h" />
     <ClInclude Include="source\sdk\LevelRoom.h" />
     <ClInclude Include="source\sdk\LevelValues.h" />

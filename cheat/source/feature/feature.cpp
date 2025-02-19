@@ -8,7 +8,6 @@
 #include "curseditems/tarotcardmodifier/tarotcardmodifier.h"
 #include "ghost/ghostmodifier/ghostmodifier.h"
 #include "miscellaneous/antikick/antikick.h"
-#include "miscellaneous/autokey/autokey.h"
 #include "miscellaneous/customname/customname.h"
 #include "miscellaneous/doormodifier/doormodifier.h"
 #include "miscellaneous/freemouselook/freemouselook.h"
@@ -71,7 +70,6 @@ FeatureManager::FeatureManager()
 
 	AddFeature("Miscellaneous::LeavePeople", new Features::Miscellaneous::LeavePeople());
 	AddFeature("Miscellaneous::AntiKick", new Features::Miscellaneous::AntiKick());
-	AddFeature("Miscellaneous::AutoKey", new Features::Miscellaneous::AutoKey());
 	AddFeature("Miscellaneous::JoinRandomRoom", new Features::Miscellaneous::JoinRandomRoom());
 	AddFeature("Miscellaneous::DoorModifier", new Features::Miscellaneous::DoorModifier());
 	AddFeature("Miscellaneous::CustomName", new Features::Miscellaneous::CustomName());
