@@ -28,7 +28,7 @@ void AntiKick::OnMenu()
 		ImGui::SetTooltip("%s", Description.c_str());
 }
 
-void AntiKick::OnServerManagerKickPlayerNetworked(SDK::ServerManager* serverManager, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const
+void AntiKick::OnServerManagerKickPlayerNetworked(SDK::ServerManager* serverManager, const bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()) || Helper::IsLocalMasterClient())
 		return SDK::ServerManager_KickPlayerNetworked_ptr(serverManager, a1, photonMessageInfo, methodInfo);

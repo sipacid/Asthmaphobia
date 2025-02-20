@@ -24,7 +24,7 @@ namespace Asthmaphobia
 	inline bool globalRunning{true};
 	inline float dpiScale = GetDpiForSystem() / 96.0f;
 
-	inline const char* cheatName =
+	inline auto cheatName =
 #ifdef _DEBUG
 		"[DEV] Asthmaphobia";
 #else

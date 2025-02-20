@@ -285,6 +285,12 @@
     <ClInclude Include="source\sdk\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\feature\ghost\interactor\interactor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\GhostActivity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -457,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkLevelValues_IsPerfectGame.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\ghost\interactor\interactor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkGhostAI_Hunting(SDK::GhostAI* ghostAI, bool isHunting, int a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called GhostAI_Hunting");
+	DEBUG_LOG("Called GhostAI_Hunting")
 	if (!globalRunning)
 		return SDK::GhostAI_Hunting_ptr(ghostAI, isHunting, a1, photonMessageInfo, methodInfo);
 

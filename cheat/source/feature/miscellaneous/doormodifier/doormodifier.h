@@ -14,7 +14,7 @@ namespace Asthmaphobia::Features::Miscellaneous
 		void OnMenu() override;
 
 	private:
-		enum class Mode : int32_t
+		enum class Mode : uint8_t
 		{
 			ToggleDoorCollision,
 			ToggleDoorInteraction,

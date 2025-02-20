@@ -6,7 +6,7 @@ using namespace Asthmaphobia;
 
 int32_t Hooks::hkLevelValues_GetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called LevelValues_GetInvestigationBonus");
+	DEBUG_LOG("Called LevelValues_GetInvestigationBonus")
 	if (!globalRunning)
 		return SDK::LevelValues_GetInvestigationBonus_ptr(levelValues, methodInfo);
 

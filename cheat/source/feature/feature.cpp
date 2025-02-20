@@ -7,6 +7,7 @@
 
 #include "curseditems/tarotcardmodifier/tarotcardmodifier.h"
 #include "ghost/ghostmodifier/ghostmodifier.h"
+#include "ghost/interactor/interactor.h"
 #include "miscellaneous/antikick/antikick.h"
 #include "miscellaneous/customname/customname.h"
 #include "miscellaneous/doormodifier/doormodifier.h"
@@ -65,6 +66,7 @@ FeatureManager::FeatureManager()
 	AddFeature("Players::PlayerModifier", new Features::Players::PlayerModifier());
 
 	AddFeature("Ghost::GhostModifier", new Features::Ghost::GhostModifier());
+	AddFeature("Ghost::Interactor", new Features::Ghost::Interactor());
 
 	AddFeature("CursedItems::TarotCardModifier", new Features::CursedItems::TarotCardModifier());
 

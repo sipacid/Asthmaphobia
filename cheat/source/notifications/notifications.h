@@ -3,7 +3,7 @@
 
 namespace Asthmaphobia::Notifications
 {
-	enum class NotificationType
+	enum class NotificationType : uint8_t
 	{
 		Info,
 		Warning,
@@ -21,7 +21,7 @@ namespace Asthmaphobia::Notifications
 
 	inline void AddNotification(const std::string& message, const NotificationType type, const float lifeTime)
 	{
-		notifications.push_back({message, type, lifeTime});
+		notifications.push_back({.Message= message, .Type= type, .LifeTime= lifeTime});
 	}
 
 	inline void UpdateNotifications()

@@ -30,6 +30,7 @@ namespace SDK
 #include "GhostEvidence.h"
 #include "GhostTraits.h"
 #include "GhostInfo.h"
+#include "GhostActivity.h"
 #include "GhostAI.h"
 #include "EMF.h"
 #include "PhotoValues.h"

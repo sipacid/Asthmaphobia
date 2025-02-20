@@ -43,12 +43,14 @@ void PlayerModifier::OnMenu()
 
 		if (const auto isLocalMasterClient = Helper::IsLocalMasterClient(); player == Helper::GetLocalPlayer() || isLocalMasterClient)
 		{
-			const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
-			if (ImGui::Button(killPlayerLabel.c_str()))
-				isLocalMasterClient ? SDK::Player_StartKillingPlayer_ptr(player, nullptr) : SDK::Player_KillPlayer_ptr(player, true, nullptr);
-			if (isLocalMasterClient)
+			if (!player->Fields.IsDead)
 			{
-				ImGui::SameLine();
+				const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
+				if (ImGui::Button(killPlayerLabel.c_str()))
+					isLocalMasterClient ? SDK::Player_StartKillingPlayer_ptr(player, nullptr) : SDK::Player_KillPlayer_ptr(player, true, nullptr);
+			}
+			else if (isLocalMasterClient)
+			{
 				const auto revivePlayerLabel = std::format("Revive player##{}", playerIndex);
 				if (ImGui::Button(revivePlayerLabel.c_str()))
 					SDK::Player_RevivePlayer_ptr(player, nullptr);
@@ -62,12 +64,15 @@ void PlayerModifier::OnMenu()
 			if (ImGui::Button(unfreezePlayerLabel.c_str()))
 				SDK::Player_ToggleFreezePlayer_ptr(player, false, nullptr);
 
-			const auto sanityLabel = std::format("Sanity##i{}", playerIndex);
-			ImGui::SliderInt(sanityLabel.c_str(), &SanityArray[playerIndex], 0, 100);
-			ImGui::SameLine();
-			const auto setSanityLabel = std::format("Set sanity##i{}", playerIndex);
-			if (ImGui::Button(setSanityLabel.c_str()))
-				SDK::PlayerSanity_SetInsanity_ptr(player->Fields.PlayerSanity, 100 - SanityArray[playerIndex], nullptr);
+			if (!player->Fields.IsDead)
+			{
+				const auto sanityLabel = std::format("Sanity##i{}", playerIndex);
+				ImGui::SliderInt(sanityLabel.c_str(), &SanityArray[playerIndex], 0, 100);
+				ImGui::SameLine();
+				const auto setSanityLabel = std::format("Set sanity##i{}", playerIndex);
+				if (ImGui::Button(setSanityLabel.c_str()))
+					SDK::PlayerSanity_SetInsanity_ptr(player->Fields.PlayerSanity, 100 - SanityArray[playerIndex], nullptr);
+			}
 		}
 
 		ImGui::Separator();

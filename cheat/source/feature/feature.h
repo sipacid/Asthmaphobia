@@ -5,7 +5,7 @@
 
 namespace Asthmaphobia
 {
-	enum FeatureCategory
+	enum FeatureCategory : uint8_t
 	{
 		Visuals,
 		Players,
@@ -33,10 +33,10 @@ namespace Asthmaphobia
 		virtual void OnDraw() = 0;
 		virtual void OnMenu() = 0;
 
-		const std::string& GetName() const { return Name; }
-		const std::string& GetDescription() const { return Description; }
-		FeatureCategory GetCategory() const { return Category; }
-		bool IsEnabled() const { return std::get<bool>(EnabledSetting->GetValue()); }
+		[[nodiscard]] const std::string& GetName() const { return Name; }
+		[[nodiscard]] const std::string& GetDescription() const { return Description; }
+		[[nodiscard]] FeatureCategory GetCategory() const { return Category; }
+		[[nodiscard]] bool IsEnabled() const { return std::get<bool>(EnabledSetting->GetValue()); }
 		std::unique_ptr<Settings>& GetSettings() { return Settings_; }
 
 		bool ShouldDrawSection = true;
@@ -56,8 +56,8 @@ namespace Asthmaphobia
 		~FeatureManager();
 
 		void AddFeature(const std::string& name, Feature* feature);
-		const std::unordered_map<std::string, Feature*>& GetFeatures() const { return Features; }
-		Feature* GetFeatureByName(const std::string& name) const;
+		[[nodiscard]] const std::unordered_map<std::string, Feature*>& GetFeatures() const { return Features; }
+		[[nodiscard]] Feature* GetFeatureByName(const std::string& name) const;
 		void OnDraw() const;
 		void OnMenu() const;
 

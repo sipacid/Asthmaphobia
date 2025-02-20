@@ -5,7 +5,7 @@
 
 using namespace Asthmaphobia;
 
-void SetTheme()
+static void SetTheme()
 {
 	auto& style = ImGui::GetStyle();
 	const auto& io = ImGui::GetIO();

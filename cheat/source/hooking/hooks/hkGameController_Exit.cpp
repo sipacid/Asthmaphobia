@@ -5,7 +5,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkGameController_Exit(SDK::GameController* gameController, void* photonMessageInfo, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called GameController_Exit");
+	DEBUG_LOG("Called GameController_Exit")
 	if (!globalRunning)
 		return SDK::GameController_Exit_ptr(gameController, photonMessageInfo, methodInfo);
 

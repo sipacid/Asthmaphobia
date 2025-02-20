@@ -5,7 +5,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkGhostAI_Start(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called GhostAI_Start");
+	DEBUG_LOG("Called GhostAI_Start")
 	if (!globalRunning)
 		return SDK::GhostAI_Start_ptr(ghostAI, methodInfo);
 

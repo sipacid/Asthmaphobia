@@ -253,7 +253,7 @@ SDK::String* Helper::StringToSystemString(const std::string& string)
 
 std::wstring Helper::StringToWString(const std::string& string)
 {
-	return std::basic_string<wchar_t>(string.begin(), string.end());
+	return std::wstring{string.begin(), string.end()};
 }
 
 int Helper::GetPlayerIndex(const SDK::Player* player)

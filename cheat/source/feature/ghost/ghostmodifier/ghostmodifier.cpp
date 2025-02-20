@@ -30,7 +30,16 @@ void GhostModifier::OnMenu()
 	ImGui::SliderFloat("Ghost Speed##ghostModifier", &std::get<float>(GhostSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
 
 	if (ImGui::Button("Force appear##ghostModifier"))
-		SDK::GhostAI_Appear_ptr(GameState::ghostAI, INT_MAX, nullptr);
+	{
+		if (GameState::ghostAI == nullptr)
+		{
+			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+		}
+		else
+		{
+			SDK::GhostAI_Appear_ptr(GameState::ghostAI, INT_MAX, nullptr);
+		}
+	}
 }
 
 void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo) const

@@ -8,7 +8,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called FirstPersonController_Update");
+	DEBUG_LOG("Called FirstPersonController_Update")
 	if (!globalRunning)
 		return SDK::FirstPersonController_Update_ptr(firstPersonController, methodInfo);
 

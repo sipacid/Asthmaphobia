@@ -31,9 +31,8 @@ void Speed::OnMenu()
 	ImGui::SliderFloat("Run Speed##speed", &std::get<float>(RunSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
 }
 
-void Speed::OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
+void Speed::OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo)
 {
-	static bool WasEnabled = false;
 	if (std::get<bool>(EnabledSetting->GetValue()))
 	{
 		WasEnabled = true;

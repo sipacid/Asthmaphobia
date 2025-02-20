@@ -72,9 +72,6 @@ void GhostWindow::OnMenu()
 
 std::string GhostWindow::GetGhostEvidenceString()
 {
-	if (GameState::ghostAI == nullptr)
-		return "";
-
 	const auto ghostInfo = GameState::ghostAI->Fields.GhostInfo;
 	const auto ghostTraits = ghostInfo->Fields.GhostTraits;
 	const auto ghostEvidenceList = ghostTraits.GhostEvidenceList;

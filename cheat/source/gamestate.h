@@ -10,7 +10,6 @@ namespace Asthmaphobia::GameState
 	inline SDK::FuseBox* fuseBox;
 	inline SDK::DeadZoneController* deadZoneController;
 	inline bool isHunting = false;
-	inline bool leaveMatch = false;
 
 	inline void Reset()
 	{
@@ -20,6 +19,5 @@ namespace Asthmaphobia::GameState
 		fuseBox = nullptr;
 		deadZoneController = nullptr;
 		isHunting = false;
-		leaveMatch = false;
 	}
 }

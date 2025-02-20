@@ -25,7 +25,7 @@ Logger::~Logger()
 	logger = nullptr;
 }
 
-void Logger::Log(LogType type, const std::string& message)
+void Logger::Log(const LogType type, const std::string& message)
 {
 	switch (type)
 	{

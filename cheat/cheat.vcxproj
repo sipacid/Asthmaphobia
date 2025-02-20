@@ -173,6 +173,7 @@
     <ClCompile Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.cpp" />
     <ClCompile Include="source\feature\feature.cpp" />
     <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp" />
+    <ClCompile Include="source\feature\ghost\interactor\interactor.cpp" />
     <ClCompile Include="source\feature\miscellaneous\antikick\antikick.cpp" />
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
     <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.h" />
     <ClInclude Include="source\feature\feature.h" />
     <ClInclude Include="source\feature\ghost\ghostmodifier\ghostmodifier.h" />
+    <ClInclude Include="source\feature\ghost\interactor\interactor.h" />
     <ClInclude Include="source\feature\miscellaneous\antikick\antikick.h" />
     <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
     <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
@@ -260,6 +262,7 @@
     <ClInclude Include="source\sdk\FuseBox.h" />
     <ClInclude Include="source\sdk\GameController.h" />
     <ClInclude Include="source\sdk\GameObject.h" />
+    <ClInclude Include="source\sdk\GhostActivity.h" />
     <ClInclude Include="source\sdk\GhostAI.h" />
     <ClInclude Include="source\sdk\GhostEvidence.h" />
     <ClInclude Include="source\sdk\GhostInfo.h" />

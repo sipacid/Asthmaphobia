@@ -40,7 +40,7 @@ namespace SDK
 		void* NavMeshAgent; // NavMeshAgent
 		void* GhostAudio; // GhostAudio
 		void* GhostInteraction; // GhostInteraction
-		void* GhostActivity; // GhostActivity
+		GhostActivity* GhostActivity; // GhostActivity
 		void* NormalModel; // GhostModel
 		void* HalloweenModel; // GhostModel
 		void* HolidayModel; // GhostModel
@@ -105,4 +105,5 @@ namespace SDK
 	DECLARE_FUNCTION_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19F3F80);
 	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x19DF720);
 	DECLARE_FUNCTION_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int a1, MethodInfo* methodInfo), 0x19DE620);
+	DECLARE_FUNCTION_POINTER(GhostAI_LookAtNearestPlayer, bool(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19E0780);
 }
