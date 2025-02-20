@@ -4,5 +4,5 @@
 namespace Injector
 {
 	DWORD GetProcessIdByName(const char* processName);
-	void InjectDLL(DWORD processId, const char* dllPath);
+	bool InjectDLL(DWORD processId, const char* dllPath);
 }

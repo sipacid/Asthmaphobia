@@ -19,8 +19,6 @@
 namespace Asthmaphobia
 {
 	inline HMODULE globalModule{};
-	inline HANDLE mainThread{};
-	inline DWORD mainThreadId{};
 	inline bool globalRunning{true};
 	inline float dpiScale = GetDpiForSystem() / 96.0f;
 

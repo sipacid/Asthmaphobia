@@ -5,7 +5,7 @@
 
 using namespace Asthmaphobia;
 
-DWORD WINAPI AsthmaphobiaThread()
+extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 {
 	static std::unique_ptr<Logger> loggerInstance;
 	static std::unique_ptr<ConfigManager> configManagerInstance;
@@ -75,7 +75,6 @@ DWORD WINAPI AsthmaphobiaThread()
 		LOG_ERROR(std::string("Exception in main Asthmaphobia thread: ") + e.what());
 	}
 
-	CloseHandle(mainThread);
 	FreeLibraryAndExitThread(globalModule, 0);
 }
 
@@ -85,9 +84,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ulReasonForCall, LPVOID lpReserved)
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
-
-		mainThread = CreateThread(nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(AsthmaphobiaThread), nullptr, 0, &mainThreadId);
-
 		globalModule = hModule;
 		break;
 	case DLL_THREAD_ATTACH:
