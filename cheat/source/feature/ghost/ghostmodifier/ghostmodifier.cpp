@@ -24,10 +24,13 @@ void GhostModifier::OnDraw()
 
 void GhostModifier::OnMenu()
 {
-	ImGui::Checkbox("Enable custom ghost speed##ghostSpeed", &std::get<bool>(EnabledSetting->GetValue()));
+	ImGui::Checkbox("Enable custom ghost speed##ghostModifier", &std::get<bool>(EnabledSetting->GetValue()));
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("This will only work if you are the host.");
-	ImGui::SliderFloat("Ghost Speed##ghostSpeed", &std::get<float>(GhostSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
+	ImGui::SliderFloat("Ghost Speed##ghostModifier", &std::get<float>(GhostSpeedSetting->GetValue()), 0.0f, 15.0f, "%.1f");
+
+	if (ImGui::Button("Force appear##ghostModifier"))
+		SDK::GhostAI_Appear_ptr(GameState::ghostAI, INT_MAX, nullptr);
 }
 
 void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo) const
