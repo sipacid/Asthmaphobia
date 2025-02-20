@@ -9,7 +9,7 @@ namespace SDK
 		void* Monitor; // MonitorData
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
-		void* Vector[32];
+		void* Vector[65535];
 	};
 
 	DECLARE_FUNCTION_POINTER(GameObject_FindGameObjectsWithTag, GameObjectArray* (*)(String* tag, MethodInfo* methodInfo), 0x47AA9B0);

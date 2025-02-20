@@ -13,7 +13,7 @@ namespace SDK
 		void* Monitor; // MonitorData
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
-		Door* Vector[32];
+		Door* Vector[65535];
 	};
 
 	DECLARE_FUNCTION_POINTER(Door_DisableOrEnableCollider, void(*)(Door* door, bool collisionEnabled, MethodInfo* methodInfo), 0x1F6C250);

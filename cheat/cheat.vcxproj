@@ -170,7 +170,8 @@
     <ClInclude Include="libraries\json\json.hpp" />
     <ClInclude Include="resources\fonts\RobotoMonoMediumFont.h" />
     <ClCompile Include="source\config\config.cpp" />
-    <ClCompile Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.cpp" />
+    <ClCompile Include="source\feature\curseditems\curseditemmodifier\curseditemmodifier.cpp" />
+    <ClCompile Include="source\feature\curseditems\forcecard\forcecard.cpp" />
     <ClCompile Include="source\feature\feature.cpp" />
     <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp" />
     <ClCompile Include="source\feature\ghost\interactor\interactor.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="source\feature\visuals\playeresp\playeresp.cpp" />
     <ClCompile Include="source\feature\visuals\watermark\watermark.cpp" />
     <ClCompile Include="source\helper\helper.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkCursedItemController_Awake.cpp" />
     <ClCompile Include="source\hooking\hooks\hkDeadZoneController_Awake.cpp" />
     <ClCompile Include="source\hooking\hooks\hkEvidenceController_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkExitLevel_Exit.cpp" />
@@ -213,7 +215,8 @@
     <ClCompile Include="source\hooking\hooks\hkTarotCard_SetCard.cpp" />
     <ClCompile Include="source\hooking\hooks\hkWndProc.cpp" />
     <ClInclude Include="source\config\config.h" />
-    <ClInclude Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.h" />
+    <ClInclude Include="source\feature\curseditems\curseditemmodifier\curseditemmodifier.h" />
+    <ClInclude Include="source\feature\curseditems\forcecard\forcecard.h" />
     <ClInclude Include="source\feature\feature.h" />
     <ClInclude Include="source\feature\ghost\ghostmodifier\ghostmodifier.h" />
     <ClInclude Include="source\feature\ghost\interactor\interactor.h" />
@@ -251,6 +254,8 @@
     <ClInclude Include="source\sdk\Camera.h" />
     <ClInclude Include="source\sdk\Collider.h" />
     <ClInclude Include="source\sdk\Component.h" />
+    <ClInclude Include="source\sdk\CursedItem.h" />
+    <ClInclude Include="source\sdk\CursedItemController.h" />
     <ClInclude Include="source\sdk\Cursor.h" />
     <ClInclude Include="source\sdk\DeadZoneController.h" />
     <ClInclude Include="source\sdk\Door.h" />

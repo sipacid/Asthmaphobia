@@ -52,3 +52,5 @@ namespace SDK
 #include "DeadZoneController.h"
 #include "MouseLook.h"
 #include "GameObject.h"
+#include "CursedItem.h"
+#include "CursedItemController.h"

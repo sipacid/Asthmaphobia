@@ -201,7 +201,7 @@
     <ClInclude Include="source\sdk\Vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.h">
+    <ClInclude Include="source\feature\curseditems\forcecard\forcecard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\TarotCard.h">
@@ -289,6 +289,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\GhostActivity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\CursedItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\CursedItemController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\feature\curseditems\curseditemmodifier\curseditemmodifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -404,7 +413,7 @@
     <ClCompile Include="source\hooking\hooks\hkFirstPersonController_Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\curseditems\tarotcardmodifier\tarotcardmodifier.cpp">
+    <ClCompile Include="source\feature\curseditems\forcecard\forcecard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkTarotCard_SetCard.cpp">
@@ -465,6 +474,12 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\ghost\interactor\interactor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkCursedItemController_Awake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\curseditems\curseditemmodifier\curseditemmodifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,7 +21,7 @@ namespace SDK
 		void* Monitor; // MonitorData
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
-		GhostEvidence Vector[32];
+		GhostEvidence Vector[65535];
 	};
 
 	struct __declspec(align(8)) ListGhostEvidenceFields

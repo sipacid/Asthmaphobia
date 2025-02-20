@@ -5,7 +5,8 @@
 
 #include "source/notifications/notifications.h"
 
-#include "curseditems/tarotcardmodifier/tarotcardmodifier.h"
+#include "curseditems/curseditemmodifier/curseditemmodifier.h"
+#include "curseditems/forcecard/forcecard.h"
 #include "ghost/ghostmodifier/ghostmodifier.h"
 #include "ghost/interactor/interactor.h"
 #include "miscellaneous/antikick/antikick.h"
@@ -68,7 +69,8 @@ FeatureManager::FeatureManager()
 	AddFeature("Ghost::GhostModifier", new Features::Ghost::GhostModifier());
 	AddFeature("Ghost::Interactor", new Features::Ghost::Interactor());
 
-	AddFeature("CursedItems::TarotCardModifier", new Features::CursedItems::TarotCardModifier());
+	AddFeature("CursedItems::CursedItemModifier", new Features::CursedItems::CursedItemModifier());
+	AddFeature("CursedItems::ForceCard", new Features::CursedItems::ForceCard());
 
 	AddFeature("Miscellaneous::LeavePeople", new Features::Miscellaneous::LeavePeople());
 	AddFeature("Miscellaneous::AntiKick", new Features::Miscellaneous::AntiKick());

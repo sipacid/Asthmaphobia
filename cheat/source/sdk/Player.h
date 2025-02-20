@@ -83,7 +83,7 @@ namespace SDK
 		void* Monitor; // MonitorData
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
-		Player* Vector[32];
+		Player* Vector[65535];
 	};
 
 	struct __declspec(align(8)) ListPlayerFields
