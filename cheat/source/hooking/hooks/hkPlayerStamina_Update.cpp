@@ -6,11 +6,9 @@ using namespace Asthmaphobia;
 
 void Hooks::hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called PlayerStamina_Update")
-	if (!globalRunning)
-		return SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
-
-	dynamic_cast<Features::Movement::InfiniteStamina*>(featureManager->GetFeatureByName("Movement::InfiniteStamina"))->OnPlayerStamina_Update(playerStamina, methodInfo);
+	LOG_DEBUG("Called PlayerStamina_Update");
+	if (globalRunning)
+		dynamic_cast<Features::Movement::InfiniteStamina*>(featureManager->GetFeatureByName("Movement::InfiniteStamina"))->OnPlayerStamina_Update(playerStamina, methodInfo);
 
 	SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
 }

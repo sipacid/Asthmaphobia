@@ -6,7 +6,7 @@ using namespace Asthmaphobia;
 
 std::nullptr_t Hooks::hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called Player_StartKillingPlayerNetworked")
+	LOG_DEBUG("Called Player_StartKillingPlayerNetworked");
 	if (!globalRunning)
 		return SDK::Player_StartKillingPlayerNetworked_ptr(player, a1, photonMessageInfo, methodInfo);
 

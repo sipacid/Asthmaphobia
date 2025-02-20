@@ -8,5 +8,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Camera_WorldToScreenPoint, Vector3(*)(Camera* camera, Vector3 worldPoint, MethodInfo* methodInfo), 0x476C3B0);
+	DECLARE_FUNCTION_POINTER(Camera_WorldToScreenPoint, Vector3(*)(Camera* camera, Vector3 worldPoint, MethodInfo* methodInfo), 0x4751730);
 }

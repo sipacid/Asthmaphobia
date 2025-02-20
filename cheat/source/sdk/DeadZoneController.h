@@ -22,5 +22,5 @@ namespace SDK
 		DeadZoneControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(DeadZoneController_Awake, void(*)(DeadZoneController* deadZoneController, MethodInfo* methodInfo), 0x1C4BCD0);
+	DECLARE_FUNCTION_POINTER(DeadZoneController_Awake, void(*)(DeadZoneController* deadZoneController, MethodInfo* methodInfo), 0x1C12930);
 }

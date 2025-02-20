@@ -21,7 +21,7 @@ namespace Asthmaphobia::Notifications
 
 	inline void AddNotification(const std::string& message, const NotificationType type, const float lifeTime)
 	{
-		notifications.push_back({.Message= message, .Type= type, .LifeTime= lifeTime});
+		notifications.push_back({.Message = message, .Type = type, .LifeTime = lifeTime});
 	}
 
 	inline void UpdateNotifications()

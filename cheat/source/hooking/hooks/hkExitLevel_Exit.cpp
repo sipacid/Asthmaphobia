@@ -5,10 +5,9 @@ using namespace Asthmaphobia;
 
 void Hooks::hkExitLevel_Exit(SDK::ExitLevel* exitLevel, void* photonMessageInfo, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called ExitLevel_Exit")
-	if (!globalRunning)
-		return SDK::ExitLevel_Exit_ptr(exitLevel, photonMessageInfo, methodInfo);
-
-	GameState::Reset();
+	LOG_DEBUG("Called ExitLevel_Exit");
 	SDK::ExitLevel_Exit_ptr(exitLevel, photonMessageInfo, methodInfo);
+
+	if (globalRunning)
+		GameState::Reset();
 }

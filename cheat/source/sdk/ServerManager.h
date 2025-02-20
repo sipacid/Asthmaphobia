@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(ServerManager_KickPlayerNetworked, void(*)(ServerManager* serverManager, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x866510);
+	DECLARE_FUNCTION_POINTER(ServerManager_KickPlayerNetworked, void(*)(ServerManager* serverManager, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x813520);
 }

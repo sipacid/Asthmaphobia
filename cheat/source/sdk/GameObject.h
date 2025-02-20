@@ -3,6 +3,7 @@
 
 namespace SDK
 {
+	// UnityEngine.CoreModule.UnityEngine.GameObject
 	struct GameObjectArray
 	{
 		void* Clazz; // GameObjectArrayClass
@@ -12,6 +13,6 @@ namespace SDK
 		void* Vector[65535];
 	};
 
-	DECLARE_FUNCTION_POINTER(GameObject_FindGameObjectsWithTag, GameObjectArray* (*)(String* tag, MethodInfo* methodInfo), 0x47AA9B0);
-	DECLARE_FUNCTION_POINTER(GameObject_Get_Transform, Transform*(*)(void* gameObject, MethodInfo* methodInfo), 0x47AB400);
+	DECLARE_FUNCTION_POINTER(GameObject_Get_Transform, Transform* (*)(void* gameObject, MethodInfo* methodInfo), 0x4790750);
+	DECLARE_FUNCTION_POINTER(GameObject_FindGameObjectsWithTag, GameObjectArray* (*)(String* tag, MethodInfo* methodInfo), 0x478FD00);
 }

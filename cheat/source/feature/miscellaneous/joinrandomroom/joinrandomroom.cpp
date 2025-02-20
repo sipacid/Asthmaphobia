@@ -30,13 +30,18 @@ void JoinRandomRoom::OnMenu()
 void JoinRandomRoom::Run()
 {
 	if (!SDK::PhotonNetwork_Get_IsConnected_ptr(nullptr))
-		return;
+		return AddNotification("You must be connected to the Photon network to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 	if (!SDK::PhotonNetwork_GetPing_ptr(nullptr))
-		return;
+		return AddNotification("You must have a stable connection to the Photon network to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 	if (SDK::PhotonNetwork_Get_InRoom_ptr(nullptr))
+	{
+		AddNotification("You are already in a room, leaving it instead.", Notifications::NotificationType::Warning, 3.0f);
 		SDK::PhotonNetwork_LeaveRoom_ptr(true, nullptr);
+	}
 	else
+	{
 		SDK::PhotonNetwork_JoinRandomRoom_ptr(nullptr);
+	}
 }

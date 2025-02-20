@@ -5,10 +5,9 @@ using namespace Asthmaphobia;
 
 void Hooks::hkFuseBox_Start(SDK::FuseBox* fuseBox, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called FuseBox_Start")
-	if (!globalRunning)
-		return SDK::FuseBox_Start_ptr(fuseBox, methodInfo);
-
-	GameState::fuseBox = fuseBox;
+	LOG_DEBUG("Called FuseBox_Start");
 	SDK::FuseBox_Start_ptr(fuseBox, methodInfo);
+
+	if (globalRunning)
+		GameState::fuseBox = fuseBox;
 }

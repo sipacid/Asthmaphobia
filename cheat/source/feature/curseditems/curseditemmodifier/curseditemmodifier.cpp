@@ -25,7 +25,7 @@ void CursedItemModifier::OnMenu()
 	if (ImGui::Button("Break cursed items##cursedItems"))
 	{
 		if (GameState::cursedItemController == nullptr)
-			return AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 		if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
 			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
@@ -54,7 +54,7 @@ void CursedItemModifier::OnMenu()
 	if (ImGui::Button("Use cursed items##cursedItems"))
 	{
 		if (GameState::cursedItemController == nullptr)
-			return AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 		if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
 			SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);

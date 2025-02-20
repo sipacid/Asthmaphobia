@@ -4,5 +4,5 @@
 namespace SDK
 {
 	// mscorlib.System.Runtime.InteropServices.Marshal
-	DECLARE_FUNCTION_POINTER(Marshal_PtrToStringAnsi, String* (*)(void* pointer, MethodInfo* methodInfo), 0x38C25B0);
+	DECLARE_FUNCTION_POINTER(Marshal_PtrToStringAnsi, String* (*)(void* pointer, MethodInfo* methodInfo), 0x38AC5D0);
 }

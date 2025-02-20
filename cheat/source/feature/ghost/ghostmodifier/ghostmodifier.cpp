@@ -33,16 +33,22 @@ void GhostModifier::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
-			SDK::GhostAI_Appear_ptr(GameState::ghostAI, INT_MAX, nullptr);
+			ForceAppear = true;
 		}
 	}
+	if (ImGui::IsItemHovered())
+		ImGui::SetTooltip("This will only work if you are the host.");
 }
 
-void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo) const
+void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()) || !Helper::IsLocalMasterClient())
 		return;
@@ -50,4 +56,10 @@ void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* method
 	ghost->Fields.Speed = std::get<float>(GhostSpeedSetting->GetValue());
 	ghost->Fields.Field22 = std::get<float>(GhostSpeedSetting->GetValue());
 	ghost->Fields.Field23 = std::get<float>(GhostSpeedSetting->GetValue());
+
+	if (ForceAppear)
+	{
+		SDK::GhostAI_Appear_ptr(ghost, INT_MAX, nullptr);
+		ForceAppear = false;
+	}
 }

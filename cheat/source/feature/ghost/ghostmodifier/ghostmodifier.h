@@ -13,9 +13,11 @@ namespace Asthmaphobia::Features::Ghost
 		void OnDraw() override;
 		void OnMenu() override;
 
-		void OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo) const;
+		void OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo);
 
 	private:
 		std::shared_ptr<Setting> GhostSpeedSetting;
+
+		bool ForceAppear = false;
 	};
 }

@@ -37,7 +37,7 @@ void Teleport::OnMenu()
 void Teleport::Run(const SDK::Player* player) const
 {
 	if (!GameState::mapController || !GameState::deadZoneController || !GameState::ghostAI)
-		return AddNotification("You must be in-game to use this feature", Notifications::NotificationType::Info, 3.0f);
+		return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 	const auto localPlayer = Helper::GetLocalPlayer();
 
@@ -62,7 +62,7 @@ void Teleport::Run(const SDK::Player* player) const
 void Teleport::TeleportItems()
 {
 	if (!GameState::mapController || !GameState::deadZoneController || !GameState::ghostAI)
-		return AddNotification("You must be in-game to use this feature", Notifications::NotificationType::Info, 3.0f);
+		return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 	const auto localPlayer = Helper::GetLocalPlayer();
 	const auto objects = SDK::GameObject_FindGameObjectsWithTag_ptr(Helper::StringToSystemString("Item"), nullptr);

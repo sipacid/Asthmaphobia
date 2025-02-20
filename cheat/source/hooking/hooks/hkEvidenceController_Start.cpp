@@ -5,10 +5,9 @@ using namespace Asthmaphobia;
 
 void Hooks::hkEvidenceController_Start(SDK::EvidenceController* evidenceController, SDK::MethodInfo* methodInfo)
 {
-	DEBUG_LOG("Called EvidenceController_Start")
-	if (!globalRunning)
-		return SDK::EvidenceController_Start_ptr(evidenceController, methodInfo);
-
-	GameState::evidenceController = evidenceController;
+	LOG_DEBUG("Called EvidenceController_Start");
 	SDK::EvidenceController_Start_ptr(evidenceController, methodInfo);
+
+	if (globalRunning)
+		GameState::evidenceController = evidenceController;
 }

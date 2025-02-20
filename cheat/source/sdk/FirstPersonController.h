@@ -26,11 +26,10 @@ namespace SDK
 		Vector2 Input; // Vector2
 		Vector3 MoveDir; // Vector3
 		void* CharacterController; // PhysicsCharacterController
-		bool Field0;
 		bool Crouching;
 		float CurrentSpeed;
 		Vector3 DesiredMove; // Vector3
-		void* HitInfo; // RaycastHit
+		void* HitInfo; // RaycastHit - inaccurate from hereout
 		void* OnStartSprint; // UnityEvent
 		void* OnStartWalk; // UnityEvent
 	};
@@ -43,5 +42,5 @@ namespace SDK
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0x100ABD0);
+	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0xFCF4A0);
 }

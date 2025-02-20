@@ -24,7 +24,7 @@ void PlayerModifier::OnMenu()
 {
 	const auto players = Helper::GetPlayers();
 	if (!players)
-		return ImGui::Text("You need to be in-game to view this.");
+		return ImGui::Text("You must be in-game to view this.");
 
 	for (int playerIndex = 0; playerIndex < players->Fields.Size; playerIndex++)
 	{
@@ -48,12 +48,6 @@ void PlayerModifier::OnMenu()
 				const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
 				if (ImGui::Button(killPlayerLabel.c_str()))
 					isLocalMasterClient ? SDK::Player_StartKillingPlayer_ptr(player, nullptr) : SDK::Player_KillPlayer_ptr(player, true, nullptr);
-			}
-			else if (isLocalMasterClient)
-			{
-				const auto revivePlayerLabel = std::format("Revive player##{}", playerIndex);
-				if (ImGui::Button(revivePlayerLabel.c_str()))
-					SDK::Player_RevivePlayer_ptr(player, nullptr);
 			}
 
 			const auto freezePlayerLabel = std::format("Freeze player##{}", playerIndex);

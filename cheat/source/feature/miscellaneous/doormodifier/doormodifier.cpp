@@ -64,7 +64,7 @@ void DoorModifier::DoorLoop(const Mode mode, const bool enabled, SDK::DoorArray*
 void DoorModifier::Run(const Mode mode, const bool enabled)
 {
 	if (!GameState::mapController)
-		return AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+		return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
 	const auto gameController = GameState::mapController->Fields.GameController;
 	const auto levelController = gameController->Fields.LevelController;

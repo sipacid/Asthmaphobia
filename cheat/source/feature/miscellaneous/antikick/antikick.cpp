@@ -33,5 +33,5 @@ void AntiKick::OnServerManagerKickPlayerNetworked(SDK::ServerManager* serverMana
 	if (!std::get<bool>(EnabledSetting->GetValue()) || Helper::IsLocalMasterClient())
 		return SDK::ServerManager_KickPlayerNetworked_ptr(serverManager, a1, photonMessageInfo, methodInfo);
 
-	AddNotification("The host just tried to kick you", Notifications::NotificationType::Warning, 3.0f);
+	AddNotification("The host just tried to kick you!", Notifications::NotificationType::Warning, 3.0f);
 }

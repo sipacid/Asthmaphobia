@@ -66,5 +66,5 @@ namespace SDK
 		CursedItemControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(CursedItemController_Awake, void(*)(CursedItemController* cursedItemController, MethodInfo* methodInfo), 0x1C38700);
+	DECLARE_FUNCTION_POINTER(CursedItemController_Awake, void(*)(CursedItemController* cursedItemController, MethodInfo* methodInfo), 0x1BFCED0);
 }

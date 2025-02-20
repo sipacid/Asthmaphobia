@@ -57,9 +57,7 @@ void Menu::Initialize()
 	SetTheme();
 	menu.Initialized = true;
 
-#ifdef _DEBUG
-	logger->Log(Logger::LogType::Info, "Menu initialized.");
-#endif
+	LOG_DEBUG("Menu initialized.");
 }
 
 void Menu::Render()

@@ -10,9 +10,7 @@ ConfigManager::ConfigManager()
 {
 	if (!ConfigDirectoryExists())
 	{
-#ifdef _DEBUG
-		logger->Log(Logger::LogType::Info, "Config directory does not exist, creating...");
-#endif
+		LOG_DEBUG("Config directory does not exist, creating...");
 		CreateConfigDirectory();
 	}
 
@@ -92,7 +90,7 @@ void ConfigManager::SaveConfig()
 	const auto configPath = GetConfigDirectoryPath() + "\\config.json";
 
 	Json data;
-	for (const auto features = featureManager->GetFeatures(); const auto& feature : features)
+	for (const auto& features = featureManager->GetFeatures(); const auto& feature : features)
 	{
 		auto settings = feature.second->GetSettings()->GetSettings();
 		auto featureName = feature.first;

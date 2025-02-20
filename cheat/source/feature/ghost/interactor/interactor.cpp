@@ -26,7 +26,11 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -38,7 +42,11 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -50,19 +58,27 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
 			ForceInteract = true;
 		}
 	}
-	
+
 	if (ImGui::Button("Force interact with door##interactor"))
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -74,7 +90,11 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -86,7 +106,11 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -98,7 +122,11 @@ void Interactor::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You need to be in-game!", Notifications::NotificationType::Info, 3.0f);
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{

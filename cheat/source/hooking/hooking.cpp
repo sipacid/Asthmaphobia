@@ -27,11 +27,9 @@ void Hooking::ApplyHooks() const
 {
 	for (const auto& hook : this->hooks_)
 	{
-#ifdef _DEBUG
 		std::ostringstream oss;
-		oss << "Applying hook: " << std::get<0>(hook) << std::endl;
-		logger->Log(Logger::LogType::Info, oss.str());
-#endif
+		oss << "Applying hook: " << std::get<0>(hook) << "\n";
+		LOG_DEBUG(oss.str());
 
 		DetourAttach(std::get<1>(hook), std::get<2>(hook));
 	}
@@ -45,11 +43,9 @@ void Hooking::RemoveHooks() const
 
 	for (const auto& hook : this->hooks_)
 	{
-#ifdef _DEBUG
 		std::ostringstream oss;
-		oss << "Restoring hook: " << std::get<0>(hook) << std::endl;
-		logger->Log(Logger::LogType::Info, oss.str());
-#endif
+		oss << "Restoring hook: " << std::get<0>(hook) << "\n";
+		LOG_DEBUG(oss.str());
 
 		DetourDetach(std::get<1>(hook), std::get<2>(hook));
 	}
