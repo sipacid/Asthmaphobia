@@ -13,6 +13,7 @@ namespace SDK
 #include "MethodInfo.h"
 #include "Vector2.h"
 #include "Vector3.h"
+#include "RaycastHit.h"
 #include "Quaternion.h"
 #include "String.h"
 #include "Cursor.h"

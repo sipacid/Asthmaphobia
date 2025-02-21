@@ -288,6 +288,7 @@
     <ClInclude Include="source\sdk\PlayerSanity.h" />
     <ClInclude Include="source\sdk\PlayerStamina.h" />
     <ClInclude Include="source\sdk\Quaternion.h" />
+    <ClInclude Include="source\sdk\RaycastHit.h" />
     <ClInclude Include="source\sdk\sdk.h" />
     <ClInclude Include="source\sdk\ServerManager.h" />
     <ClInclude Include="source\sdk\String.h" />
