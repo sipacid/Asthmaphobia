@@ -6,7 +6,7 @@ using namespace Asthmaphobia;
 
 bool Hooks::hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exitLevel, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called ExitLevel_ThereAreAlivePlayersOutsideTheTruck");
+	LOG_CALL("Called ExitLevel_ThereAreAlivePlayersOutsideTheTruck");
 	if (!globalRunning)
 		return SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr(exitLevel, methodInfo);
 

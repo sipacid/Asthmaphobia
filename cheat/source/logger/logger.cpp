@@ -11,6 +11,8 @@ constexpr std::string_view Logger::LevelToString(const Level level)
 {
 	switch (level)
 	{
+	case Level::Call:
+		return "[Call]";
 	case Level::Debug:
 		return "[Debug]";
 	case Level::Info:
@@ -28,6 +30,7 @@ constexpr WORD Logger::LevelToColor(const Level level)
 {
 	switch (level)
 	{
+	case Level::Call:
 	case Level::Debug:
 		return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
 	case Level::Info:
@@ -133,6 +136,6 @@ void Logger::ActualLog(const Level level, const std::string_view message)
 		fflush(stdout);
 	}
 
-	if (FileOut.is_open() && FileOut.good())
+	if (level > Level::Call && FileOut.is_open() && FileOut.good())
 		FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
 }

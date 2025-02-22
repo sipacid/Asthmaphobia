@@ -6,7 +6,7 @@ using namespace Asthmaphobia;
 
 bool Hooks::hkLevelValues_IsPerfectGame(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called LevelValues_IsPerfectGame");
+	LOG_CALL("Called LevelValues_IsPerfectGame");
 	if (!globalRunning)
 		return SDK::LevelValues_IsPerfectGame_ptr(levelValues, methodInfo);
 

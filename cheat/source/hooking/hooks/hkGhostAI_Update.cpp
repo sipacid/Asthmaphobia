@@ -7,7 +7,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkGhostAI_Update(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called GhostAI_Update");
+	LOG_CALL("Called GhostAI_Update");
 	if (globalRunning)
 	{
 		dynamic_cast<Features::Ghost::GhostModifier*>(featureManager->GetFeatureByName("Ghost::GhostModifier"))->OnGhostAIUpdate(ghostAI, methodInfo);

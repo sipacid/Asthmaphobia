@@ -5,7 +5,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkExitLevel_Exit(SDK::ExitLevel* exitLevel, void* photonMessageInfo, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called ExitLevel_Exit");
+	LOG_CALL("Called ExitLevel_Exit");
 	SDK::ExitLevel_Exit_ptr(exitLevel, photonMessageInfo, methodInfo);
 
 	if (globalRunning)

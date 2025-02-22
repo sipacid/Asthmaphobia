@@ -8,7 +8,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called FirstPersonController_Update");
+	LOG_CALL("Called FirstPersonController_Update");
 	if (globalRunning)
 	{
 		dynamic_cast<Features::Movement::Speed*>(featureManager->GetFeatureByName("Movement::Speed"))->OnFirstPersonController_Update(firstPersonController, methodInfo);

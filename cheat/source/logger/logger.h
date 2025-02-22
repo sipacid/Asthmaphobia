@@ -10,13 +10,14 @@ namespace Asthmaphobia
 	public:
 		enum class Level : uint8_t
 		{
+			Call,
 			Debug,
 			Info,
 			Warning,
 			Error
 		};
 
-		explicit Logger(Level minLevel = Level::Debug);
+		explicit Logger(Level minLevel = Level::Call);
 		~Logger();
 
 		template <typename T>
@@ -59,8 +60,12 @@ namespace Asthmaphobia
 #define LOG_DEBUG(...)        \
 	if (Asthmaphobia::logger) \
 	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Debug, __VA_ARGS__)
+#define LOG_CALL(...)        \
+	if (Asthmaphobia::logger) \
+	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Call, __VA_ARGS__)
 #else
 #define LOG_DEBUG(...)
+#define LOG_CALL(...)
 #endif
 
 #define LOG_INFO(...)         \

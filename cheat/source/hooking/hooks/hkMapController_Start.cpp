@@ -5,7 +5,7 @@ using namespace Asthmaphobia;
 
 void Hooks::hkMapController_Start(SDK::MapController* mapController, SDK::MethodInfo* methodInfo)
 {
-	LOG_DEBUG("Called MapController_Start");
+	LOG_CALL("Called MapController_Start");
 	SDK::MapController_Start_ptr(mapController, methodInfo);
 
 	if (globalRunning)
