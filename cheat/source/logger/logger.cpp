@@ -64,9 +64,11 @@ bool Logger::InitializeLogDirectory()
 		LogFilePath = logDir + "\\log_" + timestamp + ".txt";
 		FileOut.open(LogFilePath, std::ios_base::out | std::ios_base::app);
 
+		FileOut.rdbuf()->pubsetbuf(nullptr, 0);
+
 		return FileOut.is_open();
 	}
-	catch (const std::exception&)
+	catch (const std::exception &)
 	{
 		return false;
 	}
@@ -81,7 +83,7 @@ Logger::Logger(Level minLevel) : MinLevel(minLevel), ConsoleExists(false), HCons
 	if (!ConsoleExists)
 		ConsoleExists = AllocConsole();
 
-	FILE* dummy;
+	FILE *dummy;
 	freopen_s(&dummy, "CONOUT$", "w", stdout);
 	HConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -137,5 +139,8 @@ void Logger::ActualLog(const Level level, const std::string_view message)
 	}
 
 	if (level > Level::Call && FileOut.is_open() && FileOut.good())
+	{
 		FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
+		FileOut.flush(); 
+	}
 }
