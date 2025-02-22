@@ -168,16 +168,28 @@ bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScr
 	if (camera == nullptr)
 		return false;
 
-	const auto worldToScreen = SDK::Camera_WorldToScreenPoint_ptr(camera, vWorldPosition, nullptr); // do manually; dot product direction looking direction object.
-	if (worldToScreen.Z > 0)
-	{
-		vScreenPosition.X = worldToScreen.X;
-		vScreenPosition.Y = static_cast<float>(screenHeight) - worldToScreen.Y;
-		vScreenPosition.Z = worldToScreen.Z;
-		return true;
-	}
+	const auto cameraTransform = SDK::Component_Get_Transform_ptr(reinterpret_cast<SDK::Component*>(camera), nullptr);
+	const auto cameraPos = SDK::Transform_Get_Position_ptr(cameraTransform, nullptr);
+	const auto cameraForward = SDK::Transform_Get_Forward_ptr(cameraTransform, nullptr);
 
-	return false;
+	SDK::Vector3 direction;
+	direction.X = vWorldPosition.X - cameraPos.X;
+	direction.Y = vWorldPosition.Y - cameraPos.Y;
+	direction.Z = vWorldPosition.Z - cameraPos.Z;
+
+	const float dot = direction.X * cameraForward.X +
+		direction.Y * cameraForward.Y +
+		direction.Z * cameraForward.Z;
+
+	if (dot <= 0)
+		return false;
+
+	const auto worldToScreen = SDK::Camera_WorldToScreenPoint_ptr(camera, vWorldPosition, nullptr);
+	vScreenPosition.X = worldToScreen.X;
+	vScreenPosition.Y = static_cast<float>(screenHeight) - worldToScreen.Y;
+	vScreenPosition.Z = worldToScreen.Z;
+
+	return true;
 }
 
 SDK::Vector3 Helper::GetWorldPosition(const SDK::Player* player)
