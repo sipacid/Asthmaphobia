@@ -27,6 +27,9 @@ void CursedItemModifier::OnMenu()
 		if (GameState::cursedItemController == nullptr)
 			return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 
+		if (Helper::IsLocalMasterClient())
+			return AddNotification("You must not be the host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+
 		if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
 			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
 
