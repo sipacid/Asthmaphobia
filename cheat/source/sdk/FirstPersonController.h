@@ -25,7 +25,7 @@ namespace SDK
 		Camera* Camera;
 		Vector2 Input;
 		Vector3 MoveDir;
-		void* CharacterController; // PhysicsCharacterController
+		PhysicsCharacterController* CharacterController; // PhysicsCharacterController
 		bool Crouching;
 		float CurrentSpeed;
 		Vector3 DesiredMove;

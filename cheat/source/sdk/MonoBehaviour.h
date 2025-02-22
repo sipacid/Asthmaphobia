@@ -3,6 +3,8 @@
 
 namespace SDK
 {
+	struct MethodInfo;
+
 	struct __declspec(align(8)) Object1Fields
 	{
 		void* m_CachedPtr;
@@ -17,6 +19,10 @@ namespace SDK
 	struct BehaviourFields
 	{
 		Component1Fields _;
+	};
+
+	struct Behaviour
+	{
 	};
 
 	struct MonoBehaviourFields
@@ -41,4 +47,6 @@ namespace SDK
 	{
 		MonoBehaviourPunFields _;
 	};
+
+	DECLARE_FUNCTION_POINTER(Behaviour_Set_Enabled, void(*)(Behaviour* behaviour, bool enabled, MethodInfo* methodInfo), 0x478B600);
 }

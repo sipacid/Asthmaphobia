@@ -30,12 +30,18 @@ void NoClip::OnMenu()
 
 void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
 {
-	SDK::Collider_Set_Enabled_ptr(static_cast<SDK::Collider*>(firstPersonController->Fields.CharacterController), !std::get<bool>(EnabledSetting->GetValue()), nullptr);
-
+	const auto rigidBody = firstPersonController->Fields.CharacterController->Fields.Rigidbody;
 	if (!std::get<bool>(EnabledSetting->GetValue()))
+	{
+		SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, false, nullptr);
+		SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(firstPersonController->Fields.CharacterController), true, nullptr);
 		return;
+	}
 
-	const auto transform = SDK::Component_Get_Transform_ptr(static_cast<SDK::Component*>(firstPersonController->Fields.CharacterController), nullptr);
+	SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, true, nullptr);
+	SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(firstPersonController->Fields.CharacterController), false, nullptr);
+
+	const auto transform = SDK::Component_Get_Transform_ptr(reinterpret_cast<SDK::Component*>(firstPersonController->Fields.CharacterController), nullptr);
 	SDK::Vector3 position = {.X = 0, .Y = 0, .Z = 0};
 
 	if (GetAsyncKeyState(0x57))

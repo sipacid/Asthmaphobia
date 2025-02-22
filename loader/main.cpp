@@ -163,7 +163,7 @@ int main()
 	}
 
 	CloseHandle(hProcess);
-	std::cout << "\n[+] Process completed. Press any key to exit..." << "\n";
+	std::cout << "\n[+] Process completed." << "\n";
 	system("pause");
 	return 0;
 }

@@ -63,6 +63,7 @@ namespace Asthmaphobia
 
 	private:
 		std::unordered_map<std::string, Feature*> Features;
+		mutable CRITICAL_SECTION DrawSection;
 	};
 
 	inline FeatureManager* featureManager{};

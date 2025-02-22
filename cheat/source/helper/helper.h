@@ -27,4 +27,6 @@ namespace Asthmaphobia::Helper
 	SDK::NetworkPlayerSpot* GetNetworkPlayerSpot(const SDK::Player* player);
 	std::string GetPlayerName(const SDK::Player* player);
 	float RandomNumber(float min, float max);
+	std::string GetAsthmaphobiaDirectory();
+	void CreateAsthmaphobiaDirectory();
 }

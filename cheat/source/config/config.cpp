@@ -1,18 +1,10 @@
 #include "config.h"
 
-#include <codecvt>
-#include <KnownFolders.h>
-#include <ShlObj.h>
-
 using namespace Asthmaphobia;
 
 ConfigManager::ConfigManager()
 {
-	if (!ConfigDirectoryExists())
-	{
-		LOG_DEBUG("Config directory does not exist, creating...");
-		CreateConfigDirectory();
-	}
+	Helper::CreateAsthmaphobiaDirectory();
 
 	configManager = this;
 }
@@ -22,22 +14,10 @@ ConfigManager::~ConfigManager()
 	configManager = nullptr;
 }
 
-std::string ConfigManager::GetConfigDirectoryPath()
-{
-	PWSTR path;
-	SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, &path);
-
-	std::wstring widePath(path);
-	CoTaskMemFree(path);
-
-	const std::string configDirectoryPathA(widePath.begin(), widePath.end());
-	return configDirectoryPathA + "\\Asthmaphobia";
-}
-
 void ConfigManager::LoadConfig()
 {
 	using Json = nlohmann::json;
-	const auto configPath = GetConfigDirectoryPath() + "\\config.json";
+	const auto configPath = Helper::GetAsthmaphobiaDirectory() + "\\config.json";
 
 	if (!std::filesystem::exists(configPath))
 		return;
@@ -87,7 +67,7 @@ void ConfigManager::LoadConfig()
 void ConfigManager::SaveConfig()
 {
 	using Json = nlohmann::json;
-	const auto configPath = GetConfigDirectoryPath() + "\\config.json";
+	const auto configPath = Helper::GetAsthmaphobiaDirectory() + "\\config.json";
 
 	Json data;
 	for (const auto& features = featureManager->GetFeatures(); const auto& feature : features)
@@ -141,16 +121,4 @@ void ConfigManager::SaveConfig()
 	std::ofstream f(configPath);
 	f << data.dump(4);
 	f.close();
-}
-
-bool ConfigManager::ConfigDirectoryExists()
-{
-	const std::filesystem::path configDirectoryPath(GetConfigDirectoryPath());
-	return exists(configDirectoryPath);
-}
-
-void ConfigManager::CreateConfigDirectory()
-{
-	const std::filesystem::path configDirectoryPath(GetConfigDirectoryPath());
-	create_directory(configDirectoryPath);
 }

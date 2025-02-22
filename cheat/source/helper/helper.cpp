@@ -1,5 +1,8 @@
 #include "helper.h"
 
+#include <KnownFolders.h>
+#include <shlobj_core.h>
+
 using namespace Asthmaphobia;
 
 SDK::Network* Helper::GetNetwork()
@@ -165,7 +168,7 @@ bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScr
 	if (camera == nullptr)
 		return false;
 
-	const auto worldToScreen = SDK::Camera_WorldToScreenPoint_ptr(camera, vWorldPosition, nullptr);
+	const auto worldToScreen = SDK::Camera_WorldToScreenPoint_ptr(camera, vWorldPosition, nullptr); // do manually; dot product direction looking direction object.
 	if (worldToScreen.Z > 0)
 	{
 		vScreenPosition.X = worldToScreen.X;
@@ -281,14 +284,43 @@ SDK::NetworkPlayerSpot* Helper::GetNetworkPlayerSpot(const SDK::Player* player)
 
 std::string Helper::GetPlayerName(const SDK::Player* player)
 {
-	const auto networkPlayerSpot = GetNetworkPlayerSpot(player);
-	if (networkPlayerSpot == nullptr)
+	try
+	{
+		const auto networkPlayerSpot = GetNetworkPlayerSpot(player);
+		if (networkPlayerSpot == nullptr)
+			return {};
+		return SystemStringToString(*networkPlayerSpot->Fields.AccountName);
+	}
+	catch (const std::exception& e)
+	{
+		LOG_ERROR("Failed to get player name: {}", e.what());
 		return {};
-
-	return SystemStringToString(*networkPlayerSpot->Fields.AccountName);
+	}
 }
 
 float Helper::RandomNumber(const float min, const float max)
 {
 	return min + static_cast<float>(rand()) / (RAND_MAX / (max - min));
+}
+
+std::string Helper::GetAsthmaphobiaDirectory()
+{
+	PWSTR path;
+	SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, &path);
+
+	std::wstring widePath(path);
+	CoTaskMemFree(path);
+
+	const std::string configDirectoryPathA(widePath.begin(), widePath.end());
+	return configDirectoryPathA + "\\Asthmaphobia";
+}
+
+void Helper::CreateAsthmaphobiaDirectory()
+{
+	const std::string configDirectoryPath = GetAsthmaphobiaDirectory();
+	if (std::filesystem::exists(configDirectoryPath))
+		return;
+
+	LOG_INFO("Asthmaphobia directory not found, creating one.");
+	std::filesystem::create_directory(configDirectoryPath);
 }

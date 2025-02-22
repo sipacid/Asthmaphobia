@@ -47,7 +47,7 @@ void GhostWindow::OnDraw()
 		ImGui::Text("Mimic type: %s", Helper::EnumToString(mimicType).c_str());
 	}
 
-	else if (ghostType == SDK::GhostType::Banshee)
+	else if (ghostType == SDK::GhostType::Banshee && GameState::ghostAI->Fields.BansheeTarget != nullptr)
 	{
 		const auto bansheeTarget = GameState::ghostAI->Fields.BansheeTarget;
 		ImGui::Text("Banshee target: %s", Helper::GetPlayerName(bansheeTarget).c_str());

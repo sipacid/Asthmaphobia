@@ -1,6 +1,7 @@
 #pragma once
 #include "source/common.h"
 #include <mutex>
+#include <sstream>
 
 namespace Asthmaphobia
 {
@@ -12,21 +13,36 @@ namespace Asthmaphobia
 			Debug,
 			Info,
 			Warning,
-			Error,
-			None
+			Error
 		};
 
 		explicit Logger(Level minLevel = Level::Debug);
 		~Logger();
 
-		void Log(Level level, std::string_view message);
-		static std::string GetAppDataPath();
+		template <typename T>
+		void Log(const Level level, const T& message)
+		{
+			std::ostringstream ss;
+			ss << message;
+			ActualLog(level, ss.str());
+		}
+
+		template <typename T, typename... Args>
+		void Log(const Level level, const T& first, const Args&... args)
+		{
+			std::ostringstream ss;
+			ss << first;
+			((ss << " " << args), ...);
+			ActualLog(level, ss.str());
+		}
+
+		void ActualLog(Level level, std::string_view message);
 
 	private:
-		const Level minLevel;
+		const Level MinLevel;
 		bool ConsoleExists;
 		HANDLE HConsole;
-		std::mutex logMutex;
+		std::mutex LogMutex;
 		std::ofstream FileOut;
 		std::string LogFilePath;
 
@@ -40,19 +56,21 @@ namespace Asthmaphobia
 }
 
 #ifdef _DEBUG
-#define LOG_DEBUG(message)    \
+#define LOG_DEBUG(...)        \
 	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Debug, message)
+	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Debug, __VA_ARGS__)
 #else
-#define LOG_DEBUG(message)
+#define LOG_DEBUG(...)
 #endif
 
-#define LOG_INFO(message)     \
+#define LOG_INFO(...)         \
 	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Info, message)
-#define LOG_WARN(message)     \
+	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Info, __VA_ARGS__)
+
+#define LOG_WARN(...)         \
 	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Warning, message)
-#define LOG_ERROR(message)    \
+	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Warning, __VA_ARGS__)
+
+#define LOG_ERROR(...)        \
 	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Error, message)
+	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Error, __VA_ARGS__)

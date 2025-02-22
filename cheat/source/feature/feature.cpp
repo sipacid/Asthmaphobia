@@ -13,7 +13,6 @@
 #include "miscellaneous/customname/customname.h"
 #include "miscellaneous/doormodifier/doormodifier.h"
 #include "miscellaneous/freemouselook/freemouselook.h"
-#include "miscellaneous/joinrandomroom/joinrandomroom.h"
 #include "miscellaneous/leavepeople/leavepeople.h"
 #include "miscellaneous/rewardmodifier/rewardmodifier.h"
 #include "movement/infinitestamina/infinitestamina.h"
@@ -54,6 +53,7 @@ const char* Asthmaphobia::FeatureTypeToString(const FeatureCategory category)
 
 FeatureManager::FeatureManager()
 {
+	InitializeCriticalSection(&DrawSection);
 	Features = std::unordered_map<std::string, Feature*>();
 
 	AddFeature("Visuals::Watermark", new Features::Visuals::Watermark());
@@ -74,7 +74,6 @@ FeatureManager::FeatureManager()
 
 	AddFeature("Miscellaneous::LeavePeople", new Features::Miscellaneous::LeavePeople());
 	AddFeature("Miscellaneous::AntiKick", new Features::Miscellaneous::AntiKick());
-	AddFeature("Miscellaneous::JoinRandomRoom", new Features::Miscellaneous::JoinRandomRoom());
 	AddFeature("Miscellaneous::DoorModifier", new Features::Miscellaneous::DoorModifier());
 	AddFeature("Miscellaneous::CustomName", new Features::Miscellaneous::CustomName());
 	AddFeature("Miscellaneous::RewardModifier", new Features::Miscellaneous::RewardModifier());
@@ -90,6 +89,7 @@ FeatureManager::FeatureManager()
 
 FeatureManager::~FeatureManager()
 {
+	DeleteCriticalSection(&DrawSection);
 	Features.clear();
 
 	for (const auto& feature : Features | std::views::values)
@@ -112,6 +112,7 @@ Feature* FeatureManager::GetFeatureByName(const std::string& name) const
 
 void FeatureManager::OnDraw() const
 {
+	EnterCriticalSection(&DrawSection);
 	for (const auto& feature : Features | std::views::values)
 	{
 		if (feature->IsEnabled())
@@ -119,6 +120,7 @@ void FeatureManager::OnDraw() const
 			feature->OnDraw();
 		}
 	}
+	LeaveCriticalSection(&DrawSection);
 }
 
 void FeatureManager::OnMenu() const
@@ -137,12 +139,11 @@ void FeatureManager::OnMenu() const
 						ImGui::TextColored(ImColor(173, 173, 173, 255), "%s", feature->GetDescription().c_str());
 					}
 
+					EnterCriticalSection(&DrawSection);
 					feature->OnMenu();
+					LeaveCriticalSection(&DrawSection);
 
-					if (feature->ShouldDrawSection)
-					{
-						ImGui::Separator();
-					}
+					ImGui::Separator();
 				}
 			}
 

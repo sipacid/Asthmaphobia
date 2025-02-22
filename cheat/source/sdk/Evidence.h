@@ -61,6 +61,7 @@ namespace SDK
 		UsedCrucifix,
 		DotsGhost,
 		MonkeyPaw,
+		MoonAlter,
 		None
 	};
 }

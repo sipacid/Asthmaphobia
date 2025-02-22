@@ -55,12 +55,12 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 
 		do
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			std::this_thread::sleep_for(std::chrono::milliseconds(111));
 		}
 		while (globalRunning);
 
 		ConfigManager::SaveConfig();
-		ImGui::SaveIniSettingsToDisk((ConfigManager::GetConfigDirectoryPath() + "\\menu.ini").c_str());
+		ImGui::SaveIniSettingsToDisk((Helper::GetAsthmaphobiaDirectory() + "\\menu.ini").c_str());
 
 		featureManagerInstance.reset();
 		hookingInstance.reset();

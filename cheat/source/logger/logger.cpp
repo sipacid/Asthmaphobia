@@ -1,6 +1,7 @@
 #include "logger.h"
 #include <ctime>
 #include <filesystem>
+#include <print>
 #include <KnownFolders.h>
 #include <shlobj_core.h>
 
@@ -40,32 +41,15 @@ constexpr WORD Logger::LevelToColor(const Level level)
 	}
 }
 
-std::string Logger::GetAppDataPath()
-{
-	PWSTR path = nullptr;
-	std::string result;
-
-	if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, nullptr, &path)))
-	{
-		std::wstring widePath(path);
-		result = std::string(widePath.begin(), widePath.end()) + "\\Asthmaphobia";
-		CoTaskMemFree(path);
-	}
-
-	return result;
-}
-
 bool Logger::InitializeLogDirectory()
 {
 	try
 	{
-		if (!std::filesystem::exists(GetAppDataPath()))
-		{
-			std::filesystem::create_directories(GetAppDataPath());
-		}
+		Helper::CreateAsthmaphobiaDirectory();
 
-		const std::string logDir = GetAppDataPath() + "\\logs";
-		std::filesystem::create_directories(logDir);
+		const std::string logDir = Helper::GetAsthmaphobiaDirectory() + "\\logs";
+		if (!std::filesystem::exists(logDir))
+			std::filesystem::create_directories(logDir);
 
 		const auto now = std::time(nullptr);
 		std::tm timeinfo;
@@ -85,31 +69,28 @@ bool Logger::InitializeLogDirectory()
 	}
 }
 
-Logger::Logger(Level minLevel) : minLevel(minLevel), ConsoleExists(false), HConsole(nullptr)
+Logger::Logger(Level minLevel) : MinLevel(minLevel), ConsoleExists(false), HConsole(nullptr)
 {
 	if (!InitializeLogDirectory())
-	{
 		throw std::runtime_error("Failed to initialize log directory");
-	}
 
 	ConsoleExists = AttachConsole(GetCurrentProcessId());
 	if (!ConsoleExists)
-	{
-		AllocConsole();
-	}
+		ConsoleExists = AllocConsole();
 
 	FILE* dummy;
 	freopen_s(&dummy, "CONOUT$", "w", stdout);
-
 	HConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	if (HConsole)
+
+	if (HConsole && HConsole != INVALID_HANDLE_VALUE)
 	{
 		DWORD consoleMode;
-		GetConsoleMode(HConsole, &consoleMode);
-		SetConsoleMode(HConsole, consoleMode & ~ENABLE_QUICK_EDIT_MODE);
-
-		SetConsoleTitleA("[Debug] Asthmaphobia");
-		SetConsoleOutputCP(CP_UTF8);
+		if (GetConsoleMode(HConsole, &consoleMode))
+		{
+			SetConsoleMode(HConsole, consoleMode & ~ENABLE_QUICK_EDIT_MODE);
+			SetConsoleTitleA("[Debug] Asthmaphobia");
+			SetConsoleOutputCP(CP_UTF8);
+		}
 	}
 
 	logger = this;
@@ -120,7 +101,7 @@ Logger::~Logger()
 	if (FileOut.is_open())
 		FileOut.close();
 
-	if (!ConsoleExists)
+	if (ConsoleExists)
 		FreeConsole();
 
 	logger = nullptr;
@@ -136,22 +117,22 @@ std::string Logger::GetTimestamp()
 	return timestamp;
 }
 
-void Logger::Log(const Level level, const std::string_view message)
+void Logger::ActualLog(const Level level, const std::string_view message)
 {
-	if (level < minLevel)
+	if (level < MinLevel)
 		return;
 
-	std::lock_guard lock(logMutex);
-
+	std::lock_guard lock(LogMutex);
 	const auto timestamp = GetTimestamp();
 	const auto levelStr = LevelToString(level);
 
-	if (HConsole)
+	if (HConsole && HConsole != INVALID_HANDLE_VALUE)
 	{
 		SetConsoleTextAttribute(HConsole, LevelToColor(level));
-		std::cout << levelStr << ' ' << message << "\n";
+		std::println("{} {}", levelStr.data(), message.data());
+		fflush(stdout);
 	}
 
-	FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
-	FileOut.flush();
+	if (FileOut.is_open() && FileOut.good())
+		FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
 }

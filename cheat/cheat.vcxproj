@@ -181,7 +181,6 @@
     <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp" />
     <ClCompile Include="source\feature\players\godmode\godmode.cpp" />
     <ClCompile Include="source\feature\movement\infinitestamina\infinitestamina.cpp" />
-    <ClCompile Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.cpp" />
     <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp" />
     <ClCompile Include="source\feature\movement\noclip\noclip.cpp" />
     <ClCompile Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.cpp" />
@@ -226,7 +225,6 @@
     <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h" />
     <ClInclude Include="source\feature\players\godmode\godmode.h" />
     <ClInclude Include="source\feature\movement\infinitestamina\infinitestamina.h" />
-    <ClInclude Include="source\feature\miscellaneous\joinrandomroom\joinrandomroom.h" />
     <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h" />
     <ClInclude Include="source\feature\movement\noclip\noclip.h" />
     <ClInclude Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.h" />
@@ -284,11 +282,13 @@
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
     <ClInclude Include="source\sdk\PhotoValues.h" />
+    <ClInclude Include="source\sdk\PhysicsCharacterController.h" />
     <ClInclude Include="source\sdk\Player.h" />
     <ClInclude Include="source\sdk\PlayerSanity.h" />
     <ClInclude Include="source\sdk\PlayerStamina.h" />
     <ClInclude Include="source\sdk\Quaternion.h" />
     <ClInclude Include="source\sdk\RaycastHit.h" />
+    <ClInclude Include="source\sdk\Rigidbody.h" />
     <ClInclude Include="source\sdk\sdk.h" />
     <ClInclude Include="source\sdk\ServerManager.h" />
     <ClInclude Include="source\sdk\String.h" />

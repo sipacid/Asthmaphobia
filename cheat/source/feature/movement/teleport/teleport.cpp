@@ -32,6 +32,8 @@ void Teleport::OnMenu()
 
 	if (ImGui::Button("Teleport all items to me##teleport"))
 		TeleportItems();
+	if (ImGui::IsItemHovered())
+		ImGui::SetTooltip("Some items might be only locally there until you pick them up.");
 }
 
 void Teleport::Run(const SDK::Player* player) const

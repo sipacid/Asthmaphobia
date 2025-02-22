@@ -28,28 +28,44 @@ void PlayerModifier::OnMenu()
 
 	for (int playerIndex = 0; playerIndex < players->Fields.Size; playerIndex++)
 	{
+		const auto localPlayer = Helper::GetLocalPlayer();
 		const auto player = players->Fields.Items->Vector[playerIndex];
 		ImGui::Text("Player: %s", Helper::GetPlayerName(player).c_str());
 		ImGui::Text("Sanity: %s", player->Fields.IsDead ? "DEAD" : std::to_string(static_cast<int>(100.f - Helper::GetPlayerInsanity(player))).c_str());
 		if (const auto levelRoom = player->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
 			ImGui::Text("Current room: %s", Helper::SystemStringToString(*player->Fields.LevelRoom->Fields.RoomName).c_str());
 
-		if (player != Helper::GetLocalPlayer())
+		// Teleport button
+		const auto teleportToLabel = std::format("Teleport to##{}", playerIndex);
+		if (ImGui::Button(teleportToLabel.c_str()))
 		{
-			const auto teleportToLabel = std::format("Teleport to##{}", playerIndex);
-			if (ImGui::Button(teleportToLabel.c_str()))
-				Helper::TeleportPlayerTo(Helper::GetLocalPlayer(), player);
+			if (localPlayer == player)
+			{
+				AddNotification("You can't teleport to yourself.", Notifications::NotificationType::Error, 3.0f);
+			}
+			else
+			{
+				Helper::TeleportPlayerTo(localPlayer, player);
+			}
 		}
 
 		if (const auto isLocalMasterClient = Helper::IsLocalMasterClient(); player == Helper::GetLocalPlayer() || isLocalMasterClient)
 		{
-			if (!player->Fields.IsDead)
+			// Kill player button
+			const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
+			if (ImGui::Button(killPlayerLabel.c_str()))
 			{
-				const auto killPlayerLabel = std::format("Kill player##{}", playerIndex);
-				if (ImGui::Button(killPlayerLabel.c_str()))
+				if (player->Fields.IsDead)
+				{
+					AddNotification("Player is already dead.", Notifications::NotificationType::Error, 3.0f);
+				}
+				else
+				{
 					isLocalMasterClient ? SDK::Player_StartKillingPlayer_ptr(player, nullptr) : SDK::Player_KillPlayer_ptr(player, true, nullptr);
+				}
 			}
 
+			// Freeze/Unfreeze buttons
 			const auto freezePlayerLabel = std::format("Freeze player##{}", playerIndex);
 			if (ImGui::Button(freezePlayerLabel.c_str()))
 				SDK::Player_ToggleFreezePlayer_ptr(player, true, nullptr);
@@ -58,14 +74,22 @@ void PlayerModifier::OnMenu()
 			if (ImGui::Button(unfreezePlayerLabel.c_str()))
 				SDK::Player_ToggleFreezePlayer_ptr(player, false, nullptr);
 
-			if (!player->Fields.IsDead)
+			// Sanity controls
+			const auto sanityLabel = std::format("Sanity##i{}", playerIndex);
+			ImGui::SliderInt(sanityLabel.c_str(), &SanityArray[playerIndex], 0, 100);
+			ImGui::SameLine();
+
+			const auto setSanityLabel = std::format("Set sanity##i{}", playerIndex);
+			if (ImGui::Button(setSanityLabel.c_str()))
 			{
-				const auto sanityLabel = std::format("Sanity##i{}", playerIndex);
-				ImGui::SliderInt(sanityLabel.c_str(), &SanityArray[playerIndex], 0, 100);
-				ImGui::SameLine();
-				const auto setSanityLabel = std::format("Set sanity##i{}", playerIndex);
-				if (ImGui::Button(setSanityLabel.c_str()))
+				if (player->Fields.IsDead)
+				{
+					AddNotification("Player is already dead.", Notifications::NotificationType::Error, 3.0f);
+				}
+				else
+				{
 					SDK::PlayerSanity_SetInsanity_ptr(player->Fields.PlayerSanity, 100 - SanityArray[playerIndex], nullptr);
+				}
 			}
 		}
 
