@@ -52,6 +52,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hookingInstance->ApplyHooks();
 
 		LOG_INFO("Successfully loaded.");
+		AddNotification("Asthmaphobia loaded. Press INSERT to open the menu.", Notifications::NotificationType::Info, 10.0f);
 
 		do
 		{
