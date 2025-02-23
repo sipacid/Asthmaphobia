@@ -7,10 +7,23 @@ namespace Asthmaphobia::Features::Ghost
 	{
 	public:
 		GhostModifier();
-		~GhostModifier() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+
+		~GhostModifier() override
+		{
+		}
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo);

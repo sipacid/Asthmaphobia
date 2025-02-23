@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Movement
 	{
 	public:
 		explicit Teleport();
-		~Teleport() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~Teleport() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 	private:

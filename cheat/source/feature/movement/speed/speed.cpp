@@ -10,20 +10,6 @@ Speed::Speed() : Feature("Speed", "Custom walk/run speed, become Marco", Feature
 	Settings_->AddSetting(RunSpeedSetting);
 }
 
-Speed::~Speed() = default;
-
-void Speed::OnEnable()
-{
-}
-
-void Speed::OnDisable()
-{
-}
-
-void Speed::OnDraw()
-{
-}
-
 void Speed::OnMenu()
 {
 	ImGui::Checkbox("Enabled##speed", &std::get<bool>(EnabledSetting->GetValue()));

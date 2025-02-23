@@ -6,20 +6,6 @@ CursedItemModifier::CursedItemModifier() : Feature("CursedItem Modifier", "Modif
 {
 }
 
-CursedItemModifier::~CursedItemModifier() = default;
-
-void CursedItemModifier::OnEnable()
-{
-}
-
-void CursedItemModifier::OnDisable()
-{
-}
-
-void CursedItemModifier::OnDraw()
-{
-}
-
 void CursedItemModifier::OnMenu()
 {
 	if (ImGui::Button("Break cursed items##cursedItems"))

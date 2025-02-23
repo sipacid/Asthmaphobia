@@ -8,7 +8,6 @@ using namespace Asthmaphobia;
 extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 {
 	static std::unique_ptr<Logger> loggerInstance;
-	static std::unique_ptr<ConfigManager> configManagerInstance;
 	static std::unique_ptr<Renderer> rendererInstance;
 	static std::unique_ptr<Hooking> hookingInstance;
 	static std::unique_ptr<FeatureManager> featureManagerInstance;
@@ -16,12 +15,11 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 	try
 	{
 		loggerInstance = std::make_unique<Logger>();
-		configManagerInstance = std::make_unique<ConfigManager>();
 		rendererInstance = std::make_unique<Renderer>();
 		hookingInstance = std::make_unique<Hooking>();
 		featureManagerInstance = std::make_unique<FeatureManager>();
 
-		ConfigManager::LoadConfig();
+		Config::LoadConfig();
 
 		hookingInstance->OriginalPresent = rendererInstance->GetPresent();
 
@@ -60,7 +58,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		}
 		while (globalRunning);
 
-		ConfigManager::SaveConfig();
+		Config::SaveConfig();
 		ImGui::SaveIniSettingsToDisk((Helper::GetAsthmaphobiaDirectory() + "\\menu.ini").c_str());
 
 		featureManagerInstance.reset();
@@ -69,7 +67,6 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 
 		LOG_INFO("Exiting...");
 		loggerInstance.reset();
-		configManagerInstance.reset();
 	}
 	catch (const std::exception& e)
 	{

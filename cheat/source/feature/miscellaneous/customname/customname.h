@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Miscellaneous
 	{
 	public:
 		explicit CustomName();
-		~CustomName() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~CustomName() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 	private:

@@ -7,20 +7,6 @@ LeavePeople::LeavePeople() : Feature("Leave People", "Leave whilst there are sti
 	this->ShouldDrawSection = false;
 }
 
-LeavePeople::~LeavePeople() = default;
-
-void LeavePeople::OnEnable()
-{
-}
-
-void LeavePeople::OnDisable()
-{
-}
-
-void LeavePeople::OnDraw()
-{
-}
-
 void LeavePeople::OnMenu()
 {
 	ImGui::Checkbox("Leave People", &std::get<bool>(EnabledSetting->GetValue()));

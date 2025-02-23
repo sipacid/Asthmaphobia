@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Miscellaneous
 	{
 	public:
 		LeavePeople();
-		~LeavePeople() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~LeavePeople() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		bool OnExitLevelThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exitLevel, SDK::MethodInfo* methodInfo) const;

@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Players
 	{
 	public:
 		explicit PlayerModifier();
-		~PlayerModifier() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~PlayerModifier() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 	private:

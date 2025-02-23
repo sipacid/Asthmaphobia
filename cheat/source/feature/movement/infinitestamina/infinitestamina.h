@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Movement
 	{
 	public:
 		InfiniteStamina();
-		~InfiniteStamina() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~InfiniteStamina() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const;

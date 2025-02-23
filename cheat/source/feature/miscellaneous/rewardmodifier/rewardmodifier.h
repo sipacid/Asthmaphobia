@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Miscellaneous
 	{
 	public:
 		explicit RewardModifier();
-		~RewardModifier() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~RewardModifier() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		int32_t OnGetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo) const;

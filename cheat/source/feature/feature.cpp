@@ -53,66 +53,58 @@ const char* Asthmaphobia::FeatureTypeToString(const FeatureCategory category)
 
 FeatureManager::FeatureManager()
 {
-	InitializeCriticalSection(&DrawSection);
-	Features = std::unordered_map<std::string, Feature*>();
+	Features = std::unordered_map<std::string, std::unique_ptr<Feature>>();
 
-	AddFeature("Visuals::Watermark", new Features::Visuals::Watermark());
-	AddFeature("Visuals::GhostWindow", new Features::Visuals::GhostWindow());
-	AddFeature("Visuals::GhostESP", new Features::Visuals::GhostESP());
-	AddFeature("Visuals::PlayerESP", new Features::Visuals::PlayerESP());
-	AddFeature("Visuals::EvidenceESP", new Features::Visuals::EvidenceESP());
-	AddFeature("Visuals::FuseBoxESP", new Features::Visuals::FuseBoxESP());
+	AddFeature("Visuals::Watermark", std::make_unique<Features::Visuals::Watermark>());
+	AddFeature("Visuals::GhostWindow", std::make_unique<Features::Visuals::GhostWindow>());
+	AddFeature("Visuals::GhostESP", std::make_unique<Features::Visuals::GhostESP>());
+	AddFeature("Visuals::PlayerESP", std::make_unique<Features::Visuals::PlayerESP>());
+	AddFeature("Visuals::EvidenceESP", std::make_unique<Features::Visuals::EvidenceESP>());
+	AddFeature("Visuals::FuseBoxESP", std::make_unique<Features::Visuals::FuseBoxESP>());
 
-	AddFeature("Players::GodMode", new Features::Players::GodMode());
-	AddFeature("Players::PlayerModifier", new Features::Players::PlayerModifier());
+	AddFeature("Players::GodMode", std::make_unique<Features::Players::GodMode>());
+	AddFeature("Players::PlayerModifier", std::make_unique<Features::Players::PlayerModifier>());
 
-	AddFeature("Ghost::GhostModifier", new Features::Ghost::GhostModifier());
-	AddFeature("Ghost::Interactor", new Features::Ghost::Interactor());
+	AddFeature("Ghost::GhostModifier", std::make_unique<Features::Ghost::GhostModifier>());
+	AddFeature("Ghost::Interactor", std::make_unique<Features::Ghost::Interactor>());
 
-	AddFeature("CursedItems::CursedItemModifier", new Features::CursedItems::CursedItemModifier());
-	AddFeature("CursedItems::ForceCard", new Features::CursedItems::ForceCard());
+	AddFeature("CursedItems::CursedItemModifier", std::make_unique<Features::CursedItems::CursedItemModifier>());
+	AddFeature("CursedItems::ForceCard", std::make_unique<Features::CursedItems::ForceCard>());
 
-	AddFeature("Miscellaneous::LeavePeople", new Features::Miscellaneous::LeavePeople());
-	AddFeature("Miscellaneous::AntiKick", new Features::Miscellaneous::AntiKick());
-	AddFeature("Miscellaneous::DoorModifier", new Features::Miscellaneous::DoorModifier());
-	AddFeature("Miscellaneous::CustomName", new Features::Miscellaneous::CustomName());
-	AddFeature("Miscellaneous::RewardModifier", new Features::Miscellaneous::RewardModifier());
-	AddFeature("Miscellaneous::FreeMouseLook", new Features::Miscellaneous::FreeMouseLook());
+	AddFeature("Miscellaneous::LeavePeople", std::make_unique<Features::Miscellaneous::LeavePeople>());
+	AddFeature("Miscellaneous::AntiKick", std::make_unique<Features::Miscellaneous::AntiKick>());
+	AddFeature("Miscellaneous::DoorModifier", std::make_unique<Features::Miscellaneous::DoorModifier>());
+	AddFeature("Miscellaneous::CustomName", std::make_unique<Features::Miscellaneous::CustomName>());
+	AddFeature("Miscellaneous::RewardModifier", std::make_unique<Features::Miscellaneous::RewardModifier>());
+	AddFeature("Miscellaneous::FreeMouseLook", std::make_unique<Features::Miscellaneous::FreeMouseLook>());
 
-	AddFeature("Movement::InfiniteStamina", new Features::Movement::InfiniteStamina());
-	AddFeature("Movement::NoClip", new Features::Movement::NoClip());
-	AddFeature("Movement::Speed", new Features::Movement::Speed());
-	AddFeature("Movement::Teleport", new Features::Movement::Teleport());
+	AddFeature("Movement::InfiniteStamina", std::make_unique<Features::Movement::InfiniteStamina>());
+	AddFeature("Movement::NoClip", std::make_unique<Features::Movement::NoClip>());
+	AddFeature("Movement::Speed", std::make_unique<Features::Movement::Speed>());
+	AddFeature("Movement::Teleport", std::make_unique<Features::Movement::Teleport>());
 
 	featureManager = this;
 }
 
 FeatureManager::~FeatureManager()
 {
-	DeleteCriticalSection(&DrawSection);
-	Features.clear();
-
-	for (const auto& feature : Features | std::views::values)
-	{
-		delete feature;
-	}
-
 	featureManager = nullptr;
 }
 
-void FeatureManager::AddFeature(const std::string& name, Feature* feature)
+void FeatureManager::AddFeature(const std::string_view name, std::unique_ptr<Feature> feature)
 {
-	Features[name] = feature;
+	Features.emplace(std::string(name), std::move(feature));
 }
 
-Feature* FeatureManager::GetFeatureByName(const std::string& name) const
+Feature* FeatureManager::GetFeatureByName(const std::string_view name) const
 {
-	return Features.at(name);
+	if (const auto it = Features.find(std::string(name)); it != Features.end())
+		return it->second.get();
+	return nullptr;
 }
 
 void FeatureManager::OnDraw() const
 {
-	EnterCriticalSection(&DrawSection);
 	for (const auto& feature : Features | std::views::values)
 	{
 		if (feature->IsEnabled())
@@ -120,12 +112,15 @@ void FeatureManager::OnDraw() const
 			feature->OnDraw();
 		}
 	}
-	LeaveCriticalSection(&DrawSection);
 }
 
 void FeatureManager::OnMenu() const
 {
-	for (const auto& featureType : {Visuals, Players, Ghost, CursedItems, Movement, Miscellaneous})
+	static constexpr FeatureCategory CATEGORIES[] = {
+		Visuals, Players, Ghost, CursedItems, Movement, Miscellaneous
+	};
+
+	for (const auto featureType : CATEGORIES)
 	{
 		if (ImGui::BeginTabItem(FeatureTypeToString(featureType)))
 		{
@@ -136,17 +131,14 @@ void FeatureManager::OnMenu() const
 					if (feature->ShouldDrawSection)
 					{
 						ImGui::Text("%s", feature->GetName().c_str());
-						ImGui::TextColored(ImColor(173, 173, 173, 255), "%s", feature->GetDescription().c_str());
+						ImGui::TextColored(ImColor(173, 173, 173, 255), "%s",
+						                   feature->GetDescription().c_str());
 					}
 
-					EnterCriticalSection(&DrawSection);
 					feature->OnMenu();
-					LeaveCriticalSection(&DrawSection);
-
 					ImGui::Separator();
 				}
 			}
-
 			ImGui::EndTabItem();
 		}
 	}

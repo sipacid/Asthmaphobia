@@ -10,20 +10,6 @@ CustomName::CustomName() : Feature("Custom name", "Set your own custom in-game n
 	strcpy_s(NickNameBuffer, std::get<std::string>(NickNameSetting->GetValue()).c_str());
 }
 
-CustomName::~CustomName() = default;
-
-void CustomName::OnEnable()
-{
-}
-
-void CustomName::OnDisable()
-{
-}
-
-void CustomName::OnDraw()
-{
-}
-
 void CustomName::OnMenu()
 {
 	ImGui::InputText("##customName", NickNameBuffer, IM_ARRAYSIZE(NickNameBuffer));

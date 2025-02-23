@@ -76,7 +76,7 @@ bool Logger::InitializeLogDirectory()
 
 Logger::Logger(Level minLevel) : MinLevel(minLevel)
 #ifdef _DEBUG
- , ConsoleExists(false), HConsole(nullptr)
+                                 , ConsoleExists(false), HConsole(nullptr)
 #endif
 
 
@@ -89,7 +89,7 @@ Logger::Logger(Level minLevel) : MinLevel(minLevel)
 	if (!ConsoleExists)
 		ConsoleExists = AllocConsole();
 
-	FILE *dummy;
+	FILE* dummy;
 	freopen_s(&dummy, "CONOUT$", "w", stdout);
 	HConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 

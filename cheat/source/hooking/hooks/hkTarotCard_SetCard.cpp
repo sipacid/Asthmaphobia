@@ -7,8 +7,8 @@ using namespace Asthmaphobia;
 void Hooks::hkTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo)
 {
 	LOG_CALL("Called TarotCard_SetCard");
-	if (!globalRunning)
-		return SDK::TarotCard_SetCard_ptr(tarotCard, type, methodInfo);
+	if (globalRunning)
+		return featureManager->GetFeature<Features::CursedItems::ForceCard>("CursedItems::ForceCard")->OnTarotCard_SetCard(tarotCard, type, methodInfo);
 
-	dynamic_cast<Features::CursedItems::ForceCard*>(featureManager->GetFeatureByName("CursedItems::ForceCard"))->OnTarotCard_SetCard(tarotCard, type, methodInfo);
+	return SDK::TarotCard_SetCard_ptr(tarotCard, type, methodInfo);
 }

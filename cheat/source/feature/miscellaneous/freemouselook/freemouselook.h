@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Miscellaneous
 	{
 	public:
 		FreeMouseLook();
-		~FreeMouseLook() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~FreeMouseLook() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const;

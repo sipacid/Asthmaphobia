@@ -7,9 +7,8 @@ using namespace Asthmaphobia;
 int32_t Hooks::hkLevelValues_GetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo)
 {
 	LOG_CALL("Called LevelValues_GetInvestigationBonus");
-	if (!globalRunning)
-		return SDK::LevelValues_GetInvestigationBonus_ptr(levelValues, methodInfo);
+	if (globalRunning)
+		return featureManager->GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnGetInvestigationBonus(levelValues, methodInfo);
 
-	return dynamic_cast<Features::Miscellaneous::RewardModifier*>(featureManager->GetFeatureByName("Miscellaneous::RewardModifier"))->OnGetInvestigationBonus(
-		levelValues, methodInfo);
+	return SDK::LevelValues_GetInvestigationBonus_ptr(levelValues, methodInfo);
 }

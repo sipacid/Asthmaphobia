@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Players
 	{
 	public:
 		GodMode();
-		~GodMode() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~GodMode() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		std::nullptr_t OnPlayerStartKillingPlayerNetworked(SDK::Player* player, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const;

@@ -8,20 +8,6 @@ Teleport::Teleport() : Feature("Teleport", "Portal <3", FeatureCategory::Movemen
 	Settings_->AddSetting(TargetSetting);
 }
 
-Teleport::~Teleport() = default;
-
-void Teleport::OnEnable()
-{
-}
-
-void Teleport::OnDisable()
-{
-}
-
-void Teleport::OnDraw()
-{
-}
-
 void Teleport::OnMenu()
 {
 	const char* targetList[] = {"Ghost", "Death room", "Truck"};

@@ -8,38 +8,33 @@ Watermark::Watermark() : Feature("Watermark", "Shows a watermark on the screen."
 	ShowPingSetting = std::make_shared<Setting>("Show ping", "Shows your ping to the server", true);
 	Settings_->AddSetting(ShowAverageSanitySetting);
 	Settings_->AddSetting(ShowPingSetting);
-}
-
-Watermark::~Watermark() = default;
-
-void Watermark::OnEnable()
-{
-}
-
-void Watermark::OnDisable()
-{
+	CachedText.reserve(128);
 }
 
 void Watermark::OnDraw()
 {
-	ImGuiWindowFlags windowFlags = 0;
-	windowFlags |= ImGuiWindowFlags_NoCollapse;
-	windowFlags |= ImGuiWindowFlags_NoTitleBar;
-	windowFlags |= ImGuiWindowFlags_AlwaysAutoResize;
-	windowFlags |= ImGuiWindowFlags_NoResize;
+	ImGui::Begin("Watermark", nullptr, WINDOW_FLAGS);
 
-	ImGui::Begin("Watermark", nullptr, windowFlags);
+	CachedText = cheatName;
+	const bool showPing = std::get<bool>(ShowPingSetting->GetValue());
+	const bool showSanity = std::get<bool>(ShowAverageSanitySetting->GetValue());
 
-	auto text = static_cast<std::string>(cheatName);
+	if (showPing && SDK::PhotonNetwork_Get_IsConnected_ptr(nullptr))
+	{
+		CachedText.append(PING_PREFIX);
+		CachedText.append(std::to_string(SDK::PhotonNetwork_GetPing_ptr(nullptr)));
+		CachedText.append(" ms");
+	}
 
-	if (std::get<bool>(ShowPingSetting->GetValue()) && SDK::PhotonNetwork_Get_IsConnected_ptr(nullptr))
-		text += " | Ping: " + std::to_string(SDK::PhotonNetwork_GetPing_ptr(nullptr)) + " ms";
+	if (showSanity && GameState::mapController && GameState::mapController->Fields.GameController)
+	{
+		CachedText.append(SANITY_PREFIX);
+		const int sanity = static_cast<int>(100.f - SDK::GameController_GetAveragePlayerInsanity_ptr(
+			GameState::mapController->Fields.GameController, nullptr));
+		CachedText.append(std::to_string(sanity));
+	}
 
-	if (std::get<bool>(ShowAverageSanitySetting->GetValue()) && GameState::mapController != nullptr && GameState::mapController->Fields.GameController != nullptr)
-		text += " | Avg. sanity: " + std::to_string(
-			static_cast<int>(100.f - SDK::GameController_GetAveragePlayerInsanity_ptr(GameState::mapController->Fields.GameController, nullptr)));
-
-	ImGui::Text("%s", text.c_str());
+	ImGui::Text("%s", CachedText.c_str());
 
 	ImGui::End();
 }

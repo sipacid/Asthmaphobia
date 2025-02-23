@@ -7,14 +7,24 @@ namespace Asthmaphobia::Features::Visuals
 	{
 	public:
 		explicit FuseBoxESP();
-		~FuseBoxESP() override;
-		void OnEnable() override;
-		void OnDisable() override;
+		~FuseBoxESP() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
 		void OnDraw() override;
 		void OnMenu() override;
 
 	private:
 		std::shared_ptr<Setting> ShowStatusSetting;
 		std::shared_ptr<Setting> ColorSetting;
+
+		std::string TextBuffer;
+		static constexpr size_t INITIAL_BUFFER_SIZE = 32;
 	};
 }

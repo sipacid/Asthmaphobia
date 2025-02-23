@@ -8,28 +8,13 @@ GhostESP::GhostESP() : Feature("Ghost ESP", "Draws the ghost's name above the gh
 	Settings_->AddSetting(ColorSetting);
 }
 
-GhostESP::~GhostESP() = default;
-
-void GhostESP::OnEnable()
-{
-}
-
-void GhostESP::OnDisable()
-{
-}
-
 void GhostESP::OnDraw()
 {
-	if (GameState::ghostAI == nullptr)
+	if (!GameState::ghostAI || !GameState::ghostAI->Fields.GhostInfo)
 		return;
 
 	const auto ghostInfo = GameState::ghostAI->Fields.GhostInfo;
-	if (ghostInfo == nullptr)
-		return;
-
-	const auto ghostTraits = ghostInfo->Fields.GhostTraits;
-	const auto ghostName = ghostTraits.Name;
-	if (ghostName == nullptr)
+	if (!ghostInfo->Fields.GhostTraits.Name)
 		return;
 
 	const auto ghostPosition = Helper::GetWorldPosition(GameState::ghostAI);
@@ -38,8 +23,10 @@ void GhostESP::OnDraw()
 	if (!Helper::WorldToScreen(ghostPosition, screenPosition))
 		return;
 
-	const auto draw = ImGui::GetBackgroundDrawList();
-	draw->AddText(ImVec2(screenPosition.X, screenPosition.Y), std::get<ImColor>(ColorSetting->GetValue()), Helper::SystemStringToString(*ghostName).c_str());
+	ImGui::GetBackgroundDrawList()->AddText(
+		ImVec2(screenPosition.X, screenPosition.Y),
+		std::get<ImColor>(ColorSetting->GetValue()),
+		Helper::SystemStringToString(*ghostInfo->Fields.GhostTraits.Name).c_str());
 }
 
 void GhostESP::OnMenu()
@@ -48,5 +35,8 @@ void GhostESP::OnMenu()
 
 	ImGui::Checkbox("Enabled##ghostESP", &std::get<bool>(EnabledSetting->GetValue()));
 	ImGui::SameLine();
-	ImGui::ColorEdit4("Color##ghostESP", reinterpret_cast<float*>(&std::get<ImColor>(ColorSetting->GetValue()).Value), colorEditFlags);
+
+	ImGui::ColorEdit4("Color##ghostESP",
+	                  reinterpret_cast<float*>(&std::get<ImColor>(ColorSetting->GetValue()).Value),
+	                  colorEditFlags);
 }

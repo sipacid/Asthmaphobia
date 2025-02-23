@@ -8,83 +8,59 @@ NoClip::NoClip() : Feature("NoClip", "Allows you to walk through walls.", Featur
 	Settings_->AddSetting(SpeedSetting);
 }
 
-NoClip::~NoClip() = default;
-
-void NoClip::OnEnable()
-{
-}
-
-void NoClip::OnDisable()
-{
-}
-
-void NoClip::OnDraw()
-{
-}
-
 void NoClip::OnMenu()
 {
 	ImGui::Checkbox("Enabled##noClip", &std::get<bool>(EnabledSetting->GetValue()));
 	ImGui::SliderFloat("Speed##noClip", &std::get<float>(SpeedSetting->GetValue()), 0.0f, 10.0f, "%.1f");
 }
 
-void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const
+void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo*) const
 {
-	const auto rigidBody = firstPersonController->Fields.CharacterController->Fields.Rigidbody;
-	if (!std::get<bool>(EnabledSetting->GetValue()))
+	const auto& enabled = std::get<bool>(EnabledSetting->GetValue());
+	const auto controller = firstPersonController->Fields.CharacterController;
+	const auto rigidBody = controller->Fields.Rigidbody;
+
+	if (!enabled)
 	{
 		SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, false, nullptr);
-		SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(firstPersonController->Fields.CharacterController), true, nullptr);
+		SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(controller), true, nullptr);
 		return;
 	}
 
 	SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, true, nullptr);
-	SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(firstPersonController->Fields.CharacterController), false, nullptr);
+	SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(controller), false, nullptr);
 
-	const auto transform = SDK::Component_Get_Transform_ptr(reinterpret_cast<SDK::Component*>(firstPersonController->Fields.CharacterController), nullptr);
-	SDK::Vector3 position = {.X = 0, .Y = 0, .Z = 0};
+	const auto transform = SDK::Component_Get_Transform_ptr(reinterpret_cast<SDK::Component*>(controller), nullptr);
 
-	if (GetAsyncKeyState(0x57))
-	{
-		const auto forward = SDK::Transform_Get_Forward_ptr(transform, nullptr);
+	const auto forward = SDK::Transform_Get_Forward_ptr(transform, nullptr);
+	const auto right = SDK::Transform_Get_Right_ptr(transform, nullptr);
+	const auto up = SDK::Transform_Get_Up_ptr(transform, nullptr);
+
+	SDK::Vector3 position = {};
+
+	const uint8_t movementMask = (GetAsyncKeyState(0x57) ? 1 : 0) | // W
+		(GetAsyncKeyState(0x53) ? 2 : 0) | // S
+		(GetAsyncKeyState(0x44) ? 4 : 0) | // D
+		(GetAsyncKeyState(0x41) ? 8 : 0) | // A
+		(GetAsyncKeyState(VK_LSHIFT) ? 16 : 0) |
+		(GetAsyncKeyState(VK_LCONTROL) ? 32 : 0);
+
+	if (movementMask & 1)
 		position += forward;
-	}
-
-	if (GetAsyncKeyState(0x53))
-	{
-		const auto forward = SDK::Transform_Get_Forward_ptr(transform, nullptr);
+	if (movementMask & 2)
 		position -= forward;
-	}
-
-	if (GetAsyncKeyState(0x44))
-	{
-		const auto right = SDK::Transform_Get_Right_ptr(transform, nullptr);
+	if (movementMask & 4)
 		position += right;
-	}
-
-	if (GetAsyncKeyState(0x41))
-	{
-		const auto right = SDK::Transform_Get_Right_ptr(transform, nullptr);
+	if (movementMask & 8)
 		position -= right;
-	}
-
-	if (GetAsyncKeyState(VK_LSHIFT))
-	{
-		const auto up = SDK::Transform_Get_Up_ptr(transform, nullptr);
+	if (movementMask & 16)
 		position += up;
-	}
-
-	if (GetAsyncKeyState(VK_LCONTROL))
-	{
-		const auto up = SDK::Transform_Get_Up_ptr(transform, nullptr);
+	if (movementMask & 32)
 		position -= up;
-	}
 
 	const auto speed = std::get<float>(SpeedSetting->GetValue()) * SDK::Time_Get_DeltaTime_ptr(nullptr);
 	position *= speed;
-
-	const auto worldPosition = SDK::Transform_Get_Position_ptr(transform, nullptr);
-	position += worldPosition;
+	position += SDK::Transform_Get_Position_ptr(transform, nullptr);
 
 	SDK::Transform_Set_Position_ptr(transform, position, nullptr);
 }

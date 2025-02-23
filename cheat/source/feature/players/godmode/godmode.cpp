@@ -6,20 +6,6 @@ GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body
 {
 }
 
-GodMode::~GodMode() = default;
-
-void GodMode::OnEnable()
-{
-}
-
-void GodMode::OnDisable()
-{
-}
-
-void GodMode::OnDraw()
-{
-}
-
 void GodMode::OnMenu()
 {
 	ImGui::Checkbox("Enabled", &std::get<bool>(EnabledSetting->GetValue()));

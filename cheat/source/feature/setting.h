@@ -1,26 +1,38 @@
 #pragma once
+#include <string_view>
 #include <unordered_map>
 #include <variant>
 #include <vector>
-
 #include "libraries/imgui/imgui.h"
 #include "libraries/json/json.hpp"
 
 namespace Asthmaphobia
 {
+	struct StringViewHash
+	{
+		using IsTransparent = void;
+
+		size_t operator()(const std::string_view sv) const
+		{
+			return std::hash<std::string_view>{}(sv);
+		}
+	};
+
 	class Setting
 	{
 	public:
-		Setting(std::string name, std::string description, const std::variant<bool, int, float, std::string, ImColor>& value) : Name(std::move(name)),
-			Description(std::move(description)),
-			Value(value)
+		Setting(std::string name, std::string description,
+		        std::variant<bool, int, float, std::string, ImColor> value) noexcept
+			: Name(std::move(name)), Description(std::move(description)), Value(std::move(value))
 		{
 		}
 
-		[[nodiscard]] const std::string& GetName() const { return Name; }
-		[[nodiscard]] const std::string& GetDescription() const { return Description; }
-		std::variant<bool, int, float, std::string, ImColor>& GetValue() { return Value; }
-		void SetValue(const std::variant<bool, int, float, std::string, ImColor>& value) { Value = value; }
+		[[nodiscard]] std::string_view GetName() const noexcept { return Name; }
+		[[nodiscard]] std::string_view GetDescription() const noexcept { return Description; }
+		[[nodiscard]] const auto& GetValue() const noexcept { return Value; }
+		auto& GetValue() noexcept { return Value; }
+
+		void SetValue(const auto& value) noexcept { Value = value; }
 
 	private:
 		std::string Name;
@@ -31,41 +43,28 @@ namespace Asthmaphobia
 	class Settings
 	{
 	public:
-		Settings()
+		Settings() { SettingsVector.reserve(16); }
+
+		void AddSetting(std::shared_ptr<Setting> setting)
 		{
-			SettingsVector.reserve(100); // Reserve some space to avoid reallocation.
-			SettingsMap = std::unordered_map<std::string, std::size_t>();
+			const auto idx = SettingsVector.size();
+			SettingsVector.emplace_back(std::move(setting));
+			SettingsMap.emplace(SettingsVector.back()->GetName(), idx);
 		}
 
-		~Settings()
+		[[nodiscard]] const auto& GetSettings() const noexcept { return SettingsVector; }
+
+		[[nodiscard]] const auto& GetSetting(const std::string_view name) const
 		{
-			for (auto& setting : SettingsVector)
+			if (const auto it = SettingsMap.find(name); it != SettingsMap.end())
 			{
-				setting.reset();
+				return SettingsVector[it->second];
 			}
-		}
-
-		void AddSetting(const std::shared_ptr<Setting>& setting)
-		{
-			SettingsVector.push_back(setting);
-			SettingsMap[SettingsVector.back()->GetName()] = SettingsVector.size() - 1;
-		}
-
-		[[nodiscard]] const std::vector<std::shared_ptr<Setting>>& GetSettings() const { return SettingsVector; }
-
-		[[nodiscard]] const std::shared_ptr<Setting>& GetSetting(const std::string& name) const
-		{
-			const auto it = SettingsMap.find(name);
-			if (it == SettingsMap.end())
-			{
-				throw std::invalid_argument("Setting not found: " + name);
-			}
-
-			return SettingsVector[it->second];
+			throw std::invalid_argument("Setting not found");
 		}
 
 	private:
 		std::vector<std::shared_ptr<Setting>> SettingsVector;
-		std::unordered_map<std::string, std::size_t> SettingsMap;
+		std::unordered_map<std::string_view, size_t, StringViewHash> SettingsMap;
 	};
 }

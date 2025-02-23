@@ -6,62 +6,45 @@ GhostWindow::GhostWindow() : Feature("Ghost window", "Shows ghost information.",
 {
 }
 
-GhostWindow::~GhostWindow() = default;
-
-void GhostWindow::OnEnable()
-{
-}
-
-void GhostWindow::OnDisable()
-{
-}
-
 void GhostWindow::OnDraw()
 {
-	if (GameState::ghostAI == nullptr)
+	if (!GameState::ghostAI || !GameState::ghostAI->Fields.GhostInfo)
 		return;
 
-	ImGuiWindowFlags windowFlags = 0;
-	windowFlags |= ImGuiWindowFlags_NoCollapse;
-	windowFlags |= ImGuiWindowFlags_AlwaysAutoResize;
-	windowFlags |= ImGuiWindowFlags_NoResize;
+	const auto& ghostInfo = GameState::ghostAI->Fields.GhostInfo;
+	const auto& ghostTraits = ghostInfo->Fields.GhostTraits;
 
-	const auto ghostInfo = GameState::ghostAI->Fields.GhostInfo;
-	if (ghostInfo == nullptr)
+	if (!ghostTraits.Name)
 		return;
 
-	const auto ghostTraits = ghostInfo->Fields.GhostTraits;
-	const auto ghostName = ghostTraits.Name;
-	if (!ghostName)
-		return;
+	ImGui::Begin("Ghost information", nullptr, WINDOW_FLAGS);
 
-	ImGui::Begin("Ghost information", nullptr, windowFlags);
-	ImGui::Text("Ghost name: %s", Helper::SystemStringToString(*ghostName).c_str());
+	ImGui::Text("Ghost name: %s", Helper::SystemStringToString(*ghostTraits.Name).c_str());
+	ImGui::Text("Ghost type: %s", Helper::EnumToString(ghostTraits.GhostType_).c_str());
 
-	const auto ghostType = ghostTraits.GhostType_;
-	ImGui::Text("Ghost type: %s", Helper::EnumToString(ghostType).c_str());
-
-	if (ghostType == SDK::GhostType::Mimic)
+	switch (ghostTraits.GhostType_)
 	{
-		const auto mimicType = ghostTraits.MimicType;
-		ImGui::Text("Mimic type: %s", Helper::EnumToString(mimicType).c_str());
+	case SDK::GhostType::Mimic:
+		ImGui::Text("Mimic type: %s", Helper::EnumToString(ghostTraits.MimicType).c_str());
+		break;
+	case SDK::GhostType::Banshee:
+		if (const auto& bansheeTarget = GameState::ghostAI->Fields.BansheeTarget)
+			ImGui::Text("Banshee target: %s", Helper::GetPlayerName(bansheeTarget).c_str());
+		break;
+	default:
+		break;
 	}
 
-	else if (ghostType == SDK::GhostType::Banshee && GameState::ghostAI->Fields.BansheeTarget != nullptr)
+	if (const auto& evidence = GetGhostEvidenceString(); !evidence.empty())
+		ImGui::Text("Evidence: %s", evidence.c_str());
+
+	if (const auto& levelRoom = ghostInfo->Fields.LevelRoom;
+		levelRoom && levelRoom->Fields.RoomName)
 	{
-		const auto bansheeTarget = GameState::ghostAI->Fields.BansheeTarget;
-		ImGui::Text("Banshee target: %s", Helper::GetPlayerName(bansheeTarget).c_str());
-	}
-
-	const auto ghostEvidence = GetGhostEvidenceString();
-	if (!ghostEvidence.empty())
-		ImGui::Text("Evidence: %s", ghostEvidence.c_str());
-
-	if (const auto levelRoom = ghostInfo->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
 		ImGui::Text("Room: %s", Helper::SystemStringToString(*levelRoom->Fields.RoomName).c_str());
+	}
 
 	ImGui::Text("Is hunting: %s", GameState::isHunting ? "true" : "false");
-
 	ImGui::End();
 }
 
@@ -72,21 +55,22 @@ void GhostWindow::OnMenu()
 
 std::string GhostWindow::GetGhostEvidenceString()
 {
-	const auto ghostInfo = GameState::ghostAI->Fields.GhostInfo;
-	const auto ghostTraits = ghostInfo->Fields.GhostTraits;
-	const auto ghostEvidenceList = ghostTraits.GhostEvidenceList;
-	if (!ghostEvidenceList)
-		return "";
+	const auto& ghostInfo = GameState::ghostAI->Fields.GhostInfo;
+	const auto& ghostEvidenceList = ghostInfo->Fields.GhostTraits.GhostEvidenceList;
 
-	std::string ghostEvidenceString;
+	if (!ghostEvidenceList || ghostEvidenceList->Fields.Size == 0)
+		return {};
 
-	for (auto i = 0; i < ghostEvidenceList->Fields.Size; i++)
+	std::string evidence;
+	evidence.reserve(ghostEvidenceList->Fields.Size);
+
+	const auto items = ghostEvidenceList->Fields.Items->Vector;
+	for (auto i = 0; i < ghostEvidenceList->Fields.Size; ++i)
 	{
-		const auto ghostEvidence = ghostEvidenceList->Fields.Items->Vector + i;
-		ghostEvidenceString += Helper::EnumToString(ghostEvidence);
-		if (i < ghostEvidenceList->Fields.Size - 1)
-			ghostEvidenceString += " | ";
+		if (i > 0)
+			evidence += " | ";
+		evidence += Helper::EnumToString(items[i]);
 	}
 
-	return ghostEvidenceString;
+	return evidence;
 }

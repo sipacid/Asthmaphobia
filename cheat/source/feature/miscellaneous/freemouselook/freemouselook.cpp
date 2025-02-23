@@ -7,20 +7,6 @@ FreeMouseLook::FreeMouseLook() : Feature("FreeMouseLook", "Disable camera restri
 	ShouldDrawSection = false;
 }
 
-FreeMouseLook::~FreeMouseLook() = default;
-
-void FreeMouseLook::OnEnable()
-{
-}
-
-void FreeMouseLook::OnDisable()
-{
-}
-
-void FreeMouseLook::OnDraw()
-{
-}
-
 void FreeMouseLook::OnMenu()
 {
 	ImGui::Checkbox("No camera restrictions", &std::get<bool>(EnabledSetting->GetValue()));

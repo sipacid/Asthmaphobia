@@ -6,20 +6,6 @@ PlayerModifier::PlayerModifier() : Feature("Player Modifier", "Modify other play
 {
 }
 
-PlayerModifier::~PlayerModifier() = default;
-
-void PlayerModifier::OnEnable()
-{
-}
-
-void PlayerModifier::OnDisable()
-{
-}
-
-void PlayerModifier::OnDraw()
-{
-}
-
 void PlayerModifier::OnMenu()
 {
 	const auto players = Helper::GetPlayers();

@@ -10,20 +10,6 @@ GhostModifier::GhostModifier() : Feature("GhostModifier", "Modify the ghost's be
 	Settings_->AddSetting(ForcedStateSetting);
 }
 
-GhostModifier::~GhostModifier() = default;
-
-void GhostModifier::OnEnable()
-{
-}
-
-void GhostModifier::OnDisable()
-{
-}
-
-void GhostModifier::OnDraw()
-{
-}
-
 void GhostModifier::OnMenu()
 {
 	ImGui::Checkbox("Enable custom ghost speed##ghostModifier", &std::get<bool>(EnabledSetting->GetValue()));

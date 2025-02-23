@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::CursedItems
 	{
 	public:
 		explicit ForceCard();
-		~ForceCard() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~ForceCard() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo) const;

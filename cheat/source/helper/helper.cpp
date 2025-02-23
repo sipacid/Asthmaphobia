@@ -119,11 +119,11 @@ std::string Helper::EnumToString(SDK::GhostType ghostType)
 	return ghostTypeString;
 }
 
-std::string Helper::EnumToString(const SDK::GhostEvidence* ghostEvidence)
+std::string Helper::EnumToString(const SDK::GhostEvidence ghostEvidence)
 {
 	std::string evidenceTypeString;
 
-	switch (*ghostEvidence)
+	switch (ghostEvidence)
 	{
 	case SDK::GhostEvidence::None:
 		evidenceTypeString = "None";

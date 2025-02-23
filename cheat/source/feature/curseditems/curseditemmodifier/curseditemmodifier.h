@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::CursedItems
 	{
 	public:
 		explicit CursedItemModifier();
-		~CursedItemModifier() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~CursedItemModifier() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 	private:

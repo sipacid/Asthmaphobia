@@ -7,9 +7,8 @@ using namespace Asthmaphobia;
 bool Hooks::hkLevelValues_IsPerfectGame(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo)
 {
 	LOG_CALL("Called LevelValues_IsPerfectGame");
-	if (!globalRunning)
-		return SDK::LevelValues_IsPerfectGame_ptr(levelValues, methodInfo);
+	if (globalRunning)
+		return featureManager->GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnIsPerfectGame(levelValues, methodInfo);
 
-	return dynamic_cast<Features::Miscellaneous::RewardModifier*>(featureManager->GetFeatureByName("Miscellaneous::RewardModifier"))->OnIsPerfectGame(
-		levelValues, methodInfo);
+	return SDK::LevelValues_IsPerfectGame_ptr(levelValues, methodInfo);
 }

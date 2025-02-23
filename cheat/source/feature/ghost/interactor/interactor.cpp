@@ -6,20 +6,6 @@ Interactor::Interactor() : Feature("Interactor", "Force the ghost to interact", 
 {
 }
 
-Interactor::~Interactor() = default;
-
-void Interactor::OnEnable()
-{
-}
-
-void Interactor::OnDisable()
-{
-}
-
-void Interactor::OnDraw()
-{
-}
-
 void Interactor::OnMenu()
 {
 	if (ImGui::Button("Force interact with prop##interactor"))

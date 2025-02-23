@@ -7,20 +7,6 @@ InfiniteStamina::InfiniteStamina() : Feature("Infinite Stamina", "Infinite stami
 	ShouldDrawSection = false;
 }
 
-InfiniteStamina::~InfiniteStamina() = default;
-
-void InfiniteStamina::OnEnable()
-{
-}
-
-void InfiniteStamina::OnDisable()
-{
-}
-
-void InfiniteStamina::OnDraw()
-{
-}
-
 void InfiniteStamina::OnMenu()
 {
 	ImGui::Checkbox("Infinite Stamina", &std::get<bool>(EnabledSetting->GetValue()));

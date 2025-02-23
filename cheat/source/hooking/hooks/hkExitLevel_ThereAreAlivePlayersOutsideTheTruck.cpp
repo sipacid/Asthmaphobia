@@ -7,10 +7,9 @@ using namespace Asthmaphobia;
 bool Hooks::hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exitLevel, SDK::MethodInfo* methodInfo)
 {
 	LOG_CALL("Called ExitLevel_ThereAreAlivePlayersOutsideTheTruck");
-	if (!globalRunning)
-		return SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr(exitLevel, methodInfo);
+	if (globalRunning)
+		return featureManager->GetFeature<Features::Miscellaneous::LeavePeople>("Miscellaneous::LeavePeople")->
+		                       OnExitLevelThereAreAlivePlayersOutsideTheTruck(exitLevel, methodInfo);
 
-	return dynamic_cast<Features::Miscellaneous::LeavePeople*>(
-			featureManager->GetFeatureByName("Miscellaneous::LeavePeople"))
-		->OnExitLevelThereAreAlivePlayersOutsideTheTruck(exitLevel, methodInfo);
+	return SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr(exitLevel, methodInfo);
 }

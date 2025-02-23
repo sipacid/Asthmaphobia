@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Movement
 	{
 	public:
 		explicit Speed();
-		~Speed() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~Speed() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);

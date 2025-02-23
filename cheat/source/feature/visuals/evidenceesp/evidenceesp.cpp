@@ -2,6 +2,17 @@
 
 using namespace Asthmaphobia::Features::Visuals;
 
+const std::unordered_map<SDK::EvidenceType, EvidenceESP::EvidenceInfo> EvidenceESP::EVIDENCE_INFO_MAP_ = {
+	{SDK::EvidenceType::OuijaBoard, {.Text = "Ouija Board", .IsCursedItem = true}},
+	{SDK::EvidenceType::DNA, {.Text = "DNA Evidence", .IsCursedItem = false}},
+	{SDK::EvidenceType::MusicBox, {.Text = "Music Box", .IsCursedItem = true}},
+	{SDK::EvidenceType::TarotCards, {.Text = "Tarot Cards", .IsCursedItem = true}},
+	{SDK::EvidenceType::SummoningCircle, {.Text = "Summoning Circle", .IsCursedItem = true}},
+	{SDK::EvidenceType::HauntedMirror, {.Text = "Haunted Mirror", .IsCursedItem = true}},
+	{SDK::EvidenceType::VoodooDoll, {.Text = "Voodoo Doll", .IsCursedItem = true}},
+	{SDK::EvidenceType::MonkeyPaw, {.Text = "Monkey Paw", .IsCursedItem = true}}
+};
+
 EvidenceESP::EvidenceESP() : Feature("Evidence ESP", "Draws the evidence's name on top of the evidence.", FeatureCategory::Visuals)
 {
 	DNAEvidenceEnabledSetting = std::make_shared<Setting>("DNA Evidence ESP enabled", "If the ESP is enabled", false);
@@ -14,107 +25,46 @@ EvidenceESP::EvidenceESP() : Feature("Evidence ESP", "Draws the evidence's name 
 	Settings_->AddSetting(CursedItemColorSetting);
 }
 
-EvidenceESP::~EvidenceESP() = default;
-
-void EvidenceESP::OnEnable()
-{
-}
-
-void EvidenceESP::OnDisable()
-{
-}
-
 void EvidenceESP::OnDraw()
 {
-	if (GameState::evidenceController == nullptr)
+	const bool cursedItemEnabled = std::get<bool>(CursedItemEnabledSetting->GetValue());
+	const bool dnaEvidenceEnabled = std::get<bool>(DNAEvidenceEnabledSetting->GetValue());
+
+	if (!GameState::evidenceController ||
+		(!cursedItemEnabled && !dnaEvidenceEnabled))
 		return;
 
 	const auto evidenceList = GameState::evidenceController->Fields.EvidenceList;
+	if (!evidenceList || !evidenceList->Fields.Items)
+		return;
+
+	const auto& items = evidenceList->Fields.Items->Vector;
+	const auto draw = ImGui::GetBackgroundDrawList();
+	const auto cursedItemColor = std::get<ImColor>(CursedItemColorSetting->GetValue());
+	const auto dnaEvidenceColor = std::get<ImColor>(DNAEvidenceColorSetting->GetValue());
+
 	for (int i = 0; i < evidenceList->Fields.Size; i++)
 	{
-		const auto evidence = evidenceList->Fields.Items->Vector[i];
-		const auto photoValues = evidence->Fields.PhotoValues;
-		const auto evidenceType = photoValues->Fields.EvidenceType;
+		const auto evidence = items[i];
+		if (!evidence || !evidence->Fields.PhotoValues)
+			continue;
 
-		bool shouldDraw = false;
-		ImColor color;
-		std::string text;
+		const auto evidenceType = evidence->Fields.PhotoValues->Fields.EvidenceType;
+		auto it = EVIDENCE_INFO_MAP_.find(evidenceType);
+		if (it == EVIDENCE_INFO_MAP_.end())
+			continue;
 
-		switch (evidenceType)
-		{
-		case SDK::EvidenceType::EMFSpot:
-			break;
-		case SDK::EvidenceType::OuijaBoard:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Ouija Board";
-			break;
-		case SDK::EvidenceType::Fingerprint:
-			break;
-		case SDK::EvidenceType::Footstep:
-			break;
-		case SDK::EvidenceType::DNA:
-			shouldDraw = std::get<bool>(DNAEvidenceEnabledSetting->GetValue());
-			color = std::get<ImColor>(DNAEvidenceColorSetting->GetValue());
-			text = "DNA Evidence";
-			break;
-		case SDK::EvidenceType::Ghost:
-			break;
-		case SDK::EvidenceType::DeadBody:
-			break;
-		case SDK::EvidenceType::DirtyWater:
-			break;
-		case SDK::EvidenceType::MusicBox:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Music Box";
-			break;
-		case SDK::EvidenceType::TarotCards:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Tarot Cards";
-			break;
-		case SDK::EvidenceType::SummoningCircle:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Summoning Circle";
-			break;
-		case SDK::EvidenceType::HauntedMirror:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Haunted Mirror";
-			break;
-		case SDK::EvidenceType::VoodooDoll:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Voodoo Doll";
-			break;
-		case SDK::EvidenceType::GhostWriting:
-			break;
-		case SDK::EvidenceType::UsedCrucifix:
-			break;
-		case SDK::EvidenceType::DotsGhost:
-			break;
-		case SDK::EvidenceType::MonkeyPaw:
-			shouldDraw = std::get<bool>(CursedItemEnabledSetting->GetValue());
-			color = std::get<ImColor>(CursedItemColorSetting->GetValue());
-			text = "Monkey Paw";
-			break;
-		case SDK::EvidenceType::None:
-			break;
-		default:
-			color = ImColor(255, 255, 255, 255);
-			break;
-		}
-
+		const auto& info = it->second;
+		const bool shouldDraw = info.IsCursedItem ? cursedItemEnabled : dnaEvidenceEnabled;
 		if (!shouldDraw)
 			continue;
 
 		const auto worldPosition = Helper::GetWorldPosition(reinterpret_cast<SDK::Component*>(evidence));
-		if (SDK::Vector3 screenPosition; Helper::WorldToScreen(worldPosition, screenPosition))
+		SDK::Vector3 screenPosition;
+		if (Helper::WorldToScreen(worldPosition, screenPosition))
 		{
-			const auto draw = ImGui::GetBackgroundDrawList();
-			draw->AddText(ImVec2(screenPosition.X, screenPosition.Y), color, text.c_str());
+			const auto& color = info.IsCursedItem ? cursedItemColor : dnaEvidenceColor;
+			draw->AddText(ImVec2(screenPosition.X, screenPosition.Y), color, info.Text.data());
 		}
 	}
 }

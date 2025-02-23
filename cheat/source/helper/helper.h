@@ -7,7 +7,7 @@ namespace Asthmaphobia::Helper
 	bool IsLocalMasterClient();
 	SDK::Player* GetLocalPlayer();
 	std::string EnumToString(SDK::GhostType ghostType);
-	std::string EnumToString(const SDK::GhostEvidence* ghostEvidence);
+	std::string EnumToString(SDK::GhostEvidence ghostEvidence);
 	bool WorldToScreen(SDK::Vector3 vWorldPosition, SDK::Vector3& vScreenPosition);
 	SDK::Vector3 GetWorldPosition(const SDK::Player* player);
 	SDK::Vector3 GetWorldPosition(const SDK::GhostAI* ghostAI);

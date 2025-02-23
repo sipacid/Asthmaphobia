@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Miscellaneous
 	{
 	public:
 		AntiKick();
-		~AntiKick() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~AntiKick() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnServerManagerKickPlayerNetworked(SDK::ServerManager* serverManager, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const;

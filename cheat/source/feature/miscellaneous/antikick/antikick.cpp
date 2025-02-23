@@ -7,20 +7,6 @@ AntiKick::AntiKick() : Feature("AntiKick", "Prevents the server from kicking you
 	ShouldDrawSection = false;
 }
 
-AntiKick::~AntiKick() = default;
-
-void AntiKick::OnEnable()
-{
-}
-
-void AntiKick::OnDisable()
-{
-}
-
-void AntiKick::OnDraw()
-{
-}
-
 void AntiKick::OnMenu()
 {
 	ImGui::Checkbox("Anti Kick", &std::get<bool>(EnabledSetting->GetValue()));

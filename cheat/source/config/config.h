@@ -1,16 +1,8 @@
 #pragma once
 #include "source/common.h"
 
-namespace Asthmaphobia
+namespace Asthmaphobia::Config
 {
-	class ConfigManager
-	{
-	public:
-		ConfigManager();
-		~ConfigManager();
-		static void LoadConfig();
-		static void SaveConfig();
-	};
-
-	inline ConfigManager* configManager{};
+	void LoadConfig();
+	void SaveConfig();
 }

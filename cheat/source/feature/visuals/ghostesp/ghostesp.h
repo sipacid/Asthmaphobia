@@ -7,9 +7,16 @@ namespace Asthmaphobia::Features::Visuals
 	{
 	public:
 		GhostESP();
-		~GhostESP() override;
-		void OnEnable() override;
-		void OnDisable() override;
+		~GhostESP() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
 		void OnDraw() override;
 		void OnMenu() override;
 

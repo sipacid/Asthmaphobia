@@ -7,13 +7,24 @@ namespace Asthmaphobia::Features::Visuals
 	{
 	public:
 		GhostWindow();
-		~GhostWindow() override;
-		void OnEnable() override;
-		void OnDisable() override;
+		~GhostWindow() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
 		void OnDraw() override;
 		void OnMenu() override;
 
 	private:
 		static std::string GetGhostEvidenceString();
+		static constexpr ImGuiWindowFlags WINDOW_FLAGS =
+			ImGuiWindowFlags_NoCollapse |
+			ImGuiWindowFlags_AlwaysAutoResize |
+			ImGuiWindowFlags_NoResize;
 	};
 }

@@ -10,16 +10,7 @@ PlayerESP::PlayerESP() : Feature("Player ESP", "Draws players name and/or sanity
 	Settings_->AddSetting(ShowPlayerSanitySetting);
 	Settings_->AddSetting(ShowDeadStatusSetting);
 	Settings_->AddSetting(ColorSetting);
-}
-
-PlayerESP::~PlayerESP() = default;
-
-void PlayerESP::OnEnable()
-{
-}
-
-void PlayerESP::OnDisable()
-{
+	TextBuffer.reserve(BUFFER_RESERVE_SIZE);
 }
 
 void PlayerESP::OnDraw()
@@ -33,26 +24,39 @@ void PlayerESP::OnDraw()
 	if (players == nullptr || localPlayer == nullptr)
 		return;
 
-	for (int playerIndex = 0; playerIndex < players->Fields.Size; playerIndex++)
+	ShowSanity = std::get<bool>(ShowPlayerSanitySetting->GetValue());
+	ShowDeadStatus = std::get<bool>(ShowDeadStatusSetting->GetValue());
+	Color = std::get<ImColor>(ColorSetting->GetValue());
+
+	const auto draw = ImGui::GetBackgroundDrawList();
+	const int playerCount = players->Fields.Size;
+	const auto& playerVector = players->Fields.Items->Vector;
+
+	SDK::Vector3 screenPosition;
+	for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
 	{
-		const auto player = players->Fields.Items->Vector[playerIndex];
+		const auto player = playerVector[playerIndex];
 		if (player == nullptr || player == localPlayer)
 			continue;
 
 		const auto playerPosition = Helper::GetWorldPosition(player);
-		SDK::Vector3 screenPosition;
 		if (!Helper::WorldToScreen(playerPosition, screenPosition))
 			continue;
 
-		auto text = Helper::GetPlayerName(player);
-		if (std::get<bool>(ShowDeadStatusSetting->GetValue()) && player->Fields.IsDead)
-			text += " [DEAD]";
+		TextBuffer.clear();
+		TextBuffer = Helper::GetPlayerName(player);
 
-		else if (std::get<bool>(ShowPlayerSanitySetting->GetValue()))
-			text += std::format(" [S: {}%]", std::to_string(static_cast<int>(100.f - Helper::GetPlayerInsanity(player))));
+		if (ShowDeadStatus && player->Fields.IsDead)
+		{
+			TextBuffer += " [DEAD]";
+		}
+		else if (ShowSanity)
+		{
+			const int sanity = static_cast<int>(100.f - Helper::GetPlayerInsanity(player));
+			TextBuffer += " [S: " + std::to_string(sanity) + "%]";
+		}
 
-		const auto draw = ImGui::GetBackgroundDrawList();
-		draw->AddText(ImVec2(screenPosition.X, screenPosition.Y), std::get<ImColor>(ColorSetting->GetValue()), text.c_str());
+		draw->AddText(ImVec2(screenPosition.X, screenPosition.Y), Color, TextBuffer.c_str());
 	}
 }
 

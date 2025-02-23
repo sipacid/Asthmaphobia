@@ -6,20 +6,6 @@ DoorModifier::DoorModifier() : Feature("Door Modifier", "Modify door behaviour",
 {
 }
 
-DoorModifier::~DoorModifier() = default;
-
-void DoorModifier::OnEnable()
-{
-}
-
-void DoorModifier::OnDisable()
-{
-}
-
-void DoorModifier::OnDraw()
-{
-}
-
 void DoorModifier::OnMenu()
 {
 	if (ImGui::Button("Disable door collision"))

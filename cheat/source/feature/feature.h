@@ -20,31 +20,38 @@ namespace Asthmaphobia
 	class Feature
 	{
 	public:
-		explicit Feature(std::string name, std::string description, const FeatureCategory category) : Name(std::move(name)), Description(std::move(description)), Category(category)
+		explicit Feature(const std::string_view name, const std::string_view description, const FeatureCategory category)
+			: Name(name), Description(description), Category(category), Settings_(std::make_unique<Settings>())
 		{
-			Settings_ = std::make_unique<Settings>();
-			EnabledSetting = std::make_shared<Setting>("Enabled", "Enables or disables this feature", false);
-			Settings_->AddSetting(EnabledSetting);
+			const auto setting = std::make_shared<Setting>("Enabled", "Enables or disables this feature", false);
+			EnabledSetting = setting;
+			Settings_->AddSetting(setting);
 		}
 
+		Feature(const Feature&) = delete;
+		Feature& operator=(const Feature&) = delete;
+		Feature(Feature&&) noexcept = default;
+		Feature& operator=(Feature&&) noexcept = default;
 		virtual ~Feature() = default;
+
 		virtual void OnEnable() = 0;
 		virtual void OnDisable() = 0;
 		virtual void OnDraw() = 0;
 		virtual void OnMenu() = 0;
 
-		[[nodiscard]] const std::string& GetName() const { return Name; }
-		[[nodiscard]] const std::string& GetDescription() const { return Description; }
-		[[nodiscard]] FeatureCategory GetCategory() const { return Category; }
-		[[nodiscard]] bool IsEnabled() const { return std::get<bool>(EnabledSetting->GetValue()); }
-		std::unique_ptr<Settings>& GetSettings() { return Settings_; }
+		[[nodiscard]] const std::string& GetName() const noexcept { return Name; }
+		[[nodiscard]] const std::string& GetDescription() const noexcept { return Description; }
+		[[nodiscard]] FeatureCategory GetCategory() const noexcept { return Category; }
+		[[nodiscard]] bool IsEnabled() const noexcept { return std::get<bool>(EnabledSetting->GetValue()); }
+		[[nodiscard]] const Settings* GetSettings() const noexcept { return Settings_.get(); }
+		Settings* GetSettings() noexcept { return Settings_.get(); }
 
 		bool ShouldDrawSection = true;
 
 	protected:
 		std::string Name;
 		std::string Description;
-		FeatureCategory Category;
+		const FeatureCategory Category;
 		std::shared_ptr<Setting> EnabledSetting;
 		std::unique_ptr<Settings> Settings_;
 	};
@@ -55,15 +62,25 @@ namespace Asthmaphobia
 		FeatureManager();
 		~FeatureManager();
 
-		void AddFeature(const std::string& name, Feature* feature);
-		[[nodiscard]] const std::unordered_map<std::string, Feature*>& GetFeatures() const { return Features; }
-		[[nodiscard]] Feature* GetFeatureByName(const std::string& name) const;
+		void AddFeature(std::string_view name, std::unique_ptr<Feature> feature);
+		[[nodiscard]] const auto& GetFeatures() const noexcept { return Features; }
+		[[nodiscard]] Feature* GetFeatureByName(std::string_view name) const;
+
+		template <typename T>
+		[[nodiscard]] T* GetFeature(const std::string_view name) const
+		{
+			if (auto feature = GetFeatureByName(name))
+			{
+				return dynamic_cast<T*>(feature);
+			}
+			return nullptr;
+		}
+
 		void OnDraw() const;
 		void OnMenu() const;
 
 	private:
-		std::unordered_map<std::string, Feature*> Features;
-		mutable CRITICAL_SECTION DrawSection;
+		std::unordered_map<std::string, std::unique_ptr<Feature>> Features;
 	};
 
 	inline FeatureManager* featureManager{};

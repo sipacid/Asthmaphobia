@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Ghost
 	{
 	public:
 		Interactor();
-		~Interactor() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~Interactor() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo);

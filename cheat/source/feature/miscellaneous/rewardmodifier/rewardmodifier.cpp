@@ -10,20 +10,6 @@ RewardModifier::RewardModifier() : Feature("Reward modifier", "Modifies the rewa
 	Settings_->AddSetting(PerfectGameSetting);
 }
 
-RewardModifier::~RewardModifier() = default;
-
-void RewardModifier::OnEnable()
-{
-}
-
-void RewardModifier::OnDisable()
-{
-}
-
-void RewardModifier::OnDraw()
-{
-}
-
 void RewardModifier::OnMenu()
 {
 	ImGui::Checkbox("Always perfect game##rewardModifier", &std::get<bool>(PerfectGameSetting->GetValue()));

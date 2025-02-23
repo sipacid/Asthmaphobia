@@ -7,10 +7,20 @@ namespace Asthmaphobia::Features::Movement
 	{
 	public:
 		explicit NoClip();
-		~NoClip() override;
-		void OnEnable() override;
-		void OnDisable() override;
-		void OnDraw() override;
+		~NoClip() override = default;
+
+		void OnEnable() override
+		{
+		}
+
+		void OnDisable() override
+		{
+		}
+
+		void OnDraw() override
+		{
+		}
+
 		void OnMenu() override;
 
 		void OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo) const;
