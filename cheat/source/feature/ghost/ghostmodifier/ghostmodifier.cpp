@@ -5,7 +5,9 @@ using namespace Asthmaphobia::Features::Ghost;
 GhostModifier::GhostModifier() : Feature("GhostModifier", "Modify the ghost's behaviour", FeatureCategory::Ghost)
 {
 	GhostSpeedSetting = std::make_shared<Setting>("Ghost speed", "The speed of the ghost.", 3.0f);
+	ForcedStateSetting = std::make_shared<Setting>("Forced State", "The state of the ghost to force", static_cast<int>(SDK::GhostState::Hunting));
 	Settings_->AddSetting(GhostSpeedSetting);
+	Settings_->AddSetting(ForcedStateSetting);
 }
 
 GhostModifier::~GhostModifier() = default;
@@ -46,20 +48,52 @@ void GhostModifier::OnMenu()
 	}
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("This will only work if you are the host.");
+
+	const char* ghostStateList[] = {
+		"Idle", "Wander", "Hunting", "FavouriteRoom", "Light", "Door", "Throwing", "FuseBox", "Appear", "DoorKnock", "WindowKnock", "CarAlarm", "Flicker", "CCTV", "RandomEvent",
+		"GhostAbility", "Mannequin", "TeleportObject", "Interact", "SummoningCircle", "MusicBox", "Dots", "Salt"
+	};
+	ImGui::Combo("Forced type##tarotCardModifier", &std::get<int>(ForcedStateSetting->GetValue()), ghostStateList, IM_ARRAYSIZE(ghostStateList));
+	if (ImGui::Button("Force State##ghostModifier"))
+	{
+		if (GameState::ghostAI == nullptr)
+		{
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else
+		{
+			ForceState = true;
+		}
+	}
+	if (ImGui::IsItemHovered())
+		ImGui::SetTooltip("This will only work if you are the host.");
 }
 
 void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
 {
-	if (!std::get<bool>(EnabledSetting->GetValue()) || !Helper::IsLocalMasterClient())
+	if (!Helper::IsLocalMasterClient())
 		return;
 
-	ghost->Fields.Speed = std::get<float>(GhostSpeedSetting->GetValue());
-	ghost->Fields.Field22 = std::get<float>(GhostSpeedSetting->GetValue());
-	ghost->Fields.Field23 = std::get<float>(GhostSpeedSetting->GetValue());
+	if (std::get<bool>(EnabledSetting->GetValue()))
+	{
+		ghost->Fields.Speed = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.Field22 = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.Field23 = std::get<float>(GhostSpeedSetting->GetValue());
+	}
 
 	if (ForceAppear)
 	{
-		SDK::GhostAI_Appear_ptr(ghost, INT_MAX, nullptr);
 		ForceAppear = false;
+		SDK::GhostAI_Appear_ptr(ghost, INT_MAX, nullptr);
+	}
+
+	if (ForceState)
+	{
+		ForceState = false;
+		SDK::GhostAI_ChangeState_ptr(GameState::ghostAI, static_cast<SDK::GhostState>(std::get<int>(ForcedStateSetting->GetValue())), nullptr, nullptr, nullptr);
 	}
 }

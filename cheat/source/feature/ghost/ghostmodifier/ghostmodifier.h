@@ -17,7 +17,9 @@ namespace Asthmaphobia::Features::Ghost
 
 	private:
 		std::shared_ptr<Setting> GhostSpeedSetting;
+		std::shared_ptr<Setting> ForcedStateSetting;
 
 		bool ForceAppear = false;
+		bool ForceState = false;
 	};
 }
