@@ -41,8 +41,10 @@ namespace Asthmaphobia
 
 	private:
 		const Level MinLevel;
+#ifdef _DEBUG
 		bool ConsoleExists;
 		HANDLE HConsole;
+#endif
 		std::mutex LogMutex;
 		std::ofstream FileOut;
 		std::string LogFilePath;

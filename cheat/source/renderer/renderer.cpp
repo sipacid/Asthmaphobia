@@ -12,24 +12,44 @@ Renderer::~Renderer()
 	renderer = nullptr;
 }
 
-bool Renderer::GetSwapchain(IDXGISwapChain** swapchain, ID3D11Device** device)
+bool Renderer::GetSwapChain(IDXGISwapChain** swapChain, ID3D11Device** device) const
 {
 	WNDCLASSEX wc{0};
 	wc.cbSize = sizeof(wc);
 	wc.lpfnWndProc = DefWindowProc;
 	wc.lpszClassName = TEXT("asthmaphobia");
+	wc.hInstance = GetModuleHandle(nullptr);
 
 	if (!RegisterClassEx(&wc))
 	{
 		return false;
 	}
 
-	DXGI_SWAP_CHAIN_DESC description{0};
+	HWND hwnd = CreateWindowEx(
+		0,
+		wc.lpszClassName,
+		TEXT(""),
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		100,
+		100,
+		nullptr,
+		nullptr,
+		wc.hInstance,
+		nullptr);
 
+	if (!hwnd)
+	{
+		UnregisterClass(wc.lpszClassName, wc.hInstance);
+		return false;
+	}
+
+	DXGI_SWAP_CHAIN_DESC description{};
 	description.BufferCount = 1;
 	description.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	description.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	description.OutputWindow = GetForegroundWindow();
+	description.OutputWindow = hwnd;
 	description.SampleDesc.Count = 1;
 	description.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	description.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
@@ -41,9 +61,9 @@ bool Renderer::GetSwapchain(IDXGISwapChain** swapchain, ID3D11Device** device)
 
 	for (const auto& driverType : KDriverType)
 	{
-		HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr, driverType, nullptr, 0, nullptr, 0,
-		                                           D3D11_SDK_VERSION, &description, swapchain, device, &level,
-		                                           nullptr);
+		const HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr, driverType, nullptr, 0, nullptr, 0,
+		                                                 D3D11_SDK_VERSION, &description, swapChain, device, &level,
+		                                                 nullptr);
 
 		if (SUCCEEDED(hr))
 		{
@@ -52,30 +72,25 @@ bool Renderer::GetSwapchain(IDXGISwapChain** swapchain, ID3D11Device** device)
 		}
 	}
 
-	DestroyWindow(description.OutputWindow);
-	UnregisterClass(wc.lpszClassName, GetModuleHandle(nullptr));
+	DestroyWindow(hwnd);
+	UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-	if (!success)
-	{
-		return false;
-	}
-
-	return true;
+	return success;
 }
 
-Id3DPresent Renderer::GetPresent()
+Id3DPresent Renderer::GetPresent() const
 {
-	IDXGISwapChain* swapchain;
+	IDXGISwapChain* swapChain;
 	ID3D11Device* device;
 
-	if (GetSwapchain(&swapchain, &device))
+	if (GetSwapChain(&swapChain, &device))
 	{
-		void** vmt = *reinterpret_cast<void***>(swapchain);
+		void** vmt = *reinterpret_cast<void***>(swapChain);
 
-		if (swapchain)
+		if (swapChain)
 		{
-			swapchain->Release();
-			swapchain = nullptr;
+			swapChain->Release();
+			swapChain = nullptr;
 		}
 		if (device)
 		{

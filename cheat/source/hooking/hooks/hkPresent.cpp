@@ -50,36 +50,14 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 
 	if (menu.Open)
 	{
-		try
-		{
-			Menu::Render();
-		}
-		catch (const std::exception& e)
-		{
-			LOG_ERROR("Failed to render menu: {}", e.what());
-		}
+		Menu::Render();
 	}
 
 	// destroying featureManager before this, will become nullptr
 	if (globalRunning)
 	{
-		try
-		{
-			featureManager->OnDraw();
-		}
-		catch (const std::exception& e)
-		{
-			LOG_ERROR("Failed to draw features: {}", e.what());
-		}
-
-		try
-		{
-			Notifications::RenderNotifications();
-		}
-		catch (const std::exception& e)
-		{
-			LOG_ERROR("Failed to render notifications: {}", e.what());
-		}
+		featureManager->OnDraw();
+		Notifications::RenderNotifications();
 	}
 
 	ImGui::EndFrame();

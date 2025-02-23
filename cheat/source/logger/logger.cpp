@@ -68,17 +68,23 @@ bool Logger::InitializeLogDirectory()
 
 		return FileOut.is_open();
 	}
-	catch (const std::exception &)
+	catch (const std::exception&)
 	{
 		return false;
 	}
 }
 
-Logger::Logger(Level minLevel) : MinLevel(minLevel), ConsoleExists(false), HConsole(nullptr)
+Logger::Logger(Level minLevel) : MinLevel(minLevel)
+#ifdef _DEBUG
+ , ConsoleExists(false), HConsole(nullptr)
+#endif
+
+
 {
 	if (!InitializeLogDirectory())
 		throw std::runtime_error("Failed to initialize log directory");
 
+#ifdef _DEBUG
 	ConsoleExists = AttachConsole(GetCurrentProcessId());
 	if (!ConsoleExists)
 		ConsoleExists = AllocConsole();
@@ -97,6 +103,7 @@ Logger::Logger(Level minLevel) : MinLevel(minLevel), ConsoleExists(false), HCons
 			SetConsoleOutputCP(CP_UTF8);
 		}
 	}
+#endif
 
 	logger = this;
 }
@@ -106,8 +113,11 @@ Logger::~Logger()
 	if (FileOut.is_open())
 		FileOut.close();
 
+
+#ifdef _DEBUG
 	if (ConsoleExists)
 		FreeConsole();
+#endif
 
 	logger = nullptr;
 }
@@ -131,16 +141,18 @@ void Logger::ActualLog(const Level level, const std::string_view message)
 	const auto timestamp = GetTimestamp();
 	const auto levelStr = LevelToString(level);
 
+#ifdef _DEBUG
 	if (HConsole && HConsole != INVALID_HANDLE_VALUE)
 	{
 		SetConsoleTextAttribute(HConsole, LevelToColor(level));
 		std::println("{} {}", levelStr.data(), message.data());
 		fflush(stdout);
 	}
+#endif
 
 	if (level > Level::Call && FileOut.is_open() && FileOut.good())
 	{
 		FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
-		FileOut.flush(); 
+		FileOut.flush();
 	}
 }

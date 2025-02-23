@@ -18,8 +18,8 @@ namespace Asthmaphobia
 	public:
 		explicit Renderer();
 		~Renderer();
-		bool GetSwapchain(IDXGISwapChain** swapchain, ID3D11Device** device);
-		Id3DPresent GetPresent();
+		bool GetSwapChain(IDXGISwapChain** swapChain, ID3D11Device** device) const;
+		Id3DPresent GetPresent() const;
 
 		static inline IDXGISwapChain* Swapchain;
 		static inline HWND Window;
