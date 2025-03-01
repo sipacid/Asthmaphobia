@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
+	// Accept user data as a prop
+	let { user } = $props<{ user?: any | null }>();
+	
 	// Local state for dropdown menu
 	let isProfileMenuOpen = $state(false);
-	let isAuthenticated = $state(false);
-	let username = $state('');
 
 	// Function to toggle dropdown menu
 	const toggleProfileMenu = () => {
@@ -19,15 +19,6 @@
 			isProfileMenuOpen = false;
 		}
 	};
-
-	// Check authentication status from page data
-	onMount(() => {
-		// This is just a simple check - you'll need to adapt this based on your actual auth system
-		isAuthenticated = !!$page.data.user;
-		if (isAuthenticated && $page.data.user) {
-			username = $page.data.user.username;
-		}
-	});
 
 	// Setup click listener
 	onMount(() => {
@@ -48,25 +39,25 @@
 				<li>
 					<a href="/" class="text-sm font-medium transition duration-200 hover:text-purple-400">Home</a>
 				</li>
-				<li>
-					<a 
-						href="/dashboard" 
-						class="text-sm font-medium transition duration-200 hover:text-purple-400"
-					>
-						Dashboard
-					</a>
-				</li>
-				
-				{#if isAuthenticated}
+					<li>
+						<a 
+							href="/dashboard" 
+							class="text-sm font-medium transition duration-200 hover:text-purple-400"
+						>
+							Dashboard
+						</a>
+					</li>
+					
+				{#if user}
 					<li class="relative" id="profile-dropdown">
 						<button 
 							onclick={toggleProfileMenu} 
 							class="flex items-center space-x-1 rounded-full bg-zinc-800 px-3 py-1.5 text-sm transition hover:bg-zinc-700"
 						>
 							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-purple-700 text-xs">
-								{username.charAt(0).toUpperCase()}
+									{user.username.charAt(0).toUpperCase()}
 							</div>
-							<span class="hidden sm:inline">{username}</span>
+							<span class="hidden sm:inline">{user.username}</span>
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 							</svg>
@@ -74,18 +65,21 @@
 						
 						{#if isProfileMenuOpen}
 							<div class="absolute right-0 mt-2 w-48 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg">
+								{#if user.role === 'administrator'}
+									<a 
+										href="/admin" 
+										class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800"
+									>
+										<div class="flex items-center space-x-2">
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+											</svg>
+											<span>Admin Panel</span>
+										</div>
+									</a>
+								{/if}
 								<a 
-									href="/admin" 
-									class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800"
-								>
-									<div class="flex items-center space-x-2">
-										<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-										</svg>
-										<span>Admin Panel</span>
-									</div>
-								</a><a 
 									href="/user" 
 									class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800"
 								>

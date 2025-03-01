@@ -59,10 +59,7 @@ export const load: PageServerLoad = async (event) => {
 export const actions: Actions = {
 	create: async (event) => {
 		if (!event.locals.user || event.locals.user.role !== 'administrator') {
-			return fail(401, {
-				success: false,
-				message: 'Unauthorized'
-			});
+			return fail(401, { success: false, error: 'Unauthorized' });
 		}
 
 		const data = await event.request.formData();
@@ -71,6 +68,7 @@ export const actions: Actions = {
 		const type = data.get('type')?.toString();
 		const published = data.get('published') === 'true';
 
+		// Validation
 		if (!title || !content || !type) {
 			return fail(400, { success: false, error: 'Missing required fields' });
 		}

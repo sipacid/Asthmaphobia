@@ -3,10 +3,10 @@
 	import Header from '$lib/components/header.svelte';
 	import '../app.css';
 
-	let { children } = $props();
+	let { data, children } = $props();
 </script>
 
-<Header />
+<Header user={data.user} />
 <div class="pt-14"> 
   {@render children()}
 </div>

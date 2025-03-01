@@ -101,31 +101,15 @@
 				
 				<div class="mb-4">
 					<label for="role" class="mb-1 block text-sm font-medium text-zinc-300">Role</label>
-					<div class="flex items-center space-x-4 rounded-md border border-zinc-700 bg-zinc-800 p-2">
-						<label class="flex items-center space-x-2">
-							<input 
-								type="radio" 
-								name="role" 
-								value="user" 
-								checked={role === 'user'}
-								onchange={() => role = 'user'}
-								class="text-purple-600 focus:ring-purple-500"
-							/>
-							<span class="text-sm text-white">Standard User</span>
-						</label>
-						
-						<label class="flex items-center space-x-2">
-							<input 
-								type="radio" 
-								name="role" 
-								value="administrator" 
-								checked={role === 'administrator'}
-								onchange={() => role = 'administrator'}
-								class="text-purple-600 focus:ring-purple-500"
-							/>
-							<span class="text-sm text-white">Administrator</span>
-						</label>
-					</div>
+					<select 
+						id="role" 
+						name="role"
+						bind:value={role}
+						class="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+					>
+						<option value="user">Standard User</option>
+						<option value="administrator">Administrator</option>
+					</select>
 				</div>
 				
 				<div class="flex justify-end space-x-2">
