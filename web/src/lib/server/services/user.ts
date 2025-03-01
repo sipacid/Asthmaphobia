@@ -55,14 +55,13 @@ export class UserService {
 		return id;
 	}
 
-	async getUsers(): Promise<table.User[]> {
+	async getUsers(): Promise<Omit<table.User, 'passwordHash'>[]> {
 		return await db.query.user.findMany({
-			orderBy: [{ role: 'desc' }, { username: 'asc' }],
 			columns: {
 				id: true,
-				role: true,
 				email: true,
 				username: true,
+				role: true,
 				createdAt: true,
 				updatedAt: true
 			}

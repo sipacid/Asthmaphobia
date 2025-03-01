@@ -47,7 +47,7 @@
 			</div>
 			<p class="mb-4 flex-grow text-sm text-zinc-400">View and manage user accounts, reset passwords, and modify user roles.</p>
 			<div class="flex justify-end">
-				<span class="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400">Coming Soon</span>
+				<span class="rounded-full bg-purple-900/20 px-3 py-1 text-xs font-medium text-purple-400">Manage</span>
 			</div>
 		</a>
 		

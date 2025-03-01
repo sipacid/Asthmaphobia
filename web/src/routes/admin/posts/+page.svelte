@@ -60,10 +60,6 @@
 		return confirm('Are you sure you want to delete this post?');
 	}
 	
-	function formatDate(date: Date): string {
-		return new Date(date).toLocaleDateString();
-	}
-
 	function handleFormDelete(event: Event, shouldDelete: boolean) {
 		event.preventDefault();
 		if (shouldDelete) {
@@ -235,7 +231,7 @@
 									{post.author_name}
 								</td>
 								<td class="px-4 py-3 text-sm text-zinc-400">
-									{formatDate(post.created_at)}
+									{new Date(post.created_at).toLocaleDateString()}
 								</td>
 								<td class="px-4 py-3">
 									<span class={`rounded-full px-2.5 py-0.5 text-xs font-medium ${post.published ? 'bg-green-900/20 text-green-400' : 'bg-amber-900/20 text-amber-400'}`}>

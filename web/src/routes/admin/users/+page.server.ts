@@ -12,10 +12,9 @@ export const load: PageServerLoad = async (event) => {
 
 	const users = await userService.getUsers();
 
-	const url = new URL(event.request.url);
-	const editId = url.searchParams.get('edit');
-	let editUser = null;
+	const editId = event.url.searchParams.get('edit');
 
+	let editUser = null;
 	if (editId) {
 		try {
 			editUser = await userService.getUserByID(editId);
@@ -27,11 +26,9 @@ export const load: PageServerLoad = async (event) => {
 	}
 
 	return {
+		user: event.locals.user,
 		users,
-		editUser,
-		currentUser: {
-			id: event.locals.user.id
-		}
+		editUser
 	};
 };
 
