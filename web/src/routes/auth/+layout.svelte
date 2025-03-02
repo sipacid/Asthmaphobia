@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../../app.css';
-	
+
 	let { children } = $props();
 </script>
 
@@ -10,6 +10,6 @@
 			<span class="text-purple-500">Asthma</span><span class="text-white">phobia</span>
 		</a>
 	</div>
-	
+
 	{@render children()}
 </main>

@@ -17,7 +17,7 @@ export const load: PageServerLoad = async (event) => {
 
 	return {
 		user: event.locals.user,
-        totalDownloads,
-        totalUsers
+		totalDownloads,
+		totalUsers
 	};
 };

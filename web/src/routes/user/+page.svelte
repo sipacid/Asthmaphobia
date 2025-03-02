@@ -33,7 +33,7 @@
 				<p class="mb-4 text-sm text-zinc-400">{data.user.email || 'No email set'}</p>
 				<div class="mb-4 w-full rounded-lg bg-black/40 p-3">
 					<p class="mb-1 text-xs text-zinc-500">User ID</p>
-					<p class="break-all font-mono text-sm text-zinc-400">{data.user.id}</p>
+					<p class="font-mono text-sm break-all text-zinc-400">{data.user.id}</p>
 				</div>
 				<div class="mt-2 w-full text-center">
 					<form method="POST" action="?/logout">
@@ -120,7 +120,7 @@
 									id="email"
 									type="email"
 									value={data.user.email || ''}
-									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pl-10 pr-3 text-zinc-200 focus:border-purple-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pr-3 pl-10 text-zinc-200 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
 									required
 								/>
 							</div>
@@ -152,7 +152,7 @@
 									id="username"
 									type="text"
 									value={data.user.username}
-									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pl-10 pr-3 text-zinc-200 focus:border-purple-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pr-3 pl-10 text-zinc-200 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
 									required
 								/>
 							</div>
@@ -189,7 +189,7 @@
 									name="current-password"
 									id="current-password"
 									type={showCurrentPassword ? 'text' : 'password'}
-									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pl-10 pr-10 text-zinc-200 focus:border-purple-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pr-10 pl-10 text-zinc-200 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
 									placeholder="Enter current password"
 								/>
 								<button
@@ -264,7 +264,7 @@
 									name="password"
 									id="password"
 									type={showPassword ? 'text' : 'password'}
-									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pl-10 pr-10 text-zinc-200 focus:border-purple-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pr-10 pl-10 text-zinc-200 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
 									placeholder="Enter new password"
 								/>
 								<button
@@ -339,7 +339,7 @@
 									name="confirm-password"
 									id="confirm-password"
 									type={showConfirmPassword ? 'text' : 'password'}
-									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pl-10 pr-10 text-zinc-200 focus:border-purple-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+									class="w-full rounded-lg border border-zinc-800 bg-black py-2.5 pr-10 pl-10 text-zinc-200 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 focus:outline-none"
 									placeholder="Confirm new password"
 								/>
 								<button
@@ -395,7 +395,7 @@
 					<div class="pt-4">
 						<button
 							type="submit"
-							class="flex w-full items-center justify-center rounded-lg bg-purple-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-black"
+							class="flex w-full items-center justify-center rounded-lg bg-purple-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-purple-600 focus:ring-2 focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-black focus:outline-none"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
