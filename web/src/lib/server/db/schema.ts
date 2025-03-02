@@ -1,4 +1,5 @@
-import { pgEnum, pgTable, text, timestamp, boolean, uuid } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import { pgEnum, pgTable, text, timestamp, boolean, uuid, integer } from 'drizzle-orm/pg-core';
 
 export const roleEnum = pgEnum('role', ['user', 'administrator']);
 
@@ -56,8 +57,18 @@ export const downloads = pgTable('downloads', {
 	createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).defaultNow()
 });
 
+export const faq = pgTable('faq', {
+	id: uuid('id').primaryKey().defaultRandom(),
+	question: text('question').notNull(),
+	answer: text('answer').notNull(),
+	ranking: integer('ranking').notNull().default(0),
+	createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).defaultNow(),
+	updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).defaultNow()
+});
+
 export type Session = typeof session.$inferSelect;
 export type User = typeof user.$inferSelect;
 export type UserLogin = typeof userLogin.$inferSelect;
 export type Post = typeof posts.$inferSelect;
 export type Download = typeof downloads.$inferSelect;
+export type FAQ = typeof faq.$inferSelect;

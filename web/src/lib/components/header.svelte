@@ -12,6 +12,11 @@
 		isProfileMenuOpen = !isProfileMenuOpen;
 	};
 
+	// Function to close dropdown menu
+	const closeProfileMenu = () => {
+		isProfileMenuOpen = false;
+	};
+
 	// Close dropdown when clicking outside
 	const handleClickOutside = (event: MouseEvent) => {
 		const dropdown = document.getElementById('profile-dropdown');
@@ -27,7 +32,9 @@
 	});
 </script>
 
-<header class="fixed top-0 right-0 left-0 z-50 h-14 w-full bg-zinc-950 px-4 text-white shadow-md">
+<header
+	class="fixed top-0 right-0 left-0 z-50 h-14 w-full bg-zinc-950/80 px-4 text-white shadow-md backdrop-blur-md"
+>
 	<div class="container mx-auto flex h-full items-center justify-between">
 		<div class="text-lg font-bold">
 			<a href="/" class="flex items-center">
@@ -83,7 +90,11 @@
 								class="absolute right-0 mt-2 w-48 rounded-md border border-zinc-800 bg-zinc-900 py-1 shadow-lg"
 							>
 								{#if user.role === 'administrator'}
-									<a href="/admin" class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800">
+									<a
+										href="/admin"
+										class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800"
+										onclick={closeProfileMenu}
+									>
 										<div class="flex items-center space-x-2">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +120,11 @@
 										</div>
 									</a>
 								{/if}
-								<a href="/user" class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800">
+								<a
+									href="/user"
+									class="block px-4 py-2 text-sm text-zinc-200 hover:bg-zinc-800"
+									onclick={closeProfileMenu}
+								>
 									<div class="flex items-center space-x-2">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +144,7 @@
 									</div>
 								</a>
 								<hr class="my-1 border-zinc-800" />
-								<form method="POST" action="/user?/logout">
+								<form method="POST" action="/user?/logout" onsubmit={closeProfileMenu}>
 									<button
 										type="submit"
 										class="flex w-full items-center px-4 py-2 text-left text-sm text-red-400 hover:bg-zinc-800"
@@ -159,3 +174,9 @@
 		</nav>
 	</div>
 </header>
+
+<style>
+	header {
+		view-transition-name: header;
+	}
+</style>

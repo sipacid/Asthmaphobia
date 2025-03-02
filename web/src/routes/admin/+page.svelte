@@ -123,5 +123,36 @@
 				>
 			</div>
 		</a>
+
+		<a
+			href="/admin/faq"
+			class="flex h-full flex-col rounded-xl border border-zinc-800 bg-zinc-900/70 p-6 shadow-md transition-colors duration-200 hover:bg-zinc-900"
+		>
+			<div class="mb-4 flex items-center justify-between">
+				<h2 class="text-lg font-bold text-white">FAQ Management</h2>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5 text-purple-500"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+					/>
+				</svg>
+			</div>
+			<p class="mb-4 flex-grow text-sm text-zinc-400">
+				Manage frequently asked questions and their answers for the help center.
+			</p>
+			<div class="flex justify-end">
+				<span class="rounded-full bg-purple-900/20 px-3 py-1 text-xs font-medium text-purple-400"
+					>Manage</span
+				>
+			</div>
+		</a>
 	</div>
 </div>
