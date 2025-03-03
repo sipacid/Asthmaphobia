@@ -1,6 +1,9 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { userService, UserError } from '$lib/server/services/user';
 import type { PageServerLoad, Actions } from './$types';
+import { db } from '$lib/server/db';
+import { userLogin } from '$lib/server/db/schema';
+import { desc, eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
@@ -11,18 +14,11 @@ export const load: PageServerLoad = async (event) => {
 	}
 
 	const users = await userService.getUsers();
-
 	const editId = event.url.searchParams.get('edit');
 
 	let editUser = null;
 	if (editId) {
-		try {
-			editUser = await userService.getUserByID(editId);
-		} catch (error) {
-			if (!(error instanceof UserError && error.code === 'NOT_FOUND')) {
-				console.error('Error fetching user:', error);
-			}
-		}
+		editUser = await userService.getUserByID(editId);
 	}
 
 	return {
@@ -121,5 +117,65 @@ export const actions: Actions = {
 		}
 
 		return { success: true };
+	},
+	getUserDetails: async ({ request, locals }) => {
+		if (!locals.user) {
+			throw redirect(302, '/auth/login');
+		}
+		if (locals.user.role !== 'administrator') {
+			throw redirect(302, '/dashboard');
+		}
+
+		const data = await request.formData();
+		const userId = data.get('userId')?.toString();
+
+		if (!userId) {
+			return { success: false, error: 'User ID is required' };
+		}
+
+		try {
+			const user = await userService.getUserByID(userId);
+
+			if (!user) {
+				return { success: false, error: 'User not found' };
+			}
+
+			const logins = await db
+				.select({
+					id: userLogin.id,
+					userId: userLogin.userId,
+					ipAddress: userLogin.ipAddress,
+					userAgent: userLogin.userAgent,
+					success: userLogin.success,
+					createdAt: userLogin.createdAt
+				})
+				.from(userLogin)
+				.where(eq(userLogin.userId, userId))
+				.orderBy(desc(userLogin.createdAt))
+				.limit(50);
+
+			return {
+				success: true,
+				user: {
+					id: user.id,
+					username: user.username,
+					email: user.email,
+					role: user.role,
+					createdAt: user.createdAt?.toISOString(),
+					updatedAt: user.updatedAt?.toISOString()
+				},
+				userLogins: logins.map((login) => ({
+					id: login.id,
+					userId: login.userId,
+					ipAddress: login.ipAddress,
+					userAgent: login.userAgent,
+					success: login.success,
+					createdAt: login.createdAt?.toISOString()
+				}))
+			};
+		} catch (error) {
+			console.error('Error fetching user details:', error);
+			return { success: false, error: 'Failed to fetch user details' };
+		}
 	}
 };

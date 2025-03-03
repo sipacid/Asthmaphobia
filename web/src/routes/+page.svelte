@@ -40,19 +40,19 @@
 
 	const screenshots = [
 		{
-			src: '/images/esp-showcase.jpg',
-			alt: 'ESP feature showing ghosts through walls',
-			caption: 'Ghost ESP in action'
+			src: '/images/img.webp',
+			alt: 'Soon TM',
+			caption: 'Soon TM'
 		},
 		{
-			src: '/images/player-mods.jpg',
-			alt: 'Player modification menu',
-			caption: 'Advanced player modifications'
+			src: '/images/img.webp',
+			alt: 'Soon TM',
+			caption: 'Soon TM'
 		},
 		{
-			src: '/images/ghost-info.jpg',
-			alt: 'Detailed ghost information window',
-			caption: 'Real-time ghost data'
+			src: '/images/img.webp',
+			alt: 'Soon TM',
+			caption: 'Soon TM'
 		}
 	];
 
@@ -74,7 +74,7 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen bg-black bg-[url('/images/noise-pattern.png')] bg-fixed">
+<div class="min-h-screen bg-black">
 	<div class="relative">
 		<div
 			class="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent opacity-60"
@@ -193,12 +193,12 @@
 											stroke-linecap="round"
 											stroke-linejoin="round"
 											stroke-width="2"
-											d="M13 10V3L4 14h7v7l9-11h-7z"
+											d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
 										/>
 									</svg>
-									<h3 class="mb-1 font-semibold text-white">24/7 Support</h3>
+									<h3 class="mb-1 font-semibold text-white">Constant Updates</h3>
 									<p class="text-center text-sm text-zinc-400">
-										Dedicated team for support and weekly updates
+										Regular updates to match game patches and add new features
 									</p>
 								</div>
 							</div>

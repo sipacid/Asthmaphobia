@@ -335,8 +335,8 @@
 	<div
 		class={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm transition-all duration-300 ${showModal ? 'bg-black/70 opacity-100' : 'opacity-0'}`}
 		onclick={handleModalBackgroundClick}
-		onkeydown={(e) => e.key === 'Escape' && closeFeatureModal()}
-		transition:fade={{ duration: 200 }}
+		role="dialog"
+		aria-modal="true"
 	>
 		{#if selectedFeature}
 			<div
@@ -346,6 +346,7 @@
 				<button
 					class="absolute top-4 right-4 rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-zinc-300"
 					onclick={closeFeatureModal}
+					aria-label="Close modal"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -415,7 +416,7 @@
 	</div>
 {/if}
 
-<div class="min-h-screen bg-black bg-[url('/images/noise-pattern.png')] bg-fixed">
+<div class="min-h-screen bg-black">
 	<div class="relative">
 		<div
 			class="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent opacity-60"

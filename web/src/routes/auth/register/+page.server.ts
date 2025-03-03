@@ -14,6 +14,9 @@ export const load: PageServerLoad = async (event) => {
 
 export const actions: Actions = {
 	register: async (event) => {
+		// TODO: remove once settings are added
+		return fail(503, { message: 'Registration is currently disabled' });
+
 		const formData = await event.request.formData();
 		const email = formData.get('email')?.toString();
 		const username = formData.get('username')?.toString();

@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { faq } from '$lib/server/db/schema';
 import type { Actions, PageServerLoad } from './$types';
-import { eq, desc, asc } from 'drizzle-orm';
+import { eq, asc } from 'drizzle-orm';
 import { fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
@@ -21,7 +21,8 @@ export const load: PageServerLoad = async (event) => {
 			.select({
 				id: faq.id,
 				question: faq.question,
-				answer: faq.answer
+				answer: faq.answer,
+				ranking: faq.ranking
 			})
 			.from(faq)
 			.where(eq(faq.id, editId))

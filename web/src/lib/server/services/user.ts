@@ -1,6 +1,7 @@
 import { db } from '$lib/server/db';
 import { hash, verify } from '@node-rs/argon2';
 import * as table from '$lib/server/db/schema';
+import { eq } from 'drizzle-orm';
 
 export class UserError extends Error {
 	constructor(
@@ -121,7 +122,7 @@ export class UserService {
 		await db
 			.update(table.user)
 			.set(updateData)
-			.where((users, { eq }) => eq(users.id, input.id));
+			.where(eq(table.user.id, input.id));
 	}
 
 	async deleteUser(id: string): Promise<void> {

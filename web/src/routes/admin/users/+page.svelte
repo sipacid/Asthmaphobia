@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
+	import UserDetailsModal from './UserDetailsModal.svelte';
 
 	let { data } = $props<{ data: PageData }>();
 
@@ -12,6 +13,10 @@
 	let username = $state(data.editUser?.username || '');
 	let email = $state(data.editUser?.email || '');
 	let role = $state<'user' | 'administrator'>(data.editUser?.role || 'user');
+
+	// User details modal state
+	let showDetailsModal = $state(false);
+	let selectedUserId = $state<string | null>(null);
 
 	// Update form when data changes
 	$effect(() => {
@@ -44,6 +49,16 @@
 		if (shouldDelete) {
 			(event.target as HTMLButtonElement).form?.submit();
 		}
+	}
+
+	function showUserDetails(userId: string) {
+		selectedUserId = userId;
+		showDetailsModal = true;
+	}
+
+	function closeModal() {
+		showDetailsModal = false;
+		selectedUserId = null;
 	}
 </script>
 
@@ -108,7 +123,7 @@
 						id="role"
 						name="role"
 						bind:value={role}
-						class="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+						class="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white hover:cursor-pointer focus:border-purple-500 focus:outline-none"
 					>
 						<option value="user">Standard User</option>
 						<option value="administrator">Administrator</option>
@@ -179,6 +194,12 @@
 								</td>
 								<td class="px-4 py-3">
 									<div class="flex items-center space-x-2">
+										<button
+											onclick={() => showUserDetails(user.id)}
+											class="rounded px-2 py-1 text-xs font-medium text-blue-400 hover:cursor-pointer hover:bg-zinc-800"
+										>
+											More Info
+										</button>
 										<a
 											href={`/admin/users?edit=${user.id}`}
 											class="rounded px-2 py-1 text-xs font-medium text-purple-400 hover:bg-zinc-800"
@@ -213,3 +234,8 @@
 		</div>
 	</div>
 </div>
+
+<!-- User Details Modal -->
+{#if showDetailsModal && selectedUserId}
+	<UserDetailsModal userId={selectedUserId} onClose={closeModal} />
+{/if}

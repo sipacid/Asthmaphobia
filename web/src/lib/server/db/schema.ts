@@ -20,6 +20,7 @@ export const userLogin = pgTable('user_login', {
 		.references(() => user.id),
 	ipAddress: text('ip_address').notNull(),
 	userAgent: text('user_agent').notNull(),
+	success: boolean('success').notNull(),
 	createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).defaultNow()
 });
 

@@ -27,7 +27,7 @@
 			<div class="rounded-xl border border-zinc-800 bg-zinc-900/70 p-6 shadow-md">
 				<div class="flex flex-col md:flex-row md:items-center md:justify-between">
 					<div class="mb-4 md:mb-0">
-						<h1 class="text-2xl font-bold text-white">Asthmaphobia Dashboard</h1>
+						<h1 class="text-2xl font-bold text-white">Asthmaphobia</h1>
 						<p class="text-zinc-400">
 							Current version: <span class="text-purple-400">v{data.currentVersion}</span>
 						</p>

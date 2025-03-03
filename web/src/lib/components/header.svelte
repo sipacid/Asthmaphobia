@@ -61,7 +61,7 @@
 					<li class="relative" id="profile-dropdown">
 						<button
 							onclick={toggleProfileMenu}
-							class="flex items-center space-x-1 rounded-full bg-zinc-800 px-3 py-1.5 text-sm transition hover:bg-zinc-700"
+							class="flex items-center space-x-1 rounded-full bg-zinc-800 px-3 py-1.5 text-sm transition hover:cursor-pointer hover:bg-zinc-700"
 						>
 							<div
 								class="flex h-6 w-6 items-center justify-center rounded-full bg-purple-700 text-xs"
@@ -144,10 +144,10 @@
 									</div>
 								</a>
 								<hr class="my-1 border-zinc-800" />
-								<form method="POST" action="/user?/logout" onsubmit={closeProfileMenu}>
+								<form method="POST" action="/user?/logout">
 									<button
 										type="submit"
-										class="flex w-full items-center px-4 py-2 text-left text-sm text-red-400 hover:bg-zinc-800"
+										class="flex w-full items-center px-4 py-2 text-left text-sm text-red-400 hover:cursor-pointer hover:bg-zinc-800"
 									>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"

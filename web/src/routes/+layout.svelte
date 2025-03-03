@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import Footer from '$lib/components/footer.svelte';
-	import Header from '$lib/components/header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Header from '$lib/components/Header.svelte';
 	import '../app.css';
 
 	let { data, children } = $props();

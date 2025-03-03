@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db';
-import { faq, posts, user } from '$lib/server/db/schema';
+import { faq, posts } from '$lib/server/db/schema';
 import { eq, gt, desc, asc } from 'drizzle-orm';
 import type { PageServerLoad } from './$types';
 
@@ -13,6 +13,8 @@ export const load: PageServerLoad = async () => {
 		.where(gt(faq.ranking, 0))
 		.orderBy(asc(faq.ranking))
 		.limit(4);
+
+    console.log('faqs', faqs);
 
 	const updates = await db
 		.select({

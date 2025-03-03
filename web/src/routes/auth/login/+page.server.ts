@@ -39,8 +39,9 @@ export const actions: Actions = {
 			return fail(400, { message: recaptchaResult.message || 'reCAPTCHA verification failed' });
 		}
 
+		let existingUser = null;
 		try {
-			const existingUser = await userService.getUserByEmail(email);
+			existingUser = await userService.getUserByEmail(email);
 			if (!existingUser) {
 				return fail(400, { message: 'Invalid email or password' });
 			}
@@ -56,9 +57,18 @@ export const actions: Actions = {
 			await db.insert(table.userLogin).values({
 				userId: existingUser.id,
 				ipAddress: ipAddress,
-				userAgent: event.request.headers.get('user-agent') || ''
+				userAgent: event.request.headers.get('user-agent') || '',
+				success: true
 			});
 		} catch (error) {
+			if (existingUser)
+				await db.insert(table.userLogin).values({
+					userId: existingUser.id,
+					ipAddress: ipAddress,
+					userAgent: event.request.headers.get('user-agent') || '',
+					success: true
+				});
+
 			if (error instanceof UserError) {
 				return fail(400, { message: error.message });
 			}
