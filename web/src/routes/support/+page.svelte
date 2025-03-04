@@ -194,7 +194,7 @@
 					</h2>
 
 					<div class="grid gap-4 md:grid-cols-2">
-						{#each commonIssues as issue, i}
+						{#each commonIssues as issue (issue.title)}
 							<div
 								class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-all hover:border-purple-600/30"
 							>
@@ -252,7 +252,10 @@
 						{:else}
 							<form
 								class="mx-auto max-w-2xl space-y-6"
-								onsubmit={(e: any) => e.preventDefault() || handleSubmit()}
+								onsubmit={(e) => {
+									e.preventDefault();
+									handleSubmit();
+								}}
 							>
 								{#if submitError}
 									<div class="rounded-lg bg-red-900/20 p-4 text-red-200">

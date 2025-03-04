@@ -1,23 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { type User } from '$lib/server/db/schema';
 
-	// Accept user data as a prop
-	let { user } = $props<{ user?: any | null }>();
+	let { user } = $props<{ user?: User | null }>();
 
-	// Local state for dropdown menu
 	let isProfileMenuOpen = $state(false);
 
-	// Function to toggle dropdown menu
 	const toggleProfileMenu = () => {
 		isProfileMenuOpen = !isProfileMenuOpen;
 	};
 
-	// Function to close dropdown menu
 	const closeProfileMenu = () => {
 		isProfileMenuOpen = false;
 	};
 
-	// Close dropdown when clicking outside
 	const handleClickOutside = (event: MouseEvent) => {
 		const dropdown = document.getElementById('profile-dropdown');
 		if (dropdown && !dropdown.contains(event.target as Node) && isProfileMenuOpen) {
@@ -25,7 +21,6 @@
 		}
 	};
 
-	// Setup click listener
 	onMount(() => {
 		document.addEventListener('click', handleClickOutside);
 		return () => document.removeEventListener('click', handleClickOutside);

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { type User, type UserLogin } from '$lib/server/db/schema';
 
 	let { userId, onClose } = $props();
 
-	let user: any = $state(null);
-	let userLogins: any[] = $state([]);
+	let user: User | null = $state(null);
+	let userLogins: UserLogin[] = $state([]);
 	let loading: boolean = $state(true);
 	let error: string | null = $state(null);
 
@@ -27,7 +28,7 @@
 
 			const result = await response.json();
 			console.log('API response:', result); // Debug response
-            console.log('data', result.data)
+			console.log('data', result.data);
 
 			if (result.type === 'success') {
 				user = result.data.user;
@@ -42,16 +43,6 @@
 			loading = false;
 		}
 	});
-
-	function formatDate(dateString: string | null | undefined) {
-		if (!dateString) return 'Unknown';
-		try {
-			return new Date(dateString).toLocaleString();
-		} catch (e) {
-			console.error('Error formatting date:', e);
-			return 'Invalid date';
-		}
-	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
@@ -71,13 +62,10 @@
 <div
 	class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
 	onclick={handleBackdropClick}
-	onkeydown={handleKeydown}
-	role="dialog"
-	aria-modal="true"
+	transition:fade={{ duration: 200 }}
 >
 	<div
 		class="w-full max-w-3xl rounded-lg border border-zinc-700 bg-zinc-900 shadow-xl"
-		onclick={(e: any) => e.stopPropagation()}
 		transition:fade={{ duration: 150 }}
 	>
 		<!-- Modal Header -->
@@ -86,7 +74,6 @@
 			<button
 				type="button"
 				onclick={onClose}
-				aria-label="Close modal"
 				class="ml-auto rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white"
 			>
 				<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,11 +126,11 @@
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Created At</p>
-							<p class="text-white">{formatDate(user.createdAt)}</p>
+							<p class="text-white">{new Date(user.createdAt!).toLocaleString()}</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Updated At</p>
-							<p class="text-white">{formatDate(user.updatedAt)}</p>
+							<p class="text-white">{new Date(user.updatedAt!).toLocaleString()}</p>
 						</div>
 					</div>
 				</div>
@@ -171,7 +158,7 @@
 										{#if login}
 											<tr class="border-b border-zinc-800">
 												<td class="px-4 py-2 text-sm text-zinc-300"
-													>{formatDate(login.createdAt)}</td
+													>{new Date(login.createdAt!).toLocaleString()}</td
 												>
 												<td class="px-4 py-2 text-sm text-zinc-300"
 													>{login.ipAddress || 'Unknown'}</td

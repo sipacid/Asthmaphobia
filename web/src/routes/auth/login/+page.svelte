@@ -19,7 +19,7 @@
 		const token = await getReCaptchaToken('login');
 		input.formData.append('recaptcha_token', token);
 
-		return async ({ update }: any) => {
+		return async ({ update }) => {
 			isSubmitting = false;
 			await update();
 		};

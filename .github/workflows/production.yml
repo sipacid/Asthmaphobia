@@ -3,6 +3,8 @@ name: Production CI/CD
 on:
   push:
     branches: ["main"]
+    paths:
+      - "web/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

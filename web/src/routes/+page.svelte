@@ -11,22 +11,22 @@
 		{
 			title: 'Visual Cheats',
 			description: 'ESP for ghosts, evidence, players, fuseboxes and detailed ghost info window',
-			icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`
+			icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
 		},
 		{
 			title: 'Movement Hacks',
 			description: 'NoClip through walls, Speed hacks, Teleport and Infinite Stamina',
-			icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`
+			icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
 		},
 		{
 			title: 'Player & Ghost Mods',
 			description: 'GodMode, Player Modifications, Ghost Control and Direct Ghost Interaction',
-			icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />`
+			icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01'
 		},
 		{
 			title: 'Game Exploits',
 			description: 'Anti-Kick, Custom Name, Door Control, and Reward Modifications',
-			icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />`
+			icon: 'M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7'
 		}
 	];
 
@@ -268,7 +268,7 @@
 				</h2>
 
 				<div class="grid gap-6 md:grid-cols-3">
-					{#each screenshots as screenshot, i}
+					{#each screenshots as screenshot (screenshot.src)}
 						<div
 							class="group relative overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 shadow-lg transition-all hover:border-purple-600/30"
 						>
@@ -311,7 +311,7 @@
 				</h2>
 
 				<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-					{#each features as feature, i}
+					{#each features as feature (feature.title)}
 						<div
 							class="group rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-purple-600/30 hover:bg-zinc-900/70"
 						>
@@ -325,7 +325,12 @@
 									viewBox="0 0 24 24"
 									stroke="currentColor"
 								>
-									{@html feature.icon}
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d={feature.icon}
+									></path>
 								</svg>
 							</div>
 							<h3 class="mb-2 text-lg font-medium text-white">{feature.title}</h3>
@@ -360,12 +365,12 @@
 				</h2>
 
 				<div class="grid gap-6 md:grid-cols-3">
-					{#each testimonials as testimonial, i}
+					{#each testimonials as testimonial (testimonial.author)}
 						<div
 							class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-transform hover:scale-[1.02]"
 						>
 							<div class="mb-4 flex text-yellow-500">
-								{#each Array(testimonial.rating) as _, i}
+								{#each Array(testimonial.rating) as rating (rating)}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										class="h-5 w-5"
@@ -406,14 +411,14 @@
 				</h2>
 
 				<div class="space-y-4">
-					{#each updates as update, i}
+					{#each updates as update (update.createdAt)}
 						<div
 							class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-all hover:border-purple-600/30"
 						>
 							<div class="mb-2 flex flex-wrap items-center justify-between gap-4">
 								<h3 class="text-lg font-medium text-white">{update.title}</h3>
 								<span class="text-sm text-zinc-500"
-									>{new Date(update.createdAt as any).toLocaleDateString()}</span
+									>{new Date(update.createdAt!).toLocaleDateString()}</span
 								>
 							</div>
 							<p class="text-zinc-400">{update.content}</p>
@@ -443,7 +448,7 @@
 				</h2>
 
 				<div class="space-y-4">
-					{#each faqs as faq}
+					{#each faqs as faq (faq.question)}
 						<FaqItem question={faq.question} answer={faq.answer} />
 					{/each}
 				</div>

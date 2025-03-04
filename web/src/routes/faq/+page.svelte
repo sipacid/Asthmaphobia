@@ -12,7 +12,7 @@
 		if (!query) return faqs;
 
 		return faqs.filter(
-			(faq: any) =>
+			(faq) =>
 				faq.question.toLowerCase().includes(query) || faq.answer.toLowerCase().includes(query)
 		);
 	}
@@ -82,7 +82,7 @@
 			<section>
 				{#if getFilteredFaqs().length > 0}
 					<div class="space-y-4">
-						{#each getFilteredFaqs() as faq}
+						{#each getFilteredFaqs() as faq (faq)}
 							<FaqItem question={faq.question} answer={faq.answer} />
 						{/each}
 					</div>

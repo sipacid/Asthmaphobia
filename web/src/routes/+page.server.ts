@@ -14,7 +14,7 @@ export const load: PageServerLoad = async () => {
 		.orderBy(asc(faq.ranking))
 		.limit(4);
 
-    console.log('faqs', faqs);
+	console.log('faqs', faqs);
 
 	const updates = await db
 		.select({

@@ -20,7 +20,7 @@
 		const token = await getReCaptchaToken('register');
 		input.formData.append('recaptcha_token', token);
 
-		return async ({ update }: any) => {
+		return async ({ update }) => {
 			isSubmitting = false;
 			await update();
 		};

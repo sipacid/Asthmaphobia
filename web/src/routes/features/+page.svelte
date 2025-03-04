@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
 	// Visuals Category
@@ -9,7 +9,7 @@
 			name: 'Ghost ESP',
 			description:
 				'See ghosts through walls and across the map with customizable colors and distance indicators. Never be surprised by a ghost again.',
-			icon: `<path d="M12 2c-4.4 0-8 3.6-8 8 0 5.3 7 11.5 7.3 11.8.2.1.5.2.7.2.2 0 .5-.1.7-.2.3-.3 7.3-6.5 7.3-11.8 0-4.4-3.6-8-8-8zm0 17.5c-2.1-2-6-6.3-6-9.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 3.2-3.9 7.5-6 9.5z"/><circle cx="12" cy="10" r="2.5" />`,
+			iconPath: `M12 2c-4.4 0-8 3.6-8 8 0 5.3 7 11.5 7.3 11.8.2.1.5.2.7.2.2 0 .5-.1.7-.2.3-.3 7.3-6.5 7.3-11.8 0-4.4-3.6-8-8-8zm0 17.5c-2.1-2-6-6.3-6-9.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 3.2-3.9 7.5-6 9.5z M12 10a2.5 2.5 0 100-5 2.5 2.5 0 000 5z`,
 			key_capabilities: [
 				'Display ghost position through walls and objects',
 				'Show distance to ghost in meters',
@@ -21,7 +21,7 @@
 			name: 'Player ESP',
 			description:
 				'Track your teammates through walls with player ESP. Displays player names, health status, and distance.',
-			icon: `<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm6 5H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z"/>`,
+			iconPath: `M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm6 5H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z`,
 			key_capabilities: [
 				'See teammates through walls',
 				'Display player health status',
@@ -33,7 +33,7 @@
 			name: 'Evidence ESP',
 			description:
 				'Locate all evidence items instantly, even through walls. Helps you gather evidence quickly without endless searching.',
-			icon: `<path d="M14 11V8c0-1.11-.89-2-2-2h-1V3H9v3H8c-1.11 0-2 .89-2 2v3H3v7c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-7h-7zm-9 7c-.55 0-1-.45-1-1v-5h2v6H5zm14-1c0 .55-.45 1-1 1h-9v-6h10v5z"/><circle cx="8.5" cy="14.5" r="1.5" /><circle cx="15.5" cy="14.5" r="1.5" />`,
+			iconPath: `M14 11V8c0-1.11-.89-2-2-2h-1V3H9v3H8c-1.11 0-2 .89-2 2v3H3v7c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-7h-7zm-9 7c-.55 0-1-.45-1-1v-5h2v6H5zm14-1c0 .55-.45 1-1 1h-9v-6h10v5z M8.5 14.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z M15.5 14.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z`,
 			key_capabilities: [
 				'See all evidence through walls',
 				'Categorized by evidence type',
@@ -45,7 +45,7 @@
 			name: 'Fusebox ESP',
 			description:
 				'Easily locate fuseboxes throughout the map. Never stumble around in the dark looking for power again.',
-			icon: `<path d="M7 21h10v-1H7v1zM7 3v1h10V3H7z"/><path d="M17 6H7c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 10H8c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1z"/><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>`,
+			iconPath: `M7 21h10v-1H7v1zM7 3v1h10V3H7z M17 6H7c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 10H8c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1z M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z`,
 			key_capabilities: [
 				'Display fusebox locations through walls',
 				'Show power status (on/off)',
@@ -57,7 +57,7 @@
 			name: 'Ghost Info Window',
 			description:
 				'Detailed real-time information about the ghost including type, behavior, current activity, and hunting status.',
-			icon: `<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path d="M14.5 11.5c0 2-2.5 3.5-2.5 5h-2c0-1.5-2.5-3-2.5-5C7.5 9.57 9.07 8 11 8s3.5 1.57 3.5 3.5zm-2.5 6h-2v-2h2v2z"/>`,
+			iconPath: `M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z M14.5 11.5c0 2-2.5 3.5-2.5 5h-2c0-1.5-2.5-3-2.5-5C7.5 9.57 9.07 8 11 8s3.5 1.57 3.5 3.5zm-2.5 6h-2v-2h2v2z`,
 			key_capabilities: [
 				'Real-time ghost type identification',
 				'Hunt countdown timer',
@@ -68,7 +68,7 @@
 		{
 			name: 'Watermark',
 			description: 'Subtle, customizable watermark to show cheat version and status.',
-			icon: `<path d="M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z"/>`,
+			iconPath: `M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z`,
 			key_capabilities: [
 				'Customizable position',
 				'Version information display',
@@ -84,7 +84,7 @@
 			name: 'NoClip',
 			description:
 				'Walk through walls, doors, and any objects. Explore the map freely without physical constraints.',
-			icon: `<path d="M17 20.41L18.41 19 15 15.59 13.59 17 17 20.41zM7.5 8H11v5.59L5.59 19 7 20.41l6-6V8h3.5L12 3.5 7.5 8z"/>`,
+			iconPath: `M17 20.41L18.41 19 15 15.59 13.59 17 17 20.41zM7.5 8H11v5.59L5.59 19 7 20.41l6-6V8h3.5L12 3.5 7.5 8z`,
 			key_capabilities: [
 				'Pass through all physical obstacles',
 				'Adjustable clipping speed',
@@ -96,7 +96,7 @@
 			name: 'Speed Hack',
 			description:
 				'Dramatically increase your movement speed. Configure multiple speed presets for different situations.',
-			icon: `<path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/>`,
+			iconPath: `M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z`,
 			key_capabilities: [
 				'Multiple speed multiplier presets (2x, 3x, 5x, 10x)',
 				'Configurable acceleration',
@@ -108,7 +108,7 @@
 			name: 'Teleport',
 			description:
 				'Instantly teleport to locations of interest, including ghosts, evidence, team members, or custom coordinates.',
-			icon: `<path d="M5 9h14v6h-14z"/><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/><path d="M15 15l-6-2.5V10l6-2.5z"/>`,
+			iconPath: `M5 9h14v6h-14z M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z M15 15l-6-2.5V10l6-2.5z`,
 			key_capabilities: [
 				'Teleport to ghost location',
 				'Teleport to team members',
@@ -120,7 +120,7 @@
 			name: 'Infinite Stamina',
 			description:
 				'Never run out of stamina. Sprint indefinitely without slowing down or stopping to catch your breath.',
-			icon: `<path d="M17 12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/><path d="M4 9h5c.55 0 1 .45 1 1v5c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-5c0-.55.45-1 1-1z"/><path d="M12 8V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h2v2c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2h-4z"/>`,
+			iconPath: `M17 12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z M4 9h5c.55 0 1 .45 1 1v5c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-5c0-.55.45-1 1-1z M12 8V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h2v2c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2h-4z`,
 			key_capabilities: [
 				'Unlimited sprint duration',
 				'No stamina drain',
@@ -136,7 +136,7 @@
 			name: 'God Mode',
 			description:
 				'Complete invulnerability to ghost attacks and environmental damage. Play without fear of death.',
-			icon: `<path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/>`,
+			iconPath: `M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z`,
 			key_capabilities: [
 				'Immunity to ghost attacks',
 				'Sanity protection',
@@ -148,7 +148,7 @@
 			name: 'Player Modifier',
 			description:
 				'Modify player stats including sanity, speed, reach distance, and more. Fully customize your character for optimal gameplay.',
-			icon: `<path d="M17.66 7.93L12 2.27 6.34 7.93c-3.12 3.12-3.12 8.19 0 11.31C7.9 20.8 9.95 21.58 12 21.58c2.05 0 4.1-.78 5.66-2.34 3.12-3.12 3.12-8.19 0-11.31zM12 19.59c-1.6 0-3.11-.62-4.24-1.76C6.62 16.69 6 15.19 6 13.59s.62-3.11 1.76-4.24L12 5.1v14.49z"/>`,
+			iconPath: `M17.66 7.93L12 2.27 6.34 7.93c-3.12 3.12-3.12 8.19 0 11.31C7.9 20.8 9.95 21.58 12 21.58c2.05 0 4.1-.78 5.66-2.34 3.12-3.12 3.12-8.19 0-11.31zM12 19.59c-1.6 0-3.11-.62-4.24-1.76C6.62 16.69 6 15.19 6 13.59s.62-3.11 1.76-4.24L12 5.1v14.49z`,
 			key_capabilities: [
 				'Adjust sanity levels',
 				'Modify player size/hitbox',
@@ -164,7 +164,7 @@
 			name: 'Ghost Modifier',
 			description:
 				'Control and modify ghost behavior, speed, visibility and other attributes. Make ghosts more predictable or more challenging.',
-			icon: `<path d="M12 2c-5.33 4-8 8.27-8 12 0 4.42 3.58 8 8 8s8-3.58 8-8c0-3.73-2.67-8-8-12zm0 18c-3.31 0-6-2.69-6-6 0-1 0-3 4-3 2 0 2 4 2 4s.67-4 4-4c3 0 4 2 4 3 0 3.31-2.69 6-6 6z"/>`,
+			iconPath: `M12 2c-5.33 4-8 8.27-8 12 0 4.42 3.58 8 8 8s8-3.58 8-8c0-3.73-2.67-8-8-12zm0 18c-3.31 0-6-2.69-6-6 0-1 0-3 4-3 2 0 2 4 2 4s.67-4 4-4c3 0 4 2 4 3 0 3.31-2.69 6-6 6z`,
 			key_capabilities: [
 				'Adjust ghost speed',
 				'Modify ghost visibility',
@@ -176,7 +176,7 @@
 			name: 'Ghost Interactor',
 			description:
 				'Directly interact with the ghost to force events, hunts, or specific behaviors. Control the ghost like a puppet master.',
-			icon: `<path d="M18 11l5-5-1.41-1.41L16 10.17V3h-2v7.17L8.41 4.59 7 6l5 5-5 5 1.41 1.41L14 11.83V19h2v-7.17l5.59 5.59L23 16l-5-5z"/>`,
+			iconPath: `M18 11l5-5-1.41-1.41L16 10.17V3h-2v7.17L8.41 4.59 7 6l5 5-5 5 1.41 1.41L14 11.83V19h2v-7.17l5.59 5.59L23 16l-5-5z`,
 			key_capabilities: [
 				'Force ghost events',
 				'Trigger or stop hunts',
@@ -192,7 +192,7 @@
 			name: 'Cursed Item Modifier',
 			description:
 				'Modify and control cursed items behavior. Use ouija boards without sanity loss, control monkey paws, and more.',
-			icon: `<path d="M11 14h2v-3h3V9h-3V6h-2v3H8v2h3z"/><path d="M21 5h-3.17l-1.24-1.35c-.37-.41-.91-.65-1.47-.65H8.88c-.56 0-1.1.24-1.48.65L6.17 5H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-3 12H6c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v8c0 .55-.45 1-1 1z"/>`,
+			iconPath: `M11 14h2v-3h3V9h-3V6h-2v3H8v2h3z M21 5h-3.17l-1.24-1.35c-.37-.41-.91-.65-1.47-.65H8.88c-.56 0-1.1.24-1.48.65L6.17 5H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-3 12H6c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v8c0 .55-.45 1-1 1z`,
 			key_capabilities: [
 				'Use cursed items without sanity drain',
 				'Unlimited cursed item uses',
@@ -204,7 +204,7 @@
 			name: 'Force Card',
 			description:
 				'Force specific tarot card draws from the deck. Get the exact cards you want every time.',
-			icon: `<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H8c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1z"/><path d="M10 7l5 5-5 5V7z"/>`,
+			iconPath: `M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H8c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1z M10 7l5 5-5 5V7z`,
 			key_capabilities: [
 				'Select specific tarot cards to draw',
 				'Preview upcoming cards',
@@ -220,7 +220,7 @@
 			name: 'Anti-Kick',
 			description:
 				'Prevent being kicked from lobbies. Stay in the game even if the host tries to remove you.',
-			icon: `<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>`,
+			iconPath: `M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z`,
 			key_capabilities: [
 				'Block kick attempts',
 				'Prevent lobby disconnection',
@@ -232,7 +232,7 @@
 			name: 'Custom Name',
 			description:
 				'Use any name in the game, including special characters, colors, and styles that would normally be restricted.',
-			icon: `<path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/>`,
+			iconPath: `M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z`,
 			key_capabilities: [
 				'Use special characters',
 				'Apply custom colors to name',
@@ -244,7 +244,7 @@
 			name: 'Door Modifier',
 			description:
 				'Control all doors remotely. Lock or unlock doors, open or close them from anywhere in the map.',
-			icon: `<path d="M19 19V5c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v14H3v2h18v-2h-2zm-2 0H7V5h10v14z"/><path d="M9 11h2v2H9z"/>`,
+			iconPath: `M19 19V5c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v14H3v2h18v-2h-2zm-2 0H7V5h10v14z M9 11h2v2H9z`,
 			key_capabilities: [
 				'Remotely open/close any door',
 				'Lock doors during hunts',
@@ -256,7 +256,7 @@
 			name: 'Free Mouse Look',
 			description:
 				'Look around freely while holding items or during events when normal camera movement is restricted.',
-			icon: `<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>`,
+			iconPath: `M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z`,
 			key_capabilities: [
 				'Free camera rotation while carrying items',
 				'Look around during immobilizing events',
@@ -268,7 +268,7 @@
 			name: 'Leave People',
 			description:
 				'Leave the mission while keeping your friends stranded in the game. Great for trolling or emergency exits.',
-			icon: `<path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>`,
+			iconPath: `M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z`,
 			key_capabilities: [
 				'Exit mission while the team remains',
 				'Preserve items and rewards on exit',
@@ -279,7 +279,7 @@
 		{
 			name: 'Reward Modifier',
 			description: 'Increase mission rewards. Get more cash and XP after completing objectives.',
-			icon: `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>`,
+			iconPath: `M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z`,
 			key_capabilities: [
 				'Multiply cash rewards',
 				'Increase XP gains',
@@ -302,7 +302,7 @@
 	let selectedFeature = $state(null);
 	let showModal = $state(false);
 
-	function openFeatureModal(feature: any) {
+	function openFeatureModal(feature) {
 		selectedFeature = feature;
 		showModal = true;
 	}
@@ -315,7 +315,7 @@
 	}
 
 	// Handle clicking outside modal to close
-	function handleModalBackgroundClick(event: any) {
+	function handleModalBackgroundClick(event) {
 		if (event.target === event.currentTarget) {
 			closeFeatureModal();
 		}
@@ -378,19 +378,19 @@
 							stroke-linecap="round"
 							stroke-linejoin="round"
 						>
-							{@html (selectedFeature as any).icon}
+							<path d={selectedFeature.iconPath} />
 						</svg>
 					</div>
 					<div>
-						<h3 class="mb-2 text-xl font-bold text-white">{(selectedFeature as any).name}</h3>
-						<p class="mb-4 text-zinc-300">{(selectedFeature as any).description}</p>
+						<h3 class="mb-2 text-xl font-bold text-white">{selectedFeature.name}</h3>
+						<p class="mb-4 text-zinc-300">{selectedFeature.description}</p>
 					</div>
 				</div>
 
 				<div class="mt-6 mb-4">
 					<h4 class="mb-3 font-medium text-purple-400">Key Capabilities</h4>
 					<ul class="space-y-1">
-						{#each (selectedFeature as any).key_capabilities as capability}
+						{#each selectedFeature.key_capabilities as capability (capability)}
 							<li class="flex items-start">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -525,7 +525,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-					{#each visuals as feature}
+					{#each visuals as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -544,7 +544,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">
@@ -601,7 +601,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-					{#each movement as feature}
+					{#each movement as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -620,7 +620,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">
@@ -677,7 +677,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-					{#each players as feature}
+					{#each players as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -696,7 +696,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">
@@ -753,7 +753,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-					{#each ghost as feature}
+					{#each ghost as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -772,7 +772,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">
@@ -829,7 +829,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-					{#each cursedItems as feature}
+					{#each cursedItems as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -848,7 +848,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">
@@ -905,7 +905,7 @@
 				</p>
 
 				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-					{#each miscellaneous as feature}
+					{#each miscellaneous as feature (feature.name)}
 						<button
 							class="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:border-purple-600/30 hover:bg-zinc-900/70"
 							onclick={() => openFeatureModal(feature)}
@@ -924,7 +924,7 @@
 									stroke-linecap="round"
 									stroke-linejoin="round"
 								>
-									{@html feature.icon}
+									<path d={feature.iconPath} />
 								</svg>
 							</div>
 							<div class="relative z-10">

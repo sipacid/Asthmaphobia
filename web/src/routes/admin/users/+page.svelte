@@ -31,7 +31,7 @@
 	});
 
 	function handleSubmit() {
-		return async ({ update, result }: any) => {
+		return async ({ update, result }) => {
 			if (result.data.success) {
 				showForm = false;
 				await goto('/admin/users', { replaceState: true });

@@ -97,7 +97,7 @@ export class UserService {
 			throw new UserError(`User with id ${input.id} not found`, 'NOT_FOUND');
 		}
 
-		const updateData: any = { id: input.id };
+		const updateData: UserUpdateInput = { id: input.id };
 
 		if (input.email !== undefined) {
 			this.validateEmail(input.email);
@@ -119,10 +119,7 @@ export class UserService {
 			updateData.role = input.role;
 		}
 
-		await db
-			.update(table.user)
-			.set(updateData)
-			.where(eq(table.user.id, input.id));
+		await db.update(table.user).set(updateData).where(eq(table.user.id, input.id));
 	}
 
 	async deleteUser(id: string): Promise<void> {
@@ -131,7 +128,7 @@ export class UserService {
 			throw new UserError(`User with id ${id} not found`, 'NOT_FOUND');
 		}
 
-		await db.delete(table.user).where((users, { eq }) => eq(users.id, id));
+		await db.delete(table.user).where(eq(table.user.id, id));
 	}
 
 	async changePassword(id: string, currentPassword: string, newPassword: string): Promise<void> {
@@ -148,10 +145,7 @@ export class UserService {
 		// Hash and update
 		const passwordHash = await this.hashPassword(newPassword);
 
-		await db
-			.update(table.user)
-			.set({ passwordHash })
-			.where((users, { eq }) => eq(users.id, id));
+		await db.update(table.user).set({ passwordHash }).where(eq(table.user.id, id));
 	}
 
 	async isUsernameAlreadyInUse(username: string): Promise<boolean> {

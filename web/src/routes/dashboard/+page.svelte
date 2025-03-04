@@ -193,7 +193,7 @@
 									<div class="border-t border-zinc-800 px-4 py-3">
 										{#if post.content.includes('\n') || post.content.includes('- ')}
 											<ul class="space-y-2 pl-1">
-												{#each parseContent(post.content) as item}
+												{#each parseContent(post.content) as item (item)}
 													<li class="flex items-start">
 														<svg
 															xmlns="http://www.w3.org/2000/svg"

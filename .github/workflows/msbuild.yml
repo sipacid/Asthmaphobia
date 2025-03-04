@@ -3,8 +3,12 @@ name: MSBuild
 on:
   push:
     branches: ["main"]
+    paths:
+      - "cheat/**"
   pull_request:
     branches: ["main"]
+    paths:
+      - "cheat/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
