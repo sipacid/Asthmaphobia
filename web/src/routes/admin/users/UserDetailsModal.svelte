@@ -27,9 +27,6 @@
 			});
 
 			const result = await response.json();
-			console.log('API response:', result); // Debug response
-			console.log('data', result.data);
-
 			if (result.type === 'success') {
 				user = result.data.user;
 				userLogins = result.data.userLogins || [];

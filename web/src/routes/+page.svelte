@@ -40,17 +40,17 @@
 
 	const screenshots = [
 		{
-			src: '/images/img.webp',
+			src: '/images/img-1.webp',
 			alt: 'Soon TM',
 			caption: 'Soon TM'
 		},
 		{
-			src: '/images/img.webp',
+			src: '/images/img-2.webp',
 			alt: 'Soon TM',
 			caption: 'Soon TM'
 		},
 		{
-			src: '/images/img.webp',
+			src: '/images/img-3.webp',
 			alt: 'Soon TM',
 			caption: 'Soon TM'
 		}
@@ -370,7 +370,7 @@
 							class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-transform hover:scale-[1.02]"
 						>
 							<div class="mb-4 flex text-yellow-500">
-								{#each Array(testimonial.rating) as rating (rating)}
+								{#each Array.from({ length: testimonial.rating }, (_, i) => i) as i (testimonial.author + '-star-' + i)}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										class="h-5 w-5"
