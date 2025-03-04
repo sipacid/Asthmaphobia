@@ -71,7 +71,15 @@ export class UserService {
 
 	async getUserByID(id: string): Promise<table.User> {
 		const user = await db.query.user.findFirst({
-			where: (users, { eq }) => eq(users.id, id)
+			where: (users, { eq }) => eq(users.id, id),
+			columns: {
+				id: true,
+				email: true,
+				username: true,
+				role: true,
+				createdAt: true,
+				updatedAt: true
+			}
 		});
 
 		if (!user) {

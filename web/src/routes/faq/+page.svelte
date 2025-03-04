@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FaqItem from '$lib/components/FaqItem.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import type { PageData } from './$types';
 
 	let { data } = $props<{ data: PageData }>();
@@ -18,10 +19,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>FAQ - Asthmaphobia</title>
-	<meta name="description" content="Frequently Asked Questions about Asthmaphobia cheat tool" />
-</svelte:head>
+<Seo
+	title="FAQ - Asthmaphobia"
+	description="Frequently asked questions about Asthmaphobia cheat tool. Find answers to common questions about features, usage, and troubleshooting."
+	keywords="phasmophobia FAQ, asthmaphobia help, phasmophobia cheat FAQ, game cheat questions"
+/>
 
 <div class="min-h-screen bg-black">
 	<div class="relative">

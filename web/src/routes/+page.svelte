@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { PageServerData } from './$types';
 	import FaqItem from '$lib/components/FaqItem.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data }: { data: PageServerData } = $props();
 	const faqs = data.faqs;
@@ -64,14 +65,30 @@
 			heroAnimated = true;
 		}, 300);
 	});
+
+	// Enhanced SEO metadata
+	const pageSeo = {
+		title: 'Asthmaphobia - Advanced Phasmophobia Cheat Software',
+		description:
+			'The ultimate Phasmophobia cheat with ESP, NoClip, Ghost Control, and 30+ advanced features. Undetected, constantly updated, and feature-rich.',
+		keywords:
+			'phasmophobia hack, asthmaphobia cheat, esp hack, noclip, ghost control, game cheats, ghost hunting tools',
+		ogImage: '/images/og-asthmaphobia.jpg'
+	};
 </script>
 
+<Seo
+	title={pageSeo.title}
+	description={pageSeo.description}
+	keywords={pageSeo.keywords}
+	ogImage={pageSeo.ogImage}
+/>
+
 <svelte:head>
-	<title>Asthmaphobia - Advanced Phasmophobia Cheat</title>
-	<meta
-		name="description"
-		content="The ultimate cheat tool for Phasmophobia with ESP, NoClip and more"
-	/>
+	<!-- Preload key images for performance -->
+	<link rel="preload" href="/images/img-1.webp" as="image" />
+	<link rel="preload" href="/images/img-2.webp" as="image" />
+	<link rel="preload" href="/images/img-3.webp" as="image" />
 </svelte:head>
 
 <div class="min-h-screen bg-black">
@@ -81,7 +98,7 @@
 		></div>
 		<div class="relative z-10 container mx-auto max-w-6xl px-4 py-8">
 			<!-- Hero Section -->
-			<section class="pt-16 pb-20">
+			<section class="pt-16 pb-20" aria-labelledby="hero-heading">
 				<div
 					class="relative overflow-hidden rounded-3xl border border-zinc-800/40 bg-zinc-900/70 p-8 shadow-xl backdrop-blur-md md:p-12"
 				>
@@ -106,6 +123,7 @@
 							</div>
 
 							<h1
+								id="hero-heading"
 								class="mb-4 text-5xl font-bold text-white transition-all duration-700 md:text-6xl"
 								class:scale-105={heroAnimated}
 							>
@@ -142,6 +160,7 @@
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -165,6 +184,7 @@
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -188,6 +208,7 @@
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
+										aria-hidden="true"
 									>
 										<path
 											stroke-linecap="round"
@@ -213,6 +234,7 @@
 								<a
 									href="/dashboard"
 									class="group relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-3.5 text-center font-medium text-white shadow-lg transition-all hover:from-purple-500 hover:to-indigo-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none"
+									aria-label="Download latest version of Asthmaphobia"
 								>
 									<div class="relative z-10 flex items-center justify-center">
 										<svg
@@ -221,6 +243,7 @@
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
+											aria-hidden="true"
 										>
 											<path
 												stroke-linecap="round"
@@ -238,6 +261,7 @@
 								<a
 									href="/features"
 									class="rounded-xl border border-purple-700/50 bg-purple-900/10 px-8 py-3.5 text-center font-medium text-purple-300 backdrop-blur-sm transition-all hover:bg-purple-900/30 hover:text-purple-200 focus:ring-2 focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-black focus:outline-none"
+									aria-label="View all Asthmaphobia features"
 								>
 									View All Features
 								</a>
@@ -248,14 +272,15 @@
 			</section>
 
 			<!-- Screenshots Showcase -->
-			<section class="mb-16">
-				<h2 class="mb-8 flex items-center text-2xl font-bold text-white">
+			<section class="mb-16" aria-labelledby="screenshots-heading">
+				<h2 id="screenshots-heading" class="mb-8 flex items-center text-2xl font-bold text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 h-6 w-6 text-purple-500"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -278,6 +303,9 @@
 							<img
 								src={screenshot.src}
 								alt={screenshot.alt}
+								width="480"
+								height="270"
+								loading="lazy"
 								class="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"
 							/>
 							<div
@@ -291,14 +319,15 @@
 			</section>
 
 			<!-- Features Section -->
-			<section class="mb-16">
-				<h2 class="mb-8 flex items-center text-2xl font-bold text-white">
+			<section class="mb-16" aria-labelledby="features-heading">
+				<h2 id="features-heading" class="mb-8 flex items-center text-2xl font-bold text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 h-6 w-6 text-purple-500"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -324,6 +353,7 @@
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
+									aria-hidden="true"
 								>
 									<path
 										stroke-linecap="round"
@@ -345,14 +375,15 @@
 			</section>
 
 			<!-- Testimonials -->
-			<section class="mb-16">
-				<h2 class="mb-8 flex items-center text-2xl font-bold text-white">
+			<section class="mb-16" aria-labelledby="testimonials-heading">
+				<h2 id="testimonials-heading" class="mb-8 flex items-center text-2xl font-bold text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 h-6 w-6 text-purple-500"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path
 							stroke-linecap="round"
@@ -369,13 +400,17 @@
 						<div
 							class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-transform hover:scale-[1.02]"
 						>
-							<div class="mb-4 flex text-yellow-500">
+							<div
+								class="mb-4 flex text-yellow-500"
+								aria-label="{testimonial.rating} out of 5 stars"
+							>
 								{#each Array.from({ length: testimonial.rating }, (_, i) => i) as i (testimonial.author + '-star-' + i)}
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										class="h-5 w-5"
 										viewBox="0 0 20 20"
 										fill="currentColor"
+										aria-hidden="true"
 									>
 										<path
 											d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
@@ -383,16 +418,20 @@
 									</svg>
 								{/each}
 							</div>
-							<p class="mb-4 text-zinc-300 italic">"‎{testimonial.content}"</p>
-							<p class="text-sm font-medium text-purple-400">— {testimonial.author}</p>
+							<blockquote>
+								<p class="mb-4 text-zinc-300 italic">"‎{testimonial.content}"</p>
+								<cite class="text-sm font-medium text-purple-400 not-italic"
+									>— {testimonial.author}</cite
+								>
+							</blockquote>
 						</div>
 					{/each}
 				</div>
 			</section>
 
 			<!-- Updates Section -->
-			<section class="mb-16">
-				<h2 class="mb-8 flex items-center text-2xl font-bold text-white">
+			<section class="mb-16" aria-labelledby="updates-heading">
+				<h2 id="updates-heading" class="mb-8 flex items-center text-2xl font-bold text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 h-6 w-6 text-purple-500"
@@ -412,24 +451,26 @@
 
 				<div class="space-y-4">
 					{#each updates as update (update.createdAt)}
-						<div
+						<article
 							class="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 backdrop-blur-sm transition-all hover:border-purple-600/30"
 						>
-							<div class="mb-2 flex flex-wrap items-center justify-between gap-4">
+							<header class="mb-2 flex flex-wrap items-center justify-between gap-4">
 								<h3 class="text-lg font-medium text-white">{update.title}</h3>
-								<span class="text-sm text-zinc-500"
-									>{new Date(update.createdAt!).toLocaleDateString()}</span
+								<time
+									datetime={new Date(update.createdAt!).toISOString()}
+									class="text-sm text-zinc-500"
+									>{new Date(update.createdAt!).toLocaleDateString()}</time
 								>
-							</div>
+							</header>
 							<p class="text-zinc-400">{update.content}</p>
-						</div>
+						</article>
 					{/each}
 				</div>
 			</section>
 
 			<!-- FAQ Section -->
-			<section class="mb-16">
-				<h2 class="mb-8 flex items-center text-2xl font-bold text-white">
+			<section class="mb-16" aria-labelledby="faq-heading">
+				<h2 id="faq-heading" class="mb-8 flex items-center text-2xl font-bold text-white">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="mr-2 h-6 w-6 text-purple-500"
@@ -447,9 +488,11 @@
 					Frequently Asked Questions
 				</h2>
 
-				<div class="space-y-4">
+				<div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
 					{#each faqs as faq (faq.question)}
-						<FaqItem question={faq.question} answer={faq.answer} />
+						<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+							<FaqItem question={faq.question} answer={faq.answer} />
+						</div>
 					{/each}
 				</div>
 			</section>

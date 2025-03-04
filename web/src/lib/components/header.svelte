@@ -3,7 +3,6 @@
 	import { type User } from '$lib/server/db/schema';
 
 	let { user } = $props<{ user?: User | null }>();
-
 	let isProfileMenuOpen = $state(false);
 
 	const toggleProfileMenu = () => {

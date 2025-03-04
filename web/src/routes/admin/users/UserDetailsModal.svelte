@@ -1,69 +1,119 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { enhance } from '$app/forms';
 	import { fade } from 'svelte/transition';
-	import { type User, type UserLogin } from '$lib/server/db/schema';
+	import type { ActionResult, SubmitFunction } from '@sveltejs/kit';
 
-	let { userId, onClose } = $props();
+	// Define proper types for the user data
+	interface UserData {
+		id: string;
+		username: string;
+		email: string;
+		role: string;
+		createdAt?: string;
+		updatedAt?: string;
+	}
 
-	let user: User | null = $state(null);
-	let userLogins: UserLogin[] = $state([]);
-	let loading: boolean = $state(true);
-	let error: string | null = $state(null);
+	interface LoginRecord {
+		id: string;
+		userId: string;
+		ipAddress: string | null;
+		userAgent: string | null;
+		success: boolean;
+		createdAt?: string;
+	}
 
-	// Fetch user details on mount
-	onMount(async () => {
+	export let userId: string;
+	export let onClose: () => void;
+
+	// Define state with proper types
+	let loading = true;
+	let error: string | null = null;
+	let userData: UserData | null = null;
+	let loginHistory: LoginRecord[] = [];
+
+	// Enhanced form submission handler with proper typing
+	const handleEnhance: SubmitFunction = () => {
 		loading = true;
 		error = null;
 
-		try {
-			// Create form data for the request
-			const formData = new FormData();
-			formData.append('userId', userId);
+		return async ({ result }) => {
+			handleResult(result);
+		};
+	};
 
-			// Fetch user details
-			const response = await fetch('?/getUserDetails', {
-				method: 'POST',
-				body: formData
-			});
+	// Separate function to handle the form result
+	function handleResult(result: ActionResult) {
+		loading = false;
 
-			const result = await response.json();
-			if (result.type === 'success') {
-				user = result.data.user;
-				userLogins = result.data.userLogins || [];
+		if (result.type === 'success') {
+			const data = result.data;
+
+			if (data.success && data.user) {
+				userData = data.user as UserData;
+				loginHistory = (data.userLogins || []) as LoginRecord[];
 			} else {
-				error = result.error || 'Failed to fetch user details';
+				error = 'Invalid response format';
+				console.error('Unexpected response structure:', data);
 			}
+		} else if (result.type === 'failure') {
+			error = result.data?.error || 'An error occurred while fetching user data';
+		} else {
+			error = 'Unknown response type';
+		}
+	}
+
+	// More robust auto-submit function
+	function autoSubmit(node: HTMLFormElement) {
+		const submitForm = () => {
+			try {
+				node.requestSubmit();
+			} catch (err) {
+				console.error('Error auto-submitting form:', err);
+				error = 'Failed to load user details automatically';
+				loading = false;
+			}
+		};
+
+		// Use setTimeout for better browser compatibility than requestAnimationFrame
+		setTimeout(submitForm, 0);
+
+		return {
+			destroy() {} // Cleanup function (empty in this case)
+		};
+	}
+
+	// Format date with proper fallback
+	function formatDate(dateString?: string): string {
+		if (!dateString) return 'N/A';
+
+		try {
+			return new Date(dateString).toLocaleString();
 		} catch (err) {
-			console.error('Error fetching user details:', err);
-			error = 'Failed to load user details. Please try again.';
-		} finally {
-			loading = false;
-		}
-	});
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
-			onClose();
+			console.error('Invalid date format:', dateString, err);
+			return 'Invalid Date';
 		}
 	}
 
-	function handleBackdropClick(event: MouseEvent) {
-		if (event.target === event.currentTarget) {
-			onClose();
-		}
-	}
+	// Memoize role class to avoid recalculation
+	$: roleClass =
+		userData?.role === 'administrator'
+			? 'bg-purple-900/20 text-purple-400'
+			: 'bg-blue-900/20 text-blue-400';
+
+	$: roleLabel = userData?.role === 'administrator' ? 'Administrator' : 'Standard User';
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={(e) => e.key === 'Escape' && onClose()} />
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
+	class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-4"
+	onclick={() => onClose()}
+	transition:fade={{ duration: 200 }}
 	role="dialog"
 	aria-modal="true"
-	class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-	onclick={handleBackdropClick}
-	onkeydown={(e) => e.key === 'Escape' && onClose()}
-	transition:fade={{ duration: 200 }}
+	aria-labelledby="modal-title"
 >
 	<div
 		class="w-full max-w-3xl rounded-lg border border-zinc-700 bg-zinc-900 shadow-xl"
@@ -71,12 +121,12 @@
 	>
 		<!-- Modal Header -->
 		<div class="flex items-center justify-between border-b border-zinc-800 p-4">
-			<h3 class="text-xl font-medium text-white">User Details</h3>
+			<h3 id="modal-title" class="text-xl font-medium text-white">User Details</h3>
 			<button
 				type="button"
 				onclick={onClose}
 				aria-label="Close modal"
-				class="ml-auto rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+				class="ml-auto rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white focus:ring-2 focus:ring-zinc-600 focus:outline-none"
 			>
 				<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path
@@ -89,58 +139,70 @@
 			</button>
 		</div>
 
+		<!-- Form for data fetching (hidden) -->
+		<form
+			method="POST"
+			action="?/getUserDetails"
+			use:enhance={handleEnhance}
+			use:autoSubmit
+			class="hidden"
+		>
+			<input type="hidden" name="userId" value={userId} />
+		</form>
+
 		<!-- Modal Body -->
 		<div class="p-6">
 			{#if loading}
-				<div class="flex justify-center py-8">
+				<div class="flex justify-center py-8" aria-live="polite" aria-busy="true">
 					<div
 						class="h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-t-purple-500"
 					></div>
+					<span class="sr-only">Loading...</span>
 				</div>
 			{:else if error}
-				<div class="rounded-md bg-red-900/20 p-4 text-center text-red-400">{error}</div>
-			{:else if user}
+				<div role="alert" class="rounded-md bg-red-900/20 p-4 text-center text-red-400">
+					{error}
+				</div>
+			{:else if userData}
 				<!-- User Info Section -->
 				<div class="mb-6">
 					<h4 class="mb-3 text-lg font-semibold text-white">User Information</h4>
 					<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Username</p>
-							<p class="text-white">{user.username || 'N/A'}</p>
+							<p class="text-white">{userData.username || 'N/A'}</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Email</p>
-							<p class="text-white">{user.email || 'N/A'}</p>
+							<p class="text-white">{userData.email || 'N/A'}</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">User ID</p>
-							<p class="text-white">{user.id || 'N/A'}</p>
+							<p class="text-white">{userData.id || 'N/A'}</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Role</p>
 							<p>
-								<span
-									class={`rounded-full px-2.5 py-0.5 text-xs font-medium ${user.role === 'administrator' ? 'bg-purple-900/20 text-purple-400' : 'bg-blue-900/20 text-blue-400'}`}
-								>
-									{user.role === 'administrator' ? 'Administrator' : 'Standard User'}
+								<span class={`rounded-full px-2.5 py-0.5 text-xs font-medium ${roleClass}`}>
+									{roleLabel}
 								</span>
 							</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Created At</p>
-							<p class="text-white">{new Date(user.createdAt!).toLocaleString()}</p>
+							<p class="text-white">{formatDate(userData.createdAt)}</p>
 						</div>
 						<div class="rounded-md bg-zinc-800/50 p-3">
 							<p class="text-xs text-zinc-500">Updated At</p>
-							<p class="text-white">{new Date(user.updatedAt!).toLocaleString()}</p>
+							<p class="text-white">{formatDate(userData.updatedAt)}</p>
 						</div>
 					</div>
 				</div>
 
-				<!-- User Logins Section -->
+				<!-- User Login History Section -->
 				<div>
 					<h4 class="mb-3 text-lg font-semibold text-white">Login History</h4>
-					{#if !userLogins || userLogins.length === 0}
+					{#if !loginHistory.length}
 						<p class="rounded-md bg-zinc-800/50 p-4 text-center text-zinc-400">
 							No login history available
 						</p>
@@ -149,34 +211,41 @@
 							<table class="w-full table-auto">
 								<thead>
 									<tr class="border-b border-zinc-800 text-left">
-										<th class="px-4 py-2 text-sm font-medium text-zinc-400">Date</th>
-										<th class="px-4 py-2 text-sm font-medium text-zinc-400">IP Address</th>
-										<th class="px-4 py-2 text-sm font-medium text-zinc-400">User Agent</th>
-										<th class="px-4 py-2 text-sm font-medium text-zinc-400">Status</th>
+										<th scope="col" class="px-4 py-2 text-sm font-medium text-zinc-400">Date</th>
+										<th scope="col" class="px-4 py-2 text-sm font-medium text-zinc-400"
+											>IP Address</th
+										>
+										<th scope="col" class="px-4 py-2 text-sm font-medium text-zinc-400"
+											>User Agent</th
+										>
+										<th scope="col" class="px-4 py-2 text-sm font-medium text-zinc-400">Status</th>
 									</tr>
 								</thead>
 								<tbody>
-									{#each userLogins as login (login?.id || Math.random().toString())}
-										{#if login}
-											<tr class="border-b border-zinc-800">
-												<td class="px-4 py-2 text-sm text-zinc-300"
-													>{new Date(login.createdAt!).toLocaleString()}</td
-												>
-												<td class="px-4 py-2 text-sm text-zinc-300"
-													>{login.ipAddress || 'Unknown'}</td
-												>
-												<td class="max-w-[200px] truncate px-4 py-2 text-sm text-zinc-300">
+									{#each loginHistory as login (login.id)}
+										<tr class="border-b border-zinc-800">
+											<td class="px-4 py-2 text-sm text-zinc-300">
+												{formatDate(login.createdAt)}
+											</td>
+											<td class="px-4 py-2 text-sm text-zinc-300">{login.ipAddress || 'Unknown'}</td
+											>
+											<td class="max-w-[200px] truncate px-4 py-2 text-sm text-zinc-300">
+												<span title={login.userAgent || undefined}>
 													{login.userAgent || 'Unknown'}
-												</td>
-												<td class="px-4 py-2">
-													<span
-														class={`inline-block rounded px-2 py-1 text-xs ${login.success ? 'bg-green-900/20 text-green-400' : 'bg-red-900/20 text-red-400'}`}
-													>
-														{login.success ? 'Success' : 'Failed'}
-													</span>
-												</td>
-											</tr>
-										{/if}
+												</span>
+											</td>
+											<td class="px-4 py-2">
+												<span
+													class={`inline-block rounded px-2 py-1 text-xs ${
+														login.success
+															? 'bg-green-900/20 text-green-400'
+															: 'bg-red-900/20 text-red-400'
+													}`}
+												>
+													{login.success ? 'Success' : 'Failed'}
+												</span>
+											</td>
+										</tr>
 									{/each}
 								</tbody>
 							</table>
@@ -184,7 +253,7 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="rounded-md bg-red-900/20 p-4 text-center text-red-400">
+				<div class="rounded-md bg-zinc-800/50 p-4 text-center text-zinc-400">
 					No user data available
 				</div>
 			{/if}
@@ -195,7 +264,7 @@
 			<button
 				type="button"
 				onclick={onClose}
-				class="rounded-lg bg-zinc-800 px-4 py-2 text-sm text-white hover:bg-zinc-700"
+				class="rounded-lg bg-zinc-800 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 focus:ring-2 focus:ring-zinc-600 focus:outline-none"
 			>
 				Close
 			</button>

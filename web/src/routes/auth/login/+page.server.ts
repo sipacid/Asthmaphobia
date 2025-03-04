@@ -6,8 +6,8 @@ import * as table from '$lib/server/db/schema';
 import type { Actions, PageServerLoad } from './$types';
 import { verifyRecaptchaToken } from '$lib/server/recaptcha';
 
-export const load: PageServerLoad = async (event) => {
-	if (event.locals.user) {
+export const load: PageServerLoad = async ({ locals }) => {
+	if (locals.user) {
 		return redirect(302, '/dashboard');
 	}
 
@@ -66,7 +66,7 @@ export const actions: Actions = {
 					userId: existingUser.id,
 					ipAddress: ipAddress,
 					userAgent: event.request.headers.get('user-agent') || '',
-					success: true
+					success: false
 				});
 
 			if (error instanceof UserError) {

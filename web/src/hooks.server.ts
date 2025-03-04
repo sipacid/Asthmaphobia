@@ -19,7 +19,20 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 	event.locals.user = user;
 	event.locals.session = session;
 
-	return resolve(event);
+	const response = await resolve(event);
+
+	// Security headers that also positively impact SEO rankings
+	response.headers.set('X-Content-Type-Options', 'nosniff');
+	response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+	response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+	response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
+	// Set caching headers for static assets
+	if (event.url.pathname.startsWith('/images/')) {
+		response.headers.set('Cache-Control', 'public, max-age=604800, immutable');
+	}
+
+	return response;
 };
 
 export const handle: Handle = handleAuth;

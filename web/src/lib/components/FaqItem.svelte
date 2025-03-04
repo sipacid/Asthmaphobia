@@ -7,32 +7,41 @@
 	}
 </script>
 
-<button
-	class={`w-full cursor-pointer rounded-xl border text-left hover:bg-zinc-800/20 ${
-		isOpen ? 'border-purple-600/30' : 'border-zinc-800/50'
-	} overflow-hidden bg-zinc-900/50 backdrop-blur-sm transition-all duration-300`}
-	onclick={toggle}
-	aria-expanded={isOpen}
-	aria-controls={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
+<div
+	class="overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/50 backdrop-blur-sm"
+	itemscope
+	itemprop="mainEntity"
+	itemtype="https://schema.org/Question"
 >
-	<div class="flex w-full items-center justify-between p-6">
-		<span class="text-lg font-medium text-white">{question}</span>
+	<button
+		class="flex w-full items-center justify-between px-6 py-4 text-left text-white focus:ring-2 focus:ring-purple-500 focus:outline-none focus:ring-inset"
+		onclick={toggle}
+		aria-expanded={isOpen}
+		aria-controls="faq-answer-{question.replace(/\s+/g, '-').toLowerCase()}"
+	>
+		<h3 class="text-lg font-medium" itemprop="name">{question}</h3>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class={`h-5 w-5 text-purple-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+			class="h-6 w-6 text-purple-400 transition-transform duration-200 {isOpen ? 'rotate-180' : ''}"
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke="currentColor"
-			aria-hidden="true"
 		>
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 		</svg>
-	</div>
+	</button>
 
-	<div
-		class={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}
-		id={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
-	>
-		<div class="p-6 pt-0 text-zinc-400">{answer}</div>
-	</div>
-</button>
+	{#if isOpen}
+		<div
+			class="px-6 pb-4 text-zinc-300"
+			id="faq-answer-{question.replace(/\s+/g, '-').toLowerCase()}"
+			itemscope
+			itemprop="acceptedAnswer"
+			itemtype="https://schema.org/Answer"
+		>
+			<div itemprop="text">
+				{answer}
+			</div>
+		</div>
+	{/if}
+</div>

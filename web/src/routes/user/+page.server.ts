@@ -3,12 +3,12 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { UserError, userService } from '$lib/server/services/user';
 
-export const load: PageServerLoad = async (event) => {
-	if (!event.locals.user) {
+export const load: PageServerLoad = async ({ locals }) => {
+	if (!locals.user) {
 		return redirect(302, '/auth/login');
 	}
 
-	return { user: event.locals.user };
+	return { user: locals.user };
 };
 
 export const actions: Actions = {

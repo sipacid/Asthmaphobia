@@ -118,26 +118,26 @@ export const actions: Actions = {
 
 		return { success: true };
 	},
-	getUserDetails: async ({ request, locals }) => {
-		if (!locals.user) {
+	getUserDetails: async (event) => {
+		if (!event.locals.user) {
 			throw redirect(302, '/auth/login');
 		}
-		if (locals.user.role !== 'administrator') {
+		if (event.locals.user.role !== 'administrator') {
 			throw redirect(302, '/dashboard');
 		}
 
-		const data = await request.formData();
+		const data = await event.request.formData();
 		const userId = data.get('userId')?.toString();
 
 		if (!userId) {
-			return { success: false, error: 'User ID is required' };
+			return fail(400, { error: 'User ID is required' });
 		}
 
 		try {
 			const user = await userService.getUserByID(userId);
 
 			if (!user) {
-				return { success: false, error: 'User not found' };
+				return fail(404, { error: 'User not found' });
 			}
 
 			const logins = await db
@@ -154,6 +154,7 @@ export const actions: Actions = {
 				.orderBy(desc(userLogin.createdAt))
 				.limit(50);
 
+			// Return clean user data structure
 			return {
 				success: true,
 				user: {
@@ -175,7 +176,7 @@ export const actions: Actions = {
 			};
 		} catch (error) {
 			console.error('Error fetching user details:', error);
-			return { success: false, error: 'Failed to fetch user details' };
+			return fail(500, { error: 'Failed to fetch user details' });
 		}
 	}
 };

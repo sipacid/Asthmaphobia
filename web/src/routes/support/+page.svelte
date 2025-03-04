@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+
 	// Form state management
 	let name = $state('');
 	let email = $state('');
@@ -46,10 +48,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Support - Asthmaphobia</title>
-	<meta name="description" content="Get help and support for Asthmaphobia cheat tool" />
-</svelte:head>
+<Seo
+	title="Support - Asthmaphobia"
+	description="Get technical support for Asthmaphobia cheat tool. Submit a ticket for help with any issues you're experiencing."
+	keywords="asthmaphobia support, phasmophobia cheat help, technical support, game hack troubleshooting"
+/>
 
 <div class="min-h-screen bg-black">
 	<div class="relative">
