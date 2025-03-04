@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Seo from '$lib/components/Seo.svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	// Last updated date for the privacy policy
 	const lastUpdated = 'May 15, 2024';

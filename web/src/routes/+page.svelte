@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { PageServerData } from './$types';
-	import FaqItem from '$lib/components/FaqItem.svelte';
-	import Seo from '$lib/components/Seo.svelte';
+	import FaqItem from '$lib/components/faqitem.svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	let { data }: { data: PageServerData } = $props();
 	const faqs = data.faqs;

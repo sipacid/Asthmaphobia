@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import Footer from '$lib/components/Footer.svelte';
-	import Header from '$lib/components/Header.svelte';
-	import Seo from '$lib/components/Seo.svelte';
+	import Footer from '$lib/components/footer.svelte';
+	import Header from '$lib/components/header.svelte';
+	import Seo from '$lib/components/seo.svelte';
 	import { type User } from '$lib/server/db/schema';
 	import '../app.css';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import FaqItem from '$lib/components/FaqItem.svelte';
-	import Seo from '$lib/components/Seo.svelte';
+	import FaqItem from '$lib/components/faqitem.svelte';
+	import Seo from '$lib/components/seo.svelte';
 	import type { PageData } from './$types';
 
 	let { data } = $props<{ data: PageData }>();

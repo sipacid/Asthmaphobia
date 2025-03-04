@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Seo from '$lib/components/Seo.svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	// Form state management
 	let name = $state('');
