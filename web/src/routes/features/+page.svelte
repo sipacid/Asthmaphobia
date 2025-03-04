@@ -332,11 +332,13 @@
 
 <!-- Feature detail modal -->
 {#if showModal}
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
-		class={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm transition-all duration-300 ${showModal ? 'bg-black/70 opacity-100' : 'opacity-0'}`}
-		onclick={handleModalBackgroundClick}
 		role="dialog"
 		aria-modal="true"
+		class={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm transition-all duration-300 ${showModal ? 'bg-black/70 opacity-100' : 'opacity-0'}`}
+		onclick={handleModalBackgroundClick}
+		onkeydown={(e) => e.key === 'Escape' && closeFeatureModal()}
 	>
 		{#if selectedFeature}
 			<div

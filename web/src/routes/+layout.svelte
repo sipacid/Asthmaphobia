@@ -2,6 +2,7 @@
 	import { onNavigate } from '$app/navigation';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import { type User } from '$lib/server/db/schema';
 	import '../app.css';
 
 	let { data, children } = $props();
@@ -24,7 +25,7 @@
 	></script>
 </svelte:head>
 
-<Header user={data.user} />
+<Header user={data.user as User} />
 <div class="pt-14">
 	{@render children()}
 </div>

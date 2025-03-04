@@ -4,21 +4,27 @@ WORKDIR /usr/src/app
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
+RUN bun install -g @sveltejs/kit
+
 RUN mkdir -p /temp/dev
-COPY package.json bun.lock /temp/dev/
+COPY package.json bun.lock svelte.config.js /temp/dev/
 RUN cd /temp/dev && bun install --frozen-lockfile
 
-# install with --production
 RUN mkdir -p /temp/prod
-COPY package.json bun.lock /temp/prod/
+COPY package.json bun.lock svelte.config.js /temp/prod/
+# First install only svelte-adapter-bun
+RUN cd /temp/prod && bun add -d svelte-adapter-bun
+# Then run production install
 RUN cd /temp/prod && bun install --frozen-lockfile --production
 
 # copy node_modules
 # then copy all (non-ignored) project files into the image
 FROM base AS prerelease
+RUN bun install -g @sveltejs/kit
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
-COPY ./.svelte-kit .
+
+RUN bun svelte-kit sync
 
 # test & build
 ENV NODE_ENV=production
@@ -34,5 +40,5 @@ COPY --from=prerelease /usr/src/app/package.json .
 # run the app
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "start" ]
+ENTRYPOINT [ "bun", "./build/index.js" ]
 

@@ -1,3 +1,5 @@
+import { env as envPublic } from '$env/dynamic/public';
+
 declare global {
 	interface Window {
 		grecaptcha: {
@@ -8,8 +10,6 @@ declare global {
 		};
 	}
 }
-
-const RECAPTCHA_SITE_KEY = '6Le3ueYqAAAAAEhccxYc6Af7bBQrQYwSD5W1LYFO';
 
 /**
  * Get a reCAPTCHA token for the specified action
@@ -22,7 +22,12 @@ export async function getReCaptchaToken(action: string): Promise<string> {
 		return new Promise((resolve) => {
 			window.grecaptcha.enterprise.ready(async () => {
 				try {
-					const token = await window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action });
+					const token = await window.grecaptcha.enterprise.execute(
+						envPublic.PUBLIC_RECAPTCHA_SITE_KEY!,
+						{
+							action
+						}
+					);
 					resolve(token);
 				} catch (err) {
 					console.error('Error executing reCAPTCHA:', err);

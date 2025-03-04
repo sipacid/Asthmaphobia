@@ -59,9 +59,13 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
+	role="dialog"
+	aria-modal="true"
 	class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
 	onclick={handleBackdropClick}
+	onkeydown={(e) => e.key === 'Escape' && onClose()}
 	transition:fade={{ duration: 200 }}
 >
 	<div
@@ -74,6 +78,7 @@
 			<button
 				type="button"
 				onclick={onClose}
+				aria-label="Close modal"
 				class="ml-auto rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white"
 			>
 				<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +98,7 @@
 				<div class="flex justify-center py-8">
 					<div
 						class="h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-t-purple-500"
-					/>
+					></div>
 				</div>
 			{:else if error}
 				<div class="rounded-md bg-red-900/20 p-4 text-center text-red-400">{error}</div>

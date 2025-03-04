@@ -1,4 +1,5 @@
-import { GOOGLE_API_KEY, GOOGLE_PROJECT_ID, RECAPTCHA_SITE_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+import { env as envPublic } from '$env/dynamic/public';
 
 /**
  * Verify a reCAPTCHA token with Google's API
@@ -25,7 +26,7 @@ export async function verifyRecaptchaToken(
 
 		// TODO: Implement ja3 fingerprinting
 		const response = await fetch(
-			`https://recaptchaenterprise.googleapis.com/v1/projects/${GOOGLE_PROJECT_ID}/assessments?key=${GOOGLE_API_KEY}`,
+			`https://recaptchaenterprise.googleapis.com/v1/projects/${env.GOOGLE_PROJECT_ID}/assessments?key=${env.GOOGLE_API_KEY}`,
 			{
 				method: 'POST',
 				headers: {
@@ -34,7 +35,7 @@ export async function verifyRecaptchaToken(
 				body: JSON.stringify({
 					event: {
 						token,
-						siteKey: RECAPTCHA_SITE_KEY,
+						siteKey: envPublic.PUBLIC_RECAPTCHA_SITE_KEY,
 						userAgent,
 						userIpAddress,
 						expectedAction

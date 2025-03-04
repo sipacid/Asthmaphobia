@@ -53,6 +53,7 @@ jobs:
   deploy-website:
     name: Deploy website
     runs-on: ubuntu-latest
+    environment: Production
     needs: build-website
 
     steps:
@@ -69,4 +70,8 @@ jobs:
             docker rm asthmaphobia-web || true 
             docker run -d -p 0.0.0.0:3003:3000 --restart unless-stopped --name asthmaphobia-web \
             -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            -e GOOGLE_PROJECT_ID="${{ secrets.GOOGLE_PROJECT_ID }}" \
+            -e GOOGLE_API_KEY="${{ secrets.GOOGLE_API_KEY }}" \
+            -e PUBLIC_RECAPTCHA_SITE_KEY="${{ secrets.PUBLIC_RECAPTCHA_SITE_KEY }}" \
+            -e RECAPTCHA_SECRET_KEY="${{ secrets.RECAPTCHA_SECRET_KEY }}" \
             ghcr.io/sipacid/asthmaphobia-v2-web:main
