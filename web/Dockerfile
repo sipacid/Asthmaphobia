@@ -25,7 +25,7 @@ RUN bun svelte-kit sync
 # test & build
 ENV NODE_ENV=production
 RUN bun test
-RUN bun run build
+RUN bun run build --debug
 
 # copy production dependencies and source code into final image
 FROM base AS release
