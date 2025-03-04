@@ -18,12 +18,11 @@ RUN cd /temp/prod && bun install --frozen-lockfile --production
 FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
+COPY ./.svelte-kit .
 
 # test & build
 ENV NODE_ENV=production
 RUN bun test
-# Set CI=false to prevent treating warnings as errors
-ENV CI=false
 RUN bun run build
 
 # copy production dependencies and source code into final image
