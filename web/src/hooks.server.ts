@@ -1,5 +1,16 @@
 import type { Handle } from '@sveltejs/kit';
 import * as auth from '$lib/server/auth.js';
+import { sequence } from '@sveltejs/kit/hooks';
+
+const handleCSRF: Handle = async ({ event, resolve }) => {
+	if (event.request.method === 'POST') {
+		const sameSite = event.request.headers.get('sec-fetch-site') === 'same-origin';
+		if (!sameSite) {
+			return new Response('Cross-site POST form submissions are forbidden', { status: 403 });
+		}
+	}
+	return resolve(event);
+};
 
 const handleAuth: Handle = async ({ event, resolve }) => {
 	console.log('Request headers:', event.request.headers);
@@ -37,4 +48,4 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
-export const handle: Handle = handleAuth;
+export const handle: Handle = sequence(handleCSRF, handleAuth);
