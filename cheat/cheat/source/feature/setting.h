@@ -43,7 +43,9 @@ namespace Asthmaphobia
 	class Settings
 	{
 	public:
-		Settings() { SettingsVector.reserve(16); }
+		Settings()
+		{
+		}
 
 		void AddSetting(std::shared_ptr<Setting> setting)
 		{

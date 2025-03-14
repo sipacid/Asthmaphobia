@@ -41,5 +41,5 @@ namespace SDK
 		FuseBoxFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FuseBox_Start, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), 0x1F8DC60);
+	DECLARE_FUNCTION_POINTER(FuseBox_Start, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), 0x1F0D240);
 }

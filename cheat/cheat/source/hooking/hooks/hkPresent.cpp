@@ -26,7 +26,7 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 
 			ImGui_ImplWin32_Init(Renderer::Window);
 			ImGui_ImplDX11_Init(Renderer::Device, Renderer::Context);
-			ImGui::GetIO().ImeWindowHandle = Renderer::Window;
+			ImGui::GetMainViewport()->PlatformHandleRaw = Renderer::Window;
 			ImGui::LoadIniSettingsFromDisk((Helper::GetAsthmaphobiaDirectory() + "\\menu.ini").c_str());
 			ImGui::GetIO().FontGlobalScale = dpiScale;
 

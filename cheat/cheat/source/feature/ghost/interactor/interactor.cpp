@@ -8,22 +8,6 @@ Interactor::Interactor() : Feature("Interactor", "Force the ghost to interact", 
 
 void Interactor::OnMenu()
 {
-	if (ImGui::Button("Force interact with prop##interactor"))
-	{
-		if (GameState::ghostAI == nullptr)
-		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
-		}
-		else if (!Helper::IsLocalMasterClient())
-		{
-			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
-		}
-		else
-		{
-			ForceInteractWithProp = true;
-		}
-	}
-	ImGui::SameLine();
 	if (ImGui::Button("Force ability##interactor"))
 	{
 		if (GameState::ghostAI == nullptr)
@@ -40,22 +24,6 @@ void Interactor::OnMenu()
 		}
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Force interact##interactor"))
-	{
-		if (GameState::ghostAI == nullptr)
-		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
-		}
-		else if (!Helper::IsLocalMasterClient())
-		{
-			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
-		}
-		else
-		{
-			ForceInteract = true;
-		}
-	}
-
 	if (ImGui::Button("Force interact with door##interactor"))
 	{
 		if (GameState::ghostAI == nullptr)
@@ -71,7 +39,7 @@ void Interactor::OnMenu()
 			ForceInteractWithRandomDoor = true;
 		}
 	}
-	ImGui::SameLine();
+
 	if (ImGui::Button("Force interact with random prop##interactor"))
 	{
 		if (GameState::ghostAI == nullptr)
@@ -123,22 +91,10 @@ void Interactor::OnMenu()
 
 void Interactor::OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
 {
-	if (ForceInteractWithProp)
-	{
-		SDK::GhostActivity_ForceInteractWithProp_ptr(ghost->Fields.GhostActivity, false, methodInfo);
-		ForceInteractWithProp = false;
-	}
-
 	if (ForceAbility)
 	{
 		SDK::GhostActivity_GhostAbility_ptr(ghost->Fields.GhostActivity, methodInfo);
 		ForceAbility = false;
-	}
-
-	if (ForceInteract)
-	{
-		SDK::GhostActivity_Interact_ptr(ghost->Fields.GhostActivity, methodInfo);
-		ForceInteract = false;
 	}
 
 	if (ForceInteractWithRandomDoor)
@@ -149,7 +105,7 @@ void Interactor::OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* met
 
 	if (ForceInteractWithRandomProp)
 	{
-		SDK::GhostActivity_InteractWithARandomProp_ptr(ghost->Fields.GhostActivity, true, true, methodInfo);
+		SDK::GhostActivity_InteractWithARandomProp_ptr(ghost->Fields.GhostActivity, true, methodInfo);
 		ForceInteractWithRandomProp = false;
 	}
 

@@ -97,6 +97,10 @@ int main()
 		return 1;
 	}
 
+#ifdef _DEBUG
+	const std::string randomName = "cheat.dll";
+	const std::string tempPath = "cheat.dll";
+#else
 	const std::string randomName = GenerateRandomString(12) + ".dll";
 	const std::string tempPath = std::filesystem::temp_directory_path().string() + randomName;
 
@@ -109,9 +113,11 @@ int main()
 	}
 
 	std::cout << "[+] Created temporary DLL: " << randomName << "\n";
-
+#endif
 	const bool injectionResult = Injector::InjectDLL(processId, tempPath.c_str());
+#ifdef _RELEASE
 	DeleteFile(tempPath.c_str());
+#endif
 
 	if (!injectionResult)
 	{

@@ -31,5 +31,5 @@ namespace SDK
 		PlayerSanityFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(PlayerSanity_SetInsanity, void(*)(PlayerSanity* playerSanity, int insanity, MethodInfo* methodInfo), 0xA2FA50);
+	DECLARE_FUNCTION_POINTER(PlayerSanity_SetInsanity, void(*)(PlayerSanity* playerSanity, int insanity, MethodInfo* methodInfo), 0x9C2B10);
 }

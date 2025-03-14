@@ -13,10 +13,10 @@ void GodMode::OnMenu()
 		ImGui::SetTooltip("%s", Description.c_str());
 }
 
-std::nullptr_t GodMode::OnPlayerStartKillingPlayerNetworked(SDK::Player* player, const bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const
+std::nullptr_t GodMode::OnPlayerStartKillingPlayerNetworked(SDK::Player* player, const bool a1, const bool a2, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()) || player != Helper::GetLocalPlayer())
-		return SDK::Player_StartKillingPlayerNetworked_ptr(player, a1, photonMessageInfo, methodInfo);
+		return SDK::Player_StartKillingPlayerNetworked_ptr(player, a1, a2, photonMessageInfo, methodInfo);
 
 	return nullptr;
 }

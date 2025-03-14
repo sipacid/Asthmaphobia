@@ -21,7 +21,7 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Rigidbody_Set_IsKinematic, void(*)(Rigidbody* rigidbody, bool isKinematic, MethodInfo* methodInfo), 0x4820940);
-	DECLARE_FUNCTION_POINTER(Rigidbody_Get_Constraints, RigidbodyConstraints(*)(Rigidbody* rigidbody, MethodInfo* methodInfo), 0x481FD30);
-	DECLARE_FUNCTION_POINTER(Rigidbody_Set_Constraints, void(*)(Rigidbody* rigidbody, RigidbodyConstraints contraints, MethodInfo* methodInfo), 0x4820600);
+	DECLARE_FUNCTION_POINTER(Rigidbody_Set_IsKinematic, void(*)(Rigidbody* rigidbody, bool isKinematic, MethodInfo* methodInfo), 0x4779E20);
+	DECLARE_FUNCTION_POINTER(Rigidbody_Get_Constraints, RigidbodyConstraints(*)(Rigidbody* rigidbody, MethodInfo* methodInfo), 0x4779210);
+	DECLARE_FUNCTION_POINTER(Rigidbody_Set_Constraints, void(*)(Rigidbody* rigidbody, RigidbodyConstraints contraints, MethodInfo* methodInfo), 0x4779AE0);
 }

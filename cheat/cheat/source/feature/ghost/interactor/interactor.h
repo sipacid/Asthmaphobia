@@ -26,9 +26,7 @@ namespace Asthmaphobia::Features::Ghost
 		void OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo);
 
 	private:
-		bool ForceInteractWithProp = false;
 		bool ForceAbility = false;
-		bool ForceInteract = false;
 		bool ForceInteractWithRandomDoor = false;
 		bool ForceInteractWithRandomProp = false;
 		bool ForceNormalInteraction = false;

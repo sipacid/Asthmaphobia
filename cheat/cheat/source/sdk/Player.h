@@ -30,7 +30,6 @@ namespace SDK
 		int32_t Field15; // LayerMask
 		void* Field16; // HeadMountedSocket
 		Transform* Field17; // Transform
-		Transform* Field18; // Transform
 		void* Field19; // GameObject
 		void* Field20; // DeadPlayer
 		PlayerSanity* PlayerSanity; // PlayerSanity
@@ -41,6 +40,7 @@ namespace SDK
 		bool Field26;
 		void* Field27; // PlayerAudio
 		void* Field28; // PlayerGraphics
+		void* Field29; // PlayerSensors
 		PlayerStamina* PlayerStamina; // PlayerStamina
 		float Field30;
 		bool Field31;
@@ -101,9 +101,9 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x9EB0A0)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x9EB720)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x9EB660)
-	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x9EC1D0)
-	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x9EC2E0)
+	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x96E5C0)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x96EC90)
+	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo), 0x96EBD0)
+	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x96F5A0)
+	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x96F6B0)
 }

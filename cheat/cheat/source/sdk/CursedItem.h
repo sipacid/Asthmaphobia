@@ -7,6 +7,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(CursedItem_Use, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x205DDC0);
-	DECLARE_FUNCTION_POINTER(CursedItem_BreakItem, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x205B130);
+	DECLARE_FUNCTION_POINTER(CursedItem_Use, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x1FF60B0);
+	DECLARE_FUNCTION_POINTER(CursedItem_BreakItem, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x1FF44A0);
 }

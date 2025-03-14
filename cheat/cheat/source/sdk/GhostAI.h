@@ -101,10 +101,10 @@ namespace SDK
 		GhostAIFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int a1, MethodInfo* methodInfo), 0x197C080);
-	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x197D190);
-	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x197F290);
-	DECLARE_FUNCTION_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x198DA50);
+	DECLARE_FUNCTION_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int a1, MethodInfo* methodInfo), 0x19B1EB0);
 	DECLARE_FUNCTION_POINTER(GhostAI_ChangeState,
-	                         void(*)(GhostAI* ghostAI, GhostState ghostState, void* photonObjectInteract, void* photonObjectInteractArray, MethodInfo* methodInfo), 0x197C370);
+		void(*)(GhostAI* ghostAI, GhostState ghostState, void* photonObjectInteract, void* photonObjectInteractArray, MethodInfo* methodInfo), 0x19B21A0);
+	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x19B3080);
+	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19B5120);
+	DECLARE_FUNCTION_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19C4510);
 }

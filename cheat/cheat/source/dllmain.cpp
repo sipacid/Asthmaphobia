@@ -36,7 +36,8 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hookingInstance->AddHook("ExitLevel_ThereArePlayersOutsideTheTruck", &reinterpret_cast<PVOID&>(SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr),
 		                         Hooks::hkExitlevel_ThereAreAlivePlayersOutsideTheTruck);
 		hookingInstance->AddHook("ServerManager_KickPlayerNetworked", &reinterpret_cast<PVOID&>(SDK::ServerManager_KickPlayerNetworked_ptr),
-		                         Hooks::hkServerManager_KickPlayerNetworked);
+		                       Hooks::hkServerManager_KickPlayerNetworked);
+
 		hookingInstance->AddHook("Player_StartKillingPlayerNetworked", &reinterpret_cast<PVOID&>(SDK::Player_StartKillingPlayerNetworked_ptr),
 		                         Hooks::hkPlayer_StartKillingPlayerNetworked);
 		hookingInstance->AddHook("PlayerStamina_Update", &reinterpret_cast<PVOID&>(SDK::PlayerStamina_Update_ptr), Hooks::hkPlayerStamina_Update);
@@ -47,6 +48,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hookingInstance->AddHook("LevelValues_IsPerfectGame", &reinterpret_cast<PVOID&>(SDK::LevelValues_IsPerfectGame_ptr), Hooks::hkLevelValues_IsPerfectGame);
 		hookingInstance->AddHook("DeadZoneController_Awake", &reinterpret_cast<PVOID&>(SDK::DeadZoneController_Awake_ptr), Hooks::hkDeadZoneController_Awake);
 		hookingInstance->AddHook("CursedItemController_Awake", &reinterpret_cast<PVOID&>(SDK::CursedItemController_Awake_ptr), Hooks::hkCursedItemController_Awake);
+
 		hookingInstance->ApplyHooks();
 
 		LOG_INFO("Successfully loaded.");
