@@ -1,0 +1,189 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  content: string;
+  category: string;
+  version?: string;
+}
+
+const { title, date, content, category, version } = Astro.props;
+
+// Convert content with line breaks to paragraphs
+const formattedContent = content
+  .split("\n\n")
+  .map((paragraph) => paragraph.trim())
+  .filter((paragraph) => paragraph.length > 0);
+---
+
+<article class={`news-item news-item-${category}`}>
+  <div class="news-header">
+    <div class="news-meta">
+      <span class={`category-badge ${category}`}>{category}</span>
+      {version && <span class="version-badge">v{version}</span>}
+      <span class="date">{date}</span>
+    </div>
+    <h2 class="news-title">{title}</h2>
+  </div>
+  <div class="news-content">
+    {
+      formattedContent.map((paragraph) => (
+        <p set:html={paragraph.replace(/•/g, "&bull;")} />
+      ))
+    }
+  </div>
+</article>
+
+<style>
+  .news-item {
+    background: rgba(20, 20, 30, 0.6);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-item:hover {
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.2);
+  }
+
+  .news-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+
+  .news-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .category-badge {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .category-badge.update {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .category-badge.announcement {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  .category-badge.warning {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .version-badge {
+    background-color: rgba(155, 89, 182, 0.2);
+    color: #c39bd3;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+  }
+
+  .date {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-left: auto;
+  }
+
+  .news-title {
+    font-size: 1.6rem;
+    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+  }
+
+  .news-content {
+    color: var(--text-color);
+    line-height: 1.7;
+  }
+
+  .news-content p {
+    margin-bottom: 1.25rem;
+  }
+
+  .news-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Color-coding for different news types */
+  .news-item-update::before {
+    background-color: #3b82f6;
+  }
+
+  .news-item-announcement::before {
+    background-color: #10b981;
+  }
+
+  .news-item-warning::before {
+    background-color: #ef4444;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .news-item {
+      padding: 1.5rem;
+    }
+
+    .news-title {
+      font-size: 1.4rem;
+    }
+
+    .news-meta {
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .date {
+      margin-left: 0;
+      width: 100%;
+      order: 3;
+      margin-top: 0.25rem;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .news-item {
+      padding: 1.25rem;
+    }
+
+    .news-title {
+      font-size: 1.25rem;
+    }
+
+    .category-badge,
+    .version-badge {
+      padding: 0.2rem 0.75rem;
+      font-size: 0.7rem;
+    }
+  }
+</style>

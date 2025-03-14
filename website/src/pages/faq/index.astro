@@ -1,0 +1,538 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FAQItem from "../../components/FAQItem.astro";
+import { appInfo } from "../../config/appInfo";
+
+// Organize FAQs into categories for better structure
+const faqCategories = [
+  {
+    name: "General",
+    items: [
+      {
+        question: "What is Asthmaphobia?",
+        answer:
+          "Asthmaphobia is a powerful cheat tool designed specifically for Phasmophobia. It offers various features like ESP, ghost detection, and item spawning to enhance your gameplay experience.",
+      },
+      {
+        question: "Is Asthmaphobia free to use?",
+        answer:
+          "Yes! Asthmaphobia is completely free to download and use. We don't believe in charging for cheat tools or having premium tiers. Everyone gets access to all features.",
+      },
+      {
+        question: "Will I get banned for using Asthmaphobia?",
+        answer:
+          "While we've implemented anti-detection measures, there's always a risk when using third-party tools in online games. We recommend using Asthmaphobia in private lobbies with friends who are aware you're using cheats rather than in public matches.",
+      },
+    ],
+  },
+  {
+    name: "Installation & Setup",
+    items: [
+      {
+        question: "How do I install Asthmaphobia?",
+        answer:
+          "Installation is simple: Download the ZIP file, extract it to any folder, run Phasmophobia, then run Asthmaphobia.exe as administrator. Once in-game, press INSERT to open the cheat menu.",
+      },
+      {
+        question:
+          "Does Asthmaphobia work with the latest version of Phasmophobia?",
+        answer:
+          "Yes, we work hard to update Asthmaphobia whenever Phasmophobia receives an update. Always check our News section for the latest update information.",
+      },
+      {
+        question: "My antivirus flags Asthmaphobia as malware. Is it safe?",
+        answer:
+          "Asthmaphobia is 100% safe to use. However, many antivirus programs flag cheat tools as potentially unwanted programs because they inject code into other applications. This is a false positive. You may need to add an exception in your antivirus software.",
+      },
+    ],
+  },
+  {
+    name: "Features & Usage",
+    items: [
+      {
+        question: "How do I use the ESP feature?",
+        answer:
+          "After opening the cheat menu with INSERT, navigate to the ESP tab and toggle which elements you want to see through walls. You can customize colors and display distance for different entity types.",
+      },
+      {
+        question: "Can Asthmaphobia identify ghost types instantly?",
+        answer:
+          "Yes! Our ghost detection feature will instantly tell you what type of ghost you're dealing with, without needing to gather any evidence. This information appears directly on your HUD.",
+      },
+      {
+        question: "Does Asthmaphobia work in VR mode?",
+        answer:
+          "Currently, Asthmaphobia only supports the desktop version of Phasmophobia. We're working on VR compatibility for a future release.",
+      },
+      {
+        question: "What should I do if Asthmaphobia crashes my game?",
+        answer:
+          "First, make sure you're running both Phasmophobia and Asthmaphobia as administrator. If crashes persist, try disabling some features in the cheat menu, as using all features simultaneously can be resource-intensive. If problems continue, please contact our support team.",
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Asthmaphobia - Frequently Asked Questions"
+  description="Find answers to common questions about Asthmaphobia, the ultimate Phasmophobia cheat tool."
+>
+  <div class="faq-container">
+    <section class="page-header">
+      <h1>Frequently Asked Questions</h1>
+      <p>Find answers to the most common questions about Asthmaphobia</p>
+
+      <div class="search-container">
+        <div class="search-wrapper">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="search-icon"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="10" cy="10" r="7"></circle>
+            <line x1="21" y1="21" x2="15" y2="15"></line>
+          </svg>
+          <input
+            type="text"
+            id="faq-search"
+            placeholder="Search for answers..."
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <p id="no-results" class="hidden">No FAQs found matching your search.</p>
+
+      {
+        faqCategories.map((category) => (
+          <div class="faq-category" data-category={category.name}>
+            <h2 class="category-title">{category.name}</h2>
+            <div class="faq-list">
+              {category.items.map((item) => (
+                <FAQItem question={item.question} answer={item.answer} />
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="still-questions">
+      <div class="glow-background"></div>
+      <h2>Still have questions?</h2>
+      <p>
+        If you couldn't find the answer you were looking for, join our Signal
+        group for direct assistance.
+      </p>
+      <div class="cta-buttons">
+        <a href={appInfo.socialLinks.signal} class="btn primary"
+          >Join Our Signal Group</a
+        >
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script is:inline>
+  // Improved search functionality with client-side hydration
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get DOM elements
+    const searchInput = document.getElementById("faq-search");
+    const faqItems = document.querySelectorAll(".faq-item");
+    const noResults = document.getElementById("no-results");
+    const categories = document.querySelectorAll(".faq-category");
+
+    // Debug check to make sure elements are found
+    console.log("Search input found:", !!searchInput);
+    console.log("FAQ items found:", faqItems.length);
+
+    if (!searchInput) return;
+
+    // Function to handle search
+    function performSearch() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      let visibleItems = 0;
+
+      console.log("Searching for:", searchTerm);
+
+      // Reset category visibility
+      categories.forEach((category) => {
+        category.classList.remove("hidden");
+      });
+
+      // Handle search on each FAQ item
+      faqItems.forEach((item) => {
+        // More robust selector that accounts for different HTML structures
+        const questionEl = item.querySelector("[class*='question']");
+        const answerEl = item.querySelector("[class*='answer']");
+
+        const question = questionEl ? questionEl.textContent.toLowerCase() : "";
+        const answer = answerEl ? answerEl.textContent.toLowerCase() : "";
+
+        if (
+          !searchTerm ||
+          question.includes(searchTerm) ||
+          answer.includes(searchTerm)
+        ) {
+          item.classList.remove("hidden");
+          visibleItems++;
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+
+      // Show/hide no results message
+      if (noResults) {
+        if (visibleItems === 0 && searchTerm) {
+          noResults.classList.remove("hidden");
+        } else {
+          noResults.classList.add("hidden");
+        }
+      }
+
+      // Hide empty categories
+      categories.forEach((category) => {
+        const visibleInCategory = Array.from(
+          category.querySelectorAll(".faq-item")
+        ).filter((item) => !item.classList.contains("hidden")).length;
+
+        if (visibleInCategory === 0 && searchTerm) {
+          category.classList.add("hidden");
+        }
+      });
+    }
+
+    // Add both input and keyup events for better responsiveness
+    searchInput.addEventListener("input", performSearch);
+    searchInput.addEventListener("keyup", performSearch);
+
+    // Initialize search if there's any initial value
+    if (searchInput.value) {
+      performSearch();
+    }
+  });
+</script>
+
+<style>
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  .page-header h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--primary-hover)
+    );
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .page-header p {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+  }
+
+  .search-container {
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+
+  .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-color);
+    opacity: 0.6;
+  }
+
+  #faq-search {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    background: rgba(30, 30, 30, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  #faq-search:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(155, 89, 182, 0.2);
+    outline: none;
+  }
+
+  #faq-search::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .faq-section {
+    background: rgba(20, 20, 20, 0.6);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 4rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .faq-category {
+    margin-bottom: 2.5rem;
+  }
+
+  .faq-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(155, 89, 182, 0.3);
+    padding-bottom: 0.5rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #no-results {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-color);
+    font-style: italic;
+  }
+
+  .still-questions {
+    text-align: center;
+    padding: 4rem 1rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    background: rgba(25, 25, 25, 0.7);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+  }
+
+  .glow-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(155, 89, 182, 0.15) 0%,
+      rgba(155, 89, 182, 0) 70%
+    );
+    z-index: -1;
+  }
+
+  .still-questions h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .still-questions p {
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .primary {
+    background: linear-gradient(135deg, var(--primary-color), #8e44ad);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+  }
+
+  .primary:hover {
+    background: linear-gradient(135deg, #a056c5, #9b59b6);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+  }
+
+  .secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid var(--primary-color);
+  }
+
+  .secondary:hover {
+    background-color: rgba(155, 89, 182, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(155, 89, 182, 0.2);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+    }
+
+    .faq-section {
+      padding: 1.5rem 1rem;
+    }
+
+    .category-title {
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .search-container {
+      margin: 1.5rem auto;
+    }
+
+    #faq-search {
+      padding: 12px 12px 12px 42px;
+      font-size: 0.95rem;
+    }
+
+    .search-icon {
+      left: 12px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      height: auto;
+      min-height: 2.5rem;
+    }
+
+    .still-questions {
+      padding: 2.5rem 1rem;
+      margin: 2rem 0;
+    }
+
+    .still-questions h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .still-questions p {
+      margin-bottom: 1.75rem;
+      font-size: 1rem;
+    }
+
+    .faq-container {
+      padding: 0 1rem;
+    }
+  }
+
+  /* Small mobile screens */
+  @media (max-width: 480px) {
+    .page-header h1 {
+      font-size: 1.7rem;
+    }
+
+    .faq-section {
+      padding: 1.25rem 0.75rem;
+    }
+
+    .category-title {
+      font-size: 1.2rem;
+    }
+
+    .still-questions {
+      padding: 2rem 1rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      line-height: 1.1;
+      min-height: 2.2rem;
+    }
+
+    .cta-buttons {
+      max-width: 220px;
+    }
+  }
+</style>

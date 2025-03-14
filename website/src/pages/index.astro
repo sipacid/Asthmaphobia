@@ -1,0 +1,742 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { appInfo } from "../config/appInfo";
+import { Image } from "astro:assets";
+
+// Import SVG icons
+import downloadIcon from "../assets/download-icon.svg";
+import starIcon from "../assets/star-icon.svg";
+import eyeIcon from "../assets/eye-icon.svg";
+import ghostIcon from "../assets/ghost-icon.svg";
+import infoIcon from "../assets/info-icon.svg";
+---
+
+<Layout>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">v{appInfo.version}</span>
+      <h1>Welcome to <span class="accent">Asthmaphobia</span></h1>
+      <p class="subtitle">The Ultimate Cheat Tool for Phasmophobia</p>
+      <div class="cta-buttons">
+        <a href={appInfo.downloadUrl} class="btn primary">
+          <span class="icon">
+            <Image src={downloadIcon} alt="Download" width={20} height={20} />
+          </span>
+          Download Now
+        </a>
+        <a href="/features" class="btn secondary">
+          <span class="icon">
+            <Image src={starIcon} alt="Features" width={20} height={20} />
+          </span>
+          View Features
+        </a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="floating-card card1">Ghost Detection</div>
+      <div class="floating-card card2">Wallhacks</div>
+      <div class="floating-card card3">AntiKick</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2><span class="highlight">Cheat</span> Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <Image src={eyeIcon} alt="ESP & Wallhacks" width={28} height={28} />
+        </div>
+        <h3>ESP & Wallhacks</h3>
+        <p>
+          See ghosts, items, and other players through walls. Never be caught
+          off guard with our advanced ESP system that reveals everything in the
+          game world.
+        </p>
+        <div class="card-shine"></div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <Image src={ghostIcon} alt="Ghost Detection" width={28} height={28} />
+        </div>
+        <h3>Ghost Detection</h3>
+        <p>
+          Instantly identify ghost types without evidence. Know what you're
+          dealing with from the start and skip the investigation process
+          entirely.
+        </p>
+        <div class="card-shine"></div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <Image src={infoIcon} alt="Ghost Control" width={28} height={28} />
+        </div>
+        <h3>Ghost Control</h3>
+        <p>
+          Force ghosts to perform specific actions and change their behavior
+          patterns. Make them hunt, interact with objects, or appear at your
+          command.
+        </p>
+        <div class="card-shine"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="download-section">
+    <h2>Download For Free</h2>
+    <p>Get the latest version of Asthmaphobia cheat tool completely free.</p>
+
+    <div class="download-container">
+      <div class="version-info">
+        <span class="version-tag">Latest Version: v{appInfo.version}</span>
+        <span class="update-date"
+          >Updated: {
+            new Date(appInfo.latestUpdateDate).toLocaleDateString()
+          }</span
+        >
+      </div>
+
+      <a href={appInfo.downloadUrl} class="download-button">
+        <span class="download-icon">
+          <Image src={downloadIcon} alt="Download" width={24} height={24} />
+        </span>
+        <span class="download-text">Download Asthmaphobia</span>
+      </a>
+
+      <p class="compatibility">
+        Compatible with the latest version of Phasmophobia
+      </p>
+
+      <div class="instructions">
+        <h3>How to Install:</h3>
+        <ol>
+          <li>Download the ZIP file</li>
+          <li>Extract all files to any folder</li>
+          <li>Run Phasmophobia</li>
+          <li>Wait until you have been loaded into the main lobby</li>
+          <li>Execute Asthmaphobia.exe as administrator</li>
+          <li>Press INSERT in-game to open the cheat menu</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <h3>Disclaimer</h3>
+    <p>
+      Asthmaphobia is for educational purposes only. Use at your own risk. We
+      are not responsible for any bans or actions taken against your account.
+      Always use cheats responsibly and preferably in private lobbies with
+      friends who are aware you are using them.
+      <br /><br />
+      © {appInfo.copyrightYear} Asthmaphobia
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    height: 90vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    background: linear-gradient(
+      135deg,
+      rgba(17, 17, 27, 0.9),
+      rgba(10, 10, 20, 0.95)
+    );
+    margin: -2rem -2rem 0; /* Increase negative margin to expand width */
+    padding: 0 10%; /* Increase horizontal padding */
+    position: relative;
+    overflow: hidden;
+    width: 100vw; /* Set width to viewport width */
+    max-width: 100vw; /* Ensure it doesn't exceed viewport width */
+    box-sizing: border-box; /* Include padding in width calculation */
+    left: 50%; /* Position from center */
+    right: 50%;
+    margin-left: -50vw; /* Negative margin trick for full width */
+    margin-right: -50vw;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: -15%;
+    right: -15%;
+    background: radial-gradient(
+      circle,
+      rgba(155, 89, 182, 0.2) 0%,
+      rgba(155, 89, 182, 0) 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    bottom: -10%;
+    left: 5%;
+    background: radial-gradient(
+      circle,
+      rgba(155, 89, 182, 0.15) 0%,
+      rgba(155, 89, 182, 0) 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    z-index: 1;
+  }
+
+  .hero-image {
+    position: relative;
+    width: 40%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floating-card {
+    position: absolute;
+    padding: 20px;
+    background: rgba(20, 20, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 89, 182, 0.3);
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+    animation: float 6s infinite ease-in-out;
+  }
+
+  .card1 {
+    top: 20%;
+    left: 0;
+    animation-delay: 0s;
+  }
+
+  .card2 {
+    top: 40%;
+    right: 0;
+    animation-delay: 1s;
+  }
+
+  .card3 {
+    bottom: 15%;
+    left: 20%;
+    animation-delay: 2s;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(155, 89, 182, 0.2);
+    color: #b878df;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+    backdrop-filter: blur(5px);
+  }
+
+  .hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: -1px;
+  }
+
+  .accent {
+    color: #b878df;
+    position: relative;
+  }
+
+  .accent::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #9b59b6;
+    bottom: -5px;
+    left: 0;
+    border-radius: 4px;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    font-weight: 400;
+    max-width: 80%;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid transparent;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon img {
+    filter: brightness(0) invert(1); /* Makes SVGs white */
+  }
+
+  .icon svg {
+    stroke: currentColor;
+  }
+
+  .primary {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+  }
+
+  .primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 25px rgba(155, 89, 182, 0.5);
+  }
+
+  .secondary {
+    background: rgba(155, 89, 182, 0.1);
+    color: white;
+    border: 2px solid rgba(155, 89, 182, 0.3);
+    backdrop-filter: blur(5px);
+  }
+
+  .secondary:hover {
+    background-color: rgba(155, 89, 182, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .features {
+    padding: 8rem 0 4rem;
+    position: relative;
+  }
+
+  .features h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: -1px;
+  }
+
+  .highlight {
+    position: relative;
+    z-index: 1;
+  }
+
+  .highlight::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 5px;
+    left: 0;
+    background-color: rgba(155, 89, 182, 0.3);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .feature-card {
+    background: rgba(20, 20, 30, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(155, 89, 182, 0.6);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(155, 89, 182, 0.4);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+    color: white;
+  }
+
+  .feature-icon img {
+    filter: brightness(0) invert(1); /* Makes SVGs white */
+  }
+
+  .feature-icon svg {
+    stroke: currentColor;
+  }
+
+  .feature-card h3 {
+    color: #b878df;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    line-height: 1.6;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .card-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateY(100%);
+    transition: transform 0.6s ease;
+  }
+
+  .feature-card:hover .card-shine {
+    transform: translateY(-100%);
+  }
+
+  .download-section {
+    padding: 4rem 0;
+    text-align: center;
+    background-color: rgba(17, 17, 17, 0.4);
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .download-section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .download-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+
+  .version-info {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .version-tag,
+  .update-date {
+    padding: 0.3rem 0.8rem;
+    background-color: rgba(155, 89, 182, 0.2);
+    border-radius: 50px;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+  }
+
+  .download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: #9b59b6;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+    width: auto; /* Changed from 80% to auto */
+    min-width: 200px; /* Added minimum width */
+    max-width: 300px;
+  }
+
+  .download-button:hover {
+    background-color: #8e44ad;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.5);
+  }
+
+  .download-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .download-icon img {
+    filter: brightness(0) invert(1); /* Makes SVGs white */
+  }
+
+  .compatibility {
+    margin: 1.5rem 0;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .instructions {
+    text-align: left;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+
+  .instructions h3 {
+    color: #9b59b6;
+    margin-bottom: 1rem;
+  }
+
+  .instructions ol {
+    padding-left: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .instructions li {
+    margin-bottom: 0.5rem;
+  }
+
+  .alt-downloads,
+  .alt-downloads p,
+  .alt-links,
+  .alt-links a,
+  .alt-links a:hover {
+    display: none;
+  }
+
+  .disclaimer {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    background-color: rgba(155, 89, 182, 0.1);
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    border-radius: 6px;
+  }
+
+  .disclaimer h3 {
+    color: #9b59b6;
+    margin-bottom: 0.5rem;
+  }
+
+  .disclaimer p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      height: auto;
+      padding: 5rem 1.5rem 3rem;
+      min-height: auto;
+    }
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .subtitle {
+      margin: 0 auto 2rem;
+      max-width: 100%;
+      font-size: 1.3rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 300px;
+      margin-top: 3rem;
+    }
+
+    .cta-buttons {
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .features {
+      padding: 5rem 0 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1rem 2rem;
+      margin-top: -1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 300px;
+      margin: 1.5rem auto 0;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .features h2 {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+
+    .download-container {
+      padding: 1.5rem 1rem;
+      margin: 2rem 1rem;
+    }
+
+    .version-info {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .download-button {
+      width: auto; /* Changed from 100% to auto */
+      max-width: 250px; /* Adjusted max-width */
+      padding: 0.8rem 1.5rem;
+    }
+
+    .feature-card {
+      padding: 1.5rem;
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  /* Small mobile adjustments */
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .badge {
+      margin-bottom: 1rem;
+    }
+
+    .hero-image {
+      height: 250px;
+    }
+
+    .floating-card {
+      padding: 12px;
+      font-size: 0.9rem;
+    }
+
+    .download-section h2 {
+      font-size: 1.75rem;
+    }
+
+    .download-button {
+      font-size: 1.1rem; /* Slightly smaller font on very small screens */
+      padding: 0.8rem 1.25rem;
+    }
+
+    .download-container {
+      padding: 1.25rem 0.75rem;
+    }
+
+    .instructions h3 {
+      font-size: 1.25rem;
+    }
+
+    .instructions ol {
+      padding-left: 1.25rem;
+    }
+  }
+</style>

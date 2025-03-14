@@ -1,0 +1,562 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import NewsItem from "../../components/NewsItem.astro";
+import { appInfo } from "../../config/appInfo";
+
+// News items data - newest first
+const newsItems = [
+  {
+    title: "Asthmaphobia v2.4.1 Released",
+    date: "June 15, 2023",
+    category: "update",
+    version: "2.4.1",
+    content: `We're excited to announce the release of Asthmaphobia v2.4.1! This update brings compatibility with the latest Phasmophobia version and includes several improvements:
+
+• Updated for Phasmophobia v0.9.0.2
+• Enhanced ghost detection accuracy for the new ghost types
+• Fixed crash when using item spawner in Sunny Meadows
+• Added new ESP options for cursed possessions
+• Improved anti-detection measures
+• UI refresh with better visibility options
+
+Download the latest version from our website to enjoy all these new features!`,
+  },
+  {
+    title: "Signal Group Launch",
+    date: "May 28, 2023",
+    category: "announcement",
+    content: `We're thrilled to announce the launch of our official Signal group! Join our growing community to:
+
+• Get immediate notifications about updates
+• Share your best ghost hunting moments
+• Get technical support directly from our developers
+• Suggest new features or report bugs
+• Connect with other Asthmaphobia users
+
+Click the "Join Our Signal Group" button at the bottom of the page to become part of our community today!`,
+  },
+  {
+    title: "Important Security Update",
+    date: "May 10, 2023",
+    category: "warning",
+    version: "2.4.0",
+    content: `URGENT: We've detected an issue with Asthmaphobia v2.3.9 that could potentially lead to game crashes or detection. 
+
+Please update immediately to version 2.4.0, which addresses this issue and adds additional security enhancements. 
+
+If you experience any problems after updating, please contact our support team or report the issue on our Signal group.`,
+  },
+  {
+    title: "Asthmaphobia v2.3.9 Released",
+    date: "April 22, 2023",
+    category: "update",
+    version: "2.3.9",
+    content: `We've released a new version of Asthmaphobia with the following changes:
+
+• Updated for Phasmophobia v0.8.2.0
+• Added new feature: Sanity Control - manage your sanity level manually
+• Added option to reveal bone locations
+• Improved ghost behavior prediction
+• Fixed various bugs reported by the community
+• Performance optimizations for smoother experience
+
+Download now to access all these new features!`,
+  },
+  {
+    title: "Website Redesign Complete",
+    date: "April 5, 2023",
+    category: "announcement",
+    content: `We've completed our website redesign! The new website features:
+
+• A cleaner, more modern look
+• Better mobile support
+• Faster download speeds
+• Improved documentation
+• Dedicated FAQ section
+
+Let us know what you think of the new design in our Signal group!`,
+  },
+];
+---
+
+<Layout
+  title="Asthmaphobia - News & Updates"
+  description="Stay up-to-date with the latest Asthmaphobia updates, releases, and announcements for your Phasmophobia cheat tool."
+>
+  <div class="news-container">
+    <section class="page-header">
+      <h1>News & Updates</h1>
+      <p>Stay informed about the latest developments for Asthmaphobia</p>
+    </section>
+
+    <div class="filter-section">
+      <button class="filter-button active" data-category="all">All</button>
+      <button class="filter-button" data-category="update">Updates</button>
+      <button class="filter-button" data-category="announcement"
+        >Announcements</button
+      >
+      <button class="filter-button" data-category="warning">Warnings</button>
+    </div>
+
+    <section class="news-list">
+      {
+        newsItems.map((item) => (
+          <div class={`news-item-wrapper ${item.category}`}>
+            <NewsItem
+              title={item.title}
+              date={item.date}
+              content={item.content}
+              category={item.category}
+              version={item.version}
+            />
+          </div>
+        ))
+      }
+    </section>
+
+    <div class="subscribe-section">
+      <div class="subscribe-content">
+        <h2>Never Miss an Update</h2>
+        <p>
+          Join our Signal group or visit our GitHub page to report issues and
+          request features.
+        </p>
+        <div class="cta-buttons">
+          <a href={appInfo.socialLinks.signal} class="btn primary">
+            <i class="icon-signal"></i> Join Signal Group
+          </a>
+          <a
+            href="https://github.com/sipacid/asthmaphobia"
+            class="btn secondary"
+          >
+            <i class="icon-github"></i> Report Issues
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .news-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .page-header h1::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--primary-hover)
+    );
+    transform: translateX(-50%);
+    border-radius: 4px;
+  }
+
+  .page-header p {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .filter-section {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    padding: 1rem 0;
+    background-color: rgba(17, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    border-radius: 8px;
+  }
+
+  .filter-button {
+    background-color: rgba(155, 89, 182, 0.1);
+    border: 1px solid rgba(155, 89, 182, 0.3);
+    color: var(--text-color);
+    padding: 0.625rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-button:hover {
+    background-color: rgba(155, 89, 182, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.2);
+  }
+
+  .filter-button.active {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--primary-hover)
+    );
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .news-item-wrapper {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s forwards;
+    position: relative;
+  }
+
+  .news-item-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(155, 89, 182, 0.15);
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .news-item-wrapper:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .news-item-wrapper:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  .news-item-wrapper:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+
+  .news-item-wrapper:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+
+  .subscribe-section {
+    text-align: center;
+    padding: 0;
+    margin: 5rem 0 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .subscribe-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(155, 89, 182, 0.1),
+      rgba(41, 19, 97, 0.2)
+    );
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    border-radius: 12px;
+    z-index: -1;
+  }
+
+  .subscribe-content {
+    padding: 3.5rem 2rem;
+    position: relative;
+  }
+
+  .subscribe-section h2 {
+    margin-bottom: 1.25rem;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .subscribe-section p {
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .icon-discord,
+  .icon-github {
+    font-size: 1.2rem;
+  }
+
+  .primary {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--primary-hover)
+    );
+    color: white;
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
+  }
+
+  .primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(155, 89, 182, 0.4);
+  }
+
+  .secondary {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .secondary:hover {
+    background-color: rgba(155, 89, 182, 0.15);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.2rem;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+    }
+
+    .filter-section {
+      gap: 0.75rem;
+      padding: 1rem 0.5rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    .filter-button {
+      padding: 0.625rem 1.25rem;
+      font-size: 1rem;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  /* Enhanced mobile styles */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+    }
+
+    .filter-section {
+      gap: 0.7rem;
+      padding: 1.25rem 1rem;
+      overflow-x: auto;
+      justify-content: flex-start;
+      position: sticky;
+      top: 60px; /* Account for header height */
+      z-index: 90;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      width: calc(100% + 2rem);
+      border-radius: 0;
+    }
+
+    .filter-button {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .subscribe-section h2 {
+      font-size: 1.6rem;
+    }
+
+    .subscribe-section p {
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.25rem;
+      width: 100%;
+    }
+
+    .news-container {
+      padding: 0 1rem;
+    }
+
+    .subscribe-content {
+      padding: 2.5rem 1.25rem;
+    }
+
+    .news-item-wrapper {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Small screens */
+  @media (max-width: 480px) {
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .filter-section {
+      padding: 1rem 0.75rem;
+    }
+
+    .filter-button {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      min-width: auto;
+    }
+
+    .subscribe-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Function to add staggered animation when elements come into view
+  function setupAnimations() {
+    const newsItems = document.querySelectorAll(".news-item-wrapper");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, _) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    newsItems.forEach((item) => {
+      observer.observe(item);
+    });
+  }
+
+  function setupFilterButtons() {
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const newsItems = document.querySelectorAll(".news-item-wrapper");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Remove active class from all buttons
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to clicked button
+        button.classList.add("active");
+
+        // Get the category to filter
+        const category = button.getAttribute("data-category");
+
+        // Show or hide news items based on category
+        newsItems.forEach((item) => {
+          if (category === "all" || item.classList.contains(category!)) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    setupFilterButtons();
+    setupAnimations();
+  });
+
+  // Initialize when Astro navigation occurs
+  document.addEventListener("astro:page-load", () => {
+    setupFilterButtons();
+    setupAnimations();
+  });
+
+  // Run immediately in case the script loads after DOM is ready
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(() => {
+      setupFilterButtons();
+      setupAnimations();
+    }, 1);
+  }
+</script>

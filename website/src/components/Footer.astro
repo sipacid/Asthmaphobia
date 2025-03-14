@@ -1,0 +1,204 @@
+---
+import { appInfo } from "../config/appInfo";
+---
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="footer-title">Asthmaphobia</h3>
+        <p class="footer-description">
+          The ultimate cheat tool for Phasmophobia, featuring ESP, ghost
+          detection, and more advanced features.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/features">Features</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Connect</h3>
+        <ul class="footer-links">
+          <li>
+            <a href={appInfo.socialLinks.github} target="_blank" rel="noopener"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a href={appInfo.socialLinks.signal} target="_blank" rel="noopener"
+              >Join Signal Group</a
+            >
+          </li>
+          <li>
+            <a href={appInfo.downloadUrl}>Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {appInfo.copyrightYear} Asthmaphobia. All rights reserved.
+      </p>
+      <p class="disclaimer">
+        This tool is for educational purposes only. Use at your own risk.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: rgba(15, 15, 20, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(155, 89, 182, 0.2);
+    padding: 3rem 0 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 2rem;
+    height: 2px;
+    background: var(--primary-color);
+  }
+
+  .footer-description {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    display: inline-block;
+  }
+
+  .footer-links a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-color);
+  }
+
+  .footer-links a:hover::after {
+    width: 100%;
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+  }
+
+  .copyright,
+  .disclaimer {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+  }
+
+  .disclaimer {
+    font-style: italic;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    footer {
+      padding: 2rem 0 1rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      padding-top: 1.25rem;
+    }
+
+    .footer-col {
+      text-align: center;
+    }
+
+    .footer-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-content {
+      padding: 0 1rem;
+    }
+
+    .footer-title {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-grid {
+      gap: 1.75rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>

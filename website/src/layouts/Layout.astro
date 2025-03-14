@@ -1,0 +1,185 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Asthmaphobia - The Ultimate Phasmophobia Cheat Tool",
+  description = "Download the best free Phasmophobia cheat tool. Asthmaphobia gives you an edge with ESP, item spawning, ghost detection and more features.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --primary-color: #9b59b6;
+    --primary-hover: #8e44ad;
+    --bg-color: #000000;
+    --secondary-bg: #111111;
+    --text-color: #f0f0f0;
+    --heading-color: #ffffff;
+    --border-color: #333333;
+  }
+
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--heading-color);
+    margin-top: 0;
+    line-height: 1.2;
+    word-wrap: break-word; /* Ensure headings don't overflow on mobile */
+  }
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--primary-hover);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  button,
+  .btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  button:hover,
+  .btn:hover {
+    background-color: var(--primary-hover);
+  }
+
+  /* Mobile-friendly styles */
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px; /* Slightly reduce base font size on mobile */
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    /* Improve tap targets on mobile */
+    button,
+    .btn,
+    a.btn {
+      padding: 0.65rem 1.25rem;
+      min-height: 44px; /* Minimum height for better touch targets */
+    }
+
+    /* Improve form elements on mobile */
+    input,
+    select,
+    textarea {
+      font-size: 16px; /* Prevent iOS zoom on focus */
+    }
+  }
+
+  /* Small mobile devices */
+  @media (max-width: 480px) {
+    .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+</style>

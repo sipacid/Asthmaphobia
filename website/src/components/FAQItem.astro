@@ -1,0 +1,180 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<div class="faq-item">
+  <div class="question-wrapper">
+    <h3 class="question">{question}</h3>
+    <div class="toggle-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </div>
+  <div class="answer">
+    <p>{answer}</p>
+  </div>
+</div>
+
+<style>
+  .faq-item {
+    background: rgba(17, 17, 17, 0.4);
+    border-radius: 8px;
+    border: 1px solid rgba(155, 89, 182, 0.15);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+  }
+
+  .question-wrapper {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .question {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    flex: 1;
+    padding-right: 2rem;
+  }
+
+  .toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+  }
+
+  .toggle-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .answer {
+    padding: 0 1.5rem;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .answer p {
+    margin: 0 0 1.5rem 0;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Active state */
+  .faq-item.active {
+    background: rgba(25, 25, 25, 0.6);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-item.active .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-item.active .answer {
+    padding: 0 1.5rem 1.5rem;
+    height: auto;
+    opacity: 1;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .question {
+      font-size: 1rem;
+      padding-right: 1rem;
+    }
+
+    .question-wrapper {
+      padding: 1rem 1.25rem;
+    }
+
+    .answer {
+      padding: 0 1.25rem;
+    }
+
+    .faq-item.active .answer {
+      padding: 0 1.25rem 1.25rem;
+    }
+
+    .toggle-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Small mobile devices */
+  @media (max-width: 480px) {
+    .question {
+      font-size: 0.95rem;
+    }
+
+    .question-wrapper {
+      padding: 0.9rem 1rem;
+    }
+
+    .answer {
+      padding: 0 1rem;
+    }
+
+    .faq-item.active .answer {
+      padding: 0 1rem 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Handle FAQ item toggling
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    const questionWrapper = item.querySelector(".question-wrapper");
+
+    if (questionWrapper) {
+      questionWrapper.addEventListener("click", () => {
+        // Toggle active state
+        item.classList.toggle("active");
+      });
+    }
+  });
+
+  // For Astro View Transitions
+  document.addEventListener("astro:page-load", () => {
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach((item) => {
+      const questionWrapper = item.querySelector(".question-wrapper");
+
+      if (questionWrapper) {
+        questionWrapper.addEventListener("click", () => {
+          // Toggle active state
+          item.classList.toggle("active");
+        });
+      }
+    });
+  });
+</script>
