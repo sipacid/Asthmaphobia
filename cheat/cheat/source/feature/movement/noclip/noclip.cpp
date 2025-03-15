@@ -27,6 +27,13 @@ void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* fi
 		return;
 	}
 
+	// Prevent no-clip from working when the game is not in focus
+	const HWND foregroundWindow = GetForegroundWindow();
+	DWORD foregroundProcessId = 0;
+	GetWindowThreadProcessId(foregroundWindow, &foregroundProcessId);
+	if (foregroundProcessId != GetCurrentProcessId())
+		return;
+
 	SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, true, nullptr);
 	SDK::Behaviour_Set_Enabled_ptr(reinterpret_cast<SDK::Behaviour*>(controller), false, nullptr);
 
