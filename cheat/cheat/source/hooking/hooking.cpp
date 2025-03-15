@@ -2,86 +2,201 @@
 
 using namespace Asthmaphobia;
 
-Hooking::Hooking()
+static std::unique_ptr<Hooking> g_hookingInstance;
+
+Hooking& Asthmaphobia::GetHookingInstance()
 {
-	hooking = this;
+	if (!g_hookingInstance)
+		g_hookingInstance = std::make_unique<Hooking>();
+	return *g_hookingInstance;
 }
 
 Hooking::~Hooking()
 {
-	this->RemoveHooks();
-	SetWindowLongPtr(renderer->Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
+	RemoveHooks();
 
-	hooking = nullptr;
+	if (OriginalWndproc && renderer && renderer->Window)
+	{
+		SetWindowLongPtr(renderer->Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
+	}
 }
 
-void Hooking::AddHook(const std::string& functionName, PVOID* originalFunction, PVOID hookFunction)
+Hooking::HookResult Hooking::ApplyHooks()
 {
-	this->hooks_.emplace_back(functionName, originalFunction, hookFunction);
-}
+	std::lock_guard lock(HookMutex);
 
-void Hooking::ApplyHooks() const
-{
+	if (Hooks.empty())
+	{
+		return HookResult::Success;
+	}
+
 	if (DetourTransactionBegin() != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to begin detour transaction");
+		LOG_ERROR("Failed to begin detour transaction");
+		return HookResult::TransactionFailed;
 	}
 
 	if (DetourUpdateThread(GetCurrentThread()) != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to update detour thread");
+		DetourTransactionAbort();
+		LOG_ERROR("Failed to update detour thread");
+		return HookResult::TransactionFailed;
 	}
 
-	for (const auto& hook : this->hooks_)
-	{
-		std::ostringstream oss;
-		oss << "Applying hook: " << std::get<0>(hook) << "\n";
-		LOG_DEBUG(oss.str());
+	bool anyFailed = false;
 
-		const LONG error = DetourAttach(std::get<1>(hook), std::get<2>(hook));
+	// Apply all inactive hooks
+	for (auto& hook : Hooks)
+	{
+		if (hook.Active)
+			continue;
+
+		LOG_DEBUG("Applying hook: " + hook.Name);
+
+		const LONG error = DetourAttach(hook.Original, hook.Hook);
 		if (error != NO_ERROR)
 		{
-			std::ostringstream oss;
-			oss << "Failed to attach hook: " << std::get<0>(hook) << " with error code: " << error << "\n";
-			LOG_ERROR(oss.str());
+			LOG_ERROR("Failed to attach hook: " + hook.Name +
+				" with error code: " + std::to_string(error));
+			anyFailed = true;
+		}
+		else
+		{
+			hook.Active = true;
 		}
 	}
 
 	if (DetourTransactionCommit() != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to commit detour transaction");
+		LOG_ERROR("Failed to commit detour transaction");
+		return HookResult::TransactionFailed;
 	}
+
+	return anyFailed ? HookResult::AttachFailed : HookResult::Success;
 }
 
-void Hooking::RemoveHooks() const
+Hooking::HookResult Hooking::RemoveHooks()
 {
+	std::lock_guard lock(HookMutex);
+
+	// Check if any hooks are active
+	if (std::ranges::none_of(Hooks,
+	                         [](const HookEntry& entry) { return entry.Active; }))
+	{
+		return HookResult::Success;
+	}
+
 	if (DetourTransactionBegin() != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to begin detour transaction");
+		LOG_ERROR("Failed to begin detour transaction for removal");
+		return HookResult::TransactionFailed;
 	}
 
 	if (DetourUpdateThread(GetCurrentThread()) != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to update detour thread");
+		DetourTransactionAbort();
+		LOG_ERROR("Failed to update detour thread for removal");
+		return HookResult::TransactionFailed;
 	}
 
-	for (const auto& hook : this->hooks_)
-	{
-		std::ostringstream oss;
-		oss << "Restoring hook: " << std::get<0>(hook) << "\n";
-		LOG_DEBUG(oss.str());
+	bool anyFailed = false;
 
-		const LONG error = DetourDetach(std::get<1>(hook), std::get<2>(hook));
+	// Detach all active hooks
+	for (auto& hook : Hooks)
+	{
+		if (!hook.Active)
+			continue;
+
+		LOG_DEBUG("Removing hook: " + hook.Name);
+
+		const LONG error = DetourDetach(hook.Original, hook.Hook);
 		if (error != NO_ERROR)
 		{
-			std::ostringstream oss;
-			oss << "Failed to detach hook: " << std::get<0>(hook) << " with error code: " << error << "\n";
-			LOG_ERROR(oss.str());
+			LOG_ERROR("Failed to detach hook: " + hook.Name +
+				" with error code: " + std::to_string(error));
+			anyFailed = true;
+		}
+		else
+		{
+			hook.Active = false;
 		}
 	}
 
 	if (DetourTransactionCommit() != NO_ERROR)
 	{
-		throw std::runtime_error("Failed to commit detour transaction");
+		LOG_ERROR("Failed to commit detour transaction");
+		return HookResult::TransactionFailed;
+	}
+
+	return anyFailed ? HookResult::DetachFailed : HookResult::Success;
+}
+
+Hooking::HookResult Hooking::ToggleHook(const std::string& name, const bool enable)
+{
+	static std::lock_guard lock(HookMutex);
+
+	// Find the hook
+	const auto it = std::ranges::find_if(Hooks,
+	                                     [&name](const HookEntry& entry) { return entry.Name == name; });
+
+	if (it == Hooks.end())
+	{
+		return HookResult::NotFound;
+	}
+
+	// Already in desired state
+	if (it->Active == enable)
+	{
+		return HookResult::Success;
+	}
+
+	if (DetourTransactionBegin() != NO_ERROR)
+	{
+		LOG_ERROR("Failed to begin detour transaction for toggle");
+		return HookResult::TransactionFailed;
+	}
+
+	if (DetourUpdateThread(GetCurrentThread()) != NO_ERROR)
+	{
+		DetourTransactionAbort();
+		LOG_ERROR("Failed to update detour thread for toggle");
+		return HookResult::TransactionFailed;
+	}
+
+	LONG error;
+	if (enable)
+	{
+		error = DetourAttach(it->Original, it->Hook);
+	}
+	else
+	{
+		error = DetourDetach(it->Original, it->Hook);
+	}
+
+	if (error != NO_ERROR)
+	{
+		DetourTransactionAbort();
+		LOG_ERROR("Failed to " + std::string(enable ? "attach" : "detach") +
+			" hook: " + name + " with error code: " + std::to_string(error));
+		return enable ? HookResult::AttachFailed : HookResult::DetachFailed;
+	}
+
+	if (DetourTransactionCommit() != NO_ERROR)
+	{
+		LOG_ERROR("Failed to commit detour transaction for toggle");
+		return HookResult::TransactionFailed;
+	}
+
+	it->Active = enable;
+	return HookResult::Success;
+}
+
+void Hooking::Cleanup()
+{
+	RemoveHooks();
+
+	if (OriginalWndproc && renderer && renderer->Window)
+	{
+		SetWindowLongPtr(renderer->Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
 	}
 }

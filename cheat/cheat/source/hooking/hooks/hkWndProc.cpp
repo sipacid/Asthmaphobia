@@ -8,8 +8,6 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 using namespace Asthmaphobia;
 
-SDK::CursorLockMode previousCursorLockMode;
-
 LRESULT __stdcall Hooks::HkWndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	POINT mPos;
@@ -30,5 +28,5 @@ LRESULT __stdcall Hooks::HkWndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		return true;
 	}
 
-	return CallWindowProc(hooking->OriginalWndproc, hWnd, uMsg, wParam, lParam);
+	return CallWindowProc(GetHookingInstance().OriginalWndproc, hWnd, uMsg, wParam, lParam);
 }

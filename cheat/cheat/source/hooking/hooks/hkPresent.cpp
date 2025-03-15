@@ -10,6 +10,8 @@ using namespace Asthmaphobia;
 
 HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
+	auto& hooking = GetHookingInstance();
+
 	if (!menu.Initialized)
 	{
 		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void**>(&renderer->Device))))
@@ -36,12 +38,12 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 			Renderer::Device->CreateRenderTargetView(pBackBuffer, nullptr, &Renderer::TargetView);
 			pBackBuffer->Release();
 
-			hooking->OriginalWndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(Renderer::Window, GWLP_WNDPROC,
+			hooking.OriginalWndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(Renderer::Window, GWLP_WNDPROC,
 			                                                                      reinterpret_cast<LONG_PTR>(HkWndProc)));
 			Menu::Initialize();
 		}
 		else
-			return hooking->OriginalPresent(pSwapChain, SyncInterval, Flags);
+			return hooking.OriginalPresent(pSwapChain, SyncInterval, Flags);
 	}
 
 	ImGui_ImplDX11_NewFrame();
@@ -66,5 +68,5 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 	Renderer::Context->OMSetRenderTargets(1, &Renderer::TargetView, nullptr);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-	return hooking->OriginalPresent(pSwapChain, SyncInterval, Flags);
+	return hooking.OriginalPresent(pSwapChain, SyncInterval, Flags);
 }
