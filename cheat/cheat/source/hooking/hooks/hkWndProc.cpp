@@ -12,7 +12,7 @@ LRESULT __stdcall Hooks::HkWndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LP
 {
 	POINT mPos;
 	GetCursorPos(&mPos);
-	ScreenToClient(Renderer::Window, &mPos);
+	ScreenToClient(GetRendererInstance().Window, &mPos);
 
 	ImGui::GetIO().MousePos.x = mPos.x;
 	ImGui::GetIO().MousePos.y = mPos.y;

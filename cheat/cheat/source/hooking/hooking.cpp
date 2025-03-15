@@ -2,23 +2,15 @@
 
 using namespace Asthmaphobia;
 
-static std::unique_ptr<Hooking> g_hookingInstance;
-
 Hooking& Asthmaphobia::GetHookingInstance()
 {
-	if (!g_hookingInstance)
-		g_hookingInstance = std::make_unique<Hooking>();
-	return *g_hookingInstance;
+	static auto instance = std::make_unique<Hooking>();
+	return *instance;
 }
 
 Hooking::~Hooking()
 {
-	RemoveHooks();
-
-	if (OriginalWndproc && renderer && renderer->Window)
-	{
-		SetWindowLongPtr(renderer->Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
-	}
+	Cleanup();
 }
 
 Hooking::HookResult Hooking::ApplyHooks()
@@ -195,8 +187,8 @@ void Hooking::Cleanup()
 {
 	RemoveHooks();
 
-	if (OriginalWndproc && renderer && renderer->Window)
+	if (OriginalWndproc && GetRendererInstance().Window)
 	{
-		SetWindowLongPtr(renderer->Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
+		SetWindowLongPtr(GetRendererInstance().Window, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(this->OriginalWndproc));
 	}
 }

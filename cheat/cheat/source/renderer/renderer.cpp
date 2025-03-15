@@ -2,18 +2,57 @@
 
 using namespace Asthmaphobia;
 
+Renderer& Asthmaphobia::GetRendererInstance()
+{
+	static auto instance = std::make_unique<Renderer>();
+	return *instance;
+}
+
 Renderer::Renderer()
 {
-	renderer = this;
+	InitializeSwapChain();
 }
 
 Renderer::~Renderer()
 {
-	renderer = nullptr;
+	Cleanup();
 }
 
-bool Renderer::GetSwapChain(IDXGISwapChain** swapChain, ID3D11Device** device) const
+void Renderer::SetGameResources(IDXGISwapChain* swapChain, ID3D11Device* device, ID3D11DeviceContext* context)
 {
+	// Clean up any existing resources first
+	if (Swapchain || Device || Context || TargetView)
+		Cleanup();
+
+	// Set the game's actual resources
+	Swapchain = swapChain;
+	Device = device;
+	Context = context;
+
+	// These are references, not owned by us, so we don't increment ref count
+	GameResourcesInitialized = true;
+}
+
+bool Renderer::CreateRenderTargetView()
+{
+	if (!Swapchain || !Device)
+		return false;
+
+	ID3D11Texture2D* pBackBuffer = nullptr;
+	HRESULT hr = Swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&pBackBuffer));
+
+	if (FAILED(hr) || !pBackBuffer)
+		return false;
+
+	hr = Device->CreateRenderTargetView(pBackBuffer, nullptr, &TargetView);
+	pBackBuffer->Release();
+
+	return SUCCEEDED(hr) && TargetView != nullptr;
+}
+
+bool Renderer::InitializeSwapChain()
+{
+	// Only initialize enough to get the Present function
 	WNDCLASSEX wc{0};
 	wc.cbSize = sizeof(wc);
 	wc.lpfnWndProc = DefWindowProc;
@@ -58,48 +97,59 @@ bool Renderer::GetSwapChain(IDXGISwapChain** swapChain, ID3D11Device** device) c
 
 	D3D_FEATURE_LEVEL level;
 	bool success = false;
+	IDXGISwapChain* tempSwapchain = nullptr;
+	ID3D11Device* tempDevice = nullptr;
+	ID3D11DeviceContext* tempContext = nullptr;
 
 	for (const auto& driverType : KDriverType)
 	{
-		const HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr, driverType, nullptr, 0, nullptr, 0,
-		                                                 D3D11_SDK_VERSION, &description, swapChain, device, &level,
-		                                                 nullptr);
+		const HRESULT hr = D3D11CreateDeviceAndSwapChain(
+			nullptr, driverType, nullptr, 0, nullptr, 0,
+			D3D11_SDK_VERSION, &description, &tempSwapchain, &tempDevice, &level, &tempContext);
 
 		if (SUCCEEDED(hr))
 		{
 			success = true;
+
+			// Just get the Present function
+			if (tempSwapchain)
+			{
+				void** vmt = *reinterpret_cast<void***>(tempSwapchain);
+				PresentFunction = static_cast<Id3DPresent>(vmt[8]);
+			}
+
+			// Release temporary resources - we'll get the real ones from the game
+			if (tempContext) tempContext->Release();
+			if (tempDevice) tempDevice->Release();
+			if (tempSwapchain) tempSwapchain->Release();
+
 			break;
 		}
 	}
 
+	// Clean up the temporary window
 	DestroyWindow(hwnd);
 	UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-	return success;
+	return success && PresentFunction != nullptr;
 }
 
 Id3DPresent Renderer::GetPresent() const
 {
-	IDXGISwapChain* swapChain;
-	ID3D11Device* device;
+	return PresentFunction;
+}
 
-	if (GetSwapChain(&swapChain, &device))
+void Renderer::Cleanup()
+{
+	if (TargetView)
 	{
-		void** vmt = *reinterpret_cast<void***>(swapChain);
-
-		if (swapChain)
-		{
-			swapChain->Release();
-			swapChain = nullptr;
-		}
-		if (device)
-		{
-			device->Release();
-			device = nullptr;
-		}
-
-		return static_cast<Id3DPresent>(vmt[8]);
+		TargetView->Release();
+		TargetView = nullptr;
 	}
 
-	return nullptr;
+	Swapchain = nullptr;
+	Device = nullptr;
+	Context = nullptr;
+
+	GameResourcesInitialized = false;
 }

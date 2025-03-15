@@ -51,10 +51,14 @@ const char* Asthmaphobia::FeatureTypeToString(const FeatureCategory category)
 	}
 }
 
+FeatureManager& Asthmaphobia::GetFeatureManagerInstance()
+{
+	static auto instance = std::make_unique<FeatureManager>();
+	return *instance;
+}
+
 FeatureManager::FeatureManager()
 {
-	Features = std::unordered_map<std::string, std::unique_ptr<Feature>>();
-
 	AddFeature("Visuals::Watermark", std::make_unique<Features::Visuals::Watermark>());
 	AddFeature("Visuals::GhostWindow", std::make_unique<Features::Visuals::GhostWindow>());
 	AddFeature("Visuals::GhostESP", std::make_unique<Features::Visuals::GhostESP>());
@@ -82,13 +86,16 @@ FeatureManager::FeatureManager()
 	AddFeature("Movement::NoClip", std::make_unique<Features::Movement::NoClip>());
 	AddFeature("Movement::Speed", std::make_unique<Features::Movement::Speed>());
 	AddFeature("Movement::Teleport", std::make_unique<Features::Movement::Teleport>());
-
-	featureManager = this;
 }
 
 FeatureManager::~FeatureManager()
 {
-	featureManager = nullptr;
+	Features.clear();
+}
+
+void FeatureManager::Cleanup()
+{
+	Features.clear();
 }
 
 void FeatureManager::AddFeature(const std::string_view name, std::unique_ptr<Feature> feature)

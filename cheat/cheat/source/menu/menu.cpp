@@ -77,7 +77,7 @@ void Menu::Render()
 
 	if (ImGui::BeginTabBar("##tabBarMain"))
 	{
-		featureManager->OnMenu();
+		GetFeatureManagerInstance().OnMenu();
 
 		if (ImGui::BeginTabItem("Settings"))
 		{

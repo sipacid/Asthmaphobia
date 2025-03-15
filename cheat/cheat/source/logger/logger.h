@@ -17,6 +17,22 @@ namespace Asthmaphobia
 			Error
 		};
 
+	private:
+		const Level MinLevel;
+#ifdef _DEBUG
+		bool ConsoleExists;
+		HANDLE HConsole;
+#endif
+		std::mutex LogMutex;
+		std::ofstream FileOut;
+		std::string LogFilePath;
+
+		static constexpr std::string_view LevelToString(Level level);
+		static constexpr WORD LevelToColor(Level level);
+		static std::string GetTimestamp();
+		bool InitializeLogDirectory();
+
+	public:
 		explicit Logger(Level minLevel = Level::Call);
 		~Logger();
 
@@ -38,46 +54,27 @@ namespace Asthmaphobia
 		}
 
 		void ActualLog(Level level, std::string_view message);
-
-	private:
-		const Level MinLevel;
-#ifdef _DEBUG
-		bool ConsoleExists;
-		HANDLE HConsole;
-#endif
-		std::mutex LogMutex;
-		std::ofstream FileOut;
-		std::string LogFilePath;
-
-		static constexpr std::string_view LevelToString(Level level);
-		static constexpr WORD LevelToColor(Level level);
-		static std::string GetTimestamp();
-		bool InitializeLogDirectory();
+		void Cleanup();
 	};
 
-	inline Logger* logger;
+	Logger& GetLoggerInstance();
 }
 
 #ifdef _DEBUG
-#define LOG_DEBUG(...)        \
-	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Debug, __VA_ARGS__)
-#define LOG_CALL(...)        \
-	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Call, __VA_ARGS__)
+#define LOG_DEBUG(...) \
+    Asthmaphobia::GetLoggerInstance().Log(Asthmaphobia::Logger::Level::Debug, __VA_ARGS__)
+#define LOG_CALL(...) \
+    Asthmaphobia::GetLoggerInstance().Log(Asthmaphobia::Logger::Level::Call, __VA_ARGS__)
 #else
 #define LOG_DEBUG(...)
 #define LOG_CALL(...)
 #endif
 
-#define LOG_INFO(...)         \
-	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Info, __VA_ARGS__)
+#define LOG_INFO(...) \
+    Asthmaphobia::GetLoggerInstance().Log(Asthmaphobia::Logger::Level::Info, __VA_ARGS__)
 
-#define LOG_WARN(...)         \
-	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Warning, __VA_ARGS__)
+#define LOG_WARN(...) \
+    Asthmaphobia::GetLoggerInstance().Log(Asthmaphobia::Logger::Level::Warning, __VA_ARGS__)
 
-#define LOG_ERROR(...)        \
-	if (Asthmaphobia::logger) \
-	Asthmaphobia::logger->Log(Asthmaphobia::Logger::Level::Error, __VA_ARGS__)
+#define LOG_ERROR(...) \
+    Asthmaphobia::GetLoggerInstance().Log(Asthmaphobia::Logger::Level::Error, __VA_ARGS__)

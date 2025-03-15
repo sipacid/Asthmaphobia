@@ -15,7 +15,7 @@ namespace Asthmaphobia::Config
 		std::ifstream f(configPath);
 		Json data = Json::parse(f);
 
-		for (const auto& features = featureManager->GetFeatures(); const auto& feature : features)
+		for (const auto& features = GetFeatureManagerInstance().GetFeatures(); const auto& feature : features)
 		{
 			auto settings = feature.second->GetSettings()->GetSettings();
 			auto featureName = feature.first;
@@ -61,7 +61,7 @@ namespace Asthmaphobia::Config
 
 		using Json = nlohmann::json;
 		Json data;
-		for (const auto& features = featureManager->GetFeatures(); const auto& feature : features)
+		for (const auto& features = GetFeatureManagerInstance().GetFeatures(); const auto& feature : features)
 		{
 			auto settings = feature.second->GetSettings()->GetSettings();
 			auto featureName = feature.first;

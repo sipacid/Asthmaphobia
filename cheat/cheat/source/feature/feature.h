@@ -58,9 +58,18 @@ namespace Asthmaphobia
 
 	class FeatureManager
 	{
+		std::unordered_map<std::string, std::unique_ptr<Feature>> Features;
+
 	public:
+		FeatureManager(const FeatureManager&) = delete;
+		FeatureManager& operator=(const FeatureManager&) = delete;
+		FeatureManager(FeatureManager&&) = delete;
+		FeatureManager& operator=(FeatureManager&&) = delete;
+
 		FeatureManager();
 		~FeatureManager();
+
+		void Cleanup();
 
 		void AddFeature(std::string_view name, std::unique_ptr<Feature> feature);
 		[[nodiscard]] const auto& GetFeatures() const noexcept { return Features; }
@@ -78,10 +87,7 @@ namespace Asthmaphobia
 
 		void OnDraw() const;
 		void OnMenu() const;
-
-	private:
-		std::unordered_map<std::string, std::unique_ptr<Feature>> Features;
 	};
 
-	inline FeatureManager* featureManager{};
+	FeatureManager& GetFeatureManagerInstance();
 }

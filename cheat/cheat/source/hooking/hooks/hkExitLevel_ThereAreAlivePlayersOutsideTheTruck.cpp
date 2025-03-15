@@ -8,8 +8,8 @@ bool Hooks::hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exit
 {
 	LOG_CALL("Called ExitLevel_ThereAreAlivePlayersOutsideTheTruck");
 	if (globalRunning)
-		return featureManager->GetFeature<Features::Miscellaneous::LeavePeople>("Miscellaneous::LeavePeople")->
-		                       OnExitLevelThereAreAlivePlayersOutsideTheTruck(exitLevel, methodInfo);
+		return GetFeatureManagerInstance().GetFeature<Features::Miscellaneous::LeavePeople>("Miscellaneous::LeavePeople")->
+		                                   OnExitLevelThereAreAlivePlayersOutsideTheTruck(exitLevel, methodInfo);
 
 	return SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr(exitLevel, methodInfo);
 }

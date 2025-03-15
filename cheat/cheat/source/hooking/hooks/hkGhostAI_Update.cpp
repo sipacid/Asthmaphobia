@@ -10,8 +10,8 @@ void Hooks::hkGhostAI_Update(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo)
 	LOG_CALL("Called GhostAI_Update");
 	if (globalRunning)
 	{
-		featureManager->GetFeature<Features::Ghost::GhostModifier>("Ghost::GhostModifier")->OnGhostAIUpdate(ghostAI, methodInfo);
-		featureManager->GetFeature<Features::Ghost::Interactor>("Ghost::Interactor")->OnGhostAIUpdate(ghostAI, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Ghost::GhostModifier>("Ghost::GhostModifier")->OnGhostAIUpdate(ghostAI, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Ghost::Interactor>("Ghost::Interactor")->OnGhostAIUpdate(ghostAI, methodInfo);
 	}
 
 	SDK::GhostAI_Update_ptr(ghostAI, methodInfo);

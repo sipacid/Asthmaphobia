@@ -15,18 +15,38 @@ namespace Asthmaphobia
 			D3D_DRIVER_TYPE_REFERENCE, D3D_DRIVER_TYPE_SOFTWARE, D3D_DRIVER_TYPE_HARDWARE, D3D_DRIVER_TYPE_WARP
 		};
 
+		IDXGISwapChain* Swapchain{nullptr};
+		ID3D11Device* Device{nullptr};
+		ID3D11DeviceContext* Context{nullptr};
+		ID3D11RenderTargetView* TargetView{nullptr};
+		Id3DPresent PresentFunction{nullptr};
+
+		bool GameResourcesInitialized{false};
+
 	public:
+		Renderer(const Renderer&) = delete;
+		Renderer& operator=(const Renderer&) = delete;
+		Renderer(Renderer&&) = delete;
+		Renderer& operator=(Renderer&&) = delete;
+
 		explicit Renderer();
 		~Renderer();
-		bool GetSwapChain(IDXGISwapChain** swapChain, ID3D11Device** device) const;
+
+		void SetGameResources(IDXGISwapChain* swapChain, ID3D11Device* device, ID3D11DeviceContext* context);
+		bool CreateRenderTargetView();
+
+		bool InitializeSwapChain();
 		Id3DPresent GetPresent() const;
 
-		static inline IDXGISwapChain* Swapchain;
-		static inline HWND Window;
-		static inline ID3D11Device* Device;
-		static inline ID3D11DeviceContext* Context;
-		static inline ID3D11RenderTargetView* TargetView;
+		IDXGISwapChain* GetSwapchain() const { return Swapchain; }
+		ID3D11Device* GetDevice() const { return Device; }
+		ID3D11DeviceContext* GetContext() const { return Context; }
+		ID3D11RenderTargetView* GetTargetView() const { return TargetView; }
+
+		void Cleanup();
+
+		HWND Window{nullptr};
 	};
 
-	inline Renderer* renderer{};
+	Renderer& GetRendererInstance();
 }

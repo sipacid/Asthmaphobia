@@ -7,6 +7,12 @@
 
 using namespace Asthmaphobia;
 
+Logger& Asthmaphobia::GetLoggerInstance()
+{
+	static auto instance = std::make_unique<Logger>();
+	return *instance;
+}
+
 constexpr std::string_view Logger::LevelToString(const Level level)
 {
 	switch (level)
@@ -21,9 +27,9 @@ constexpr std::string_view Logger::LevelToString(const Level level)
 		return "[Warning]";
 	case Level::Error:
 		return "[Error]";
-	default:
-		return "[Unknown]";
 	}
+
+	return "[Unknown]";
 }
 
 constexpr WORD Logger::LevelToColor(const Level level)
@@ -39,9 +45,9 @@ constexpr WORD Logger::LevelToColor(const Level level)
 		return FOREGROUND_RED | FOREGROUND_GREEN;
 	case Level::Error:
 		return FOREGROUND_RED;
-	default:
-		return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
 	}
+
+	return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
 }
 
 bool Logger::InitializeLogDirectory()
@@ -64,7 +70,9 @@ bool Logger::InitializeLogDirectory()
 		LogFilePath = logDir + "\\log_" + timestamp + ".txt";
 		FileOut.open(LogFilePath, std::ios_base::out | std::ios_base::app);
 
-		FileOut.rdbuf()->pubsetbuf(nullptr, 0);
+		static constexpr size_t FILE_BUFFER_SIZE = 8192;
+		static char fileBuffer[FILE_BUFFER_SIZE];
+		FileOut.rdbuf()->pubsetbuf(fileBuffer, FILE_BUFFER_SIZE);
 
 		return FileOut.is_open();
 	}
@@ -78,8 +86,6 @@ Logger::Logger(Level minLevel) : MinLevel(minLevel)
 #ifdef _DEBUG
                                  , ConsoleExists(false), HConsole(nullptr)
 #endif
-
-
 {
 	if (!InitializeLogDirectory())
 		throw std::runtime_error("Failed to initialize log directory");
@@ -104,22 +110,11 @@ Logger::Logger(Level minLevel) : MinLevel(minLevel)
 		}
 	}
 #endif
-
-	logger = this;
 }
 
 Logger::~Logger()
 {
-	if (FileOut.is_open())
-		FileOut.close();
-
-
-#ifdef _DEBUG
-	if (ConsoleExists)
-		FreeConsole();
-#endif
-
-	logger = nullptr;
+	Cleanup();
 }
 
 std::string Logger::GetTimestamp()
@@ -137,9 +132,16 @@ void Logger::ActualLog(const Level level, const std::string_view message)
 	if (level < MinLevel)
 		return;
 
-	std::lock_guard lock(LogMutex);
 	const auto timestamp = GetTimestamp();
 	const auto levelStr = LevelToString(level);
+
+	std::string formattedMessage;
+	if (level > Level::Call)
+	{
+		formattedMessage = '[' + timestamp + "] " + std::string(levelStr) + ' ' + std::string(message) + '\n';
+	}
+
+	std::lock_guard lock(LogMutex);
 
 #ifdef _DEBUG
 	if (HConsole && HConsole != INVALID_HANDLE_VALUE)
@@ -152,7 +154,18 @@ void Logger::ActualLog(const Level level, const std::string_view message)
 
 	if (level > Level::Call && FileOut.is_open() && FileOut.good())
 	{
-		FileOut << '[' << timestamp << "] " << levelStr << ' ' << message << "\n";
+		FileOut << formattedMessage;
 		FileOut.flush();
 	}
+}
+
+void Logger::Cleanup()
+{
+	if (FileOut.is_open())
+		FileOut.close();
+
+#ifdef _DEBUG
+	if (ConsoleExists)
+		FreeConsole();
+#endif
 }

@@ -8,7 +8,7 @@ bool Hooks::hkLevelValues_IsPerfectGame(SDK::LevelValues* levelValues, SDK::Meth
 {
 	LOG_CALL("Called LevelValues_IsPerfectGame");
 	if (globalRunning)
-		return featureManager->GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnIsPerfectGame(levelValues, methodInfo);
+		return GetFeatureManagerInstance().GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnIsPerfectGame(levelValues, methodInfo);
 
 	return SDK::LevelValues_IsPerfectGame_ptr(levelValues, methodInfo);
 }

@@ -47,17 +47,19 @@ namespace Asthmaphobia
 		std::lock_guard lock(HookMutex);
 
 		// Check if hook already exists
-		for (const auto& hook : Hooks) {
-			if (hook.Name == functionName) {
+		for (const auto& hook : Hooks)
+		{
+			if (hook.Name == functionName)
+			{
 				return HookResult::AlreadyExists;
 			}
 		}
 
 		Hooks.push_back({
-			.Name= functionName,
-			.Original= reinterpret_cast<void**>(originalFunction),
-			.Hook= reinterpret_cast<void*>(hookFunction),
-			.Active= false
+			.Name = functionName,
+			.Original = reinterpret_cast<void**>(originalFunction),
+			.Hook = reinterpret_cast<void*>(hookFunction),
+			.Active = false
 		});
 
 		return HookResult::Success;

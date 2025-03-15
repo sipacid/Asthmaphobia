@@ -8,7 +8,7 @@ int32_t Hooks::hkLevelValues_GetInvestigationBonus(SDK::LevelValues* levelValues
 {
 	LOG_CALL("Called LevelValues_GetInvestigationBonus");
 	if (globalRunning)
-		return featureManager->GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnGetInvestigationBonus(levelValues, methodInfo);
+		return GetFeatureManagerInstance().GetFeature<Features::Miscellaneous::RewardModifier>("Miscellaneous::RewardModifier")->OnGetInvestigationBonus(levelValues, methodInfo);
 
 	return SDK::LevelValues_GetInvestigationBonus_ptr(levelValues, methodInfo);
 }

@@ -8,7 +8,7 @@ void Hooks::hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::Metho
 {
 	LOG_CALL("Called PlayerStamina_Update");
 	if (globalRunning)
-		featureManager->GetFeature<Features::Movement::InfiniteStamina>("Movement::InfiniteStamina")->OnPlayerStamina_Update(playerStamina, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Movement::InfiniteStamina>("Movement::InfiniteStamina")->OnPlayerStamina_Update(playerStamina, methodInfo);
 
 	SDK::PlayerStamina_Update_ptr(playerStamina, methodInfo);
 }

@@ -8,7 +8,8 @@ std::nullptr_t Hooks::hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, 
 {
 	LOG_CALL("Called Player_StartKillingPlayerNetworked");
 	if (globalRunning)
-		return featureManager->GetFeature<Features::Players::GodMode>("Players::GodMode")->OnPlayerStartKillingPlayerNetworked(player, a1, a2, photonMessageInfo, methodInfo);
+		return GetFeatureManagerInstance().GetFeature<Features::Players::GodMode>("Players::GodMode")->OnPlayerStartKillingPlayerNetworked(
+			player, a1, a2, photonMessageInfo, methodInfo);
 
 	return SDK::Player_StartKillingPlayerNetworked_ptr(player, a1, a2, photonMessageInfo, methodInfo);
 }
