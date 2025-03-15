@@ -7,6 +7,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(ExitLevel_Exit, void(*)(ExitLevel* exitLevel, void* photonMessageInfo, MethodInfo* methodInfo), 0xD071B0);
-	DECLARE_FUNCTION_POINTER(ExitLevel_ThereAreAlivePlayersOutsideTheTruck, bool(*)(ExitLevel* exitLevel, MethodInfo* methodInfo), 0xD078A0);
+	DECLARE_METHOD_POINTER(ExitLevel_Exit, void(*)(ExitLevel* exitLevel, void* photonMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "ExitLevel", "Exit", 1);
+	DECLARE_METHOD_POINTER(ExitLevel_ThereAreAlivePlayersOutsideTheTruck, bool(*)(ExitLevel* exitLevel, MethodInfo* methodInfo), "Assembly-CSharp", "", "ExitLevel", "ThereAreAlivePlayersOutsideTheTruck", 0);
 }

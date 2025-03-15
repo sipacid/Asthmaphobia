@@ -8,6 +8,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Collider_Get_Enabled, bool(*)(Collider* collider, MethodInfo* methodInfo), 0x476FBA0);
-	DECLARE_FUNCTION_POINTER(Collider_Set_Enabled, void(*)(Collider* collider, bool enabled, MethodInfo* methodInfo), 0x476FE30);
+	DECLARE_METHOD_POINTER(Collider_Get_Enabled, bool(*)(Collider* collider, MethodInfo* methodInfo), "UnityEngine.PhysicsModule", "UnityEngine", "Collider", "get_enabled", 0);
+	DECLARE_METHOD_POINTER(Collider_Set_Enabled, void(*)(Collider* collider, bool enabled, MethodInfo* methodInfo), "UnityEngine.PhysicsModule", "UnityEngine", "Collider", "set_enabled", 1);
 }

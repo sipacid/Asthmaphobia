@@ -8,6 +8,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Component_Get_Transform, Transform* (*)(Component* component, MethodInfo* methodInfo), 0x46E58F0);
-	DECLARE_FUNCTION_POINTER(Component_Get_GameObject, GameObject * (*)(Component* component, MethodInfo* methodInfo), 0x46E5840);
+	DECLARE_METHOD_POINTER(Component_Get_Transform, Transform* (*)(Component* component, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Component", "get_transform", 0);
+	DECLARE_METHOD_POINTER(Component_Get_GameObject, GameObject * (*)(Component* component, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Component", "set_transform", 1);
 }

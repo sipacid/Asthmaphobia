@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(PauseMenuController_Leave, void(*)(PauseMenuController* pauseMenuController, MethodInfo* methodInfo), 0x1CBC720);
+	DECLARE_METHOD_POINTER(PauseMenuController_Leave, void(*)(PauseMenuController* pauseMenuController, MethodInfo* methodInfo), "Assembly-CSharp", "", "PauseMenuController", "Leave", 0);
 }

@@ -41,5 +41,5 @@ namespace SDK
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), 0xF527D0);
+	DECLARE_METHOD_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), "Assembly-CSharp", "", "FirstPersonController", "Update", 0);
 }

@@ -38,5 +38,5 @@ namespace SDK
 		PlayerStaminaFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), 0x9D9AF0);
+	DECLARE_METHOD_POINTER(PlayerStamina_Update, void (*)(PlayerStamina* playerStamina, MethodInfo* methodInfo), "Assembly-CSharp", "", "PlayerStamina", "Update", 0);
 }

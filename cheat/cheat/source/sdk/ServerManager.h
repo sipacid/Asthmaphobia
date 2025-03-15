@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(ServerManager_KickPlayerNetworked, void(*)(ServerManager* serverManager, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), 0x7CB660);
+	DECLARE_METHOD_POINTER(ServerManager_KickPlayerNetworked, void(*)(ServerManager* serverManager, bool a1, void* photonMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "ServerManager", "KickPlayerNetworked", 2);
 }

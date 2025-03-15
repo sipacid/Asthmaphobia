@@ -7,6 +7,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(CursedItem_Use, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x1FF60B0);
-	DECLARE_FUNCTION_POINTER(CursedItem_BreakItem, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), 0x1FF44A0);
+	DECLARE_METHOD_POINTER(CursedItem_Use, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), "Assembly-CSharp", "", "CursedItem", "Use", 0);
+	DECLARE_METHOD_POINTER(CursedItem_BreakItem, void(*)(CursedItem* cursedItem, MethodInfo* methodInfo), "Assembly-CSharp", "", "CursedItem", "BreakItem", 0);
 }

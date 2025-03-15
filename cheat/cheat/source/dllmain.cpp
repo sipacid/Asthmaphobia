@@ -9,6 +9,8 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 {
 	try
 	{
+		SDK::InitializeSDK();
+
 		auto& logger = GetLoggerInstance();
 		auto& hooking = GetHookingInstance();
 		auto& renderer = GetRendererInstance();

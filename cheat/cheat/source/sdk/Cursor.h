@@ -15,7 +15,9 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(Cursor_Set_Visible, void(*)(bool visible, MethodInfo* methodInfo), 0x46CFE40);
-	DECLARE_FUNCTION_POINTER(Cursor_Get_LockState, CursorLockMode(*)(MethodInfo* methodInfo), 0x46CFDD0);
-	DECLARE_FUNCTION_POINTER(Cursor_Set_LockState, void(*)(CursorLockMode mode, MethodInfo* methodInfo), 0x46CFE00);
+	DECLARE_METHOD_POINTER(Cursor_Set_Visible, void(*)(bool visible, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Cursor", "set_visible", 1);
+
+	DECLARE_METHOD_POINTER(Cursor_Get_LockState, CursorLockMode(*)(MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Cursor", "get_lockState", 0);
+
+	DECLARE_METHOD_POINTER(Cursor_Set_LockState, void(*)(CursorLockMode mode, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Cursor", "set_lockState", 1);
 }

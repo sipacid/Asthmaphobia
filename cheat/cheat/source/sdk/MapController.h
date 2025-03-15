@@ -26,5 +26,5 @@ namespace SDK
 		MapControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), 0x1C772D0);
+	DECLARE_METHOD_POINTER(MapController_Start, void(*)(MapController* mapController, MethodInfo* methodInfo), "Assembly-CSharp", "", "MapController", "Start", 0);
 }

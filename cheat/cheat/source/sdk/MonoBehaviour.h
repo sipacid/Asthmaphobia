@@ -48,5 +48,5 @@ namespace SDK
 		MonoBehaviourPunFields _;
 	};
 
-	DECLARE_FUNCTION_POINTER(Behaviour_Set_Enabled, void(*)(Behaviour* behaviour, bool enabled, MethodInfo* methodInfo), 0x46E4EE0);
+	DECLARE_METHOD_POINTER(Behaviour_Set_Enabled, void(*)(Behaviour* behaviour, bool enabled, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Behaviour", "set_enabled", 1);
 }

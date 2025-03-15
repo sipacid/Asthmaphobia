@@ -101,10 +101,16 @@ namespace SDK
 		GhostAIFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int a1, MethodInfo* methodInfo), 0x19B1EB0);
-	DECLARE_FUNCTION_POINTER(GhostAI_ChangeState,
-	                         void(*)(GhostAI* ghostAI, GhostState ghostState, void* photonObjectInteract, void* photonObjectInteractArray, MethodInfo* methodInfo), 0x19B21A0);
-	DECLARE_FUNCTION_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), 0x19B3080);
-	DECLARE_FUNCTION_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19B5120);
-	DECLARE_FUNCTION_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), 0x19C4510);
+	DECLARE_METHOD_POINTER(GhostAI_Appear, void(*)(GhostAI* ghostAI, int a1, MethodInfo* methodInfo), "Assembly-CSharp", "", "GhostAI", "Appear", 1);
+
+	DECLARE_METHOD_POINTER(GhostAI_ChangeState,
+	                       void(*)(GhostAI* ghostAI, GhostState ghostState, void* photonObjectInteract, void* photonObjectInteractArray, MethodInfo* methodInfo), "Assembly-CSharp",
+	                       "", "GhostAI", "ChangeState", 3);
+
+	DECLARE_METHOD_POINTER(GhostAI_Hunting, void(*)(GhostAI* ghostAI, bool isHunting, int a1, void* PhotonMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "GhostAI",
+	                       "Hunting", 3);
+
+	DECLARE_METHOD_POINTER(GhostAI_Start, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), "Assembly-CSharp", "", "GhostAI", "Start", 0);
+
+	DECLARE_METHOD_POINTER(GhostAI_Update, void(*)(GhostAI* ghostAI, MethodInfo* methodInfo), "Assembly-CSharp", "", "GhostAI", "Update", 0);
 }

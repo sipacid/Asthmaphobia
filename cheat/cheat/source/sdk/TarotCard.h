@@ -7,5 +7,5 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(TarotCard_SetCard, void(*)(TarotCard* tarotCard, TarotCardType type, MethodInfo* methodInfo), 0x213A480);
+	DECLARE_METHOD_POINTER(TarotCard_SetCard, void(*)(TarotCard* tarotCard, TarotCardType type, MethodInfo* methodInfo), "Assembly-CSharp", "", "TarotCard", "SetCard", 1);
 }

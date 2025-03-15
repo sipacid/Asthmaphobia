@@ -27,5 +27,5 @@ namespace SDK
 		EvidenceControllerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(EvidenceController_Start, void(*)(EvidenceController* evidenceController, MethodInfo* methodInfo), 0x1BEB200);
+	DECLARE_METHOD_POINTER(EvidenceController_Start, void(*)(EvidenceController* evidenceController, MethodInfo* methodInfo), "Assembly-CSharp", "", "EvidenceController", "Start", 0);
 }

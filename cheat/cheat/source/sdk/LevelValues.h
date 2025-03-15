@@ -7,6 +7,6 @@ namespace SDK
 	{
 	};
 
-	DECLARE_FUNCTION_POINTER(LevelValues_GetInvestigationBonus, int(*)(LevelValues* levelValues, MethodInfo* methodInfo), 0x1C61460);
-	DECLARE_FUNCTION_POINTER(LevelValues_IsPerfectGame, bool(*)(LevelValues* levelValues, MethodInfo* methodInfo), 0x1C616C0);
+	DECLARE_METHOD_POINTER(LevelValues_GetInvestigationBonus, int(*)(LevelValues* levelValues, MethodInfo* methodInfo), "Assembly-CSharp", "", "LevelValues", "GetInvestigationBonusReward", 0);
+	DECLARE_METHOD_POINTER(LevelValues_IsPerfectGame, bool(*)(LevelValues* levelValues, MethodInfo* methodInfo), "Assembly-CSharp", "", "LevelValues", "IsPerfectGame", 0);
 }

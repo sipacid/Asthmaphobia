@@ -101,9 +101,9 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), 0x96E5C0)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), 0x96EC90)
-	DECLARE_FUNCTION_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo), 0x96EBD0)
-	DECLARE_FUNCTION_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), 0x96F5A0)
-	DECLARE_FUNCTION_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), 0x96F6B0)
+	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 1)
+	DECLARE_METHOD_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayer", 0)
+	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
+	DECLARE_METHOD_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "Teleport", 1)
+	DECLARE_METHOD_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "ToggleFreezePlayer", 1)
 }
