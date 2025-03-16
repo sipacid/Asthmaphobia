@@ -15,10 +15,11 @@ namespace SDK
 		DotsProjector
 	};
 
+	// GhostEvidence[]
 	struct GhostEvidenceArray
 	{
-		void* Clazz; // GhostEvidenceArrayClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		GhostEvidence Vector[65535];
@@ -32,10 +33,11 @@ namespace SDK
 		void* SyncRoot; // Object
 	};
 
+	// List<GhostEvidence>
 	struct ListGhostEvidence
 	{
-		void* Clazz; // ListGhostEvidenceClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		ListGhostEvidenceFields Fields;
 	};
 }

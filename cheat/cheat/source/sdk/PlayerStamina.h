@@ -7,11 +7,11 @@ namespace SDK
 
 	struct PlayerStaminaFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		void* OutOfStaminaSource; // AudioSource
 		void* OutOfBreathMale; // AudioClip[]
 		void* OutOfBreathFemale; // AudioClip[]
-		Player* Player; // Player
+		Player* Player;
 		bool MaleSoundsOverride;
 		bool FemaleSoundsOverride;
 		bool Field6;
@@ -33,8 +33,8 @@ namespace SDK
 
 	struct PlayerStamina
 	{
-		void* Clazz; // PlayerStaminaClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		PlayerStaminaFields Fields;
 	};
 

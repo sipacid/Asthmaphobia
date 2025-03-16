@@ -22,8 +22,8 @@ namespace SDK
 
 	struct MouseLook
 	{
-		void* Clazz; // PlayerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		MouseLookFields Fields;
 	};
 }

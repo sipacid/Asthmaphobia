@@ -26,7 +26,7 @@ namespace SDK
 		void* Field101; // ???
 		float Field11;
 		void* Field12; // SpeechRecognitionController
-		LevelController* LevelController; // LevelController
+		LevelController* LevelController;
 		void* Field14; // MultiplayerController
 		bool Field15;
 		int Field16;
@@ -37,11 +37,14 @@ namespace SDK
 
 	struct GameController
 	{
-		void* Clazz; // GameControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		GameControllerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(GameController_Exit, void(*)(GameController* gameController, void* photoMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "GameController", "Exit", 1);
-	DECLARE_METHOD_POINTER(GameController_GetAveragePlayerInsanity, float(*)(GameController* gameController, MethodInfo* methodInfo), "Assembly-CSharp", "", "GameController", "GetAveragePlayerInsanity", 0);
+	DECLARE_METHOD_POINTER(GameController_Exit, void(*)(GameController* gameController, void* photoMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "GameController",
+	                       "Exit", 1);
+
+	DECLARE_METHOD_POINTER(GameController_GetAveragePlayerInsanity, float(*)(GameController* gameController, MethodInfo* methodInfo), "Assembly-CSharp", "", "GameController",
+	                       "GetAveragePlayerInsanity", 0);
 }

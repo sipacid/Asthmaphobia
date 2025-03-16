@@ -16,7 +16,7 @@ namespace SDK
 		void* RotatingObjects;
 		void* LoopSource; // AudioSource
 		void* Noise; // Noise
-		Transform* Field8; // Transform
+		Transform* Transform0;
 		void* OnClip; // AudioClip
 		void* OffClip; // AudioClip
 		bool IsOn;
@@ -24,22 +24,24 @@ namespace SDK
 		void* PhotonInteract; // PhotonObjectInteract
 		int Field14;
 		int Field15;
-		Transform* MapIcon; // Transform
-		Transform* ShakeObject; // Transform
-		Transform* HandleObject; // Transform
-		Vector3 HandleOnAngle; // Vector3
-		Vector3 HandleOffAngle; // Vector3
-		void* BrokenFuseBoxObject; // GameObject
+		Transform* MapIcon;
+		Transform* ShakeObject;
+		Transform* HandleObject;
+		Vector3 HandleOnAngle;
+		Vector3 HandleOffAngle;
+		GameObject* BrokenFuseBoxObject;
 		bool Field22;
 		void* Field23; // FuseBox.???
 	};
 
 	struct FuseBox
 	{
-		void* Clazz; // FuseBoxClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		FuseBoxFields Fields;
 	};
 
 	DECLARE_METHOD_POINTER(FuseBox_Start, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), "Assembly-CSharp", "", "FuseBox", "Start", 0);
+
+	DECLARE_METHOD_POINTER(FuseBox_Use, void (*)(FuseBox* fuseBox, MethodInfo* methodInfo), "Assembly-CSharp", "", "FuseBox", "Use", 0);
 }

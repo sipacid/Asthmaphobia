@@ -15,10 +15,11 @@ namespace SDK
 		MonkeyPaw
 	};
 
+	// CursedItemEnum[]
 	struct CursedItemEnumArray
 	{
-		void* Clazz; // CursedItemEnumArray
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		CursedItemType Vector[65535];
@@ -32,10 +33,11 @@ namespace SDK
 		void* SyncRoot; // Object
 	};
 
+	// List<CursedItemEnum>
 	struct ListCursedItemEnum
 	{
-		void* Clazz; // List<???> Class
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		ListCursedItemEnumFields Fields;
 	};
 
@@ -61,10 +63,11 @@ namespace SDK
 
 	struct CursedItemController
 	{
-		void* Clazz; // CursedItemControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		CursedItemControllerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(CursedItemController_Awake, void(*)(CursedItemController* cursedItemController, MethodInfo* methodInfo), "Assembly-CSharp", "", "CursedItemsController", "Awake", 0);
+	DECLARE_METHOD_POINTER(CursedItemController_Awake, void(*)(CursedItemController* cursedItemController, MethodInfo* methodInfo), "Assembly-CSharp", "", "CursedItemsController",
+	                       "Awake", 0);
 }

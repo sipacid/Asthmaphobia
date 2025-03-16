@@ -6,21 +6,22 @@ namespace SDK
 	struct DeadZoneControllerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		void* Field0; // GameObject
-		void* DeathRoomObjects; // GameObject[]
-		Transform* PlayerSpawn; // Transform
-		Vector3 Field3; // Vector3
-		void* DeadZoneLightObj; // GameObject
+		GameObject* Field0;
+		GameObjectArray* DeathRoomObjects;
+		Transform* PlayerSpawn;
+		Vector3 Field3;
+		GameObject* DeadZoneLightObj;
 		void* DeadZoneLightSmashAudio; // AudioSource
-		GameController* GameController; // GameController
+		GameController* GameController;
 	};
 
 	struct DeadZoneController
 	{
-		void* Clazz; // DeadZoneControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		DeadZoneControllerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(DeadZoneController_Awake, void(*)(DeadZoneController* deadZoneController, MethodInfo* methodInfo), "Assembly-CSharp", "", "DeadZoneController", "Awake", 0);
+	DECLARE_METHOD_POINTER(DeadZoneController_Awake, void(*)(DeadZoneController* deadZoneController, MethodInfo* methodInfo), "Assembly-CSharp", "", "DeadZoneController", "Awake",
+	                       0);
 }

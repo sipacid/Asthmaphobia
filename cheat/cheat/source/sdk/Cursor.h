@@ -3,14 +3,13 @@
 
 namespace SDK
 {
-	enum class CursorLockMode
+	enum class CursorLockMode : int32_t
 	{
 		None,
 		Locked,
 		Confined
 	};
 
-	// UnityEngine.CoreModule.UnityEngine.Cursor
 	struct Cursor
 	{
 	};

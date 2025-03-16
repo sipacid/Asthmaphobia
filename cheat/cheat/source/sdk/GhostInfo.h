@@ -9,17 +9,17 @@ namespace SDK
 	struct GhostInfoFields
 	{
 		MonoBehaviourPunFields MonoBehaviourPunFields; // MonoBehaviourPun derived class field
-		GhostTraits GhostTraits; // GhostTraits
-		GhostAI* Ghost; // GhostAI
-		LevelRoom* LevelRoom; // LevelRoom
+		GhostTraits GhostTraits;
+		GhostAI* Ghost;
+		LevelRoom* LevelRoom;
 		float Field3;
 		bool Field4;
 	};
 
 	struct GhostInfo
 	{
-		void* Clazz; // GhostInfoClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		GhostInfoFields Fields;
 	};
 }

@@ -6,12 +6,12 @@ namespace SDK
 {
 	struct FirstPersonControllerFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		bool CanMove;
 		bool CanTurn;
 		bool IsSprinting;
 		bool IsMoving;
-		bool canSprint;
+		bool CanSprint;
 		float RunstepLength; // range 0 - 1
 		float StickToGroundForce;
 		float GravityMultiplier;
@@ -25,7 +25,7 @@ namespace SDK
 		Camera* Camera;
 		Vector2 Input;
 		Vector3 MoveDir;
-		PhysicsCharacterController* CharacterController; // PhysicsCharacterController
+		PhysicsCharacterController* CharacterController;
 		bool Crouching;
 		float CurrentSpeed;
 		Vector3 DesiredMove;
@@ -36,10 +36,11 @@ namespace SDK
 
 	struct FirstPersonController
 	{
-		void* Clazz; // FirtsPersonControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		FirstPersonControllerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), "Assembly-CSharp", "", "FirstPersonController", "Update", 0);
+	DECLARE_METHOD_POINTER(FirstPersonController_Update, void (*)(FirstPersonController* firstPersonController, MethodInfo* methodInfo), "Assembly-CSharp", "",
+	                       "FirstPersonController", "Update", 0);
 }

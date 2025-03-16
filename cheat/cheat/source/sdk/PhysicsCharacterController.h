@@ -7,7 +7,7 @@ namespace SDK
 {
 	struct PhysicsCharacterControllerFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		RaycastHit Field0;
 		Vector3 Field1;
 		float Field2;
@@ -32,8 +32,8 @@ namespace SDK
 
 	struct PhysicsCharacterController
 	{
-		void* Clazz; // PhysicsCharacterControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		PhysicsCharacterControllerFields Fields;
 	};
 }

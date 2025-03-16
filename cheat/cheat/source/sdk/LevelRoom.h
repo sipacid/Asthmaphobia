@@ -9,12 +9,12 @@ namespace SDK
 		void* Field1; // List<LightSwitch>
 		void* Field2; // Door[]
 		void* RoomColliders; // List<Collider>
-		Transform* Field4; // Transform
+		Transform* Field4;
 		void* AudioReverbZone; // AudioReverbZone
 		int32_t Field5;
 		void* Field7; // BoxCollider
 		int32_t Field6;
-		String* RoomName; // String
+		String* RoomName;
 		float Field10;
 		float Field11;
 		float Field12;
@@ -27,8 +27,8 @@ namespace SDK
 
 	struct LevelRoom
 	{
-		void* Clazz; // LevelRoomClass
-		void* Monitor; // Monitor
+		void* Clazz;
+		void* Monitor;
 		LevelRoomFields Fields;
 	};
 }

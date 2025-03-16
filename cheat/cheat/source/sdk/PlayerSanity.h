@@ -8,9 +8,9 @@ namespace SDK
 
 	struct PlayerSanityFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		void* View; // PhotonView
-		Player* Player; // Player
+		Player* Player;
 		float Insanity;
 		float Field2;
 		float Field3;
@@ -26,10 +26,11 @@ namespace SDK
 
 	struct PlayerSanity
 	{
-		void* Clazz; // PlayerSanityClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		PlayerSanityFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(PlayerSanity_SetInsanity, void(*)(PlayerSanity* playerSanity, int insanity, MethodInfo* methodInfo), "Assembly-CSharp", "", "PlayerSanity", "SetInsanity", 1);
+	DECLARE_METHOD_POINTER(PlayerSanity_SetInsanity, void(*)(PlayerSanity* playerSanity, int insanity, MethodInfo* methodInfo), "Assembly-CSharp", "", "PlayerSanity",
+	                       "SetInsanity", 1);
 }

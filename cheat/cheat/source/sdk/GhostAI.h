@@ -32,15 +32,15 @@ namespace SDK
 
 	struct GhostAIFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		void* Field0; // ???
-		GhostState GhostState; // GhostState
+		GhostState GhostState;
 		void* PhotonView; // PhotonView
-		GhostInfo* GhostInfo; // GhostInfo
+		GhostInfo* GhostInfo;
 		void* NavMeshAgent; // NavMeshAgent
 		void* GhostAudio; // GhostAudio
 		void* GhostInteraction; // GhostInteraction
-		GhostActivity* GhostActivity; // GhostActivity
+		GhostActivity* GhostActivity;
 		void* NormalModel; // GhostModel
 		void* HalloweenModel; // GhostModel
 		void* HolidayModel; // GhostModel
@@ -54,16 +54,16 @@ namespace SDK
 		void* SanityDrainer; // SanityDrainer
 		bool Field14;
 		int32_t LayerMask; // LayerMask
-		Transform* Transform0; // Transform
-		Transform* Transform1; // Transform
-		Transform* Transform2; // Transform
+		Transform* Transform0;
+		Transform* Transform1;
+		Transform* Transform2;
 		float Speed;
 		float Field22;
 		float Field23;
 		bool Field24;
 		bool Field25;
-		Vector3 Field26; // Vector3
-		void* Field27; // GameObject
+		Vector3 Field26;
+		GameObject* Field27;
 		bool Field28;
 		bool Field29;
 		bool Field30;
@@ -73,9 +73,9 @@ namespace SDK
 		bool Field33;
 		bool Field34;
 		bool Field35;
-		Player* BansheeTarget; // Player
+		Player* BansheeTarget;
 		int32_t Field37;
-		Vector3 Field38; // Vector3
+		Vector3 Field38;
 		void* Field39; // float[]
 		void* Field40; // float[]
 		void* Field41; // float[]
@@ -96,8 +96,8 @@ namespace SDK
 
 	struct GhostAI
 	{
-		void* Clazz; // GhostAIClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		GhostAIFields Fields;
 	};
 

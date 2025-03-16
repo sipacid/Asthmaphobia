@@ -275,6 +275,7 @@
     <ClInclude Include="source\sdk\LevelValues.h" />
     <ClInclude Include="source\sdk\MapController.h" />
     <ClInclude Include="source\sdk\Marshal.h" />
+    <ClInclude Include="source\sdk\Matrix4x4.h" />
     <ClInclude Include="source\sdk\MethodInfo.h" />
     <ClInclude Include="source\sdk\MonoBehaviour.h" />
     <ClInclude Include="source\sdk\MouseLook.h" />

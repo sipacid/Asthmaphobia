@@ -11,8 +11,8 @@ namespace SDK
 
 	struct String
 	{
-		void* Clazz; // StringClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		StringFields Fields;
 	};
 }

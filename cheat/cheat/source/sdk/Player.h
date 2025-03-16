@@ -10,7 +10,7 @@ namespace SDK
 
 	struct PlayerFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		void* Field0; // PhotonView
 		bool IsDead;
 		bool Field1;
@@ -72,15 +72,15 @@ namespace SDK
 
 	struct Player
 	{
-		void* Clazz; // PlayerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		PlayerFields Fields;
 	};
 
 	struct PlayerArray
 	{
-		void* Clazz; // PlayerArrayClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		Player* Vector[65535];
@@ -96,14 +96,19 @@ namespace SDK
 
 	struct ListPlayer
 	{
-		void* Clazz; // List<Player> Class
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		ListPlayerFields Fields;
 	};
 
 	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 1)
+
 	DECLARE_METHOD_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayer", 0)
-	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
+
+	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo),
+	                       "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
+
 	DECLARE_METHOD_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "Teleport", 1)
+
 	DECLARE_METHOD_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "ToggleFreezePlayer", 1)
 }

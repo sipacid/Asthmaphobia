@@ -32,8 +32,8 @@ namespace SDK
 
 	struct MonoBehaviour
 	{
-		void* Clazz; // MonoBehaviourClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		MonoBehaviourFields Fields;
 	};
 
@@ -48,5 +48,6 @@ namespace SDK
 		MonoBehaviourPunFields _;
 	};
 
-	DECLARE_METHOD_POINTER(Behaviour_Set_Enabled, void(*)(Behaviour* behaviour, bool enabled, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Behaviour", "set_enabled", 1);
+	DECLARE_METHOD_POINTER(Behaviour_Set_Enabled, void(*)(Behaviour* behaviour, bool enabled, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Behaviour",
+	                       "set_enabled", 1);
 }

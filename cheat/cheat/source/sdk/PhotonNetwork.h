@@ -3,7 +3,6 @@
 
 namespace SDK
 {
-	// PhotonUnityNetworking.Photon.Pun.PhotonNetwork
 	struct PhotonNetwork
 	{
 	};

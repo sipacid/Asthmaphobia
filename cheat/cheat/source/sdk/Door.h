@@ -3,9 +3,11 @@
 
 namespace SDK
 {
+	struct Door;
+
 	struct DoorFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		bool Field0;
 		bool Field1;
 		bool Field2;
@@ -25,7 +27,7 @@ namespace SDK
 		Rigidbody* Rigidbody;
 		void* Field11; // PhotonObjectInteract
 		void* Field12; // Fingerprint
-		void* Field13; // Collider
+		Collider* Field13;
 		float Field14;
 		void* Noise; // Noise
 		void* Field15; // ConfigurableJoint
@@ -38,11 +40,11 @@ namespace SDK
 		Vector3 Field19;
 		Vector3 Field20;
 		Vector3 ForwardDirection;
-		void* Field21; // Door
+		Door* Field21;
 		int32_t Field22; // Enum: None, Main, Secondary, PermanentLock
 		void* HuntCollider; // BoxCollider
 		void* ClothDoor; // ClothDoor
-		void* Field23; // Transform
+		Transform* Field23; // Transform
 		float Field24;
 		void* CollideWithColliders; // Collider[]
 		float CloseDoorDistance;
@@ -60,21 +62,24 @@ namespace SDK
 
 	struct Door
 	{
-		void* Clazz; // DoorClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		DoorFields Fields;
 	};
 
 	struct DoorArray
 	{
-		void* Clazz; // DoorArrayClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		Door* Vector[65535];
 	};
 
-	DECLARE_METHOD_POINTER(Door_DisableOrEnableCollider, void(*)(Door* door, bool collisionEnabled, MethodInfo* methodInfo), "Assembly-CSharp", "", "Door", "DisableOrEnableCollider", 1);
+	DECLARE_METHOD_POINTER(Door_DisableOrEnableCollider, void(*)(Door* door, bool collisionEnabled, MethodInfo* methodInfo), "Assembly-CSharp", "", "Door",
+	                       "DisableOrEnableCollider", 1);
+
 	DECLARE_METHOD_POINTER(Door_DisableOrEnableDoor, void(*)(Door* door, bool a1, bool a2, MethodInfo* methodInfo), "Assembly-CSharp", "", "Door", "DisableOrEnableDoor", 2);
+
 	DECLARE_METHOD_POINTER(Door_LockDoorForTime, void(*)(Door* door, float time, bool locked, MethodInfo* methodInfo), "Assembly-CSharp", "", "Door", "LockDoorForTime", 2);
 }

@@ -7,21 +7,21 @@ namespace SDK
 	{
 		MonoBehaviourPunFields MonoBehaviourPunFields;
 		void* Field0; // LevelController.SmallMapVariation[]
-		LevelRoom* Field1; // LevelRoom
-		LevelRoom* Field2; // LevelRoom
-		GhostAI* GhostAI; // GhostAI
-		DoorArray* DoorArray0; // Door[]
+		LevelRoom* Field1;
+		LevelRoom* Field2;
+		GhostAI* GhostAI;
+		DoorArray* DoorArray0;
 		void* Field5; // LevelRoom[]
 		void* Field6; // LevelRoom[]
 		void* Field7; // Transform[]
 		void* Field8; // Transform[]
-		LevelRoom* Field9; // LevelRoom
+		LevelRoom* Field9;
 		bool Field10;
-		FuseBox* Field11; // FuseBox
-		GameController* GameController; // GameController
+		FuseBox* FuseBox;
+		GameController* GameController;
 		void* SoundController; // SoundController
 		void* Field15; // ItemSpawner
-		DoorArray* DoorArray1; // Door[]
+		DoorArray* DoorArray1;
 		void* Field17; // LevelArea[]
 		void* Field18; // List<Crucifix>
 		void* Field19; // List<FireSource>
@@ -40,8 +40,8 @@ namespace SDK
 
 	struct LevelController
 	{
-		void* Clazz; // LevelControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		LevelControllerFields Fields;
 	};
 }

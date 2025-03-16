@@ -5,24 +5,24 @@ namespace SDK
 {
 	struct MapControllerFields
 	{
-		MonoBehaviourFields MonoBehaviourFields; // MonoBehaviour derived class field
+		MonoBehaviourFields MonoBehaviourFields;
 		void* PlayerIcons; // List<RectTransform>
-		ListPlayer* Players; // List<Player>
+		ListPlayer* Players;
 		void* AllFloors;
 		int32_t Index;
 		float IconScale;
 		float PlayerIconScale;
 		void* MotionSensorData; // MotionSensorData
-		GameController* GameController; // GameController
+		GameController* GameController;
 		void* DefaultFloor; // LevelRoom.?????
-		Vector3 PlayerIconOffset; // Vector3
-		Camera* MapCamera; // Camera
+		Vector3 PlayerIconOffset;
+		Camera* MapCamera;
 	};
 
 	struct MapController
 	{
-		void* Clazz; // MapControllerClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		MapControllerFields Fields;
 	};
 

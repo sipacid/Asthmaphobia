@@ -35,7 +35,7 @@ SDK::Player* Helper::GetLocalPlayer()
 
 std::string Helper::EnumToString(SDK::GhostType ghostType)
 {
-	std::string ghostTypeString;
+	std::string ghostTypeString = "Unknown";
 
 	switch (ghostType)
 	{
@@ -111,9 +111,6 @@ std::string Helper::EnumToString(SDK::GhostType ghostType)
 	case SDK::GhostType::Thaye:
 		ghostTypeString = "Thaye";
 		break;
-	default:
-		ghostTypeString = "Unknown";
-		break;
 	}
 
 	return ghostTypeString;
@@ -121,7 +118,7 @@ std::string Helper::EnumToString(SDK::GhostType ghostType)
 
 std::string Helper::EnumToString(const SDK::GhostEvidence ghostEvidence)
 {
-	std::string evidenceTypeString;
+	std::string evidenceTypeString = "Unknown";
 
 	switch (ghostEvidence)
 	{
@@ -149,9 +146,6 @@ std::string Helper::EnumToString(const SDK::GhostEvidence ghostEvidence)
 	case SDK::GhostEvidence::DotsProjector:
 		evidenceTypeString = "D.O.T.S. Projector";
 		break;
-	default:
-		evidenceTypeString = "Unknown";
-		break;
 	}
 
 	return evidenceTypeString;
@@ -164,6 +158,7 @@ bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScr
 	GetWindowRect(hGame, &rect);
 
 	const auto screenHeight = rect.bottom - rect.top;
+	const auto screenWidth = rect.right;
 	const auto camera = GetLocalPlayer()->Fields.Camera;
 	if (camera == nullptr)
 		return false;
@@ -184,10 +179,50 @@ bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScr
 	if (dot <= 0)
 		return false;
 
-	const auto worldToScreen = SDK::Camera_WorldToScreenPoint_ptr(camera, vWorldPosition, nullptr);
-	vScreenPosition.X = worldToScreen.X;
-	vScreenPosition.Y = static_cast<float>(screenHeight) - worldToScreen.Y;
-	vScreenPosition.Z = worldToScreen.Z;
+	SDK::Matrix4x4 viewMatrix = SDK::Camera_Get_WorldToCameraMatrix_ptr(camera, nullptr);
+	SDK::Matrix4x4 projMatrix = SDK::Camera_Get_ProjectionMatrix_ptr(camera, nullptr);
+
+	// First apply the worldToCamera (view) matrix to convert from world to camera space
+	// Matrix multiplication with a point: Matrix * (x,y,z,1)
+	// Using Unity's Matrix4x4 field naming: mrc where r=row, c=column
+	float camX = viewMatrix.m00 * vWorldPosition.X + viewMatrix.m01 * vWorldPosition.Y +
+		viewMatrix.m02 * vWorldPosition.Z + viewMatrix.m03;
+
+	float camY = viewMatrix.m10 * vWorldPosition.X + viewMatrix.m11 * vWorldPosition.Y +
+		viewMatrix.m12 * vWorldPosition.Z + viewMatrix.m13;
+
+	float camZ = viewMatrix.m20 * vWorldPosition.X + viewMatrix.m21 * vWorldPosition.Y +
+		viewMatrix.m22 * vWorldPosition.Z + viewMatrix.m23;
+
+	float camW = viewMatrix.m30 * vWorldPosition.X + viewMatrix.m31 * vWorldPosition.Y +
+		viewMatrix.m32 * vWorldPosition.Z + viewMatrix.m33;
+
+	// Then apply the projection matrix to convert from camera to clip space
+	float clipX = projMatrix.m00 * camX + projMatrix.m01 * camY +
+		projMatrix.m02 * camZ + projMatrix.m03 * camW;
+
+	float clipY = projMatrix.m10 * camX + projMatrix.m11 * camY +
+		projMatrix.m12 * camZ + projMatrix.m13 * camW;
+
+	float clipZ = projMatrix.m20 * camX + projMatrix.m21 * camY +
+		projMatrix.m22 * camZ + projMatrix.m23 * camW;
+
+	float clipW = projMatrix.m30 * camX + projMatrix.m31 * camY +
+		projMatrix.m32 * camZ + projMatrix.m33 * camW;
+
+	// Check if the point is behind the camera after projection
+	if (clipW < 0.1f)
+		return false;
+
+	// Perspective divide to get normalized device coordinates
+	float ndcX = clipX / clipW;
+	float ndcY = clipY / clipW;
+	float ndcZ = clipZ / clipW;
+
+	// Transform from NDC to screen coordinates
+	vScreenPosition.X = (ndcX * 0.5f + 0.5f) * screenWidth;
+	vScreenPosition.Y = (1.0f - (ndcY * 0.5f + 0.5f)) * screenHeight; // Flip Y for screen space
+	vScreenPosition.Z = ndcZ;
 
 	return true;
 }

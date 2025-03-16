@@ -10,13 +10,13 @@ namespace SDK
 		bool PlayerReady;
 		int PlayerCharacterIndex;
 		void* PhotonPlayer; // Photon.Realtime.Player
-		String* UnityPlayerID; // string
+		String* UnityPlayerID;
 		int Experience;
 		int Level;
 		int Prestige;
-		Player* Player; // Player
+		Player* Player;
 		float PlayerVolume;
-		String* AccountName; // string
+		String* AccountName;
 		bool IsKicked;
 		bool IsHacker;
 		bool IsBlocked;
@@ -33,22 +33,24 @@ namespace SDK
 		int32_t LegacyBackground;
 		int32_t LegacyColor;
 		void* PlayerEquipment;
-		bool hasBroughtItems;
-		int32_t totalEquipmentCost;
+		bool HasBroughtItems;
+		int32_t TotalEquipmentCost;
 		void* OnBlockMuteStateChanged;
 	};
 
+	// Network.PlayerSpot
 	struct NetworkPlayerSpot
 	{
-		void* Clazz; // Network.PlayerSpotClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		NetworkPlayerSpotFields Fields;
 	};
 
+	// Network.PlayerSpot[]
 	struct NetworkPlayerSpotArray
 	{
-		void* Clazz; // EvidenceArrayClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		NetworkPlayerSpot* Vector[32];
@@ -62,10 +64,11 @@ namespace SDK
 		void* SyncRoot; // Object
 	};
 
+	// List<Network.PlayerSpot>
 	struct ListNetworkPlayerSpot
 	{
-		void* Clazz; // List<Network.PlayerSpot>Class
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		ListNetworkPlayerSpotFields Fields;
 	};
 
@@ -73,7 +76,7 @@ namespace SDK
 	{
 		MonoBehaviourPunCallbacksFields MonoBehaviourPunCallbacksFields; // MonoBehaviourPunCallbacksFields derived class field
 		Player* LocalPlayer;
-		ListNetworkPlayerSpot* NetworkPlayerSpots; // List<Network.PlayerSpot>
+		ListNetworkPlayerSpot* NetworkPlayerSpots;
 		void* Field2; // UnityEvent
 		void* Field3; // UnityEvent
 		void* Field4; // UnityEvent
@@ -95,10 +98,10 @@ namespace SDK
 
 	struct Network
 	{
-		void* Clazz; // NetworkClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		NetworkFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), "Assembly-CSharp", "", "Network", "get_Network", 0);
+	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x1C8A3C0);
 }

@@ -9,7 +9,10 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 {
 	try
 	{
-		SDK::InitializeSDK();
+		if (!SDK::InitializeSDK())
+		{
+			throw std::runtime_error("Failed to initialize SDK");
+		}
 
 		auto& logger = GetLoggerInstance();
 		auto& hooking = GetHookingInstance();
@@ -72,6 +75,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 	catch (const std::exception& e)
 	{
 		LOG_ERROR(std::string("Exception in main Asthmaphobia thread: ") + e.what());
+		MessageBoxA(nullptr, e.what(), "Asthmaphobia Exception", MB_ICONERROR);
 	}
 
 	FreeLibraryAndExitThread(globalModule, 0);

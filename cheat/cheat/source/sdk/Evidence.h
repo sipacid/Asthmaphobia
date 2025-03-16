@@ -13,15 +13,16 @@ namespace SDK
 
 	struct Evidence
 	{
-		void* Clazz; // EvidenceClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		EvidenceFields Fields;
 	};
 
+	// Evidence[]
 	struct EvidenceArray
 	{
-		void* Clazz; // EvidenceArrayClass
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		void* Bounds; // Il2CppArrayBounds
 		void* MaxLength; // Il2CppArraySizeT
 		Evidence* Vector[65535];
@@ -35,10 +36,11 @@ namespace SDK
 		void* SyncRoot; // Object
 	};
 
+	// List<Evidence>
 	struct ListEvidence
 	{
-		void* Clazz; // List<Evidence> Class
-		void* Monitor; // MonitorData
+		void* Clazz;
+		void* Monitor;
 		ListEvidenceFields Fields;
 	};
 
