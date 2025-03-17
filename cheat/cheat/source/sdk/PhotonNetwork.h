@@ -3,9 +3,7 @@
 
 namespace SDK
 {
-	struct PhotonNetwork
-	{
-	};
+	struct PhotonNetwork;
 
 	DECLARE_METHOD_POINTER(PhotonNetwork_Get_IsConnected, bool(*)(MethodInfo* methodInfo), "PhotonUnityNetworking", "Photon.Pun", "PhotonNetwork", "get_IsConnected", 0)
 

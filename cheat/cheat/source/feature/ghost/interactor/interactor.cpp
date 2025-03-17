@@ -4,10 +4,17 @@ using namespace Asthmaphobia::Features::Ghost;
 
 Interactor::Interactor() : Feature("Interactor", "Force the ghost to interact", FeatureCategory::Ghost)
 {
+	GhostActivityMultiplier = std::make_shared<Setting>("Ghost activity multiplier", "How active the ghost is.", 3.0f);
+	Settings_->AddSetting(GhostActivityMultiplier);
 }
 
 void Interactor::OnMenu()
 {
+	ImGui::Checkbox("Enable custom ghost activity##ghostInteractor", &std::get<bool>(EnabledSetting->GetValue()));
+	if (ImGui::IsItemHovered())
+		ImGui::SetTooltip("This will only work if you are the host.");
+	ImGui::SliderFloat("Activity Multiplier##ghostInteractor", &std::get<float>(GhostActivityMultiplier->GetValue()), 0.0f, 15.0f, "%.1f");
+
 	if (ImGui::Button("Force ability##interactor"))
 	{
 		if (GameState::ghostAI == nullptr)
@@ -119,5 +126,10 @@ void Interactor::OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* met
 	{
 		SDK::GhostActivity_TwinInteraction_ptr(ghost->Fields.GhostActivity, true, methodInfo);
 		ForceTwinInteraction = false;
+	}
+
+	if (std::get<bool>(EnabledSetting->GetValue()))
+	{
+		ghost->Fields.GhostInfo->Fields.ActivityMultiplier = std::get<float>(GhostActivityMultiplier->GetValue());
 	}
 }

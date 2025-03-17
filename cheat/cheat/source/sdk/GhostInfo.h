@@ -12,7 +12,7 @@ namespace SDK
 		GhostTraits GhostTraits;
 		GhostAI* Ghost;
 		LevelRoom* LevelRoom;
-		float Field3;
+		float ActivityMultiplier;
 		bool Field4;
 	};
 

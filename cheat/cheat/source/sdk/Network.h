@@ -103,5 +103,5 @@ namespace SDK
 		NetworkFields Fields;
 	};
 
-	DECLARE_FUNCTION_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), 0x1C8A3C0);
+	DECLARE_METHOD_POINTER(Network_Get_Network, Network* (*)(MethodInfo* methodInfo), "Assembly-CSharp", "", "Network", "get_Instance", 0);
 }

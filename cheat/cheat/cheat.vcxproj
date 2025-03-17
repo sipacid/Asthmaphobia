@@ -273,6 +273,7 @@
     <ClInclude Include="source\sdk\LevelController.h" />
     <ClInclude Include="source\sdk\LevelRoom.h" />
     <ClInclude Include="source\sdk\LevelValues.h" />
+    <ClInclude Include="source\sdk\MainManager.h" />
     <ClInclude Include="source\sdk\MapController.h" />
     <ClInclude Include="source\sdk\Marshal.h" />
     <ClInclude Include="source\sdk\Matrix4x4.h" />

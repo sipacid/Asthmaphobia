@@ -31,5 +31,7 @@ namespace Asthmaphobia::Features::Ghost
 		bool ForceInteractWithRandomProp = false;
 		bool ForceNormalInteraction = false;
 		bool ForceTwinInteraction = false;
+
+		std::shared_ptr<Setting> GhostActivityMultiplier;
 	};
 }

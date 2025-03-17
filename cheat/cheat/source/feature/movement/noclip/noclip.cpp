@@ -1,5 +1,7 @@
 #include "noclip.h"
 
+#include "source/menu/menu.h"
+
 using namespace Asthmaphobia::Features::Movement;
 
 NoClip::NoClip() : Feature("NoClip", "Allows you to walk through walls.", FeatureCategory::Movement)
@@ -31,7 +33,7 @@ void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* fi
 	const HWND foregroundWindow = GetForegroundWindow();
 	DWORD foregroundProcessId = 0;
 	GetWindowThreadProcessId(foregroundWindow, &foregroundProcessId);
-	if (foregroundProcessId != GetCurrentProcessId())
+	if (foregroundProcessId != GetCurrentProcessId() || menu.Open)
 		return;
 
 	SDK::Rigidbody_Set_IsKinematic_ptr(rigidBody, true, nullptr);
