@@ -13,6 +13,7 @@ namespace Asthmaphobia
 		static void hkGhostAI_Start(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo);
 		static void hkGhostAI_Update(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo);
 		static void hkGhostAI_Hunting(SDK::GhostAI* ghostAI, bool isHunting, int a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
+		static void hkEMFData_Start(SDK::EMFData* emfData, SDK::MethodInfo* methodInfo);
 		static void hkEvidenceController_Start(SDK::EvidenceController* evidenceController, SDK::MethodInfo* methodInfo);
 		static void hkMapController_Start(SDK::MapController* mapController, SDK::MethodInfo* methodInfo);
 		static void hkFuseBox_Start(SDK::FuseBox* fuseBox, SDK::MethodInfo* methodInfo);

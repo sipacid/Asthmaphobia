@@ -312,6 +312,15 @@
     <ClInclude Include="source\sdk\MainManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\sdk\EMFData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\feature\visuals\activitymonitor\activitymonitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\LineRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -489,6 +498,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\curseditems\curseditemmodifier\curseditemmodifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkEMFData_Start.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\visuals\activitymonitor\activitymonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

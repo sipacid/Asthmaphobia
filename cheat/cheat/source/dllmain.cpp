@@ -30,6 +30,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hooking.AddHook("GhostAI_Start", &SDK::GhostAI_Start_ptr, Hooks::hkGhostAI_Start);
 		hooking.AddHook("GhostAI_Update", &SDK::GhostAI_Update_ptr, Hooks::hkGhostAI_Update);
 		hooking.AddHook("GhostAI_Hunting", &SDK::GhostAI_Hunting_ptr, Hooks::hkGhostAI_Hunting);
+		hooking.AddHook("EMFData_Start", &SDK::EMFData_Start_ptr, Hooks::hkEMFData_Start);
 		hooking.AddHook("EvidenceController_Start", &SDK::EvidenceController_Start_ptr, Hooks::hkEvidenceController_Start);
 		hooking.AddHook("MapController_Start", &SDK::MapController_Start_ptr, Hooks::hkMapController_Start);
 		hooking.AddHook("FuseBox_Start", &SDK::FuseBox_Start_ptr, Hooks::hkFuseBox_Start);

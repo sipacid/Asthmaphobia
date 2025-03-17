@@ -187,6 +187,7 @@
     <ClCompile Include="source\feature\movement\speed\speed.cpp" />
     <ClCompile Include="source\feature\movement\teleport\teleport.cpp" />
     <ClCompile Include="source\feature\players\playermodifier\playermodifier.cpp" />
+    <ClCompile Include="source\feature\visuals\activitymonitor\activitymonitor.cpp" />
     <ClCompile Include="source\feature\visuals\evidenceesp\evidenceesp.cpp" />
     <ClCompile Include="source\feature\visuals\fuseboxesp\fuseboxesp.cpp" />
     <ClCompile Include="source\feature\visuals\ghostesp\ghostesp.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="source\helper\helper.cpp" />
     <ClCompile Include="source\hooking\hooks\hkCursedItemController_Awake.cpp" />
     <ClCompile Include="source\hooking\hooks\hkDeadZoneController_Awake.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkEMFData_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkEvidenceController_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkExitLevel_Exit.cpp" />
     <ClCompile Include="source\hooking\hooks\hkExitLevel_ThereAreAlivePlayersOutsideTheTruck.cpp" />
@@ -232,6 +234,7 @@
     <ClInclude Include="source\feature\movement\teleport\teleport.h" />
     <ClInclude Include="source\feature\players\playermodifier\playermodifier.h" />
     <ClInclude Include="source\feature\setting.h" />
+    <ClInclude Include="source\feature\visuals\activitymonitor\activitymonitor.h" />
     <ClInclude Include="source\feature\visuals\evidenceesp\evidenceesp.h" />
     <ClInclude Include="source\feature\visuals\fuseboxesp\fuseboxesp.h" />
     <ClInclude Include="source\feature\visuals\ghostesp\ghostesp.h" />
@@ -258,6 +261,7 @@
     <ClInclude Include="source\sdk\DeadZoneController.h" />
     <ClInclude Include="source\sdk\Door.h" />
     <ClInclude Include="source\sdk\EMF.h" />
+    <ClInclude Include="source\sdk\EMFData.h" />
     <ClInclude Include="source\sdk\Evidence.h" />
     <ClInclude Include="source\sdk\EvidenceController.h" />
     <ClInclude Include="source\sdk\ExitLevel.h" />
@@ -273,6 +277,7 @@
     <ClInclude Include="source\sdk\LevelController.h" />
     <ClInclude Include="source\sdk\LevelRoom.h" />
     <ClInclude Include="source\sdk\LevelValues.h" />
+    <ClInclude Include="source\sdk\LineRenderer.h" />
     <ClInclude Include="source\sdk\MainManager.h" />
     <ClInclude Include="source\sdk\MapController.h" />
     <ClInclude Include="source\sdk\Marshal.h" />

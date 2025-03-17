@@ -21,6 +21,7 @@
 #include "movement/teleport/teleport.h"
 #include "players/godmode/godmode.h"
 #include "players/playermodifier/playermodifier.h"
+#include "visuals/activitymonitor/activitymonitor.h"
 #include "visuals/evidenceesp/evidenceesp.h"
 #include "visuals/fuseboxesp/fuseboxesp.h"
 #include "visuals/ghostesp/ghostesp.h"
@@ -61,6 +62,7 @@ FeatureManager::FeatureManager()
 {
 	AddFeature("Visuals::Watermark", std::make_unique<Features::Visuals::Watermark>());
 	AddFeature("Visuals::GhostWindow", std::make_unique<Features::Visuals::GhostWindow>());
+	AddFeature("Visuals::ActivityMonitor", std::make_unique<Features::Visuals::ActivityMonitor>());
 	AddFeature("Visuals::GhostESP", std::make_unique<Features::Visuals::GhostESP>());
 	AddFeature("Visuals::PlayerESP", std::make_unique<Features::Visuals::PlayerESP>());
 	AddFeature("Visuals::EvidenceESP", std::make_unique<Features::Visuals::EvidenceESP>());
