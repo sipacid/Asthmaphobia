@@ -41,6 +41,14 @@ const {
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 
+    <!-- RSS Auto Discovery -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Asthmaphobia - The Ultimate phasmophobia Cheat Tool"
+      href={new URL("rss.xml", Astro.site)}
+    />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

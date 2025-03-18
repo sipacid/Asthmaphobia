@@ -1,0 +1,43 @@
+[
+  {
+    "id": 2,
+    "title": "Asthmaphobia v2.4.2 Released",
+    "date": "2025-03-18",
+    "category": "update",
+    "version": "2.4.2",
+    "content": [
+      "This update brings:",
+      "• Ghost activity monitor",
+      "• Customising the ghost activity (how active the ghost is)",
+      "• Noclip no longer moves when the menu is open or if the window is not in focus.",
+      "• It's less likely to crash after a game update"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Asthmaphobia v2.4.1 Released",
+    "date": "2025-03-14",
+    "category": "update",
+    "version": "2.4.1",
+    "content": [
+      "We're excited to announce the release of Asthmaphobia v2.4.1! This update brings compatibility with the latest Phasmophobia version and includes several improvements:",
+      "• Updated for Phasmophobia v0.12.0.2",
+      "Download the latest version from our website to enjoy all these new features!"
+    ]
+  },
+  {
+    "id": 0,
+    "title": "Signal Group Launch",
+    "date": "2025-03-14",
+    "category": "announcement",
+    "content": [
+      "We're thrilled to announce the launch of our official Signal group! Join our growing community to:",
+      "• Get immediate notifications about updates",
+      "• Share your best ghost hunting moments",
+      "• Get technical support directly from our developers",
+      "• Suggest new features or report bugs",
+      "• Connect with other Asthmaphobia users",
+      "Click the \"Join Our Signal Group\" button at the bottom of the page to become part of our community today!"
+    ]
+  }
+]

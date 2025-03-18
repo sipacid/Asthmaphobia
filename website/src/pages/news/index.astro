@@ -2,48 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import NewsItem from "../../components/NewsItem.astro";
 import { appInfo } from "../../config/appInfo";
+import { getCollection } from "astro:content";
 
-// News items data - newest first
-const newsItems = [
-  {
-    title: "Asthmaphobia v2.4.2 Released",
-    date: "March 18, 2025",
-    category: "update",
-    version: "2.4.2",
-    content: `This update brings:
-
-• Ghost activity monitor \n
-• Customising the ghost activity (how active the ghost is) \n
-• Noclip no longer moves when the menu is open or if the window is not in focus. \n
-• It's less likely to crash after a game update
-`,
-  },
-  {
-    title: "Asthmaphobia v2.4.1 Released",
-    date: "March 14, 2025",
-    category: "update",
-    version: "2.4.1",
-    content: `We're excited to announce the release of Asthmaphobia v2.4.1! This update brings compatibility with the latest Phasmophobia version and includes several improvements:
-
-• Updated for Phasmophobia v0.12.0.2
-
-Download the latest version from our website to enjoy all these new features!`,
-  },
-  {
-    title: "Signal Group Launch",
-    date: "March 14, 2025",
-    category: "announcement",
-    content: `We're thrilled to announce the launch of our official Signal group! Join our growing community to:
-
-• Get immediate notifications about updates \n
-• Share your best ghost hunting moments \n
-• Get technical support directly from our developers \n
-• Suggest new features or report bugs \n
-• Connect with other Asthmaphobia users
-
-Click the "Join Our Signal Group" button at the bottom of the page to become part of our community today!`,
-  },
-];
+const newsItems = await getCollection("news");
 ---
 
 <Layout
@@ -68,13 +29,13 @@ Click the "Join Our Signal Group" button at the bottom of the page to become par
     <section class="news-list">
       {
         newsItems.map((item) => (
-          <div class={`news-item-wrapper ${item.category}`}>
+          <div id={item.id} class={`news-item-wrapper ${item.data.category}`}>
             <NewsItem
-              title={item.title}
-              date={item.date}
-              content={item.content}
-              category={item.category}
-              version={item.version}
+              title={item.data.title}
+              date={item.data.date}
+              content={item.data.content}
+              category={item.data.category}
+              version={item.data.version}
             />
           </div>
         ))

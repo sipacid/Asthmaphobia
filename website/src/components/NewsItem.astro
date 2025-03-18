@@ -1,19 +1,13 @@
 ---
 interface Props {
   title: string;
-  date: string;
-  content: string;
+  date: Date;
+  content: string[];
   category: string;
   version?: string;
 }
 
 const { title, date, content, category, version } = Astro.props;
-
-// Convert content with line breaks to paragraphs
-const formattedContent = content
-  .split("\n\n")
-  .map((paragraph) => paragraph.trim())
-  .filter((paragraph) => paragraph.length > 0);
 ---
 
 <article class={`news-item news-item-${category}`}>
@@ -21,13 +15,13 @@ const formattedContent = content
     <div class="news-meta">
       <span class={`category-badge ${category}`}>{category}</span>
       {version && <span class="version-badge">v{version}</span>}
-      <span class="date">{date}</span>
+      <span class="date">{new Date(date).toLocaleDateString()}</span>
     </div>
     <h2 class="news-title">{title}</h2>
   </div>
   <div class="news-content">
     {
-      formattedContent.map((paragraph) => (
+      content.map((paragraph) => (
         <p set:html={paragraph.replace(/•/g, "&bull;")} />
       ))
     }

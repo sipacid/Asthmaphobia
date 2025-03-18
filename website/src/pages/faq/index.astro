@@ -201,7 +201,7 @@ const faqCategories = [
       // Hide empty categories
       categories.forEach((category) => {
         const visibleInCategory = Array.from(
-          category.querySelectorAll(".faq-item")
+          category.querySelectorAll(".faq-item"),
         ).filter((item) => !item.classList.contains("hidden")).length;
 
         if (visibleInCategory === 0 && searchTerm) {
