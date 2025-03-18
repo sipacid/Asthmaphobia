@@ -1,0 +1,53 @@
+[
+  {
+    "id": "General",
+    "items": [
+      {
+        "question": "What is Asthmaphobia?",
+        "answer": "Asthmaphobia is a powerful cheat tool designed specifically for Phasmophobia. It offers various features like ESP, ghost detection, and item spawning to enhance your gameplay experience."
+      },
+      {
+        "question": "Is Asthmaphobia free to use?",
+        "answer": "Yes! Asthmaphobia is completely free to download and use. We don't believe in charging for cheat tools or having premium tiers. Everyone gets access to all features."
+      },
+      {
+        "question": "Will I get banned for using Asthmaphobia?",
+        "answer": "While we've implemented anti-detection measures, there's always a risk when using third-party tools in online games. We recommend using Asthmaphobia in private lobbies with friends who are aware you're using cheats rather than in public matches."
+      }
+    ]
+  },
+  {
+    "id": "Installation & Setup",
+    "items": [
+      {
+        "question": "How do I install Asthmaphobia?",
+        "answer": "Installation is simple: Download the loader run Phasmophobia, then run loader.exe, check the checkbox and press Inject. Once in-game, press INSERT to open the cheat menu."
+      },
+      {
+        "question": "Does Asthmaphobia work with the latest version of Phasmophobia?",
+        "answer": "Yes, we work hard to update Asthmaphobia whenever Phasmophobia receives an update. Always check our News section for the latest update information."
+      },
+      {
+        "question": "My antivirus flags Asthmaphobia as malware. Is it safe?",
+        "answer": "Asthmaphobia is 100% safe to use. However, many antivirus programs flag cheat tools as potentially unwanted programs because they inject code into other applications. This is a false positive. You may need to add an exception in your antivirus software."
+      }
+    ]
+  },
+  {
+    "id": "Features & Usage",
+    "items": [
+      {
+        "question": "How do I use the ESP feature?",
+        "answer": "After opening the cheat menu with INSERT, navigate to the ESP tab and toggle which elements you want to see through walls. You can customize colors and display distance for different entity types."
+      },
+      {
+        "question": "Can Asthmaphobia identify ghost types instantly?",
+        "answer": "Yes! Our ghost detection feature will instantly tell you what type of ghost you're dealing with, without needing to gather any evidence. This information appears directly on your HUD."
+      },
+      {
+        "question": "What should I do if Asthmaphobia crashes my game?",
+        "answer": "First, make sure you're running both Phasmophobia and Asthmaphobia as administrator. If crashes persist, try disabling some features in the cheat menu, as using all features simultaneously can be resource-intensive. If problems continue, please contact our support team."
+      }
+    ]
+  }
+]

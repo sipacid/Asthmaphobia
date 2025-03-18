@@ -13,4 +13,17 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { news };
+const faqs = defineCollection({
+  loader: file("src/data/faqs.json"),
+  schema: z.object({
+    id: z.string(),
+    items: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      }),
+    ),
+  }),
+});
+
+export const collections = { news, faqs };
