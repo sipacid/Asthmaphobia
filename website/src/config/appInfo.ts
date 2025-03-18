@@ -8,7 +8,7 @@ export const appInfo = {
   version: "2.4.2",
   latestUpdateDate: "2025-03-18",
   copyrightYear: "2025",
-  downloadUrl: "https://asthmaphobia.xyz/Asthmaphobia.rar",
+  downloadUrl: "https://asthmaphobia.xyz/loader.exe",
   socialLinks: {
     github: "https://github.com/sipacid/asthmaphobia-issues",
     signal:
