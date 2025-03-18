@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asthmaphobia Loader</title>
+    <script type="module" src="/src/main.ts" defer></script>
+    <meta
+      name="description"
+      content="Asthmaphobia mod loader for Phasmophobia"
+    />
+  </head>
+
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1>Asthmaphobia <span class="accent">Loader</span></h1>
+        <div class="status-indicators">
+          <div class="status-pill" aria-live="polite">
+            <div class="indicator-dot" id="game-status-dot" role="status"></div>
+            <span id="game-status">Not Detected</span>
+          </div>
+          <div class="version-info" aria-label="Cheat version">
+            <span id="cheat-version">?.?.?</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="panels-container">
+          <div class="panel injection-panel">
+            <h2 class="panel-title">Injection Control</h2>
+            <div class="panel-content">
+              <form id="inject-form">
+                <div class="form-group">
+                  <input
+                    id="is-loaded-input"
+                    type="checkbox"
+                    aria-required="true"
+                  />
+                  <label for="is-loaded-input">
+                    I confirm I am inside the Phasmophobia lobby
+                  </label>
+                </div>
+                <button type="submit" class="inject-btn pulse">
+                  INJECT CHEAT
+                </button>
+              </form>
+              <div
+                class="status-message"
+                id="inject-status"
+                aria-live="polite"
+              ></div>
+            </div>
+          </div>
+
+          <div class="panel news-panel">
+            <h2 class="panel-title">
+              News
+              <span id="last-news-date" class="subtitle">Last updated: -</span>
+            </h2>
+            <div class="panel-content news-content">
+              <ul id="news-list" class="news-list">
+                <li class="news-item loading">Loading news...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <div class="footer-content">© 2025 Asthmaphobia</div>
+      </footer>
+    </div>
+  </body>
+</html>
