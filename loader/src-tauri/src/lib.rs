@@ -20,7 +20,7 @@ use winapi::um::tlhelp32::{
     CreateToolhelp32Snapshot, Module32First, Module32Next, Process32First, Process32Next,
     MODULEENTRY32, PROCESSENTRY32, TH32CS_SNAPMODULE, TH32CS_SNAPMODULE32, TH32CS_SNAPPROCESS,
 };
-use winapi::um::winnt::PROCESS_ALL_ACCESS; // Fix: Import from correct module
+use winapi::um::winnt::PROCESS_ALL_ACCESS;
 
 // Update NewsItem struct and add NewsResponse wrapper
 #[derive(Debug, Serialize, Deserialize)]
@@ -610,6 +610,16 @@ async fn fetch_latest_version() -> Result<VersionInfo, String> {
     Ok(version_info)
 }
 
+#[tauri::command]
+fn minimize_window(window: tauri::Window) {
+    window.minimize().unwrap();
+}
+
+#[tauri::command]
+fn close_window(window: tauri::Window) {
+    window.close().unwrap();
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -619,7 +629,9 @@ pub fn run() {
             check_game_status,
             is_cheat_injected,
             fetch_news,
-            fetch_latest_version
+            fetch_latest_version,
+            minimize_window,
+            close_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

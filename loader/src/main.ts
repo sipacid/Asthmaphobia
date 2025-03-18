@@ -1,7 +1,22 @@
 import { invoke } from "@tauri-apps/api/core";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Get references to DOM elements
+  const minimizeButton = document.querySelector(
+    ".window-control-button.minimize"
+  );
+  if (minimizeButton) {
+    minimizeButton.addEventListener("click", () => {
+      invoke("minimize_window");
+    });
+  }
+
+  const closeButton = document.querySelector(".window-control-button.close");
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      invoke("close_window");
+    });
+  }
+
   const injectForm = document.getElementById("inject-form") as HTMLFormElement;
   const isLoadedInput = document.getElementById(
     "is-loaded-input"
@@ -21,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ) as HTMLSpanElement;
   const newsList = document.getElementById("news-list") as HTMLUListElement;
 
-  // Create a new status indicator for cheat status
   const statusIndicators = document.querySelector(
     ".status-indicators"
   ) as HTMLDivElement;
@@ -40,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   cheatStatusIndicator.appendChild(cheatStatusText);
   statusIndicators.appendChild(cheatStatusIndicator);
 
-  // Function to update game status indicator
   async function updateGameStatus() {
     const gameRunning = await invoke<boolean>("check_game_status");
 
@@ -53,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Function to update cheat status indicator
   async function updateCheatStatus() {
     const isInjected = await invoke<boolean>("is_cheat_injected");
 
@@ -72,31 +84,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Fetch latest cheat version
   async function fetchLatestVersion() {
     try {
-      // Get the latest version from API
       const versionInfo = await invoke<{
         latest_version: string;
         release_date: string;
         changelog: string[];
       }>("fetch_latest_version");
 
-      // Display the version
       cheatVersionElement.textContent = versionInfo.latest_version;
 
-      // Add tooltip with changelog and release date
       const tooltipText = `Released: ${versionInfo.release_date}\n${versionInfo.changelog}`;
       cheatVersionElement.title = tooltipText;
       cheatVersionElement.classList.add("with-tooltip");
     } catch (error) {
       console.error("Error fetching latest version:", error);
-      // Set a placeholder if API fails
       cheatVersionElement.textContent = "Unknown";
     }
   }
 
-  // Fetch news from API
   async function fetchNews() {
     try {
       newsList.innerHTML = '<li class="news-item loading">Loading news...</li>';
@@ -143,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
         newsInfo.appendChild(dateSpan);
         newsInfo.appendChild(categoryBadge);
 
-        // Only add version badge if version exists and is not empty
         if (item.version && item.version.trim() !== "") {
           const versionBadge = document.createElement("span");
           versionBadge.className = "news-version";
@@ -168,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
         newsList.appendChild(newsItem);
       });
 
-      // Set the last news date
       const lastNewsDate = document.getElementById("last-news-date");
       if (lastNewsDate && news.length > 0) {
         lastNewsDate.textContent = `Last updated: ${news[0].date}`;
@@ -179,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Handle form submission for injection
   injectForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -200,7 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (result.includes("successfully")) {
         injectStatus.textContent = "Cheat successfully injected!";
-        // Update the cheat injected status immediately
         await updateCheatStatus();
       } else if (result.includes("already injected")) {
         injectStatus.textContent = "Cheat is already injected";
@@ -219,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initialize the app
   async function initApp() {
     await Promise.all([
       updateGameStatus(),
@@ -228,11 +229,9 @@ document.addEventListener("DOMContentLoaded", () => {
       fetchNews(),
     ]);
 
-    // Set up interval to check game and cheat status
     setInterval(updateGameStatus, 5000);
     setInterval(updateCheatStatus, 5000);
   }
 
-  // Start the app
   initApp();
 });

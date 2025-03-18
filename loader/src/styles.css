@@ -1,6 +1,7 @@
 :root {
   --bg-color: #0a0a14;
   --panel-bg: #14141e;
+  --window-frame: #0c0c18;
   --accent-color: #5d4fff;
   --accent-hover: #7a70ff;
   --accent-glow: rgba(93, 79, 255, 0.15);
@@ -46,24 +47,90 @@ body {
     );
   display: flex;
   flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
 }
 
+/* Window frame */
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   max-height: 100vh;
-  padding: 24px;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--window-frame);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Window title bar */
+.window-titlebar {
+  background-color: var(--window-frame);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  height: 38px;
+  -webkit-app-region: drag;
+  cursor: default;
+}
+
+.window-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.window-controls {
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+
+.window-control-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.window-control-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.window-control-button.close:hover {
+  background-color: #e81123;
+}
+
+.window-control-icon {
+  width: 10px;
+  height: 10px;
+  fill: var(--text-secondary);
+}
+
+.close .window-control-icon {
+  width: 12px;
+  height: 12px;
 }
 
 /* Header styles */
 .app-header {
-  padding: 16px 0;
+  padding: 16px 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 12px;
   flex-shrink: 0;
+  background-color: rgba(10, 10, 20, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(93, 79, 255, 0.1);
 }
 
 h1 {
@@ -109,9 +176,9 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: rgba(12, 12, 20, 0.6);
+  background-color: rgba(12, 12, 20, 0.5);
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.06);
   transition: all var(--transition-speed);
@@ -176,13 +243,14 @@ h1 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 12px 0;
+  padding: 16px 24px;
+  background-color: var(--bg-color);
 }
 
 .panels-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
   height: 100%;
 }
 
@@ -196,7 +264,7 @@ h1 {
 
 .panel {
   background-color: var(--panel-bg);
-  border-radius: 12px;
+  border-radius: 8px;
   border: var(--panel-border);
   box-shadow: var(--panel-shadow);
   display: flex;
@@ -210,10 +278,10 @@ h1 {
 }
 
 .panel-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 16px;
-  background-color: rgba(0, 0, 0, 0.25);
+  padding: 12px 16px;
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -239,6 +307,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
 }
 
 form {
@@ -254,11 +323,29 @@ form {
 }
 
 input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--accent-color);
-  cursor: pointer;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(12, 12, 20, 0.5);
+  transition: all var(--transition-speed);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--accent-color);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 label {
@@ -272,14 +359,15 @@ label {
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 14px;
-  font-size: 1.1rem;
+  padding: 12px;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 10px;
   box-shadow: 0 4px 12px var(--accent-glow);
+  text-transform: uppercase;
 }
 
 .inject-btn:hover {
@@ -323,22 +411,22 @@ label {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.05);
-  padding-right: 16px;
+  padding: 0;
 }
 
 .news-panel .panel-content::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .news-panel .panel-content::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .news-panel .panel-content::-webkit-scrollbar-thumb {
   background-color: var(--accent-color);
-  border-radius: 4px;
-  border: 2px solid transparent;
+  border-radius: 3px;
+  border: 1px solid transparent;
   background-clip: padding-box;
 }
 
@@ -347,7 +435,7 @@ label {
 }
 
 .news-item {
-  padding: 16px 0;
+  padding: 16px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -446,12 +534,12 @@ label {
 /* Footer styles */
 .app-footer {
   text-align: center;
-  padding: 12px 0;
+  padding: 10px 0;
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   flex-shrink: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 12px;
+  background-color: var(--window-frame);
 }
 
 /* Animations */
