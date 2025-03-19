@@ -86,7 +86,6 @@ const { question, answer } = Astro.props;
     color: rgba(255, 255, 255, 0.85);
   }
 
-  /* Active state */
   .faq-item.active {
     background: rgba(25, 25, 25, 0.6);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -150,13 +149,11 @@ const { question, answer } = Astro.props;
 <script>
   // Handle FAQ item toggling
   const faqItems = document.querySelectorAll(".faq-item");
-
   faqItems.forEach((item) => {
     const questionWrapper = item.querySelector(".question-wrapper");
 
     if (questionWrapper) {
       questionWrapper.addEventListener("click", () => {
-        // Toggle active state
         item.classList.toggle("active");
       });
     }
@@ -171,7 +168,6 @@ const { question, answer } = Astro.props;
 
       if (questionWrapper) {
         questionWrapper.addEventListener("click", () => {
-          // Toggle active state
           item.classList.toggle("active");
         });
       }

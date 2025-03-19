@@ -26,4 +26,19 @@ const faqs = defineCollection({
   }),
 });
 
-export const collections = { news, faqs };
+const features = defineCollection({
+  loader: file("src/data/features.json"),
+  schema: z.object({
+    id: z.string(),
+    icon: z.string(),
+    description: z.string(),
+    features: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      }),
+    ),
+  }),
+});
+
+export const collections = { news, faqs, features };
