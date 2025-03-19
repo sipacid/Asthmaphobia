@@ -44,7 +44,7 @@ void PlayerESP::OnDraw()
 			continue;
 
 		TextBuffer.clear();
-		TextBuffer = Helper::GetPlayerName(player);
+		TextBuffer = Helper::GetPlayerName(player).substr(0, 32); // steam nickname limit is 32. 
 
 		if (ShowDeadStatus && player->Fields.IsDead)
 		{

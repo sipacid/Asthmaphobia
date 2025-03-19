@@ -16,7 +16,7 @@ void PlayerModifier::OnMenu()
 	{
 		const auto localPlayer = Helper::GetLocalPlayer();
 		const auto player = players->Fields.Items->Vector[playerIndex];
-		ImGui::Text("Player: %s", Helper::GetPlayerName(player).c_str());
+		ImGui::Text("Player: %s", Helper::GetPlayerName(player).substr(0, 32).c_str()); // steam nickname limit is 32
 		ImGui::Text("Sanity: %s", player->Fields.IsDead ? "DEAD" : std::to_string(static_cast<int>(100.f - Helper::GetPlayerInsanity(player))).c_str());
 		if (const auto levelRoom = player->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
 			ImGui::Text("Current room: %s", Helper::SystemStringToString(*player->Fields.LevelRoom->Fields.RoomName).c_str());
