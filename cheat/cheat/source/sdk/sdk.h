@@ -166,6 +166,7 @@ inline NAME NAME##_ptr = reinterpret_cast<NAME>(BASE_ADDRESS + ADDRESS);
 #include "Evidence.h"
 #include "EvidenceController.h"
 #include "PhotonNetwork.h"
+#include "PhotonObjectInteract.h"
 #include "Network.h"
 #include "Matrix4x4.h"
 #include "PhysicsCharacterController.h"

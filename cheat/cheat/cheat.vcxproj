@@ -76,6 +76,9 @@
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -144,12 +147,13 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>libraries/detours/lib/detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -179,6 +183,7 @@
     <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp" />
     <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp" />
     <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp" />
+    <ClCompile Include="source\feature\miscellaneous\pickup\pickup.cpp" />
     <ClCompile Include="source\feature\players\godmode\godmode.cpp" />
     <ClCompile Include="source\feature\movement\infinitestamina\infinitestamina.cpp" />
     <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp" />
@@ -210,6 +215,7 @@
     <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp" />
     <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPauseMenuController_Leave.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPhotonObjectInteract_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPlayerStamina_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPlayer_StartKillingPlayerNetworked.cpp" />
     <ClCompile Include="source\hooking\hooks\hkServerManager_KickPlayerNetworked.cpp" />
@@ -225,6 +231,7 @@
     <ClInclude Include="source\feature\miscellaneous\customname\customname.h" />
     <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h" />
     <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h" />
+    <ClInclude Include="source\feature\miscellaneous\pickup\pickup.h" />
     <ClInclude Include="source\feature\players\godmode\godmode.h" />
     <ClInclude Include="source\feature\movement\infinitestamina\infinitestamina.h" />
     <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h" />
@@ -288,6 +295,7 @@
     <ClInclude Include="source\sdk\Network.h" />
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
+    <ClInclude Include="source\sdk\PhotonObjectInteract.h" />
     <ClInclude Include="source\sdk\PhotoValues.h" />
     <ClInclude Include="source\sdk\PhysicsCharacterController.h" />
     <ClInclude Include="source\sdk\Player.h" />

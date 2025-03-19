@@ -1,0 +1,25 @@
+#include "pickup.h"
+
+using namespace Asthmaphobia::Features::Miscellaneous;
+
+Pickup::Pickup() : Feature("Pickup", "Pickup any interactable object", FeatureCategory::Miscellaneous)
+{
+}
+
+void Pickup::OnMenu()
+{
+	ImGui::Checkbox("Enabled##pickup", &std::get<bool>(EnabledSetting->GetValue()));
+	if (ImGui::IsItemHovered())
+		ImGui::SetTooltip("%s", Description.c_str());
+}
+
+void Pickup::OnPhotonObjectInteract_Start(SDK::PhotonObjectInteract* photonObjectInteract, SDK::MethodInfo* methodInfo) const
+{
+	if (!std::get<bool>(EnabledSetting->GetValue()))
+		return;
+
+	photonObjectInteract->Fields.Field4 = true;
+	photonObjectInteract->Fields.Field5 = true;
+	photonObjectInteract->Fields.Field7 = true;
+	photonObjectInteract->Fields.Field8 = true;
+}

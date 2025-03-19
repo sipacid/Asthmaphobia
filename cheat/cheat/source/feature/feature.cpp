@@ -14,6 +14,7 @@
 #include "miscellaneous/doormodifier/doormodifier.h"
 #include "miscellaneous/freemouselook/freemouselook.h"
 #include "miscellaneous/leavepeople/leavepeople.h"
+#include "miscellaneous/pickup/pickup.h"
 #include "miscellaneous/rewardmodifier/rewardmodifier.h"
 #include "movement/infinitestamina/infinitestamina.h"
 #include "movement/noclip/noclip.h"
@@ -83,6 +84,7 @@ FeatureManager::FeatureManager()
 	AddFeature("Miscellaneous::CustomName", std::make_unique<Features::Miscellaneous::CustomName>());
 	AddFeature("Miscellaneous::RewardModifier", std::make_unique<Features::Miscellaneous::RewardModifier>());
 	AddFeature("Miscellaneous::FreeMouseLook", std::make_unique<Features::Miscellaneous::FreeMouseLook>());
+	AddFeature("Miscellaneous::Pickup", std::make_unique<Features::Miscellaneous::Pickup>());
 
 	AddFeature("Movement::InfiniteStamina", std::make_unique<Features::Movement::InfiniteStamina>());
 	AddFeature("Movement::NoClip", std::make_unique<Features::Movement::NoClip>());
