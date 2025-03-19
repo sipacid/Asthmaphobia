@@ -6,9 +6,11 @@
     "category": "update",
     "version": "2.4.3",
     "content": [
-      "Some bug fixes:",
+      "This update brings:",
+      "• IMPORTANT! The categories have been reworked which means most of your saved settings from the old version won't load.",
       "• ESP issue where it would draw text randomly on your screen sometimes.",
-      "• Disturbed salt showing up as Voodoo Doll when using cursed item ESP."
+      "• Disturbed salt showing up as Voodoo Doll when using cursed item ESP.",
+      "• Pickup. A new ffeature that allows you to pickup any interactable object (Must be turned on before the start of a game)."
     ]
   },
   {
