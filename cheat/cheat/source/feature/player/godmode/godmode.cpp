@@ -1,8 +1,8 @@
 #include "godmode.h"
 
-using namespace Asthmaphobia::Features::Players;
+using namespace Asthmaphobia::Features::Player;
 
-GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body when attacked by ghost", FeatureCategory::Players)
+GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body when attacked by ghost", FeatureCategory::Player)
 {
 }
 

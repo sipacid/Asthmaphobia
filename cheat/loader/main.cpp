@@ -61,21 +61,6 @@ static FARPROC GetRemoteExportAddress(const char* modulePath, const char* export
 	return reinterpret_cast<FARPROC>(reinterpret_cast<uintptr_t>(remoteBase) + offset);
 }
 
-static std::string GenerateRandomString(const size_t length)
-{
-	static constexpr char CHARSET[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	static std::uniform_int_distribution<> dis(0, sizeof(CHARSET) - 2);
-
-	std::string str;
-	str.reserve(length);
-	for (size_t i = 0; i < length; ++i)
-		str += CHARSET[dis(gen)];
-
-	return str;
-}
-
 int main()
 {
 	std::cout << "[+] Waiting for Phasmophobia.exe..." << "\n";
@@ -97,9 +82,7 @@ int main()
 		return 1;
 	}
 
-	const std::string randomName = "cheat.dll";
-	const std::string tempPath = "cheat.dll";
-	const bool injectionResult = Injector::InjectDLL(processId, tempPath.c_str());
+	const bool injectionResult = Injector::InjectDLL(processId, "cheat.dll");
 
 	if (!injectionResult)
 	{
@@ -115,7 +98,7 @@ int main()
 	Sleep(1000);
 
 	std::cout << "[+] Getting module handle..." << "\n";
-	const HMODULE hModule = GetRemoteModuleHandle(processId, randomName.c_str());
+	const HMODULE hModule = GetRemoteModuleHandle(processId, "cheat.dll");
 	if (!hModule)
 	{
 		std::cout << "[!] Failed to get module handle in target process\n";
@@ -129,7 +112,7 @@ int main()
 	std::cout << "[+] Creating main thread..." << "\n";
 
 	char dllPath[MAX_PATH];
-	GetFullPathName(tempPath.c_str(), MAX_PATH, dllPath, nullptr);
+	GetFullPathName("cheat.dll", MAX_PATH, dllPath, nullptr);
 
 	if (const auto threadProc = GetRemoteExportAddress(dllPath, "AsthmaphobiaThread", hModule))
 	{

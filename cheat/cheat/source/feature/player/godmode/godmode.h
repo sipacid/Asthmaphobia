@@ -1,7 +1,7 @@
 #pragma once
 #include "source/feature/feature.h"
 
-namespace Asthmaphobia::Features::Players
+namespace Asthmaphobia::Features::Player
 {
 	class GodMode final : public Feature
 	{

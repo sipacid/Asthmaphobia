@@ -1,5 +1,5 @@
 #include "source/common.h"
-#include "source/feature/miscellaneous/leavepeople/leavepeople.h"
+#include "source/feature/exploits/leavepeople/leavepeople.h"
 #include "source/hooking/hooking.h"
 
 using namespace Asthmaphobia;
@@ -8,7 +8,7 @@ bool Hooks::hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exit
 {
 	LOG_CALL("Called ExitLevel_ThereAreAlivePlayersOutsideTheTruck");
 	if (globalRunning)
-		return GetFeatureManagerInstance().GetFeature<Features::Miscellaneous::LeavePeople>("Miscellaneous::LeavePeople")->
+		return GetFeatureManagerInstance().GetFeature<Features::Exploits::LeavePeople>("Exploits::LeavePeople")->
 		                                   OnExitLevelThereAreAlivePlayersOutsideTheTruck(exitLevel, methodInfo);
 
 	return SDK::ExitLevel_ThereAreAlivePlayersOutsideTheTruck_ptr(exitLevel, methodInfo);

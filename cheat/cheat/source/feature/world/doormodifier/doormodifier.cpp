@@ -1,8 +1,8 @@
 #include "doormodifier.h"
 
-using namespace Asthmaphobia::Features::Miscellaneous;
+using namespace Asthmaphobia::Features::World;
 
-DoorModifier::DoorModifier() : Feature("Door Modifier", "Modify door behaviour", FeatureCategory::Miscellaneous)
+DoorModifier::DoorModifier() : Feature("Door Modifier", "Modify door behaviour", FeatureCategory::World)
 {
 }
 

@@ -1,8 +1,8 @@
 #include "playermodifier.h"
 
-using namespace Asthmaphobia::Features::Players;
+using namespace Asthmaphobia::Features::Player;
 
-PlayerModifier::PlayerModifier() : Feature("Player Modifier", "Modify other player in-game stuff", FeatureCategory::Players)
+PlayerModifier::PlayerModifier() : Feature("Player Modifier", "Modify other player in-game stuff", FeatureCategory::Player)
 {
 }
 

@@ -1,8 +1,8 @@
 #include "customname.h"
 
-using namespace Asthmaphobia::Features::Miscellaneous;
+using namespace Asthmaphobia::Features::Player;
 
-CustomName::CustomName() : Feature("Custom name", "Set your own custom in-game nickname", FeatureCategory::Miscellaneous)
+CustomName::CustomName() : Feature("Custom name", "Set your own custom in-game nickname", FeatureCategory::Player)
 {
 	NickNameSetting = std::make_unique<Setting>("Nickname", "Your custom nickname", "Asthmaphobia");
 	Settings_->AddSetting(NickNameSetting);

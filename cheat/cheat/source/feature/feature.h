@@ -7,15 +7,24 @@ namespace Asthmaphobia
 {
 	enum FeatureCategory : uint8_t
 	{
-		Visuals,
-		Players,
+		Player,
 		Ghost,
+		World,
 		CursedItems,
-		Miscellaneous,
+		Visuals,
+		Exploits,
 		Movement,
 	};
 
-	const char* FeatureTypeToString(FeatureCategory category);
+	static const std::unordered_map<FeatureCategory, const char*> CATEGORY_TO_STRING = {
+		{Player, "Player"},
+		{Ghost, "Ghost"},
+		{World, "World"},
+		{CursedItems, "Cursed items"},
+		{Visuals, "Visuals"},
+		{Exploits, "Exploits"},
+		{Movement, "Movement"}
+	};
 
 	class Feature
 	{

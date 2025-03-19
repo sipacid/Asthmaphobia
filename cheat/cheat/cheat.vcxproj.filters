@@ -111,10 +111,10 @@
     <ClInclude Include="source\sdk\GameController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\players\godmode\godmode.h">
+    <ClInclude Include="source\feature\player\godmode\godmode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\leavepeople\leavepeople.h">
+    <ClInclude Include="source\feature\exploits\leavepeople\leavepeople.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\feature\visuals\ghostwindow\ghostwindow.h">
@@ -129,7 +129,7 @@
     <ClInclude Include="source\gamestate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\antikick\antikick.h">
+    <ClInclude Include="source\feature\exploits\antikick\antikick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\feature\visuals\ghostesp\ghostesp.h">
@@ -225,7 +225,7 @@
     <ClInclude Include="source\sdk\EMF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\doormodifier\doormodifier.h">
+    <ClInclude Include="source\feature\world\doormodifier\doormodifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\LevelController.h">
@@ -246,7 +246,7 @@
     <ClInclude Include="source\feature\visuals\fuseboxesp\fuseboxesp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\players\playermodifier\playermodifier.h">
+    <ClInclude Include="source\feature\player\playermodifier\playermodifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\notifications\notifications.h">
@@ -258,19 +258,19 @@
     <ClInclude Include="source\sdk\Marshal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\customname\customname.h">
+    <ClInclude Include="source\feature\player\customname\customname.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\LevelValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.h">
+    <ClInclude Include="source\feature\exploits\rewardmodifier\rewardmodifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\DeadZoneController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\freemouselook\freemouselook.h">
+    <ClInclude Include="source\feature\exploits\freemouselook\freemouselook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\MouseLook.h">
@@ -324,7 +324,7 @@
     <ClInclude Include="source\sdk\PhotonObjectInteract.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\feature\miscellaneous\pickup\pickup.h">
+    <ClInclude Include="source\feature\exploits\pickup\pickup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -374,10 +374,10 @@
     <ClCompile Include="source\hooking\hooks\hkWndProc.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\players\godmode\godmode.cpp">
+    <ClCompile Include="source\feature\player\godmode\godmode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\leavepeople\leavepeople.cpp">
+    <ClCompile Include="source\feature\exploits\leavepeople\leavepeople.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\visuals\ghostwindow\ghostwindow.cpp">
@@ -389,7 +389,7 @@
     <ClCompile Include="source\feature\feature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\antikick\antikick.cpp">
+    <ClCompile Include="source\feature\exploits\antikick\antikick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\visuals\ghostesp\ghostesp.cpp">
@@ -455,7 +455,7 @@
     <ClCompile Include="source\feature\movement\teleport\teleport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\doormodifier\doormodifier.cpp">
+    <ClCompile Include="source\feature\world\doormodifier\doormodifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkFuseBox_Start.cpp">
@@ -464,19 +464,19 @@
     <ClCompile Include="source\feature\visuals\fuseboxesp\fuseboxesp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\players\playermodifier\playermodifier.cpp">
+    <ClCompile Include="source\feature\player\playermodifier\playermodifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Hunting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\customname\customname.cpp">
+    <ClCompile Include="source\feature\player\customname\customname.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\rewardmodifier\rewardmodifier.cpp">
+    <ClCompile Include="source\feature\exploits\rewardmodifier\rewardmodifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Start.cpp">
@@ -485,7 +485,7 @@
     <ClCompile Include="source\hooking\hooks\hkDeadZoneController_Awake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\freemouselook\freemouselook.cpp">
+    <ClCompile Include="source\feature\exploits\freemouselook\freemouselook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\ghost\ghostmodifier\ghostmodifier.cpp">
@@ -515,7 +515,7 @@
     <ClCompile Include="source\hooking\hooks\hkPhotonObjectInteract_Start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\feature\miscellaneous\pickup\pickup.cpp">
+    <ClCompile Include="source\feature\exploits\pickup\pickup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

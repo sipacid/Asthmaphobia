@@ -1,7 +1,7 @@
 #pragma once
 #include "source/feature/feature.h"
 
-namespace Asthmaphobia::Features::Miscellaneous
+namespace Asthmaphobia::Features::World
 {
 	class DoorModifier final : public Feature
 	{
