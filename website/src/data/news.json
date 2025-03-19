@@ -1,5 +1,17 @@
 [
   {
+    "id": 3,
+    "title": "Asthmaphobia v2.4.3 Released",
+    "date": "2025-03-19",
+    "category": "update",
+    "version": "2.4.3",
+    "content": [
+      "Some bug fixes:",
+      "• ESP issue where it would draw text randomly on your screen sometimes.",
+      "• Disturbed salt showing up as Voodoo Doll when using cursed item ESP."
+    ]
+  },
+  {
     "id": 2,
     "title": "Asthmaphobia v2.4.2 Released",
     "date": "2025-03-18",
@@ -10,7 +22,7 @@
       "• Ghost activity monitor",
       "• Customising the ghost activity (how active the ghost is)",
       "• Noclip no longer moves when the menu is open or if the window is not in focus.",
-      "• It's less likely to crash after a game update"
+      "• It's less likely to crash after a game update."
     ]
   },
   {

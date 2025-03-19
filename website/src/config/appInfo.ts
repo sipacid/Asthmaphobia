@@ -5,8 +5,8 @@
 
 export const appInfo = {
   name: "Asthmaphobia",
-  version: "2.4.2",
-  latestUpdateDate: "2025-03-18",
+  version: "2.4.3",
+  latestUpdateDate: "2025-03-19",
   copyrightYear: "2025",
   downloadUrl: "https://asthmaphobia.xyz/loader.exe",
   socialLinks: {
