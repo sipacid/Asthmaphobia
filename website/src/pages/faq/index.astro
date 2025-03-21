@@ -74,55 +74,33 @@ const faqItems = await getCollection("faqs");
   </div>
 </Layout>
 
-<script is:inline>
-  // Improved search functionality with client-side hydration
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get DOM elements
-    const searchInput = document.getElementById("faq-search");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById(
+      "faq-search",
+    ) as HTMLInputElement;
     const faqItems = document.querySelectorAll(".faq-item");
     const noResults = document.getElementById("no-results");
     const categories = document.querySelectorAll(".faq-category");
 
-    // Debug check to make sure elements are found
-    console.log("Search input found:", !!searchInput);
-    console.log("FAQ items found:", faqItems.length);
+    if (!searchInput || faqItems.length === 0) return;
 
-    if (!searchInput) return;
-
-    // Function to handle search
-    function performSearch() {
-      const searchTerm = searchInput.value.toLowerCase().trim();
+    searchInput.addEventListener("input", (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
       let visibleItems = 0;
 
-      console.log("Searching for:", searchTerm);
-
-      // Reset category visibility
-      categories.forEach((category) => {
-        category.classList.remove("hidden");
-      });
-
-      // Handle search on each FAQ item
       faqItems.forEach((item) => {
-        // More robust selector that accounts for different HTML structures
-        const questionEl = item.querySelector("[class*='question']");
-        const answerEl = item.querySelector("[class*='answer']");
+        const question =
+          item.querySelector(".question")?.textContent?.toLowerCase() || "";
+        const answer =
+          item.querySelector(".answer")?.textContent?.toLowerCase() || "";
+        const isVisible =
+          question.includes(searchTerm) || answer.includes(searchTerm);
 
-        const question = questionEl ? questionEl.textContent.toLowerCase() : "";
-        const answer = answerEl ? answerEl.textContent.toLowerCase() : "";
-
-        if (
-          !searchTerm ||
-          question.includes(searchTerm) ||
-          answer.includes(searchTerm)
-        ) {
-          item.classList.remove("hidden");
-          visibleItems++;
-        } else {
-          item.classList.add("hidden");
-        }
+        (item as HTMLElement).style.display = isVisible ? "block" : "none";
+        if (isVisible) visibleItems++;
       });
 
-      // Show/hide no results message
       if (noResults) {
         if (visibleItems === 0 && searchTerm) {
           noResults.classList.remove("hidden");
@@ -131,7 +109,6 @@ const faqItems = await getCollection("faqs");
         }
       }
 
-      // Hide empty categories
       categories.forEach((category) => {
         const visibleInCategory = Array.from(
           category.querySelectorAll(".faq-item"),
@@ -141,16 +118,7 @@ const faqItems = await getCollection("faqs");
           category.classList.add("hidden");
         }
       });
-    }
-
-    // Add both input and keyup events for better responsiveness
-    searchInput.addEventListener("input", performSearch);
-    searchInput.addEventListener("keyup", performSearch);
-
-    // Initialize search if there's any initial value
-    if (searchInput.value) {
-      performSearch();
-    }
+    });
   });
 </script>
 
@@ -285,9 +253,9 @@ const faqItems = await getCollection("faqs");
     border-radius: 12px;
     margin: 3rem 0;
     background: rgba(25, 25, 25, 0.7);
+    border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(155, 89, 182, 0.3);
   }
 
   .glow-background {
@@ -296,60 +264,64 @@ const faqItems = await getCollection("faqs");
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(
-      circle at center,
-      rgba(155, 89, 182, 0.15) 0%,
-      rgba(155, 89, 182, 0) 70%
+    background: linear-gradient(
+      135deg,
+      rgba(155, 89, 182, 0.1),
+      rgba(155, 89, 182, 0.05)
     );
-    z-index: -1;
+    z-index: 0;
   }
 
   .still-questions h2 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
     font-size: 2rem;
-    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
   }
 
   .still-questions p {
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    color: var(--text-color);
     font-size: 1.1rem;
-    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
   }
 
   .cta-buttons {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
   }
 
   .btn {
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    padding: 0.9rem 2.5rem;
     font-size: 1rem;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
+    font-weight: 600;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 180px;
   }
 
   .primary {
     background: linear-gradient(135deg, var(--primary-color), #8e44ad);
     color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
+    position: relative;
+    overflow: hidden;
   }
 
   .primary:hover {
-    background: linear-gradient(135deg, #a056c5, #9b59b6);
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+    box-shadow: 0 12px 25px rgba(155, 89, 182, 0.4);
   }
 
   .secondary {
@@ -412,21 +384,18 @@ const faqItems = await getCollection("faqs");
 
     .btn {
       width: 100%;
-      padding: 0.7rem 1rem;
-      font-size: 0.9rem;
-      line-height: 1.2;
-      height: auto;
-      min-height: 2.5rem;
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
     }
 
     .still-questions {
-      padding: 2.5rem 1rem;
+      padding: 3rem 1rem;
       margin: 2rem 0;
     }
 
     .still-questions h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: 1.75rem;
     }
 
     .still-questions p {

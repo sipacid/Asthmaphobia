@@ -8,108 +8,119 @@ const { question, answer } = Astro.props;
 ---
 
 <div class="faq-item">
-  <div class="question-wrapper">
-    <h3 class="question">{question}</h3>
-    <div class="toggle-icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </div>
-  </div>
-  <div class="answer">
-    <p>{answer}</p>
+  <button class="question-wrapper" aria-expanded="false" aria-controls="answer">
+    <span class="question">{question}</span>
+    <svg
+      class="toggle-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+  </button>
+  <div class="answer" hidden>
+    <div class="answer-content" set:html={answer.replace(/•/g, "&bull;")} />
   </div>
 </div>
 
 <style>
   .faq-item {
-    background: rgba(17, 17, 17, 0.4);
-    border-radius: 8px;
-    border: 1px solid rgba(155, 89, 182, 0.15);
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-bottom: 1rem;
   }
 
+  .faq-item:hover {
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+  }
+
+  .faq-item.active {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+  }
+
   .question-wrapper {
-    padding: 1.25rem 1.5rem;
+    width: 100%;
+    padding: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: none;
+    border: none;
     cursor: pointer;
-    user-select: none;
+    text-align: left;
+    transition: all 0.2s ease;
   }
 
   .question {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: white;
-    flex: 1;
-    padding-right: 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-right: 1rem;
+    line-height: 1.4;
   }
 
   .toggle-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px;
+    height: 24px;
     color: var(--primary-color);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
   }
 
-  .toggle-icon svg {
-    width: 20px;
-    height: 20px;
+  .faq-item.active .toggle-icon {
+    transform: rotate(45deg);
   }
 
   .answer {
     padding: 0 1.5rem;
-    height: 0;
-    opacity: 0;
+    max-height: 0;
     overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .answer p {
-    margin: 0 0 1.5rem 0;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .faq-item.active {
-    background: rgba(25, 25, 25, 0.6);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  }
-
-  .faq-item.active .toggle-icon {
-    transform: rotate(180deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
   }
 
   .faq-item.active .answer {
     padding: 0 1.5rem 1.5rem;
-    height: auto;
+    max-height: 1000px;
     opacity: 1;
   }
 
-  /* Mobile styles */
+  .answer-content {
+    color: var(--text-color);
+    opacity: 0.9;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  .answer-content p {
+    margin-bottom: 1rem;
+  }
+
+  .answer-content p:last-child {
+    margin-bottom: 0;
+  }
+
   @media (max-width: 768px) {
-    .question {
-      font-size: 1rem;
-      padding-right: 1rem;
+    .question-wrapper {
+      padding: 1.25rem;
     }
 
-    .question-wrapper {
-      padding: 1rem 1.25rem;
+    .question {
+      font-size: 1rem;
     }
 
     .answer {
@@ -120,57 +131,43 @@ const { question, answer } = Astro.props;
       padding: 0 1.25rem 1.25rem;
     }
 
-    .toggle-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  /* Small mobile devices */
-  @media (max-width: 480px) {
-    .question {
+    .answer-content {
       font-size: 0.95rem;
-    }
-
-    .question-wrapper {
-      padding: 0.9rem 1rem;
-    }
-
-    .answer {
-      padding: 0 1rem;
-    }
-
-    .faq-item.active .answer {
-      padding: 0 1rem 1rem;
     }
   }
 </style>
 
 <script>
-  // Handle FAQ item toggling
   const faqItems = document.querySelectorAll(".faq-item");
+
   faqItems.forEach((item) => {
-    const questionWrapper = item.querySelector(".question-wrapper");
+    const button = item.querySelector(".question-wrapper") as HTMLButtonElement;
+    const answer = item.querySelector(".answer") as HTMLElement;
 
-    if (questionWrapper) {
-      questionWrapper.addEventListener("click", () => {
-        item.classList.toggle("active");
-      });
-    }
-  });
+    button?.addEventListener("click", () => {
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isExpanded));
 
-  // For Astro View Transitions
-  document.addEventListener("astro:page-load", () => {
-    const faqItems = document.querySelectorAll(".faq-item");
+      if (!isExpanded) {
+        // Close other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherButton = otherItem.querySelector(
+              ".question-wrapper",
+            ) as HTMLButtonElement;
+            const otherAnswer = otherItem.querySelector(
+              ".answer",
+            ) as HTMLElement;
 
-    faqItems.forEach((item) => {
-      const questionWrapper = item.querySelector(".question-wrapper");
-
-      if (questionWrapper) {
-        questionWrapper.addEventListener("click", () => {
-          item.classList.toggle("active");
+            otherButton?.setAttribute("aria-expanded", "false");
+            otherItem.classList.remove("active");
+            otherAnswer.style.display = "none";
+          }
         });
       }
+
+      item.classList.toggle("active");
+      answer.style.display = isExpanded ? "none" : "block";
     });
   });
 </script>

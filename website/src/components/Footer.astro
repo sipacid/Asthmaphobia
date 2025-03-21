@@ -1,54 +1,60 @@
 ---
 import { appInfo } from "../config/appInfo";
+import SignalIcon from "../assets/signal.svg";
+import GitHubIcon from "../assets/github.svg";
+import { Image } from "astro:assets";
 ---
 
 <footer>
-  <div class="footer-content">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h3 class="footer-title">Asthmaphobia</h3>
-        <p class="footer-description">
-          The ultimate cheat tool for Phasmophobia, featuring ESP, ghost
-          detection, and more advanced features.
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h2 class="text-gradient">Asthmaphobia</h2>
+        <p>
+          The ultimate Phasmophobia cheat tool that gives you an edge in the
+          game.
         </p>
+        <div class="social-links">
+          <a
+            href={appInfo.socialLinks.signal}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Join our Signal group"
+          >
+            <Image src={SignalIcon} alt="Signal" width={20} height={20} />
+          </a>
+          <a
+            href={appInfo.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Visit our GitHub"
+          >
+            <Image src={GitHubIcon} alt="GitHub" width={20} height={20} />
+          </a>
+        </div>
       </div>
 
-      <div class="footer-col">
-        <h3 class="footer-title">Navigation</h3>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
         <ul class="footer-links">
-          <li><a href="/">Home</a></li>
           <li><a href="/features">Features</a></li>
+          <li><a href={appInfo.downloadUrl}>Download</a></li>
           <li><a href="/news">News</a></li>
           <li><a href="/faq">FAQ</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h3 class="footer-title">Connect</h3>
-        <ul class="footer-links">
-          <li>
-            <a href={appInfo.socialLinks.github} target="_blank" rel="noopener"
-              >GitHub</a
-            >
-          </li>
-          <li>
-            <a href={appInfo.socialLinks.signal} target="_blank" rel="noopener"
-              >Join Signal Group</a
-            >
-          </li>
-          <li>
-            <a href={appInfo.downloadUrl}>Download</a>
-          </li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p class="copyright">
-        &copy; {appInfo.copyrightYear} Asthmaphobia. All rights reserved.
-      </p>
-      <p class="credits">
-        Made with love by <a href="https://sipacid.com">Eve</a>
+      <p>&copy; {appInfo.copyrightYear} Asthmaphobia. All rights reserved.</p>
+      <p>Not affiliated with Phasmophobia or Kinetic Games.</p>
+      <p class="made-with-love">
+        Made with love by <a
+          href="https://sipacid.com"
+          target="_blank"
+          rel="noopener noreferrer">Eve</a>
       </p>
     </div>
   </div>
@@ -56,55 +62,85 @@ import { appInfo } from "../config/appInfo";
 
 <style>
   footer {
-    background-color: rgba(15, 15, 20, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(155, 89, 182, 0.2);
-    padding: 3rem 0 1.5rem;
-    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
   }
 
-  .footer-content {
-    max-width: 1200px;
+  .container {
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  .footer-grid {
+  .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2.5rem;
+    gap: 3rem;
+    margin-bottom: 3rem;
   }
 
-  .footer-col {
-    display: flex;
-    flex-direction: column;
+  .footer-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
   }
 
-  .footer-title {
-    color: #fff;
-    font-size: 1.2rem;
+  .footer-section h3 {
+    color: var(--heading-color);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
     font-weight: 600;
-    margin-bottom: 1.25rem;
-    position: relative;
-    padding-bottom: 0.5rem;
   }
 
-  .footer-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 2rem;
-    height: 2px;
-    background: var(--primary-color);
-  }
-
-  .footer-description {
-    color: rgba(255, 255, 255, 0.6);
+  .footer-section p {
+    color: var(--text-color);
+    opacity: 0.8;
     line-height: 1.6;
-    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--primary-color);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .social-link:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+    color: var(--accent-color);
+  }
+
+  .social-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .social-link img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(100%);
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover img {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%)
+      hue-rotate(242deg) brightness(92%) contrast(85%);
   }
 
   .footer-links {
@@ -118,87 +154,91 @@ import { appInfo } from "../config/appInfo";
   }
 
   .footer-links a {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.2s ease;
-    position: relative;
-    display: inline-block;
-  }
-
-  .footer-links a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+    transition: all 0.2s ease;
+    opacity: 0.8;
   }
 
   .footer-links a:hover {
     color: var(--primary-color);
-  }
-
-  .footer-links a:hover::after {
-    width: 100%;
+    opacity: 1;
   }
 
   .footer-bottom {
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
     text-align: center;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.875rem;
   }
 
-  .copyright,
-  .credits {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.85rem;
-    margin: 0.5rem 0;
+  .footer-bottom a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
-  .credits {
-    font-style: italic;
+  .footer-bottom a:hover {
+    color: var(--accent-color);
   }
 
-  /* Mobile responsiveness */
+  .made-with-love {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .made-with-love a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .made-with-love a:hover {
+    color: var(--accent-color);
+  }
+
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   @media (max-width: 768px) {
     footer {
-      padding: 2rem 0 1rem;
+      padding: 3rem 0 1.5rem;
+      margin-top: 3rem;
     }
 
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .footer-bottom {
-      padding-top: 1.25rem;
-    }
-
-    .footer-col {
-      text-align: center;
-    }
-
-    .footer-title::after {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (max-width: 480px) {
     .footer-content {
-      padding: 0 1rem;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
-    .footer-title {
-      font-size: 1.1rem;
+    .footer-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.125rem;
       margin-bottom: 1rem;
     }
 
-    .footer-grid {
-      gap: 1.75rem;
-      margin-bottom: 2rem;
+    .social-links {
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
     }
   }
 </style>

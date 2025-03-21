@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { appInfo } from "../../config/appInfo";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { categories, type Category } from "../../data/categories";
 
 import githubIcon from "../../assets/github.svg";
 import chevronRight from "../../assets/chevron-right.svg";
@@ -16,19 +17,46 @@ import cursedItemsIcon from "../../assets/icons/cursedItems.svg";
 import miscellaneousIcon from "../../assets/icons/miscellaneous.svg";
 
 // Create a map of category IDs to their icon imports
-const iconMap = {
-  "visuals": visualsIcon,
-  "movement": movementIcon,
-  "ghostManipulation": ghostManipulationIcon,
-  "playerAbilities": playerAbilitiesIcon,
-  "cursedItems": cursedItemsIcon,
-  "miscellaneous": miscellaneousIcon
+const iconMap: Record<string, any> = {
+  visuals: visualsIcon,
+  movement: movementIcon,
+  ghostManipulation: ghostManipulationIcon,
+  playerAbilities: playerAbilitiesIcon,
+  cursedItems: cursedItemsIcon,
+  miscellaneous: miscellaneousIcon,
 };
 
 // Default icon in case we don't find a match
 const defaultIcon = miscellaneousIcon;
 
+// Get all features
 const features = await getCollection("features");
+
+// Get all category icons
+const categoryIcons = await Promise.all(
+  categories.map(async (category: Category) => {
+    const icon = await import(`../../assets/icons/${category.icon}.svg`);
+    return {
+      id: category.id,
+      icon: icon.default,
+    };
+  }),
+);
+
+// Group features by category
+const featuresByCategory = features.reduce(
+  (acc: Record<string, any[]>, feature) => {
+    const category = feature.data.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(feature);
+    return acc;
+  },
+  {},
+);
+
+// Get total feature count
 const totalFeatureCount = features.reduce(
   (sum, category) => sum + category.data.features.length,
   0,
@@ -36,7 +64,7 @@ const totalFeatureCount = features.reduce(
 
 // For debugging - check what icons we're getting
 console.log("Feature categories with icons:");
-features.forEach(category => {
+features.forEach((category) => {
   console.log(`Category: ${category.id}, Icon: ${category.data.icon}`);
 });
 ---
@@ -60,13 +88,21 @@ features.forEach(category => {
           features.map((category) => {
             // Safely get the icon - first try exact match, then try lowercase
             const iconKey = category.data.icon;
-            const iconSrc = iconMap[iconKey] || iconMap[iconKey?.toLowerCase()] || defaultIcon;
-            
+            const iconSrc =
+              iconMap[iconKey] ||
+              iconMap[iconKey?.toLowerCase()] ||
+              defaultIcon;
+
             return (
               <li>
                 <a href={`#${category.id.toLowerCase()}`} class="nav-link">
                   <span class="nav-icon">
-                    <Image src={iconSrc} alt={`${category.id} icon`} width={24} height={24} />
+                    <Image
+                      src={iconSrc}
+                      alt={`${category.id} icon`}
+                      width={24}
+                      height={24}
+                    />
                   </span>
                   <span class="nav-text">{category.id}</span>
                 </a>
@@ -91,21 +127,29 @@ features.forEach(category => {
       features.map((category) => {
         // Similar safe lookup for the category icon
         const iconKey = category.data.icon;
-        const iconSrc = iconMap[iconKey] || iconMap[iconKey?.toLowerCase()] || defaultIcon;
-        
+        const iconSrc =
+          iconMap[iconKey] || iconMap[iconKey?.toLowerCase()] || defaultIcon;
+
         return (
           <section class="feature-category" id={category.id.toLowerCase()}>
             <div class="category-header">
               <div class="header-left">
                 <div class="category-icon-wrapper">
                   <div class="category-icon">
-                    <Image src={iconSrc} alt={`${category.id} icon`} width={35} height={35} />
+                    <Image
+                      src={iconSrc}
+                      alt={`${category.id} icon`}
+                      width={35}
+                      height={35}
+                    />
                   </div>
                   <div class="icon-glow" />
                 </div>
                 <div class="category-title">
                   <h2>{category.id}</h2>
-                  <p class="category-description">{category.data.description}</p>
+                  <p class="category-description">
+                    {category.data.description}
+                  </p>
                 </div>
               </div>
               <div class="header-right">
@@ -152,7 +196,12 @@ features.forEach(category => {
             class="btn secondary"
           >
             <span class="btn-icon">
-              <Image src={githubIcon} alt="Request Feature on GitHub" width={20} height={20} />
+              <Image
+                src={githubIcon}
+                alt="Request Feature on GitHub"
+                width={20}
+                height={20}
+              />
             </span>
             <span class="btn-text">Request on GitHub</span>
           </a>
@@ -240,18 +289,15 @@ features.forEach(category => {
 
     .category-nav {
       position: sticky;
-      top: 70px;
+      top: 90px;
       z-index: 10;
-      background: rgba(17, 17, 17, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
       margin-bottom: 2rem;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100%;
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      padding: 0.5rem;
     }
 
     .category-nav ul {
@@ -264,26 +310,43 @@ features.forEach(category => {
       -ms-overflow-style: none;
       justify-content: center;
       flex-wrap: nowrap;
-    }
-
-    .category-nav ul::-webkit-scrollbar {
-      display: none;
+      gap: 0.5rem;
     }
 
     .nav-link {
       display: flex;
       align-items: center;
-      padding: 1rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       color: var(--text-color);
       text-decoration: none;
       transition: all 0.3s ease;
       white-space: nowrap;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
     }
 
     .nav-link:hover,
     .nav-link:focus {
       color: var(--primary-color);
-      background: rgba(155, 89, 182, 0.1);
+      background: rgba(155, 89, 182, 0.05);
+    }
+
+    .nav-link:hover::before,
+    .nav-link:focus::before {
+      width: 80%;
     }
 
     .nav-icon {
@@ -297,13 +360,14 @@ features.forEach(category => {
       width: 20px;
       height: 20px;
       stroke: currentColor;
-      filter: brightness(0) saturate(100%) invert(100%); /* Make icons white by default */
-      transition: filter 0.3s ease;
+      filter: brightness(0) saturate(100%) invert(100%);
+      transition: all 0.3s ease;
     }
 
     .nav-link:hover .nav-icon img,
     .nav-link:focus .nav-icon img {
-      filter: brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
+      filter: brightness(0) saturate(100%) invert(56%) sepia(22%)
+        saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
     }
 
     .intro {
@@ -420,7 +484,8 @@ features.forEach(category => {
       height: 35px;
       stroke: var(--primary-color);
       transition: transform 0.3s ease;
-      filter: brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
+      filter: brightness(0) saturate(100%) invert(56%) sepia(22%)
+        saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
     }
 
     .feature-category:hover .category-icon img {
@@ -625,7 +690,8 @@ features.forEach(category => {
     }
 
     .request-icon:hover img {
-      filter: brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
+      filter: brightness(0) saturate(100%) invert(56%) sepia(22%)
+        saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
     }
 
     .request-feature-section h2 {
@@ -672,7 +738,8 @@ features.forEach(category => {
     }
 
     .request-feature-section .btn:hover .btn-icon img {
-      filter: brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
+      filter: brightness(0) saturate(100%) invert(56%) sepia(22%)
+        saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%);
     }
 
     .cta-section {
@@ -879,16 +946,12 @@ features.forEach(category => {
         width: 100%;
         border-radius: 0;
         margin-bottom: 1.5rem;
-      }
-
-      .category-nav ul {
-        justify-content: flex-start;
+        top: 80px;
         padding: 0.5rem;
-        overflow-x: auto;
       }
 
       .nav-link {
-        padding: 0.8rem;
+        padding: 0.6rem;
       }
 
       .nav-text {
@@ -1061,23 +1124,26 @@ features.forEach(category => {
             const activeId = entry.target.getAttribute("id");
 
             navLinks.forEach((link) => {
+              const linkElement = link as HTMLElement;
               if (link.getAttribute("href") === `#${activeId}`) {
-                link.style.color = "var(--primary-color)";
-                link.style.background = "rgba(155, 89, 182, 0.1)";
+                linkElement.style.color = "var(--primary-color)";
+                linkElement.style.background = "rgba(155, 89, 182, 0.1)";
 
                 // Update the image filter when active
                 const img = link.querySelector("img");
                 if (img) {
-                  img.style.filter = "brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%)";
+                  img.style.filter =
+                    "brightness(0) saturate(100%) invert(56%) sepia(22%) saturate(1234%) hue-rotate(242deg) brightness(92%) contrast(85%)";
                 }
               } else {
-                link.style.color = "var(--text-color)";
-                link.style.background = "transparent";
+                linkElement.style.color = "var(--text-color)";
+                linkElement.style.background = "transparent";
 
                 // Reset image filter to white (not black)
                 const img = link.querySelector("img");
                 if (img) {
-                  img.style.filter = "brightness(0) saturate(100%) invert(100%)";
+                  img.style.filter =
+                    "brightness(0) saturate(100%) invert(100%)";
                 }
               }
             });
