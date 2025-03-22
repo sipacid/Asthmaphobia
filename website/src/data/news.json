@@ -1,5 +1,17 @@
 [
   {
+    "id": 4,
+    "title": "Asthmaphobia v2.4.4 Released",
+    "date": "2025-03-22",
+    "category": "update",
+    "version": "2.4.4",
+    "content": [
+      "This update brings:",
+      "• Small menu redesign.",
+      "• Ability to send a custom ouija board message (HOST ONLY)."
+    ]
+  },
+  {
     "id": 3,
     "title": "Asthmaphobia v2.4.3 Released",
     "date": "2025-03-19",
