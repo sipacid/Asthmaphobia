@@ -15,6 +15,7 @@ namespace Asthmaphobia::Notifications
 		std::string Message;
 		NotificationType Type;
 		float LifeTime;
+		float StartTime;
 		float FadeInTime = 0.3f;
 		float FadeOutTime = 0.3f;
 		float Alpha = 0.0f;
@@ -33,6 +34,7 @@ namespace Asthmaphobia::Notifications
 		notification.Message = message;
 		notification.Type = type;
 		notification.LifeTime = lifeTime;
+		notification.StartTime = lifeTime;
 		notification.Alpha = 0.0f;
 		notification.SlideOffset = 50.0f;
 		notifications.push_back(notification);
@@ -47,7 +49,7 @@ namespace Asthmaphobia::Notifications
 			notification.LifeTime -= deltaTime;
 
 			// Fade in
-			if (notification.LifeTime > notification.LifeTime - notification.FadeInTime)
+			if (notification.LifeTime > notification.StartTime - notification.FadeInTime)
 			{
 				notification.Alpha = (std::min)(1.0f, notification.Alpha + deltaTime / notification.FadeInTime);
 			}
