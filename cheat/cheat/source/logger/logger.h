@@ -1,7 +1,10 @@
 #pragma once
-#include "source/common.h"
 #include <mutex>
 #include <sstream>
+#include <fstream>
+#include <string>
+#include <string_view>
+#include <Windows.h>
 
 namespace Asthmaphobia
 {

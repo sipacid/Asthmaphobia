@@ -14,6 +14,7 @@ namespace Asthmaphobia
 		Visuals,
 		Exploits,
 		Movement,
+		MenuSettings
 	};
 
 	static const std::unordered_map<FeatureCategory, const char*> CATEGORY_TO_STRING = {
@@ -23,7 +24,8 @@ namespace Asthmaphobia
 		{CursedItems, "Cursed items"},
 		{Visuals, "Visuals"},
 		{Exploits, "Exploits"},
-		{Movement, "Movement"}
+		{Movement, "Movement"},
+		{MenuSettings, "Settings"}
 	};
 
 	class Feature
@@ -54,8 +56,6 @@ namespace Asthmaphobia
 		[[nodiscard]] bool IsEnabled() const noexcept { return std::get<bool>(EnabledSetting->GetValue()); }
 		[[nodiscard]] const Settings* GetSettings() const noexcept { return Settings_.get(); }
 		Settings* GetSettings() noexcept { return Settings_.get(); }
-
-		bool ShouldDrawSection = true;
 
 	protected:
 		std::string Name;

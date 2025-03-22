@@ -4,14 +4,11 @@ using namespace Asthmaphobia::Features::Movement;
 
 InfiniteStamina::InfiniteStamina() : Feature("Infinite Stamina", "Infinite stamina, be like Marco", FeatureCategory::Movement)
 {
-	ShouldDrawSection = false;
 }
 
 void InfiniteStamina::OnMenu()
 {
-	ImGui::Checkbox("Infinite Stamina", &std::get<bool>(EnabledSetting->GetValue()));
-	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip("%s", Description.c_str());
+	ImGui::Checkbox("Enabled##infiniteStamina", &std::get<bool>(EnabledSetting->GetValue()));
 }
 
 void InfiniteStamina::OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const

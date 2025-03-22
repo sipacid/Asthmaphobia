@@ -107,37 +107,117 @@ void FeatureManager::OnDraw() const
 
 void FeatureManager::OnMenu() const
 {
-	static constexpr FeatureCategory CATEGORIES[] = {
-		Player,
-		Ghost,
-		World,
-		CursedItems,
-		Visuals,
-		Exploits,
-		Movement,
-	};
+	static FeatureCategory selectedCategory = Player;
+	static constexpr float SIDE_PANEL_WIDTH = 200.0f;
 
-	for (const auto featureType : CATEGORIES)
+	ImGui::Columns(2, "MenuColumns", false);
+
+	// Side panel
+	ImGui::SetColumnWidth(0, SIDE_PANEL_WIDTH);
+	ImGui::BeginGroup();
 	{
-		// GG if this fails, but this should never fail :)
-		if (ImGui::BeginTabItem(CATEGORY_TO_STRING.find(featureType)->second))
+		// Draw all category buttons
+		for (const auto& [category, name] : CATEGORY_TO_STRING)
 		{
-			for (const auto& feature : Features | std::views::values)
-			{
-				if (feature->GetCategory() == featureType)
-				{
-					if (feature->ShouldDrawSection)
-					{
-						ImGui::Text("%s", feature->GetName().c_str());
-						ImGui::TextColored(ImColor(173, 173, 173, 255), "%s",
-						                   feature->GetDescription().c_str());
-					}
+			const bool isSelected = selectedCategory == category;
+			if (isSelected)
+				ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyle().Colors[ImGuiCol_ButtonActive]);
 
-					feature->OnMenu();
-					ImGui::Separator();
-				}
-			}
-			ImGui::EndTabItem();
+			if (ImGui::Button(name, ImVec2(SIDE_PANEL_WIDTH - 16, 30)))
+				selectedCategory = category;
+
+			if (isSelected)
+				ImGui::PopStyleColor();
 		}
 	}
+	ImGui::EndGroup();
+
+	// Main content area
+	ImGui::NextColumn();
+	ImGui::BeginChild("MainContent", ImVec2(0, 0), false);
+	{
+		ImGui::Text("%s", CATEGORY_TO_STRING.find(selectedCategory)->second);
+		ImGui::Separator();
+
+		if (selectedCategory == MenuSettings)
+		{
+			// Settings content
+			if (ImGui::Button("License"))
+			{
+				ImGui::OpenPopup("License Information");
+			}
+
+			if (ImGui::BeginPopupModal("License Information", nullptr, ImGuiWindowFlags_NoResize))
+			{
+				ImGui::BeginChild("LicenseText", ImVec2(500 * dpiScale, 300 * dpiScale), false, ImGuiWindowFlags_NoCollapse);
+				ImGui::TextWrapped(
+					"MIT License\n\n"
+					"Copyright (c) 2024-2025 sipacid\n\n"
+					"Permission is hereby granted, free of charge, to any person obtaining a copy "
+					"of this software and associated documentation files (the \"Software\"), to deal "
+					"in the Software without restriction, including without limitation the rights "
+					"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell "
+					"copies of the Software, and to permit persons to whom the Software is "
+					"furnished to do so, subject to the following conditions:\n\n"
+					"The above copyright notice and this permission notice shall be included in all "
+					"copies or substantial portions of the Software.\n\n"
+					"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR "
+					"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, "
+					"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE "
+					"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER "
+					"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, "
+					"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE "
+					"SOFTWARE.");
+				ImGui::EndChild();
+
+				if (ImGui::Button("Close"))
+				{
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndPopup();
+			}
+
+			if (ImGui::Button("Unload cheat"))
+			{
+				globalRunning = false;
+			}
+
+			ImGui::Text("Built on: %s %s", buildDate, buildTime);
+			ImGui::Text("%s", creditsText);
+		}
+		else
+		{
+			// Feature content
+			ImGui::BeginChild("FeatureList", ImVec2(0, 0), false);
+			for (const auto& feature : Features | std::views::values)
+			{
+				if (feature->GetCategory() == selectedCategory)
+				{
+					const float contentWidth = ImGui::GetContentRegionAvail().x - 16.0f;
+					ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 4.0f);
+					ImGui::PushStyleVar(ImGuiStyleVar_ChildBorderSize, 1.0f);
+					ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+
+					ImGui::BeginChild(("FeatureCard_" + feature->GetName()).c_str(),
+					                  ImVec2(contentWidth, 0),
+					                  ImGuiChildFlags_Border | ImGuiChildFlags_AutoResizeY);
+
+					ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
+					ImGui::Text("%s", feature->GetName().c_str());
+					ImGui::PopFont();
+					ImGui::TextColored(ImColor(173, 173, 173, 255), "%s", feature->GetDescription().c_str());
+					ImGui::Spacing();
+
+					feature->OnMenu();
+					ImGui::EndChild();
+					ImGui::PopStyleVar(3);
+					ImGui::Spacing();
+				}
+			}
+			ImGui::EndChild();
+		}
+	}
+	ImGui::EndChild();
+
+	ImGui::Columns(1);
 }

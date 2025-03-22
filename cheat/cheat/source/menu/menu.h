@@ -14,7 +14,7 @@ namespace Asthmaphobia
 		bool Open;
 
 	private:
-		SDK::CursorLockMode previousCursorLockMode;
+		SDK::CursorLockMode PreviousCursorLockMode;
 	};
 
 	inline Menu menu;

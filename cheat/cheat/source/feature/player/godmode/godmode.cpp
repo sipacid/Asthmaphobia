@@ -8,9 +8,7 @@ GodMode::GodMode() : Feature("GodMode", "Become invincible, will spawn dead body
 
 void GodMode::OnMenu()
 {
-	ImGui::Checkbox("Enabled", &std::get<bool>(EnabledSetting->GetValue()));
-	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip("%s", Description.c_str());
+	ImGui::Checkbox("Enabled##godMode", &std::get<bool>(EnabledSetting->GetValue()));
 }
 
 std::nullptr_t GodMode::OnPlayerStartKillingPlayerNetworked(SDK::Player* player, const bool a1, const bool a2, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const

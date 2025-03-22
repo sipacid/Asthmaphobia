@@ -9,12 +9,14 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 {
 	try
 	{
+		// Initialise the logger before anything else, in case something goes wrong.
+		auto& logger = GetLoggerInstance();
+
 		if (!SDK::InitializeSDK())
 		{
 			throw std::runtime_error("Failed to initialize SDK");
 		}
 
-		auto& logger = GetLoggerInstance();
 		auto& hooking = GetHookingInstance();
 		auto& renderer = GetRendererInstance();
 		auto& featureManager = GetFeatureManagerInstance();
@@ -60,6 +62,14 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 
 		do
 		{
+#ifdef _DEBUG
+			if (GetAsyncKeyState(VK_DELETE) & 1)
+			{
+				LOG_DEBUG("Pressed DELETE key to uninject.");
+				globalRunning = false;
+			}
+#endif
+
 			std::this_thread::sleep_for(std::chrono::milliseconds(111));
 		}
 		while (globalRunning);

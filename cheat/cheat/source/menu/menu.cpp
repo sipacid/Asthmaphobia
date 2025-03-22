@@ -65,7 +65,7 @@ void Menu::Initialize()
 void Menu::Render()
 {
 	constexpr ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
-	constexpr int menuWidth = 600;
+	constexpr int menuWidth = 800;
 	constexpr int menuHeight = 600;
 
 	ImGui::SetNextWindowSize(ImVec2(menuWidth * dpiScale, menuHeight * dpiScale), ImGuiCond_Once);
@@ -75,60 +75,7 @@ void Menu::Render()
 	ImGui::ShowDemoWindow();
 #endif
 
-	if (ImGui::BeginTabBar("##tabBarMain"))
-	{
-		GetFeatureManagerInstance().OnMenu();
-
-		if (ImGui::BeginTabItem("Settings"))
-		{
-			if (ImGui::Button("License"))
-			{
-				ImGui::OpenPopup("License Information");
-			}
-
-			if (ImGui::BeginPopupModal("License Information", nullptr, ImGuiWindowFlags_NoResize))
-			{
-				ImGui::BeginChild("LicenseText", ImVec2(500 * dpiScale, 300 * dpiScale), false, ImGuiWindowFlags_NoCollapse);
-				ImGui::TextWrapped(
-					"MIT License\n\n"
-					"Copyright (c) 2024-2025 sipacid\n\n"
-					"Permission is hereby granted, free of charge, to any person obtaining a copy "
-					"of this software and associated documentation files (the \"Software\"), to deal "
-					"in the Software without restriction, including without limitation the rights "
-					"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell "
-					"copies of the Software, and to permit persons to whom the Software is "
-					"furnished to do so, subject to the following conditions:\n\n"
-					"The above copyright notice and this permission notice shall be included in all "
-					"copies or substantial portions of the Software.\n\n"
-					"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR "
-					"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, "
-					"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE "
-					"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER "
-					"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, "
-					"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE "
-					"SOFTWARE.");
-				ImGui::EndChild();
-
-				if (ImGui::Button("Close"))
-				{
-					ImGui::CloseCurrentPopup();
-				}
-				ImGui::EndPopup();
-			}
-
-			if (ImGui::Button("Unload cheat"))
-			{
-				globalRunning = false;
-			}
-
-			ImGui::Text("Built on: %s %s", buildDate, buildTime);
-			ImGui::Text("%s", creditsText);
-
-			ImGui::EndTabItem();
-		}
-
-		ImGui::EndTabBar();
-	}
+	GetFeatureManagerInstance().OnMenu();
 
 	ImGui::End();
 }
@@ -139,15 +86,15 @@ void Menu::Toggle()
 
 	if (menu.Open)
 	{
-		previousCursorLockMode = SDK::Cursor_Get_LockState_ptr(nullptr);
+		PreviousCursorLockMode = SDK::Cursor_Get_LockState_ptr(nullptr);
 		SDK::Cursor_Set_Visible_ptr(true, nullptr);
 		SDK::Cursor_Set_LockState_ptr(SDK::CursorLockMode::None, nullptr);
 	}
 	else
 	{
-		if (previousCursorLockMode != SDK::CursorLockMode::None)
+		if (PreviousCursorLockMode != SDK::CursorLockMode::None)
 			SDK::Cursor_Set_Visible_ptr(false, nullptr);
 
-		SDK::Cursor_Set_LockState_ptr(previousCursorLockMode, nullptr);
+		SDK::Cursor_Set_LockState_ptr(PreviousCursorLockMode, nullptr);
 	}
 }

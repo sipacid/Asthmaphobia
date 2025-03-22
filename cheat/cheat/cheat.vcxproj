@@ -252,6 +252,7 @@
     <ClInclude Include="source\helper\helper.h" />
     <ClCompile Include="source\hooking\hooks\hkLevelValues_IsPerfectGame.cpp" />
     <ClInclude Include="source\hooking\hooks\hooks.h" />
+    <ClInclude Include="source\memory\memory.h" />
     <ClInclude Include="source\menu\menu.h" />
     <ClCompile Include="source\hooking\hooks\hkPresent.cpp" />
     <ClInclude Include="source\notifications\notifications.h" />
@@ -293,6 +294,7 @@
     <ClInclude Include="source\sdk\MonoBehaviour.h" />
     <ClInclude Include="source\sdk\MouseLook.h" />
     <ClInclude Include="source\sdk\Network.h" />
+    <ClInclude Include="source\sdk\OuijaBoard.h" />
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
     <ClInclude Include="source\sdk\PhotonObjectInteract.h" />
@@ -323,6 +325,7 @@
     <ClCompile Include="libraries\imgui\imgui_stdlib.cpp" />
     <ClCompile Include="libraries\imgui\imgui_tables.cpp" />
     <ClCompile Include="libraries\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="source\memory\memory.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\dllmain.cpp" />

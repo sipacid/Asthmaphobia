@@ -13,7 +13,7 @@
 #include "helper/helper.h"
 #include "logger/logger.h"
 #include "renderer/renderer.h"
-#include "sdk/sdk.h"
+#include "memory.h"
 #include "notifications/notifications.h"
 
 namespace Asthmaphobia

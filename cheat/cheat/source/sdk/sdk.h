@@ -1,6 +1,12 @@
 #pragma once
+#include "source/common.h"
 #include <functional>
 #include <Windows.h>
+#include <Psapi.h>
+#include <iostream>
+
+#include "source/memory/memory.h"
+#include "source/logger/logger.h"
 
 namespace IL2CPP
 {
@@ -26,13 +32,27 @@ namespace IL2CPP
 	{
 		const HMODULE gameAssembly = GetModuleHandleW(L"GameAssembly.dll");
 		if (!gameAssembly)
+		{
+			LOG_ERROR("Failed to get GameAssembly.dll handle");
 			return false;
+		}
 
 		il2cpp_domain_get = reinterpret_cast<il2cpp_domain_get_t>(GetProcAddress(gameAssembly, "il2cpp_domain_get"));
 		il2cpp_domain_assembly_open = reinterpret_cast<il2cpp_domain_assembly_open_t>(GetProcAddress(gameAssembly, "il2cpp_domain_assembly_open"));
 		il2cpp_assembly_get_image = reinterpret_cast<il2cpp_assembly_get_image_t>(GetProcAddress(gameAssembly, "il2cpp_assembly_get_image"));
 		il2cpp_class_from_name = reinterpret_cast<il2cpp_class_from_name_t>(GetProcAddress(gameAssembly, "il2cpp_class_from_name"));
 		il2cpp_class_get_method_from_name = reinterpret_cast<il2cpp_class_get_method_from_name_t>(GetProcAddress(gameAssembly, "il2cpp_class_get_method_from_name"));
+
+		if (!il2cpp_domain_get)
+			LOG_ERROR("Failed to get il2cpp_domain_get");
+		if (!il2cpp_domain_assembly_open)
+			LOG_ERROR("Failed to get il2cpp_domain_assembly_open");
+		if (!il2cpp_assembly_get_image)
+			LOG_ERROR("Failed to get il2cpp_assembly_get_image");
+		if (!il2cpp_class_from_name)
+			LOG_ERROR("Failed to get il2cpp_class_from_name");
+		if (!il2cpp_class_get_method_from_name)
+			LOG_ERROR("Failed to get il2cpp_class_get_method_from_name");
 
 		return il2cpp_domain_get && il2cpp_domain_assembly_open && il2cpp_assembly_get_image &&
 			il2cpp_class_from_name && il2cpp_class_get_method_from_name;
@@ -41,17 +61,33 @@ namespace IL2CPP
 	inline bool InitDomain()
 	{
 		if (!domain)
+		{
 			domain = il2cpp_domain_get();
-
-		if (!domain)
-			return false;
+			if (!domain)
+			{
+				LOG_ERROR("Failed to get IL2CPP domain");
+				return false;
+			}
+			LOG_DEBUG("Got IL2CPP domain");
+		}
 
 		void* assembly = il2cpp_domain_assembly_open(domain, "Assembly-CSharp");
 		if (!assembly)
+		{
+			LOG_ERROR("Failed to open Assembly-CSharp");
 			return false;
+		}
+		LOG_DEBUG("Opened Assembly-CSharp");
 
 		assemblyImage = il2cpp_assembly_get_image(assembly);
-		return assemblyImage != nullptr;
+		if (!assemblyImage)
+		{
+			LOG_ERROR("Failed to get assembly image");
+			return false;
+		}
+		LOG_DEBUG("Got assembly image");
+
+		return true;
 	}
 
 	template <typename T>
@@ -108,13 +144,25 @@ namespace SDK
 
 	inline bool InitializeSDK()
 	{
-		if (!IL2CPP::InitIL2CPP())
-			return false;
+		LOG_DEBUG("Initializing SDK...");
 
+		if (!IL2CPP::InitIL2CPP())
+		{
+			LOG_ERROR("Failed to initialize IL2CPP");
+			return false;
+		}
+		LOG_DEBUG("IL2CPP initialized");
+
+		LOG_DEBUG("Waiting for game to stabilize...");
 		Sleep(1000);
 
+		LOG_DEBUG("Initializing methods...");
 		if (!IL2CPP::InitializeAllMethods())
+		{
+			LOG_ERROR("Failed to initialize methods");
 			return false;
+		}
+		LOG_DEBUG("Methods initialized");
 
 		return true;
 	}
@@ -133,6 +181,37 @@ namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitial
 #define DECLARE_FUNCTION_POINTER(NAME, TYPE, ADDRESS) \
 using NAME = TYPE; \
 inline NAME NAME##_ptr = reinterpret_cast<NAME>(BASE_ADDRESS + ADDRESS);
+
+// Pattern scanning support
+// Example:
+// DECLARE_PATTERN_POINTER(UpdatePlayerHealth, void(__fastcall*)(Player* player, float newHealth), L"GameAssembly.dll", ".text", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20")
+#define DECLARE_PATTERN_POINTER(NAME, TYPE, MODULE, SECTION, PATTERN) \
+using NAME = TYPE; \
+inline NAME NAME##_ptr = nullptr; \
+inline bool NAME##_initialized = false; \
+inline void Init_##NAME() { \
+    if (NAME##_initialized) return; \
+    NAME##_initialized = true; \
+    const auto moduleHandle = GetModuleHandleW(MODULE); \
+    if (!moduleHandle) return; \
+    NAME##_ptr = reinterpret_cast<NAME>(Memory::FindPatternInSection(moduleHandle, SECTION, PATTERN)); \
+} \
+namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitializers.push_back(Init_##NAME); } }; static NAME##_registrar NAME##_reg; }
+
+// Pattern scanning
+// Prefer not to use, is way slower.
+#define DECLARE_PATTERN_POINTER_ALL_SECTIONS(NAME, TYPE, MODULE, PATTERN) \
+	using NAME = TYPE; \
+	inline NAME NAME##_ptr = nullptr; \
+	inline bool NAME##_initialized = false; \
+	inline void Init_##NAME() { \
+		if (NAME##_initialized) return; \
+		NAME##_initialized = true; \
+		const auto moduleHandle = GetModuleHandleW(MODULE); \
+		if (!moduleHandle) return; \
+		NAME##_ptr = reinterpret_cast<TYPE>(Memory::FindPatternInAllSections(moduleHandle, PATTERN)); \
+	} \
+	namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitializers.push_back(Init_##NAME); } }; static NAME##_registrar NAME##_reg; }
 
 #include "MonoBehaviour.h"
 #include "MethodInfo.h"
@@ -168,6 +247,7 @@ inline NAME NAME##_ptr = reinterpret_cast<NAME>(BASE_ADDRESS + ADDRESS);
 #include "PhotonNetwork.h"
 #include "PhotonObjectInteract.h"
 #include "Network.h"
+#include "OuijaBoard.h"
 #include "Matrix4x4.h"
 #include "PhysicsCharacterController.h"
 #include "FirstPersonController.h"

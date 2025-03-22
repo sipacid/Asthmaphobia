@@ -56,5 +56,6 @@ namespace SDK
 		PhotonObjectInteractFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(PhotonObjectInteract_Start, void(*)(PhotonObjectInteract* photonObjectInteract, MethodInfo* methodInfo), "Assembly-CSharp", "", "PhotonObjectInteract", "Start", 0);
+	DECLARE_METHOD_POINTER(PhotonObjectInteract_Start, void(*)(PhotonObjectInteract* photonObjectInteract, MethodInfo* methodInfo), "Assembly-CSharp", "", "PhotonObjectInteract",
+	                       "Start", 0);
 }

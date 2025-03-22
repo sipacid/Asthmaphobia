@@ -5,6 +5,8 @@
 #include <KnownFolders.h>
 #include <shlobj_core.h>
 
+#include "source/helper/helper.h"
+
 using namespace Asthmaphobia;
 
 Logger& Asthmaphobia::GetLoggerInstance()
