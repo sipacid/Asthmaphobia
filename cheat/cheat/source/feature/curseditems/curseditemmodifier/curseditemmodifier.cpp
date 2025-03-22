@@ -14,8 +14,19 @@ void CursedItemModifier::OnMenu()
 	ImGui::SameLine();
 	if (ImGui::Button("Send message##cursedItemModifierMessage"))
 	{
-		CustomMessageSetting->SetValue(std::string(MessageBuffer));
-		SendOuijaBoardMessage = true;
+		if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else
+		{
+			CustomMessageSetting->SetValue(std::string(MessageBuffer));
+			SendOuijaBoardMessage = true;
+		}
 	}
 
 	if (ImGui::Button("Break cursed items##cursedItems"))
