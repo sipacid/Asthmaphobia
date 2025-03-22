@@ -14,7 +14,7 @@ void CursedItemModifier::OnMenu()
 	ImGui::SameLine();
 	if (ImGui::Button("Send message##cursedItemModifierMessage"))
 	{
-		if (!Helper::IsLocalMasterClient())
+		if (GameState::cursedItemController == nullptr)
 		{
 			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
 		}
