@@ -32,31 +32,36 @@ void CursedItemModifier::OnMenu()
 	if (ImGui::Button("Break cursed items##cursedItems"))
 	{
 		if (GameState::cursedItemController == nullptr)
-			return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		{
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else if (!Helper::IsLocalMasterClient())
+		{
+			AddNotification("You must be the host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else
+		{
+			if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
+				SDK::CursedItem_BreakItem_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
 
-		if (!Helper::IsLocalMasterClient())
-			return AddNotification("You must be the host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
-			SDK::CursedItem_BreakItem_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::TarotCards))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.TarotCards), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::SummoningCircle))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.SummoningCircle), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::TarotCards))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.TarotCards), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::HauntedMirror))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.HauntedMirror), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::SummoningCircle))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.SummoningCircle), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::VoodooDoll))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.VoodooDoll), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::HauntedMirror))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.HauntedMirror), nullptr);
-
-		if (DoesCursedItemExist(SDK::CursedItemType::VoodooDoll))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.VoodooDoll), nullptr);
-
-		if (DoesCursedItemExist(SDK::CursedItemType::MonkeyPaw))
-			SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MonkeyPaw), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::MonkeyPaw))
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MonkeyPaw), nullptr);
+		}
 	}
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("This will make all cursed items unusable.");
@@ -64,19 +69,23 @@ void CursedItemModifier::OnMenu()
 	if (ImGui::Button("Use cursed items##cursedItems"))
 	{
 		if (GameState::cursedItemController == nullptr)
-			return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		{
+			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		}
+		else
+		{
+			if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
+				SDK::CursedItem_Use_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
-			SDK::CursedItem_Use_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
+				SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
-			SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::TarotCards))
+				SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.TarotCards), nullptr);
 
-		if (DoesCursedItemExist(SDK::CursedItemType::TarotCards))
-			SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.TarotCards), nullptr);
-
-		if (DoesCursedItemExist(SDK::CursedItemType::HauntedMirror))
-			SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.HauntedMirror), nullptr);
+			if (DoesCursedItemExist(SDK::CursedItemType::HauntedMirror))
+				SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.HauntedMirror), nullptr);
+		}
 	}
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("This will use the following cursed items: Music Box, Tarot Cards (1 card) and the Haunted Mirror.");
@@ -86,7 +95,8 @@ void CursedItemModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* m
 {
 	if (!SendOuijaBoardMessage || GameState::cursedItemController->Fields.OuijaBoard == nullptr) return;
 
-	SDK::OuijaBoard_SendMessage_ptr(GameState::cursedItemController->Fields.OuijaBoard, Helper::StringToSystemString(std::get<std::string>(CustomMessageSetting->GetValue())), nullptr);
+	SDK::OuijaBoard_SendMessage_ptr(GameState::cursedItemController->Fields.OuijaBoard, Helper::StringToSystemString(std::get<std::string>(CustomMessageSetting->GetValue())),
+	                                nullptr);
 	SendOuijaBoardMessage = false;
 }
 

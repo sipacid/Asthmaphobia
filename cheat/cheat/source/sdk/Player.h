@@ -109,6 +109,4 @@ namespace SDK
 	                       "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
 
 	DECLARE_METHOD_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "Teleport", 1)
-
-	DECLARE_METHOD_POINTER(Player_ToggleFreezePlayer, void(*)(Player* player, bool freeze, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "ToggleFreezePlayer", 1)
 }
