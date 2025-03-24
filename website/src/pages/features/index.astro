@@ -15,6 +15,7 @@ import ghostManipulationIcon from "../../assets/icons/ghostManipulation.svg";
 import playerAbilitiesIcon from "../../assets/icons/playerAbilities.svg";
 import cursedItemsIcon from "../../assets/icons/cursedItems.svg";
 import miscellaneousIcon from "../../assets/icons/miscellaneous.svg";
+import worldIcon from "../../assets/icons/world.svg";
 
 // Create a map of category IDs to their icon imports
 const iconMap: Record<string, any> = {
@@ -23,6 +24,7 @@ const iconMap: Record<string, any> = {
   ghostManipulation: ghostManipulationIcon,
   playerAbilities: playerAbilitiesIcon,
   cursedItems: cursedItemsIcon,
+  world: worldIcon,
   miscellaneous: miscellaneousIcon,
 };
 
@@ -46,7 +48,7 @@ const categoryIcons = await Promise.all(
 // Group features by category
 const featuresByCategory = features.reduce(
   (acc: Record<string, any[]>, feature) => {
-    const category = feature.data.category;
+    const category = feature.id.toLowerCase();
     if (!acc[category]) {
       acc[category] = [];
     }
@@ -61,12 +63,6 @@ const totalFeatureCount = features.reduce(
   (sum, category) => sum + category.data.features.length,
   0,
 );
-
-// For debugging - check what icons we're getting
-console.log("Feature categories with icons:");
-features.forEach((category) => {
-  console.log(`Category: ${category.id}, Icon: ${category.data.icon}`);
-});
 ---
 
 <Layout

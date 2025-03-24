@@ -25,6 +25,10 @@
         "description": "Display detailed ghost information in a separate window, including ghost type, hunting status, and activity level."
       },
       {
+        "title": "Activity Monitor",
+        "description": "Monitor ghost activity levels and interactions in real-time."
+      },
+      {
         "title": "Watermark",
         "description": "Optional watermark showing Asthmaphobia version and FPS counter."
       }
@@ -80,6 +84,10 @@
       {
         "title": "Player Modifier",
         "description": "Modify player attributes like sanity level, carrying capacity, and interaction range."
+      },
+      {
+        "title": "Custom Name",
+        "description": "Change your in-game name to anything, including special characters and formatting."
       }
     ]
   },
@@ -99,7 +107,18 @@
     ]
   },
   {
-    "id": "Miscellaneous",
+    "id": "World",
+    "icon": "world",
+    "description": "Manipulate the game world and environment",
+    "features": [
+      {
+        "title": "Door Modifier",
+        "description": "Control all doors remotely, including locked doors and closets."
+      }
+    ]
+  },
+  {
+    "id": "Exploits",
     "icon": "miscellaneous",
     "description": "Additional utility features",
     "features": [
@@ -108,20 +127,16 @@
         "description": "Prevent being kicked from multiplayer lobbies, even by the host."
       },
       {
-        "title": "Custom Name",
-        "description": "Change your in-game name to anything, including special characters and formatting."
-      },
-      {
-        "title": "Door Modifier",
-        "description": "Control all doors remotely, including locked doors and closets."
-      },
-      {
         "title": "Free Mouse Look",
         "description": "Look around freely while dead or in equipment view mode."
       },
       {
         "title": "Leave People",
         "description": "Force other players to leave the game or disconnect them from the lobby."
+      },
+      {
+        "title": "Pickup",
+        "description": "Manipulate item pickup mechanics and interactions."
       },
       {
         "title": "Reward Modifier",
