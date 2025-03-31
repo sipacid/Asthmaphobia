@@ -20,8 +20,11 @@ import { appInfo } from "../config/appInfo";
       <ul>
         <li><a href="/features" class="nav-link">Features</a></li>
         <li>
-          <a href={appInfo.downloadUrl} class="nav-link btn-download"
-            >Download</a>
+          <a
+            href={appInfo.downloadUrl}
+            class="nav-link btn-download"
+            data-umami-event="Download">Download</a
+          >
         </li>
         <li><a href="/news" class="nav-link">News</a></li>
         <li><a href="/faq" class="nav-link">FAQ</a></li>
@@ -59,7 +62,8 @@ import { appInfo } from "../config/appInfo";
         <li><a href="/features" class="nav-link">Features</a></li>
         <li>
           <a href={appInfo.downloadUrl} class="nav-link btn-download"
-            >Download</a>
+            >Download</a
+          >
         </li>
         <li><a href="/news" class="nav-link">News</a></li>
         <li><a href="/faq" class="nav-link">FAQ</a></li>

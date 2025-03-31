@@ -213,7 +213,11 @@ const totalFeatureCount = features.reduce(
             compatibility with the latest game version.
           </p>
           <div class="cta-buttons">
-            <a href={appInfo.downloadUrl} class="btn primary">
+            <a
+              href={appInfo.downloadUrl}
+              class="btn primary"
+              data-umami-event="Download"
+            >
               <span class="btn-text">Download Now</span>
               <span class="btn-icon">
                 <Image src={chevronRight} alt="Download" />

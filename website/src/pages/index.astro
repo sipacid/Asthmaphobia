@@ -18,7 +18,11 @@ import infoIcon from "../assets/info-icon.svg";
       <h1>Welcome to <span class="accent">Asthmaphobia</span></h1>
       <p class="subtitle">The Ultimate Cheat Tool for Phasmophobia</p>
       <div class="cta-buttons">
-        <a href={appInfo.downloadUrl} class="btn primary">
+        <a
+          href={appInfo.downloadUrl}
+          class="btn primary"
+          data-umami-event="Download"
+        >
           <span class="icon">
             <Image src={downloadIcon} alt="Download" width={20} height={20} />
           </span>
@@ -95,7 +99,11 @@ import infoIcon from "../assets/info-icon.svg";
         >
       </div>
 
-      <a href={appInfo.downloadUrl} class="download-button">
+      <a
+        href={appInfo.downloadUrl}
+        class="download-button"
+        data-umami-event="Download"
+      >
         <span class="download-icon">
           <Image src={downloadIcon} alt="Download" width={24} height={24} />
         </span>

@@ -40,7 +40,11 @@ import { Image } from "astro:assets";
         <h3>Quick Links</h3>
         <ul class="footer-links">
           <li><a href="/features">Features</a></li>
-          <li><a href={appInfo.downloadUrl}>Download</a></li>
+          <li>
+            <a href={appInfo.downloadUrl} data-umami-event="Download"
+              >Download</a
+            >
+          </li>
           <li><a href="/news">News</a></li>
           <li><a href="/faq">FAQ</a></li>
         </ul>
@@ -54,7 +58,8 @@ import { Image } from "astro:assets";
         Made with love by <a
           href="https://sipacid.com"
           target="_blank"
-          rel="noopener noreferrer">Eve</a>
+          rel="noopener noreferrer">Eve</a
+        >
       </p>
     </div>
   </div>
