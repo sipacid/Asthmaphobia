@@ -16,6 +16,7 @@ namespace IL2CPP
 	using il2cpp_assembly_get_image_t = void* (*)(void* assembly);
 	using il2cpp_class_from_name_t = void* (*)(void* image, const char* namespaze, const char* name);
 	using il2cpp_class_get_method_from_name_t = void* (*)(void* klass, const char* name, int argsCount);
+	using il2cpp_string_new_utf16_t = void* (*)(const wchar_t* str, int len);
 
 	// Function pointers
 	inline il2cpp_domain_get_t il2cpp_domain_get = nullptr;
@@ -23,6 +24,7 @@ namespace IL2CPP
 	inline il2cpp_assembly_get_image_t il2cpp_assembly_get_image = nullptr;
 	inline il2cpp_class_from_name_t il2cpp_class_from_name = nullptr;
 	inline il2cpp_class_get_method_from_name_t il2cpp_class_get_method_from_name = nullptr;
+	inline il2cpp_string_new_utf16_t il2cpp_string_new_utf16 = nullptr;
 
 	// Cached domain and assembly image
 	inline void* domain = nullptr;
@@ -42,6 +44,7 @@ namespace IL2CPP
 		il2cpp_assembly_get_image = reinterpret_cast<il2cpp_assembly_get_image_t>(GetProcAddress(gameAssembly, "il2cpp_assembly_get_image"));
 		il2cpp_class_from_name = reinterpret_cast<il2cpp_class_from_name_t>(GetProcAddress(gameAssembly, "il2cpp_class_from_name"));
 		il2cpp_class_get_method_from_name = reinterpret_cast<il2cpp_class_get_method_from_name_t>(GetProcAddress(gameAssembly, "il2cpp_class_get_method_from_name"));
+		il2cpp_string_new_utf16 = reinterpret_cast<il2cpp_string_new_utf16_t>(GetProcAddress(gameAssembly, "il2cpp_string_new_utf16"));
 
 		if (!il2cpp_domain_get)
 			LOG_ERROR("Failed to get il2cpp_domain_get");
@@ -53,9 +56,11 @@ namespace IL2CPP
 			LOG_ERROR("Failed to get il2cpp_class_from_name");
 		if (!il2cpp_class_get_method_from_name)
 			LOG_ERROR("Failed to get il2cpp_class_get_method_from_name");
+		if (!il2cpp_string_new_utf16)
+			LOG_ERROR("Failed to get il2cpp_string_new_utf16");
 
 		return il2cpp_domain_get && il2cpp_domain_assembly_open && il2cpp_assembly_get_image &&
-			il2cpp_class_from_name && il2cpp_class_get_method_from_name;
+			il2cpp_class_from_name && il2cpp_class_get_method_from_name && il2cpp_string_new_utf16;
 	}
 
 	inline bool InitDomain()
@@ -246,6 +251,7 @@ namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitial
 #include "EvidenceController.h"
 #include "PhotonNetwork.h"
 #include "PhotonObjectInteract.h"
+#include "PhotonView.h"
 #include "Network.h"
 #include "OuijaBoard.h"
 #include "Matrix4x4.h"

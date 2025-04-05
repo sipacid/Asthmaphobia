@@ -5,6 +5,9 @@
 
 namespace Asthmaphobia
 {
+	const auto MESSAGE_MUST_BE_INGAME = "You must be in-game to use this feature.";
+	const auto MESSAGE_MUST_BE_HOST = "You must be host to use this feature.";
+
 	enum FeatureCategory : uint8_t
 	{
 		Player,
@@ -53,7 +56,7 @@ namespace Asthmaphobia
 		[[nodiscard]] const std::string& GetName() const noexcept { return Name; }
 		[[nodiscard]] const std::string& GetDescription() const noexcept { return Description; }
 		[[nodiscard]] FeatureCategory GetCategory() const noexcept { return Category; }
-		[[nodiscard]] bool IsEnabled() const noexcept { return std::get<bool>(EnabledSetting->GetValue()); }
+		[[nodiscard]] virtual bool IsEnabled() const noexcept { return std::get<bool>(EnabledSetting->GetValue()); }
 		[[nodiscard]] const Settings* GetSettings() const noexcept { return Settings_.get(); }
 		Settings* GetSettings() noexcept { return Settings_.get(); }
 

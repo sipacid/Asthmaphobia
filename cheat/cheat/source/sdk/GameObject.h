@@ -17,6 +17,10 @@ namespace SDK
 		GameObject* Vector[65535];
 	};
 
+	DECLARE_METHOD_POINTER(GameObject_GetComponentByName, void* (*)(GameObject* gameObject, String* type, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine",
+	                       "GameObject",
+	                       "GetComponentByName", 1);
+
 	DECLARE_METHOD_POINTER(GameObject_Get_Transform, Transform* (*)(GameObject* gameObject, MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "GameObject",
 	                       "get_transform", 0);
 

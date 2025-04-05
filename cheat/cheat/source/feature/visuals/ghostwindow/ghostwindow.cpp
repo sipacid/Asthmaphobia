@@ -14,6 +14,7 @@ void GhostWindow::OnDraw()
 	const auto& ghostInfo = GameState::ghostAI->Fields.GhostInfo;
 	const auto& ghostTraits = ghostInfo->Fields.GhostTraits;
 
+	// if the ghost name is null, all the other fields won't be valid either.
 	if (!ghostTraits.Name)
 		return;
 
@@ -22,17 +23,10 @@ void GhostWindow::OnDraw()
 	ImGui::Text("Ghost name: %s", Helper::SystemStringToString(*ghostTraits.Name).c_str());
 	ImGui::Text("Ghost type: %s", Helper::EnumToString(ghostTraits.GhostType_).c_str());
 
-	switch (ghostTraits.GhostType_)
+	if (ghostTraits.GhostType_ == SDK::GhostType::Banshee)
 	{
-	case SDK::GhostType::Mimic:
-		ImGui::Text("Mimic type: %s", Helper::EnumToString(ghostTraits.MimicType).c_str());
-		break;
-	case SDK::GhostType::Banshee:
 		if (const auto& bansheeTarget = GameState::ghostAI->Fields.BansheeTarget)
 			ImGui::Text("Banshee target: %s", Helper::GetPlayerName(bansheeTarget).c_str());
-		break;
-	default:
-		break;
 	}
 
 	if (const auto& evidence = GetGhostEvidenceString(); !evidence.empty())

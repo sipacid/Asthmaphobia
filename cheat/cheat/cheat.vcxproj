@@ -298,6 +298,7 @@
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
     <ClInclude Include="source\sdk\PhotonObjectInteract.h" />
+    <ClInclude Include="source\sdk\PhotonView.h" />
     <ClInclude Include="source\sdk\PhotoValues.h" />
     <ClInclude Include="source\sdk\PhysicsCharacterController.h" />
     <ClInclude Include="source\sdk\Player.h" />

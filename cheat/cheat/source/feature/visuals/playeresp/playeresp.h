@@ -25,8 +25,8 @@ namespace Asthmaphobia::Features::Visuals
 		std::shared_ptr<Setting> ShowDeadStatusSetting;
 		std::shared_ptr<Setting> ColorSetting;
 
-		bool ShowSanity;
-		bool ShowDeadStatus;
+		bool ShowSanity = false;
+		bool ShowDeadStatus = false;
 		ImColor Color;
 		std::string TextBuffer;
 		static constexpr size_t BUFFER_RESERVE_SIZE = 64;

@@ -333,6 +333,9 @@
     <ClInclude Include="source\memory\memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\sdk\PhotonView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">

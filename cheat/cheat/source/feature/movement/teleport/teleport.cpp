@@ -1,5 +1,7 @@
 #include "teleport.h"
 
+#include "source/sdk/PhotonView.h"
+
 using namespace Asthmaphobia::Features::Movement;
 
 Teleport::Teleport() : Feature("Teleport", "Portal <3", FeatureCategory::Movement)
@@ -18,14 +20,12 @@ void Teleport::OnMenu()
 
 	if (ImGui::Button("Teleport all items to me##teleport"))
 		TeleportItems();
-	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip("Some items might be only locally there until you pick them up.");
 }
 
 void Teleport::Run(const SDK::Player* player) const
 {
 	if (!GameState::mapController || !GameState::deadZoneController || !GameState::ghostAI)
-		return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		return AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 
 	const auto localPlayer = Helper::GetLocalPlayer();
 
@@ -50,7 +50,7 @@ void Teleport::Run(const SDK::Player* player) const
 void Teleport::TeleportItems()
 {
 	if (!GameState::mapController || !GameState::deadZoneController || !GameState::ghostAI)
-		return AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+		return AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 
 	const auto localPlayer = Helper::GetLocalPlayer();
 	const auto objects = SDK::GameObject_FindGameObjectsWithTag_ptr(Helper::StringToSystemString("Item"), nullptr);
@@ -66,6 +66,12 @@ void Teleport::TeleportItems()
 		const auto transform = SDK::GameObject_Get_Transform_ptr(object, nullptr);
 		if (transform == nullptr)
 			continue;
+
+		// request ownership so the position updates for everyone, not just us
+		const auto photonView = static_cast<SDK::PhotonView*>(SDK::GameObject_GetComponentByName_ptr(object, Helper::StringToSystemString("PhotonView"), nullptr));
+		if (photonView == nullptr)
+			continue;
+		SDK::PhotonView_RequestOwnership_ptr(photonView, nullptr);
 
 		const auto worldPosition = Helper::GetWorldPosition(localPlayer);
 		SDK::Transform_Set_Position_ptr(transform, worldPosition + SDK::Vector3{

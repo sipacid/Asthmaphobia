@@ -63,6 +63,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		do
 		{
 #ifdef _DEBUG
+			// backup in case we fuck up the menu and can't uninject
 			if (GetAsyncKeyState(VK_DELETE) & 1)
 			{
 				LOG_DEBUG("Pressed DELETE key to uninject.");

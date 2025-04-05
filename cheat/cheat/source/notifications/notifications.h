@@ -13,9 +13,9 @@ namespace Asthmaphobia::Notifications
 	struct Notification
 	{
 		std::string Message;
-		NotificationType Type;
-		float LifeTime;
-		float StartTime;
+		NotificationType Type = NotificationType::Info;
+		float LifeTime = 3.0f;
+		float StartTime = 3.0f;
 		float FadeInTime = 0.3f;
 		float FadeOutTime = 0.3f;
 		float Alpha = 0.0f;

@@ -10,17 +10,16 @@ CursedItemModifier::CursedItemModifier() : Feature("CursedItem Modifier", "Modif
 
 void CursedItemModifier::OnMenu()
 {
-	ImGui::InputText("##cursedItemModifierMessage", MessageBuffer, IM_ARRAYSIZE(MessageBuffer));
-	ImGui::SameLine();
+	ImGui::InputText("Custom Ouija Board Message##cursedItemModifierMessage", MessageBuffer, IM_ARRAYSIZE(MessageBuffer));
 	if (ImGui::Button("Send message##cursedItemModifierMessage"))
 	{
 		if (GameState::cursedItemController == nullptr)
 		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 		}
 		else if (!Helper::IsLocalMasterClient())
 		{
-			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_HOST, Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -33,11 +32,11 @@ void CursedItemModifier::OnMenu()
 	{
 		if (GameState::cursedItemController == nullptr)
 		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 		}
 		else if (!Helper::IsLocalMasterClient())
 		{
-			AddNotification("You must be the host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_HOST, Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -70,7 +69,7 @@ void CursedItemModifier::OnMenu()
 	{
 		if (GameState::cursedItemController == nullptr)
 		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{

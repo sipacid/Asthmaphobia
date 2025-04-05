@@ -11,13 +11,15 @@ namespace Asthmaphobia::Features::Visuals
 
 		void OnEnable() override
 		{
-		};
+		}
 
 		void OnDisable() override
 		{
-		};
+		}
+
 		void OnDraw() override;
 		void OnMenu() override;
+		[[nodiscard]] bool IsEnabled() const noexcept override { return true; }
 
 	private:
 		std::shared_ptr<Setting> ShowAverageSanitySetting;
@@ -27,7 +29,8 @@ namespace Asthmaphobia::Features::Visuals
 			ImGuiWindowFlags_NoCollapse |
 			ImGuiWindowFlags_NoTitleBar |
 			ImGuiWindowFlags_AlwaysAutoResize |
-			ImGuiWindowFlags_NoResize;
+			ImGuiWindowFlags_NoResize |
+			ImGuiWindowFlags_NoMove;
 
 		std::string CachedText;
 		static constexpr std::string_view PING_PREFIX = " | Ping: ";

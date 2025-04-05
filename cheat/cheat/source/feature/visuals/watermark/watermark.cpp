@@ -13,6 +13,7 @@ Watermark::Watermark() : Feature("Watermark", "Shows a watermark on the screen."
 
 void Watermark::OnDraw()
 {
+	ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always);
 	ImGui::Begin("Watermark", nullptr, WINDOW_FLAGS);
 
 	CachedText = cheatName;
@@ -41,7 +42,6 @@ void Watermark::OnDraw()
 
 void Watermark::OnMenu()
 {
-	ImGui::Checkbox("Enabled##waterMark", &std::get<bool>(EnabledSetting->GetValue()));
 	ImGui::Checkbox("Show average sanity", &std::get<bool>(ShowAverageSanitySetting->GetValue()));
 	ImGui::Checkbox("Show ping", &std::get<bool>(ShowPingSetting->GetValue()));
 }

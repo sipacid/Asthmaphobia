@@ -21,11 +21,11 @@ void GhostModifier::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 		}
 		else if (!Helper::IsLocalMasterClient())
 		{
-			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_HOST, Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{
@@ -44,11 +44,11 @@ void GhostModifier::OnMenu()
 	{
 		if (GameState::ghostAI == nullptr)
 		{
-			AddNotification("You must be in-game to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
 		}
 		else if (!Helper::IsLocalMasterClient())
 		{
-			AddNotification("You must be host to use this feature.", Notifications::NotificationType::Error, 3.0f);
+			AddNotification(MESSAGE_MUST_BE_HOST, Notifications::NotificationType::Error, 3.0f);
 		}
 		else
 		{

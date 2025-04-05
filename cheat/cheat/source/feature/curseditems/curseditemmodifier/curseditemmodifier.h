@@ -29,6 +29,6 @@ namespace Asthmaphobia::Features::CursedItems
 		static bool DoesCursedItemExist(SDK::CursedItemType cursedItemType);
 		bool SendOuijaBoardMessage = false;
 		std::shared_ptr<Setting> CustomMessageSetting;
-		char MessageBuffer[128];
+		char MessageBuffer[128] = "";
 	};
 }
