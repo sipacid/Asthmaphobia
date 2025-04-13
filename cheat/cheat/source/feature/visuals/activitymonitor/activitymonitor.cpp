@@ -13,10 +13,10 @@ void ActivityMonitor::OnDraw()
 	if (!GameState::emfData)
 		return;
 
-	ImGui::SetNextWindowSize(ImVec2(450, 250), ImGuiCond_Always);
+	ImGui::SetNextWindowSize(ImVec2(450, 275), ImGuiCond_Always);
 	ImGui::Begin("Activity Monitor", nullptr, WINDOW_FLAGS);
 
-	ImGui::SetCursorPos(ImVec2(25, 25)); // Move the graph down by increasing Y position
+	ImGui::SetCursorPos(ImVec2(25, 35)); // Move the graph down by increasing Y position
 
 	constexpr auto graphSize = ImVec2(400, 200);
 	const ImVec2 graphPos = ImGui::GetCursorScreenPos();
