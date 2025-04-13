@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci:
+  build-website:
     runs-on: ubuntu-latest
-    name: Build
+    name: Build Website
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,18 +42,56 @@ jobs:
           name: dist
           path: website/dist
 
+  build-cheat:
+    runs-on: windows-latest
+    name: Build Cheat DLL
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup Visual Studio Components
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "[17.0,18.0)"
+          vs-prerelease: false
+          msbuild-architecture: x64
+
+      - name: Build Cheat DLL
+        run: msbuild /m /p:Configuration=Release ./cheat
+
+      - name: Upload Cheat DLL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cheat-dll
+          path: cheat/x64/Release/cheat.dll
+
   deploy:
-    needs: ci
+    needs: [build-website, build-cheat]
     environment: production
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     name: Deploy to Production
     steps:
-      - name: Download artifact
+      - name: Download Website Artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
+
+      - name: Download Cheat DLL Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cheat-dll
+          path: cheat-dll
+
+      - name: Move Cheat DLL to Public Directory
+        run: |
+          cp cheat-dll/cheat.dll dist/
 
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@main
