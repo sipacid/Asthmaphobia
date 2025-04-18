@@ -8,31 +8,31 @@ namespace SDK
 	struct GameControllerFields
 	{
 		MonoBehaviourPunCallbacksFields MonoBehaviourPunCallbacksFields; // MonoBehaviourPunCallbacks derived class field
-		void* Field0; // UnityEvent
-		void* Field01; // ???
-		void* Field1; // UnityEvent
-		void* Field2; // UnityEvent
-		void* Field3; // UnityEvent
-		void* Field31; // ???
-		void* Field32; // ???
-		void* Field4; // UnityEvent
-		void* Field5; // UnityEvent
-		void* Field51; // ???
-		void* Field6; // UnityEvent
-		void* Field7; // ???
-		void* Field8; // ???
-		void* Field9; // ???
-		void* Field10; // ???
-		void* Field101; // ???
-		float Field11;
-		void* Field12; // SpeechRecognitionController
+		void* OnAllPlayersConnected; // UnityEvent
+		void* OnPlayerSpawned; // ???
+		void* OnGhostSpawned; // UnityEvent
+		void* OnHuntStarted; // UnityEvent
+		void* OnHuntEnded; // UnityEvent
+		void* OnPlayerChangedRoom; // ???
+		void* OnGhostChangedRoom; // ???
+		void* OnLocalPlayerExitTruck; // UnityEvent
+		void* OnLocalPlayerEnterTruck; // UnityEvent
+		void* OnPlayerDied; // UnityEvent
+		void* OnLocalPlayerDied; // ???
+		void* OnFuseBoxUse; // UnityEvent
+		void* OnPlayerEnteredOrExitTruck; // ???
+		void* OnPhotoTaken; // ???
+		void* OnPhotoRemoved; // ???
+		void* OnPhotoVote; // ???
+		float CurrentAverageSanity;
+		void* SpeechRecognitionController; // SpeechRecognitionController
 		LevelController* LevelController;
-		void* Field14; // MultiplayerController
-		bool Field15;
-		int Field16;
-		void* Field17; // Material
-		bool Field18;
-		void* Field19; // SpeechRecognizer
+		void* MultiplayerController; // MultiplayerController
+		bool AllPlayersAreConnected;
+		int PlayerReadyCount;
+		void* HandMaterial; // Material
+		bool HasDrawnHighPriestess;
+		void* SpeechRecognizer; // SpeechRecognizer
 	};
 
 	struct GameController

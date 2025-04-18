@@ -8,56 +8,55 @@ namespace SDK
 	struct DoorFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		bool Field0;
-		bool Field1;
-		bool Field2;
+		bool Locked;
+		bool Closed;
+		bool HasBeenGrabbedByPlayer;
 		void* DoorLockClips; // AudioClip[]
 		void* DoorUnlockClips; // AudioClip[]
-		void* Field3; // AudioClip[]
-		void* Field4; // AudioClip[]
+		void* DoorClosedClips; // AudioClip[]
+		void* DoorOpenClips; // AudioClip[]
 		float ClosedVolume;
 		float UnlockVolume;
 		void* LoopSource; // AudioSource
-		void* Field5; // OcclusionPortal
-		void* Field6; // Volume
-		bool Field7;
-		bool Field8;
-		bool Field9;
-		void* Field10; // PhotonView
-		Rigidbody* Rigidbody;
-		void* Field11; // PhotonObjectInteract
-		void* Field12; // Fingerprint
-		Collider* Field13;
-		float Field14;
+		void* OcclusionPortal; // OcclusionPortal
+		void* DeadPostProcessVolume; // Volume
+		bool HasBeenUnlocked;
+		bool CanBeGrabbed;
+		bool CanBeOpenedByGhostsInHunts;
+		void* View; // PhotonView
+		Rigidbody* Body;
+		void* PhotonInteract; // PhotonObjectInteract
+		void* Fingerprint; // Fingerprint
+		Collider* Col;
+		float ClosedYRot;
 		void* Noise; // Noise
-		void* Field15; // ConfigurableJoint
-		void* Field16; // Renderer[]
+		void* Hinge; // ConfigurableJoint
+		void* Rends; // Renderer[]
 		bool IsDoorRotationBackwards;
-		int32_t Field17; // Enum: hinge, slide, cloth
-		int32_t Field18; // Enum: wood, Metal, Locker, Fabric
-		int32_t Axis; // Enum: None, X, Y, Z (0, 1, 2, 4)
+		int32_t DoorType; // Enum: hinge, slide, cloth
+		int32_t DoorMaterialType; // Enum: wood, Metal, Locker, Fabric
+		int32_t SlideAxis; // Enum: None, X, Y, Z (0, 1, 2, 4)
 		bool SlideForwards;
-		Vector3 Field19;
-		Vector3 Field20;
+		Vector3 StartLocalPosition;
+		Vector3 StartWorldPosition;
 		Vector3 ForwardDirection;
-		Door* Field21;
-		int32_t Field22; // Enum: None, Main, Secondary, PermanentLock
+		Door* OtherDoor;
+		Door* DoubleDoor;
+		int32_t KeyType; // Enum: None, Main, Secondary, PermanentLock
 		void* HuntCollider; // BoxCollider
 		void* ClothDoor; // ClothDoor
-		Transform* Field23; // Transform
-		float Field24;
+		Transform* ClothAnchor; // Transform
+		float MaxDistanceFromAnchor;
 		void* CollideWithColliders; // Collider[]
 		float CloseDoorDistance;
-		void* Field25; // UnityEvent
-		void* Field26; // UnityEvent
-		bool Field27;
+		void* OnDoorOpened; // UnityEvent
+		void* OnDoorClosed; // UnityEvent
+		bool IsLockedForTime;
 		float LoopSoundVelocityThreshold;
 		float LoopVolumeMultiplier;
-		void* Field28; // HashSet<GameObject>
-		float Field29;
-		float Field30;
-		float Field31; // const = 3f;
-		float Field32; // const = 0.001f;
+		void* PlayerContacts; // HashSet<GameObject>
+		float Speed;
+		float AngularSpeed;
 	};
 
 	struct Door

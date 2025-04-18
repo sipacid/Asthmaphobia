@@ -19,7 +19,8 @@ namespace Asthmaphobia
 		static void hkFuseBox_Start(SDK::FuseBox* fuseBox, SDK::MethodInfo* methodInfo);
 		static bool hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exitLevel, SDK::MethodInfo* methodInfo);
 		static void hkServerManager_KickPlayerNetworked(SDK::ServerManager* serverManager, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
-		static std::nullptr_t hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, bool a1, bool a2, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
+		static std::nullptr_t hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, bool revive, bool wasDemonAbilityHunt, void* photonMessageInfo,
+		                                                           SDK::MethodInfo* methodInfo);
 		static void hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo);
 		static void hkFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);
 		static void hkTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo);

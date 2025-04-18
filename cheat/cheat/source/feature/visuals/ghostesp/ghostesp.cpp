@@ -14,7 +14,7 @@ void GhostESP::OnDraw()
 		return;
 
 	const auto ghostInfo = GameState::ghostAI->Fields.GhostInfo;
-	if (!ghostInfo->Fields.GhostTraits.Name)
+	if (!ghostInfo->Fields.GhostTraits.GhostName)
 		return;
 
 	const auto ghostPosition = Helper::GetWorldPosition(GameState::ghostAI);
@@ -26,7 +26,7 @@ void GhostESP::OnDraw()
 	ImGui::GetBackgroundDrawList()->AddText(
 		ImVec2(screenPosition.X, screenPosition.Y),
 		std::get<ImColor>(ColorSetting->GetValue()),
-		Helper::SystemStringToString(*ghostInfo->Fields.GhostTraits.Name).c_str());
+		Helper::SystemStringToString(*ghostInfo->Fields.GhostTraits.GhostName).c_str());
 }
 
 void GhostESP::OnMenu()

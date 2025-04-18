@@ -6,36 +6,36 @@ namespace SDK
 	struct LevelControllerFields
 	{
 		MonoBehaviourPunFields MonoBehaviourPunFields;
-		void* Field0; // LevelController.SmallMapVariation[]
-		LevelRoom* Field1;
-		LevelRoom* Field2;
-		GhostAI* GhostAI;
-		DoorArray* DoorArray0;
-		void* Field5; // LevelRoom[]
-		void* Field6; // LevelRoom[]
-		void* Field7; // Transform[]
-		void* Field8; // Transform[]
-		LevelRoom* Field9;
-		bool Field10;
+		void* SmallMapVariations; // LevelController.SmallMapVariation[]
+		LevelRoom* CurrentPlayerRoom;
+		LevelRoom* CurrentGhostRoom;
+		GhostAI* CurrentGhost;
+		DoorArray* Doors;
+		void* AllGhostRooms; // LevelRoom[]
+		void* AllInteriorRooms; // LevelRoom[]
+		void* FuseboxSpawnLocations; // Transform[]
+		void* MannequinTeleportSpots; // Transform[]
+		LevelRoom* OutsideRoom;
+		bool IsOutsideMap;
 		FuseBox* FuseBox;
 		GameController* GameController;
 		void* SoundController; // SoundController
-		void* Field15; // ItemSpawner
-		DoorArray* DoorArray1;
-		void* Field17; // LevelArea[]
-		void* Field18; // List<Crucifix>
-		void* Field19; // List<FireSource>
-		void* PhotonObjectInteractList; // List<PhotonObjectInteract>
-		void* Field20; // string[]
-		void* Field21; // string[]
-		void* Field22; // string[]
-		void* Field23; // Key
-		void* Field24; // BlockedZone[]
+		void* ItemSpawner; // ItemSpawner
+		DoorArray* ExitDoors;
+		void* LevelAreas; // LevelArea[]
+		void* Crucifix; // List<Crucifix>
+		void* FireSources; // List<FireSource>
+		void* AllEquipment; // List<PhotonObjectInteract>
+		void* PossibleMaleFirstNames; // string[]
+		void* PossibleFemaleFirstNames; // string[]
+		void* PossibleLastNames; // string[]
+		void* MainDoorKey; // Key
+		void* AllBlockedZones; // BlockedZone[]
 		int IntermediateZonesBlocked;
 		int ProZonesBlocked;
 		int NightmareZonesBlocked;
-		void* Field29; // Transform[]
-		void* Field30; // List<float>
+		void* AllClothDoors; // Transform[]
+		void* FPS; // List<float>
 	};
 
 	struct LevelController

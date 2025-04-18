@@ -58,7 +58,7 @@ namespace SDK
 		void* HauntedMirrorSpawnSpots; // Transform[]
 		void* VoodooDollSpawnSpots; // Transform[]
 		void* MonkeyPawSpawnSpots; // Transform[]
-		ListCursedItemEnum* CursedItems; // List<???>
+		ListCursedItemEnum* UsedCursedItems; // List<CursedItemType>
 	};
 
 	struct CursedItemController

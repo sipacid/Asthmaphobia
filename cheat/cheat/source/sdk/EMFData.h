@@ -12,7 +12,7 @@ namespace SDK
 		LineRenderer* Rend;
 		void* Screen; // BrokenScreen
 		void* GlitchText; // GlitchyText[]
-		void* Field0; // List<EMF.???>
+		void* EMFSpots; // List<EMF.???>
 		Transform* StartingPos;
 	};
 

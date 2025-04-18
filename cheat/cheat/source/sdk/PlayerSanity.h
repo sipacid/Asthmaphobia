@@ -12,16 +12,16 @@ namespace SDK
 		void* View; // PhotonView
 		Player* Player;
 		float Insanity;
-		float Field2;
-		float Field3;
+		float SanityUpdateTimer;
+		float SanityCheckTimer;
 		void* ShadowRenderTexture; // RenderTexture
-		bool Field5;
-		float Field6;
-		bool Field7;
-		float Field8;
-		float Field9;
-		bool Field10;
-		void* Field11; // List<Candle>
+		bool PlayerIsInLight;
+		float DifficultyRate;
+		bool IsCursed;
+		float NormalSanityRate;
+		float SetupSanityRate;
+		bool SanityChallengeHasBeenSet;
+		void* NearbyFireLights; // List<Candle>
 	};
 
 	struct PlayerSanity

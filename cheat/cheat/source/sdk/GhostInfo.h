@@ -11,9 +11,9 @@ namespace SDK
 		MonoBehaviourPunFields MonoBehaviourPunFields; // MonoBehaviourPun derived class field
 		GhostTraits GhostTraits;
 		GhostAI* Ghost;
-		LevelRoom* LevelRoom;
+		LevelRoom* FavouriteRoom;
 		float ActivityMultiplier;
-		bool Field4;
+		bool HasSetEvidence;
 	};
 
 	struct GhostInfo

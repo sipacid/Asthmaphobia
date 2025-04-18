@@ -33,18 +33,18 @@ namespace SDK
 
 	struct GhostTraits
 	{
-		GhostType GhostType_; // GhostType
-		GhostType MimicType; // GhostType
-		ListGhostEvidence* GhostEvidenceList; // List<GhostEvidence> ???
-		ListGhostEvidence* Field3; // List<GhostEvidence> ???
-		int32_t Field4;
-		bool Field5;
-		String* Name;
-		int32_t Field7;
-		int32_t Field8;
-		bool Field9;
-		int32_t Field10;
-		int32_t Field11;
-		bool Field12;
+		GhostType InitialGhostType; // GhostType
+		GhostType GhostType; // GhostType
+		ListGhostEvidence* Evidences; // List<GhostEvidence> ???
+		ListGhostEvidence* FullEvidences; // List<GhostEvidence> ???
+		int32_t GhostAge;
+		bool IsMale;
+		String* GhostName;
+		int32_t GhostFirstNameID;
+		int32_t GhostLastNameID;
+		bool IsShy;
+		int32_t DeathLength;
+		int32_t FavouriteRoomID;
+		bool IsWhisper;
 	};
 }

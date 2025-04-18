@@ -40,9 +40,9 @@ FeatureManager& Asthmaphobia::GetFeatureManagerInstance()
 
 FeatureManager::FeatureManager()
 {
-	AddFeature("Players::GodMode", std::make_unique<Features::Player::GodMode>());
+	AddFeature("Player::GodMode", std::make_unique<Features::Player::GodMode>());
 	AddFeature("Player::CustomName", std::make_unique<Features::Player::CustomName>());
-	AddFeature("Players::PlayerModifier", std::make_unique<Features::Player::PlayerModifier>());
+	AddFeature("Player::PlayerModifier", std::make_unique<Features::Player::PlayerModifier>());
 
 	AddFeature("Ghost::GhostModifier", std::make_unique<Features::Ghost::GhostModifier>());
 	AddFeature("Ghost::Interactor", std::make_unique<Features::Ghost::Interactor>());

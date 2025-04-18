@@ -6,23 +6,23 @@ namespace SDK
 	struct LevelRoomFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		void* Field1; // List<LightSwitch>
-		void* Field2; // Door[]
+		void* LightSwitches; // List<LightSwitch>
+		void* Doors; // Door[]
 		void* RoomColliders; // List<Collider>
-		Transform* Field4;
+		Transform* MirrorCameraOverride;
 		void* AudioReverbZone; // AudioReverbZone
-		int32_t Field5;
-		void* Field7; // BoxCollider
-		int32_t Field6;
+		int32_t RoomType;
+		void* EvidenceSpawnOverride; // BoxCollider
+		int32_t FloorType;
 		String* RoomName;
-		float Field10;
-		float Field11;
-		float Field12;
-		float Field13;
-		bool Field14;
-		bool Field15;
-		bool Field16;
-		bool Field17;
+		float Temperature;
+		float MaximumTemperature;
+		float MinimumTemperature;
+		float CurrentPlayerInRoomTimer;
+		bool AllowGhostToRoamOtherFloor;
+		bool IsMostlyDarkRoom;
+		bool RoomModifierActive;
+		bool CanRunPlayerEnter;
 	};
 
 	struct LevelRoom

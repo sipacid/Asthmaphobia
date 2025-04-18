@@ -229,12 +229,12 @@ bool Helper::WorldToScreen(const SDK::Vector3 vWorldPosition, SDK::Vector3& vScr
 
 SDK::Vector3 Helper::GetWorldPosition(const SDK::Player* player)
 {
-	return GetWorldPosition(player->Fields.Field10);
+	return GetWorldPosition(player->Fields.MapIcon);
 }
 
 SDK::Vector3 Helper::GetWorldPosition(const SDK::GhostAI* ghostAI)
 {
-	return GetWorldPosition(ghostAI->Fields.Transform1);
+	return GetWorldPosition(ghostAI->Fields.HuntingRaycastPoint);
 }
 
 SDK::Vector3 Helper::GetWorldPosition(SDK::Component* component)
@@ -326,7 +326,7 @@ SDK::NetworkPlayerSpot* Helper::GetNetworkPlayerSpot(const SDK::Player* player)
 	if (!GetNetwork())
 		return nullptr;
 
-	return GameState::network->Fields.NetworkPlayerSpots->Fields.Items->Vector[GetPlayerIndex(player)];
+	return GameState::network->Fields.PlayersData->Fields.Items->Vector[GetPlayerIndex(player)];
 }
 
 std::string Helper::GetPlayerName(const SDK::Player* player)

@@ -98,6 +98,9 @@ void Interactor::OnMenu()
 
 void Interactor::OnGhostAIUpdate(const SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
 {
+	if (ghost == nullptr || ghost->Fields.GhostInfo == nullptr)
+		return;
+
 	if (ForceAbility)
 	{
 		SDK::GhostActivity_GhostAbility_ptr(ghost->Fields.GhostActivity, methodInfo);

@@ -14,21 +14,21 @@ namespace SDK
 		Player* Player;
 		bool MaleSoundsOverride;
 		bool FemaleSoundsOverride;
-		bool Field6;
-		bool Field7;
-		bool Field8;
-		bool Field9;
-		bool Field10;
-		bool Field11;
-		bool Field12;
-		bool Field13;
-		bool Field14;
-		bool Field15;
-		float Field17;
-		float Field18;
-		float Field19;
-		void* Field20; // UnityEvent
-		void* Field21; // UnityEvent
+		bool IsMoving;
+		bool CanSprint;
+		bool IsSprinting;
+		bool IsWalking;
+		bool Draining;
+		bool CanDrainStamina;
+		bool NewIsSprinting;
+		bool NewIsWalking;
+		bool StaminaDrained;
+		bool Delayed;
+		float CurrentStaminaRecharge;
+		float CurrentStamina;
+		float RestoreDelay;
+		void* OnStaminaDrained; // UnityEvent
+		void* OnStaminaRestored; // UnityEvent
 	};
 
 	struct PlayerStamina

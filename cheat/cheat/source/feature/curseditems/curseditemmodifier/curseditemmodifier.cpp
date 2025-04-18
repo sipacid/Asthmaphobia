@@ -101,7 +101,7 @@ void CursedItemModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* m
 
 bool CursedItemModifier::DoesCursedItemExist(const SDK::CursedItemType cursedItemType)
 {
-	const auto cursedItems = GameState::cursedItemController->Fields.CursedItems;
+	const auto cursedItems = GameState::cursedItemController->Fields.UsedCursedItems;
 	for (int i = 0; i < cursedItems->Fields.Size; i++)
 	{
 		if (cursedItems->Fields.Items->Vector[i] == cursedItemType)

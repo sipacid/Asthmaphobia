@@ -13,6 +13,6 @@ void InfiniteStamina::OnMenu()
 
 void InfiniteStamina::OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const
 {
-	if (std::get<bool>(EnabledSetting->GetValue()) && playerStamina->Fields.Field18 != 3.0f)
-		playerStamina->Fields.Field18 = 3.0f;
+	if (std::get<bool>(EnabledSetting->GetValue()) && playerStamina->Fields.CurrentStamina != 3.0f)
+		playerStamina->Fields.CurrentStamina = 3.0f;
 }

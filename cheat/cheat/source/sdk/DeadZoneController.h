@@ -9,7 +9,7 @@ namespace SDK
 		GameObject* Field0;
 		GameObjectArray* DeathRoomObjects;
 		Transform* PlayerSpawn;
-		Vector3 Field3;
+		Vector3 OldPlayerPos;
 		GameObject* DeadZoneLightObj;
 		void* DeadZoneLightSmashAudio; // AudioSource
 		GameController* GameController;

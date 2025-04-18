@@ -11,63 +11,64 @@ namespace SDK
 	struct PlayerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		void* Field0; // PhotonView
+		void* View; // PhotonView
 		bool IsDead;
-		bool Field1;
-		int32_t Field2;
-		void* Field3; // PlayerCharacter
-		void* Field4; // ClosetZone
-		void* Field5; // GameObject
-		Transform* Field6; // Transform
-		void* Field7; // List<KeyInfo>
+		bool IsDyingLocally;
+		int32_t ModelID;
+		void* PlayerCharacter; // PlayerCharacter
+		void* Closet; // ClosetZone
+		void* HeadObject; // GameObject
+		Transform* TrackedHead; // Transform
+		void* Keys; // List<KeyInfo>
 		Camera* Camera; // Camera
-		LevelRoom* LevelRoom; // LevelRoom
-		Transform* Field10; // Transform
-		void* Field11; // PhotonObjectInteract
-		void* Field12; // PhotonObjectInteract
-		void* Field13; // GameObject[]
-		void* Field14; // GameObject
-		int32_t Field15; // LayerMask
-		void* Field16; // HeadMountedSocket
-		Transform* Field17; // Transform
-		void* Field19; // GameObject
-		void* Field20; // DeadPlayer
+		LevelRoom* CurrentRoom; // LevelRoom
+		Transform* MapIcon; // Transform
+		void* RightCurrentHeldObject; // PhotonObjectInteract
+		void* LeftCurrentHeldObject; // PhotonObjectInteract
+		void* CharacterModels; // GameObject[]
+		void* GhostDeathHands; // GameObject
+		int32_t GhostRaycastMask; // LayerMask
+		void* HeadSock; // HeadMountedSocket
+		void* LOSTarget; // PlayerLOSTarget[]
+		Transform* AITargetPoint; // Transform
+		void* DeadBodyPrefab; // GameObject
+		void* DeadPlayer; // DeadPlayer
 		PlayerSanity* PlayerSanity; // PlayerSanity
-		void* Field22; // PlayerStats
-		void* Field23; // FootstepController
-		void* Field24; // JournalController
-		void* Field25; // Renderer[]
-		bool Field26;
-		void* Field27; // PlayerAudio
-		void* Field28; // PlayerGraphics
-		void* Field29; // PlayerSensors
+		void* PlayerStats; // PlayerStats
+		void* FootstepController; // FootstepController
+		void* JournalController; // JournalController
+		void* AllRends; // Renderer[]
+		bool IsSafeGhostCursed;
+		void* PlayerAudio; // PlayerAudio
+		void* PlayerGraphics; // PlayerGraphics
+		void* PlayerSensors; // PlayerSensors
 		PlayerStamina* PlayerStamina; // PlayerStamina
-		float Field30;
-		bool Field31;
-		void* Field32; // CharacterController
-		void* Field33; // AudioListener
+		float MovementSpeed;
+		bool MonkeyPawLeaveEffectIsActive;
+		void* CharController; // CharacterController
+		void* Listener; // AudioListener
 		FirstPersonController* FirstPersonController; // FirstPersonController
-		void* Field35; // PCPropGrab
-		void* Field36; // DragRigidbodyUse
-		void* Field37; // PCCanvas
-		void* Field38; // PCCrouch
-		void* Field39; // PCMenu
-		void* Field40; // PCControls
-		PCFlashlight* Field41; // PCFlashlight
-		void* Field42; // Animator
-		void* Field43; // PlayerInput
-		void* Field44; // PCItemSway
-		void* Field45; // PCItemSway
-		void* Field46; // Transform
-		void* Field47; // XRBaseInteractor
-		void* Field48; // XRBaseInteractor
-		void* Field49; // Transform
-		void* Field50; // VRMovementSettings
-		void* Field51; // VRBelt
-		void* Field52; // XRSocketInteractor
-		void* Field53; // XRSocketInteractor
-		void* Field54; // TrailerCamera
-		void* Field55; // VRLoading
+		void* PCPropGrab; // PCPropGrab
+		void* DragRigidbodyUse; // DragRigidbodyUse
+		void* PCCanvas; // PCCanvas
+		void* PCCrouch; // PCCrouch
+		void* PCMenu; // PCMenu
+		void* PCControls; // PCControls
+		PCFlashlight* PCFlashlight; // PCFlashlight
+		void* CharAnim; // Animator
+		void* PlayerInput; // PlayerInput
+		void* ItemSway; // PCItemSway
+		void* LightSway; // PCItemSway
+		void* DeadPlayerSpawnPoint; // Transform
+		void* LeftHandInteractor; // XRBaseInteractor
+		void* RightHandInteractor; // XRBaseInteractor
+		void* XROrigin; // Transform
+		void* MovementSettings; // VRMovementSettings
+		void* VRBelt; // VRBelt
+		void* LeftVRBeltDropZone; // XRSocketInteractor
+		void* RightVRBeltDropZone; // XRSocketInteractor
+		void* TrailerCamera; // TrailerCamera
+		void* VRLoading; // VRLoading
 	};
 
 	struct Player
@@ -101,11 +102,12 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, bool a1, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 1)
+	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, bool revive, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 1)
 
 	DECLARE_METHOD_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayer", 0)
 
-	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked, std::nullptr_t(*)(Player* player, bool a1, bool a2, void* photonMessageInfo, MethodInfo* methodInfo),
+	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked,
+	                       std::nullptr_t(*)(Player* player, bool revive, bool wasDemonAbilityHunt, void* photonMessageInfo, MethodInfo* methodInfo),
 	                       "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
 
 	DECLARE_METHOD_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "Teleport", 1)

@@ -34,7 +34,7 @@ void EvidenceESP::OnDraw()
 		(!cursedItemEnabled && !dnaEvidenceEnabled))
 		return;
 
-	const auto evidenceList = GameState::evidenceController->Fields.EvidenceList;
+	const auto evidenceList = GameState::evidenceController->Fields.EvidenceInLevel;
 	if (!evidenceList || !evidenceList->Fields.Items)
 		return;
 

@@ -3,6 +3,8 @@
 
 namespace SDK
 {
+	struct MapController;
+
 	struct MapControllerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;

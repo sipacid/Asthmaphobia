@@ -38,7 +38,7 @@ void PlayerModifier::OnMenu()
 			ImGui::Text("Status: %s", player->Fields.IsDead ? "Dead" : "Alive");
 			ImGui::Text("Sanity: %d%%", static_cast<int>(100.f - Helper::GetPlayerInsanity(player)));
 
-			if (const auto levelRoom = player->Fields.LevelRoom; levelRoom && levelRoom->Fields.RoomName)
+			if (const auto levelRoom = player->Fields.CurrentRoom; levelRoom && levelRoom->Fields.RoomName)
 				ImGui::Text("Current Room: %s", Helper::SystemStringToString(*levelRoom->Fields.RoomName).c_str());
 
 			ImGui::Separator();

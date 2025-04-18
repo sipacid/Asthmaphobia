@@ -15,15 +15,15 @@ void GhostWindow::OnDraw()
 	const auto& ghostTraits = ghostInfo->Fields.GhostTraits;
 
 	// if the ghost name is null, all the other fields won't be valid either.
-	if (!ghostTraits.Name)
+	if (!ghostTraits.GhostName)
 		return;
 
 	ImGui::Begin("Ghost information", nullptr, WINDOW_FLAGS);
 
-	ImGui::Text("Ghost name: %s", Helper::SystemStringToString(*ghostTraits.Name).c_str());
-	ImGui::Text("Ghost type: %s", Helper::EnumToString(ghostTraits.GhostType_).c_str());
+	ImGui::Text("Ghost name: %s", Helper::SystemStringToString(*ghostTraits.GhostName).c_str());
+	ImGui::Text("Ghost type: %s", Helper::EnumToString(ghostTraits.InitialGhostType).c_str());
 
-	if (ghostTraits.GhostType_ == SDK::GhostType::Banshee)
+	if (ghostTraits.InitialGhostType == SDK::GhostType::Banshee)
 	{
 		if (const auto& bansheeTarget = GameState::ghostAI->Fields.BansheeTarget)
 			ImGui::Text("Banshee target: %s", Helper::GetPlayerName(bansheeTarget).c_str());
@@ -32,7 +32,7 @@ void GhostWindow::OnDraw()
 	if (const auto& evidence = GetGhostEvidenceString(); !evidence.empty())
 		ImGui::Text("Evidence: %s", evidence.c_str());
 
-	if (const auto& levelRoom = ghostInfo->Fields.LevelRoom;
+	if (const auto& levelRoom = ghostInfo->Fields.FavouriteRoom;
 		levelRoom && levelRoom->Fields.RoomName)
 	{
 		ImGui::Text("Room: %s", Helper::SystemStringToString(*levelRoom->Fields.RoomName).c_str());
@@ -50,7 +50,7 @@ void GhostWindow::OnMenu()
 std::string GhostWindow::GetGhostEvidenceString()
 {
 	const auto& ghostInfo = GameState::ghostAI->Fields.GhostInfo;
-	const auto& ghostEvidenceList = ghostInfo->Fields.GhostTraits.GhostEvidenceList;
+	const auto& ghostEvidenceList = ghostInfo->Fields.GhostTraits.Evidences;
 
 	if (!ghostEvidenceList || ghostEvidenceList->Fields.Size == 0)
 		return {};

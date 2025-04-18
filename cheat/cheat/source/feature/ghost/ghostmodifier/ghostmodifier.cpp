@@ -66,9 +66,10 @@ void GhostModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* method
 
 	if (std::get<bool>(EnabledSetting->GetValue()))
 	{
-		ghost->Fields.Speed = std::get<float>(GhostSpeedSetting->GetValue());
-		ghost->Fields.Field22 = std::get<float>(GhostSpeedSetting->GetValue());
-		ghost->Fields.Field23 = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.DefaultSpeed = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.SaltSpeedMultiplier = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.IncenseSpeedMultiplier = std::get<float>(GhostSpeedSetting->GetValue());
+		ghost->Fields.EventSpeedMultiplier = std::get<float>(GhostSpeedSetting->GetValue());
 	}
 
 	if (ForceAppear)

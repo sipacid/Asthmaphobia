@@ -32,66 +32,65 @@ namespace SDK
 
 	struct GhostAIFields
 	{
-		MonoBehaviourFields MonoBehaviourFields;
-		void* Field0; // ???
-		GhostState GhostState;
-		void* PhotonView; // PhotonView
+		MonoBehaviourPunFields MonoBehaviourPunFields;
+		void* StateMachine; // ???
+		GhostState CurrentState;
 		GhostInfo* GhostInfo;
-		void* NavMeshAgent; // NavMeshAgent
+		void* Agent; // NavMeshAgent
 		void* GhostAudio; // GhostAudio
 		void* GhostInteraction; // GhostInteraction
 		GhostActivity* GhostActivity;
-		void* NormalModel; // GhostModel
+		void* CurrentModel; // GhostModel
 		void* HalloweenModel; // GhostModel
 		void* HolidayModel; // GhostModel
 		void* EasterModel; // GhostModel
-		void* GhostModels0; // GhostModel[]
-		void* GhostModels1; // GhostModel[]
-		bool Field11;
-		int32_t ShadowCastingMode; // ShadowCastingMode
-		void* Field13; // List<Vector3>
-		float Field121;
-		void* SanityDrainer; // SanityDrainer
-		bool Field14;
-		int32_t LayerMask; // LayerMask
-		Transform* Transform0;
-		Transform* Transform1;
-		Transform* Transform2;
-		float Speed;
-		float Field22;
-		float Field23;
-		bool Field24;
-		bool Field25;
-		Vector3 Field26;
-		GameObject* Field27;
-		bool Field28;
-		bool Field29;
-		bool Field30;
-		bool Field301;
-		void* Field31; // WhiteSage
-		float Field32;
-		bool Field33;
-		bool Field34;
-		bool Field35;
+		void* MaleGhostModels; // GhostModel[]
+		void* FemaleGhostModels; // GhostModel[]
+		bool CanSwapModel;
+		int32_t CurrentShadowCastingMode; // ShadowCastingMode
+		void* GhostBreadcrumbs; // List<Vector3>
+		float BreadcrumbTimer;
+		void* PlayerSensor; // LOSSensor
+		bool GhostIsAppeared;
+		Transform* RaycastPoint;
+		Transform* HuntingRaycastPoint;
+		Transform* FeetRaycastPoint;
+		float DefaultSpeed;
+		float SaltSpeedMultiplier;
+		float IncenseSpeedMultiplier;
+		float EventSpeedMultiplier;
+		bool HasHuntedRecently;
+		bool RemoveInteractionChanceBlock;
+		Vector3 LastKnownHuntingLocation;
+		GameObject* HuntingPostProcessingVolume;
+		bool IsDemonAbilityHunt;
+		bool IsHunting;
+		bool IsUsingLights;
+		bool DelayedBySmudgeStick;
+		void* ActiveIncense; // WhiteSage
+		float ActiveIncenseDuration;
+		bool CanWander;
+		bool CanFlashAppear;
+		bool IsTrapped;
 		Player* BansheeTarget;
-		int32_t Field37;
-		Vector3 Field38;
-		void* Field39; // float[]
-		void* Field40; // float[]
-		void* Field41; // float[]
-		int32_t Field42;
-		int32_t Field43;
-		int32_t Field44;
-		int32_t Field45;
-		int32_t Field46;
-		void* Field47; // float[]
-		void* Field48; // float[]
-		void* Field49; // float[]
-		float Field50;
-		void* Field51; // int[]
-		void* Field52; // int[]
-		void* Field53; // int[]
-		void* Field54; // int[]
+		int32_t OnryoCandleBlowoutCounter;
+		Vector3 LastInteractionPoint;
+		void* NormalFlashValues; // float[]
+		void* DeogenFlashValues; // float[]
+		void* OniFlashValues; // float[]
+		int32_t FlashIndexValue;
+		int32_t AppearIndexValue;
+		int32_t FlashAmount;
+		int32_t ObakeModelIndex;
+		int32_t ObakeArrayID;
+		void* NormalAppearValues; // float[]
+		void* DeogenOniAppearValues; // float[]
+		void* PhantomAppearValues; // float[]
+		float AppearTimer;
+		void* Obake1Values; // int[]
+		void* Obake2Values; // int[]
+		void* Obake3Values; // int[]
+		void* Obake4Values; // int[]
 	};
 
 	struct GhostAI

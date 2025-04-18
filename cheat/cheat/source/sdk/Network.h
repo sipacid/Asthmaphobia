@@ -76,24 +76,29 @@ namespace SDK
 	{
 		MonoBehaviourPunCallbacksFields MonoBehaviourPunCallbacksFields; // MonoBehaviourPunCallbacksFields derived class field
 		Player* LocalPlayer;
-		ListNetworkPlayerSpot* NetworkPlayerSpots;
-		void* Field2; // UnityEvent
-		void* Field3; // UnityEvent
-		void* Field4; // UnityEvent
-		void* Field5; // Network.???
-		void* Field6; // Network.???
-		void* Field7; // Network.???
-		void* Field8; // Network.???
-		void* Field9; // UnityEvent
-		void* Field10; // ???
-		void* Field12; // ???
-		void* Field13; // ???
-		void* Field14; // ???
-		void* Field15; // ???
-		void* Field16; // ???
-		void* Field17; // ???
-		void* Field18; // ???
-		bool Field11;
+		ListNetworkPlayerSpot* PlayersData;
+		void* PlayerColors; // Color[]
+		void* DefaultPlayerColors; // Color[]
+		void* JoinedLobby; // UnityEvent
+		void* JoinedRoom; // UnityEvent
+		void* LeftRoom; // UnityEvent
+		void* Disconnected; // UnityEvent
+		void* OnMicrophoneChanged; // Network.???
+		void* OnMasterClientSwitchedEvent; // Network.???
+		void* OnPlayerLeftRoomEvent; // Network.???
+		void* OnPlayerSpotAssigned; // Network.???
+		void* OnLocalPlayerSpawned; // UnityEvent
+		void* OnSeasonalEventCompleted; // UnityEvent
+		void* OnPlayerColorChanged; // UnityEvent
+		void* LevelSystem; // LevelSystem
+		bool IsChangingScenes;
+		String* LastOnlineRoomName;
+		void* RecentKickedFromRooms; // HashSet<String>
+		bool FailedToConnectToVivox;
+		bool IsAttemptingVivoxLogin;
+		void* InviteSystem; // Network.InviteSystem
+		bool IsChangingRooms;
+		String* ChangeToRegionOnDisconnect;
 	};
 
 	struct Network

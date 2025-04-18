@@ -16,22 +16,22 @@ namespace SDK
 		void* RotatingObjects;
 		void* LoopSource; // AudioSource
 		void* Noise; // Noise
-		Transform* Transform0;
+		Transform* ParentObject;
 		void* OnClip; // AudioClip
 		void* OffClip; // AudioClip
 		bool IsOn;
-		void* Field12; // List<LightSwitch>
+		void* Switches; // List<LightSwitch>
 		void* PhotonInteract; // PhotonObjectInteract
-		int Field14;
-		int Field15;
+		int CurrentOnLights;
+		int MaxLights;
 		Transform* MapIcon;
 		Transform* ShakeObject;
 		Transform* HandleObject;
 		Vector3 HandleOnAngle;
 		Vector3 HandleOffAngle;
 		GameObject* BrokenFuseBoxObject;
-		bool Field22;
-		void* Field23; // FuseBox.???
+		bool IsBroken;
+		void* OnFuseBoxTrip; // FuseBox.FuseBoxTripEvent
 	};
 
 	struct FuseBox

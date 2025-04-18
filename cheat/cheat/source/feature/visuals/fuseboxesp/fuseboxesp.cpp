@@ -18,7 +18,7 @@ void FuseBoxESP::OnDraw()
 	if (!GameState::fuseBox)
 		return;
 
-	const auto& fuseBoxPosition = Helper::GetWorldPosition(GameState::fuseBox->Fields.Transform0);
+	const auto& fuseBoxPosition = Helper::GetWorldPosition(GameState::fuseBox->Fields.ParentObject);
 
 	SDK::Vector3 screenPosition;
 	if (!Helper::WorldToScreen(fuseBoxPosition, screenPosition))

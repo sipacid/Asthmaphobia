@@ -6,18 +6,17 @@ namespace SDK
 	struct EvidenceControllerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		ListEvidence* EvidenceList;
-		void* Field2; // LevelRoom[]
-		void* Field3; // PhotonView
-		void* Field4; // DNAEvidence
+		ListEvidence* EvidenceInLevel;
+		void* RoomsToSpawnDNAEvidenceInside; // LevelRoom[]
+		void* View; // PhotonView
+		void* Bone; // DNAEvidence
 		Transform* GhostOrb;
-		void* Field6; // ParticleSystemRenderer
-		LevelController* Field7;
-		bool Field8;
-		float Field9;
-		void* Field10; // List<Fingerprint>
-		float Field11; // const 0.015f
-		void* Field12; // Color
+		void* GhostOrbRenderer; // ParticleSystemRenderer
+		LevelController* LevelController;
+		bool IsFreezingTemperatureGhost;
+		float DotsCheckTimer;
+		void* ActiveFingerprints; // List<Fingerprint>
+		void* FoggyOrbColor; // Color
 	};
 
 	struct EvidenceController
