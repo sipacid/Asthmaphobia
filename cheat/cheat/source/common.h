@@ -31,5 +31,5 @@ namespace Asthmaphobia
 
 	inline auto buildDate = __DATE__;
 	inline auto buildTime = __TIME__;
-	inline auto creditsText = "Made with love by Eve [sipacid.com]";
+	inline auto creditsText = "Made with love by Evelien [sipacid.com]";
 }
