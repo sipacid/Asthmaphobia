@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::ffi::CString;
 use std::fs;
 use std::io::{Error as IoError, Result as IoResult};
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::ptr;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
@@ -48,6 +48,42 @@ struct VersionInfo {
 
 // Static flag to track if cheat is already injected
 static CHEAT_INJECTED: AtomicBool = AtomicBool::new(false);
+
+// Get the Asthmaphobia directory path in %appdata%/roaming
+fn get_asthmaphobia_directory() -> Option<PathBuf> {
+    if let Some(appdata) = std::env::var_os("APPDATA") {
+        let mut path = PathBuf::from(appdata);
+        path.push("Asthmaphobia");
+        Some(path)
+    } else {
+        None
+    }
+}
+
+// Create Asthmaphobia and logs directories if they don't exist
+fn ensure_directories_exist() -> Result<(), String> {
+    let asthmaphobia_dir = match get_asthmaphobia_directory() {
+        Some(dir) => dir,
+        None => return Err("Failed to get APPDATA directory".to_string()),
+    };
+
+    // Create Asthmaphobia directory if it doesn't exist
+    if !asthmaphobia_dir.exists() {
+        if let Err(e) = fs::create_dir_all(&asthmaphobia_dir) {
+            return Err(format!("Failed to create Asthmaphobia directory: {}", e));
+        }
+    }
+
+    // Create logs directory inside Asthmaphobia directory
+    let logs_dir = asthmaphobia_dir.join("logs");
+    if !logs_dir.exists() {
+        if let Err(e) = fs::create_dir_all(&logs_dir) {
+            return Err(format!("Failed to create logs directory: {}", e));
+        }
+    }
+
+    Ok(())
+}
 
 // Get process ID by name
 fn get_process_id_by_name(process_name: &str) -> Option<DWORD> {
@@ -337,6 +373,11 @@ async fn inject() -> String {
     // Check if the cheat is already injected
     if CHEAT_INJECTED.load(Ordering::SeqCst) {
         return "Cheat is already injected".to_string();
+    }
+
+    // Ensure directories exist before injection
+    if let Err(e) = ensure_directories_exist() {
+        return format!("Error creating directories: {}", e);
     }
 
     // Find the Phasmophobia process - try multiple possible names

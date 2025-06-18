@@ -1,11 +1,23 @@
 [
   {
+    "id": 6,
+    "title": "Asthmaphobia v2.4.6 Released",
+    "date": "2025-06-18",
+    "category": "update",
+    "version": "2.4.6",
+    "content": [
+      "Fixed an issue where the menu would not load despite it saying it was loaded."
+    ]
+  },
+  {
     "id": 5,
     "title": "Asthmaphobia v2.4.5 Released",
     "date": "2025-04-18",
     "category": "update",
     "version": "2.4.5",
-    "content": ["Updated to work with Phasmophobia v0.12.1.0"]
+    "content": [
+      "Updated to work with Phasmophobia v0.12.1.0"
+    ]
   },
   {
     "id": 4,
