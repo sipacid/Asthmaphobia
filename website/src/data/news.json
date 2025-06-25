@@ -1,5 +1,16 @@
 [
   {
+    "id": 7,
+    "title": "Asthmaphobia v2.4.7 Released",
+    "date": "2025-06-25",
+    "category": "update",
+    "version": "2.4.7",
+    "content": [
+      "Added support for Phasmophobia v0.13",
+      "Custom Ouija Board Message is currently disabled."
+    ]
+  },
+  {
     "id": 6,
     "title": "Asthmaphobia v2.4.6 Released",
     "date": "2025-06-18",

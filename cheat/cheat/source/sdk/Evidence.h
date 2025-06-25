@@ -6,7 +6,7 @@ namespace SDK
 	struct EvidenceFields
 	{
 		MonoBehaviourPunFields MonoBehaviourPunFields; // MonoBehaviourPun derived class field
-		PhotoValues* PhotoValues;
+		MediaValues* MediaValues;
 		bool Field1;
 		bool ResetTakenPhotoOnEnable;
 	};

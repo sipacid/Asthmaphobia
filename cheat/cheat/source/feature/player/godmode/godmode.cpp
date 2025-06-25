@@ -11,11 +11,10 @@ void GodMode::OnMenu()
 	ImGui::Checkbox("Enabled##godMode", &std::get<bool>(EnabledSetting->GetValue()));
 }
 
-std::nullptr_t GodMode::OnPlayerStartKillingPlayerNetworked(SDK::Player* player, const bool revive, const bool wasDemonAbilityHunt, void* photonMessageInfo,
-                                                            SDK::MethodInfo* methodInfo) const
+std::nullptr_t GodMode::OnPlayerStartKillingPlayerNetworked(SDK::Player* player, const bool revive,  void* photonMessageInfo, SDK::MethodInfo* methodInfo) const
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()) || player != Helper::GetLocalPlayer())
-		return SDK::Player_StartKillingPlayerNetworked_ptr(player, revive, wasDemonAbilityHunt, photonMessageInfo, methodInfo);
+		return SDK::Player_StartKillingPlayerNetworked_ptr(player, revive, photonMessageInfo, methodInfo);
 
 	return nullptr;
 }

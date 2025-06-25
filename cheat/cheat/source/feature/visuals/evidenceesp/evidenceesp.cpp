@@ -46,10 +46,10 @@ void EvidenceESP::OnDraw()
 	for (int i = 0; i < evidenceList->Fields.Size; i++)
 	{
 		const auto evidence = items[i];
-		if (!evidence || !evidence->Fields.PhotoValues)
+		if (!evidence || !evidence->Fields.MediaValues)
 			continue;
 
-		const auto evidenceType = evidence->Fields.PhotoValues->Fields.EvidenceType;
+		const auto evidenceType = evidence->Fields.MediaValues->Fields.EvidenceType;
 		auto it = EVIDENCE_INFO_MAP_.find(evidenceType);
 		if (it == EVIDENCE_INFO_MAP_.end())
 			continue;
@@ -63,7 +63,7 @@ void EvidenceESP::OnDraw()
 		// https://git.girl.lgbt/sipacid/Asthmaphobia/issues/4
 		if (info.IsCursedItem && info.Text == "Voodoo Doll")
 		{
-			const auto localisedName = Helper::SystemStringToString(*evidence->Fields.PhotoValues->Fields.LocalisedNameKey);
+			const auto localisedName = Helper::SystemStringToString(*evidence->Fields.MediaValues->Fields.LocalisedNameKey);
 			if (localisedName == "Evidence_DisturbedSalt")
 				continue;
 		}

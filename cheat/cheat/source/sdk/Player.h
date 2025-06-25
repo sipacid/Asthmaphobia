@@ -107,8 +107,8 @@ namespace SDK
 	DECLARE_METHOD_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayer", 0)
 
 	DECLARE_METHOD_POINTER(Player_StartKillingPlayerNetworked,
-	                       std::nullptr_t(*)(Player* player, bool revive, bool wasDemonAbilityHunt, void* photonMessageInfo, MethodInfo* methodInfo),
-	                       "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 3)
+	                       std::nullptr_t(*)(Player* player, bool revive, void* photonMessageInfo, MethodInfo* methodInfo),
+	                       "Assembly-CSharp", "", "Player", "StartKillingPlayerNetworked", 2)
 
 	DECLARE_METHOD_POINTER(Player_Teleport, void(*)(Player* player, Vector3 position, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "Teleport", 1)
 }

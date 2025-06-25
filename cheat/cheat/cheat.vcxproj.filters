@@ -102,7 +102,7 @@
     <ClInclude Include="source\sdk\Evidence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\sdk\PhotoValues.h">
+    <ClInclude Include="source\sdk\MediaValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\sdk\String.h">

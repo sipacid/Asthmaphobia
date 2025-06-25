@@ -246,7 +246,7 @@ namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitial
 #include "GhostAI.h"
 #include "EMF.h"
 #include "EMFData.h"
-#include "PhotoValues.h"
+#include "MediaValues.h"
 #include "Evidence.h"
 #include "EvidenceController.h"
 #include "PhotonNetwork.h"

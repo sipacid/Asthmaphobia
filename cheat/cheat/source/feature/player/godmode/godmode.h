@@ -23,6 +23,6 @@ namespace Asthmaphobia::Features::Player
 
 		void OnMenu() override;
 
-		std::nullptr_t OnPlayerStartKillingPlayerNetworked(SDK::Player* player, bool revive, bool wasDemonAbilityHunt, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const;
+		std::nullptr_t OnPlayerStartKillingPlayerNetworked(SDK::Player* player, bool revive, void* photonMessageInfo, SDK::MethodInfo* methodInfo) const;
 	};
 }

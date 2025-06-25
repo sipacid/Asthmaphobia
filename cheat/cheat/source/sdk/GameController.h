@@ -17,15 +17,20 @@ namespace SDK
 		void* OnGhostChangedRoom; // ???
 		void* OnLocalPlayerExitTruck; // UnityEvent
 		void* OnLocalPlayerEnterTruck; // UnityEvent
+		void* Field0; // ???
 		void* OnPlayerDied; // UnityEvent
 		void* OnLocalPlayerDied; // ???
-		void* OnFuseBoxUse; // UnityEvent
+		void* OnFuseBoxUse; // ???
 		void* OnPlayerEnteredOrExitTruck; // ???
 		void* OnPhotoTaken; // ???
 		void* OnPhotoRemoved; // ???
 		void* OnPhotoVote; // ???
-		float CurrentAverageSanity;
-		void* SpeechRecognitionController; // SpeechRecognitionController
+		void* CurrentAverageSanity; // ???
+		void* Field3; // ???
+		void* Field1; // ???
+		void* Field2; // UnityEvent
+		float AverageGameSanity;
+		void* SpeechRecognitionController; // ???
 		LevelController* LevelController;
 		void* MultiplayerController; // MultiplayerController
 		bool AllPlayersAreConnected;

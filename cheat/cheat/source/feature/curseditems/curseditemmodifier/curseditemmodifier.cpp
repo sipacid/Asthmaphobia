@@ -1,5 +1,7 @@
 #include "curseditemmodifier.h"
 
+#include "libraries/imgui/imgui_internal.h"
+
 using namespace Asthmaphobia::Features::CursedItems;
 
 CursedItemModifier::CursedItemModifier() : Feature("CursedItem Modifier", "Modify cursed item behaviour", FeatureCategory::CursedItems)
@@ -11,6 +13,7 @@ CursedItemModifier::CursedItemModifier() : Feature("CursedItem Modifier", "Modif
 void CursedItemModifier::OnMenu()
 {
 	ImGui::InputText("Custom Ouija Board Message##cursedItemModifierMessage", MessageBuffer, IM_ARRAYSIZE(MessageBuffer));
+	ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
 	if (ImGui::Button("Send message##cursedItemModifierMessage"))
 	{
 		if (GameState::cursedItemController == nullptr)
@@ -27,6 +30,7 @@ void CursedItemModifier::OnMenu()
 			SendOuijaBoardMessage = true;
 		}
 	}
+	ImGui::PopItemFlag();
 
 	if (ImGui::Button("Break cursed items##cursedItems"))
 	{
@@ -90,6 +94,7 @@ void CursedItemModifier::OnMenu()
 		ImGui::SetTooltip("This will use the following cursed items: Music Box, Tarot Cards (1 card) and the Haunted Mirror.");
 }
 
+// TODO: fix this shit
 void CursedItemModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
 {
 	if (!SendOuijaBoardMessage || GameState::cursedItemController->Fields.OuijaBoard == nullptr) return;
