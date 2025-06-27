@@ -43,6 +43,7 @@ void FuseBoxESP::OnMenu()
 	constexpr auto colorEditFlags = ImGuiColorEditFlags_NoInputs;
 
 	ImGui::Checkbox("Enabled##fuseBoxESP", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 	ImGui::SameLine();
 	ImGui::ColorEdit4("Color##fuseBoxESP", reinterpret_cast<float*>(&std::get<ImColor>(ColorSetting->GetValue()).Value), colorEditFlags);
 

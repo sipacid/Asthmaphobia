@@ -1,5 +1,15 @@
 [
   {
+    "id": 8,
+    "title": "Asthmaphobia v2.4.8 Released",
+    "date": "2025-06-27",
+    "category": "update",
+    "version": "2.4.8",
+    "content": [
+      "Added hotkey support for the menu."
+    ]
+  },
+  {
     "id": 7,
     "title": "Asthmaphobia v2.4.7 Released",
     "date": "2025-06-25",

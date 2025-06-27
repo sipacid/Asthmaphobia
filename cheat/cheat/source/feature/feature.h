@@ -2,6 +2,7 @@
 #include "source/common.h"
 #include "setting.h"
 #include "libraries/imgui/imgui.h"
+#include "source/menu/hotkey/hotkey.h"
 
 namespace Asthmaphobia
 {
@@ -37,9 +38,13 @@ namespace Asthmaphobia
 		explicit Feature(const std::string_view name, const std::string_view description, const FeatureCategory category)
 			: Name(name), Description(description), Category(category), Settings_(std::make_unique<Settings>())
 		{
-			const auto setting = std::make_shared<Setting>("Enabled", "Enables or disables this feature", false);
-			EnabledSetting = setting;
-			Settings_->AddSetting(setting);
+			const auto enabledSetting = std::make_shared<Setting>("Enabled", "Enables or disables this feature", false);
+			EnabledSetting = enabledSetting;
+			Settings_->AddSetting(enabledSetting);
+
+			const auto hotkeySetting = std::make_shared<Setting>("Hotkey", "Hotkey to toggle this feature", KeyBindToggle(KeyBind::NONE));
+			ToggleHotkeySetting = hotkeySetting;
+			Settings_->AddSetting(hotkeySetting);
 		}
 
 		Feature(const Feature&) = delete;
@@ -53,6 +58,86 @@ namespace Asthmaphobia
 		virtual void OnDraw() = 0;
 		virtual void OnMenu() = 0;
 
+		static std::unordered_map<std::string, bool>& GetCapturingStates()
+		{
+			static std::unordered_map<std::string, bool> capturingStates;
+			return capturingStates;
+		}
+
+		static bool IsAnyFeatureCapturing()
+		{
+			return std::ranges::any_of(GetCapturingStates() | std::views::values, std::identity{});
+		}
+
+		void ProcessHotkeys() const
+		{
+			if (IsAnyFeatureCapturing())
+				return;
+
+			auto& toggleHotkey = std::get<KeyBindToggle>(ToggleHotkeySetting->GetValue());
+			if (toggleHotkey.ToInt() != 0 && ImGuiCustom::CheckBindKey(toggleHotkey))
+			{
+				auto& enabled = std::get<bool>(EnabledSetting->GetValue());
+				enabled = !enabled;
+			}
+		}
+
+		void DrawHotkeySelector() const
+		{
+			const auto& hotkey = std::get<KeyBindToggle>(ToggleHotkeySetting->GetValue());
+			auto& capturingStates = GetCapturingStates();
+			bool& isCapturing = capturingStates[Name];
+
+			std::string buttonText = (hotkey.ToInt() == 0) ? ".." : hotkey.ToString();
+
+			if (isCapturing)
+			{
+				buttonText = "?";
+			}
+
+			const float buttonSize = ImGui::GetFrameHeight();
+			ImGui::PushStyleVar(ImGuiStyleVar_ButtonTextAlign, ImVec2(0.5f, 0.5f));
+			if (ImGui::Button((buttonText + "##hotkey_" + Name).c_str(), ImVec2(buttonSize, buttonSize)))
+			{
+				isCapturing = !isCapturing;
+			}
+			ImGui::PopStyleVar();
+
+			if (isCapturing)
+			{
+				if (ImGui::IsKeyPressed(ImGuiKey_Escape))
+				{
+					ToggleHotkeySetting->SetValue(KeyBindToggle(KeyBind::NONE));
+					isCapturing = false;
+				}
+				else
+				{
+					KeyBindToggle newHotkey = hotkey;
+					if (newHotkey.SetToPressedKey())
+					{
+						ToggleHotkeySetting->SetValue(newHotkey);
+						isCapturing = false;
+					}
+				}
+			}
+		}
+
+		void DrawHotkeyUI()
+		{
+			ImGui::SameLine();
+
+			const float availableWidth = ImGui::GetContentRegionAvail().x;
+			const float buttonSize = ImGui::GetFrameHeight();
+			const float hotkeyWidth = buttonSize + ImGui::GetStyle().ItemSpacing.x;
+			const float spacingWidth = availableWidth - hotkeyWidth;
+
+			if (spacingWidth > 0)
+				ImGui::Dummy(ImVec2(spacingWidth, 0));
+
+			ImGui::SameLine();
+			DrawHotkeySelector();
+		}
+
 		[[nodiscard]] const std::string& GetName() const noexcept { return Name; }
 		[[nodiscard]] const std::string& GetDescription() const noexcept { return Description; }
 		[[nodiscard]] FeatureCategory GetCategory() const noexcept { return Category; }
@@ -65,6 +150,7 @@ namespace Asthmaphobia
 		std::string Description;
 		const FeatureCategory Category;
 		std::shared_ptr<Setting> EnabledSetting;
+		std::shared_ptr<Setting> ToggleHotkeySetting;
 		std::unique_ptr<Settings> Settings_;
 	};
 
@@ -97,6 +183,7 @@ namespace Asthmaphobia
 			return nullptr;
 		}
 
+		void ProcessHotkeys();
 		void OnDraw() const;
 		void OnMenu() const;
 	};

@@ -9,6 +9,7 @@ InfiniteStamina::InfiniteStamina() : Feature("Infinite Stamina", "Infinite stami
 void InfiniteStamina::OnMenu()
 {
 	ImGui::Checkbox("Enabled##infiniteStamina", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 }
 
 void InfiniteStamina::OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const

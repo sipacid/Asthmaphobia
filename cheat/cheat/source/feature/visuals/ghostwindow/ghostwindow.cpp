@@ -45,6 +45,7 @@ void GhostWindow::OnDraw()
 void GhostWindow::OnMenu()
 {
 	ImGui::Checkbox("Enabled##ghostWindow", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 }
 
 std::string GhostWindow::GetGhostEvidenceString()

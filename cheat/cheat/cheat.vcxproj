@@ -253,6 +253,8 @@
     <ClCompile Include="source\hooking\hooks\hkLevelValues_IsPerfectGame.cpp" />
     <ClInclude Include="source\hooking\hooks\hooks.h" />
     <ClInclude Include="source\memory\memory.h" />
+    <ClInclude Include="source\menu\hotkey\hotkey.h" />
+    <ClInclude Include="source\menu\inpututil\inpututil.h" />
     <ClInclude Include="source\menu\menu.h" />
     <ClCompile Include="source\hooking\hooks\hkPresent.cpp" />
     <ClInclude Include="source\notifications\notifications.h" />
@@ -327,6 +329,8 @@
     <ClCompile Include="libraries\imgui\imgui_tables.cpp" />
     <ClCompile Include="libraries\imgui\imgui_widgets.cpp" />
     <ClCompile Include="source\memory\memory.cpp" />
+    <ClCompile Include="source\menu\hotkey\hotkey.cpp" />
+    <ClCompile Include="source\menu\inpututil\inpututil.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\dllmain.cpp" />

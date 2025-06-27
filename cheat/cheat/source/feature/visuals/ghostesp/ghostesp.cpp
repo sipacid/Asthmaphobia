@@ -34,8 +34,8 @@ void GhostESP::OnMenu()
 	constexpr auto colorEditFlags = ImGuiColorEditFlags_NoInputs;
 
 	ImGui::Checkbox("Enabled##ghostESP", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 	ImGui::SameLine();
-
 	ImGui::ColorEdit4("Color##ghostESP",
 	                  reinterpret_cast<float*>(&std::get<ImColor>(ColorSetting->GetValue()).Value),
 	                  colorEditFlags);

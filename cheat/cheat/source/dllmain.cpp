@@ -63,7 +63,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		do
 		{
 #ifdef _DEBUG
-			// backup in case we fuck up the menu and can't uninject
+			// Backup in case we fuck up the menu and can't uninject
 			if (GetAsyncKeyState(VK_DELETE) & 1)
 			{
 				LOG_DEBUG("Pressed DELETE key to uninject.");
@@ -71,7 +71,10 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 			}
 #endif
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(111));
+			// Terrible way of detecting hotkey presses
+			featureManager.ProcessHotkeys();
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
 		while (globalRunning);
 

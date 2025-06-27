@@ -5,6 +5,7 @@
 #include <vector>
 #include "libraries/imgui/imgui.h"
 #include "libraries/json/json.hpp"
+#include "source/menu/inpututil/InputUtil.h"
 
 namespace Asthmaphobia
 {
@@ -22,7 +23,7 @@ namespace Asthmaphobia
 	{
 	public:
 		Setting(std::string name, std::string description,
-		        std::variant<bool, int, float, std::string, ImColor> value) noexcept
+		        std::variant<bool, int, float, std::string, ImColor, KeyBindToggle> value) noexcept
 			: Name(std::move(name)), Description(std::move(description)), Value(std::move(value))
 		{
 		}
@@ -37,7 +38,7 @@ namespace Asthmaphobia
 	private:
 		std::string Name;
 		std::string Description;
-		std::variant<bool, int, float, std::string, ImColor> Value;
+		std::variant<bool, int, float, std::string, ImColor, KeyBindToggle> Value;
 	};
 
 	class Settings

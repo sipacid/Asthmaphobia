@@ -336,6 +336,12 @@
     <ClInclude Include="source\sdk\PhotonView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\menu\hotkey\hotkey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\menu\inpututil\inpututil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -528,6 +534,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\memory\memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\menu\hotkey\hotkey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\menu\inpututil\inpututil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

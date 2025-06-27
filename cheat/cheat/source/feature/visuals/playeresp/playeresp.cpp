@@ -65,6 +65,7 @@ void PlayerESP::OnMenu()
 	constexpr auto colorEditFlags = ImGuiColorEditFlags_NoInputs;
 
 	ImGui::Checkbox("Enabled##playerESP", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 	ImGui::SameLine();
 	ImGui::ColorEdit4("Color##playerESP", reinterpret_cast<float*>(&std::get<ImColor>(ColorSetting->GetValue()).Value), colorEditFlags);
 

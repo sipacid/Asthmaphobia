@@ -81,4 +81,5 @@ void ActivityMonitor::OnDraw()
 void ActivityMonitor::OnMenu()
 {
 	ImGui::Checkbox("Enabled##activityMonitor", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 }

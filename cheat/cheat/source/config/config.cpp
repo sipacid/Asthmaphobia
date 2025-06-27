@@ -40,7 +40,14 @@ namespace Asthmaphobia::Config
 					setting->SetValue(settingValue.get<float>());
 					break;
 				case Json::value_t::string:
-					setting->SetValue(settingValue.get<std::string>());
+					if (std::holds_alternative<KeyBindToggle>(setting->GetValue()))
+					{
+						setting->SetValue(KeyBindToggle(settingValue.get<std::string>().c_str()));
+					}
+					else
+					{
+						setting->SetValue(settingValue.get<std::string>());
+					}
 					break;
 				case Json::value_t::object:
 					setting->SetValue(ImColor(settingValue["x"].get<float>(), settingValue["y"].get<float>(),
@@ -88,6 +95,10 @@ namespace Asthmaphobia::Config
 				else if (std::holds_alternative<std::string>(settingValue))
 				{
 					settingJson = std::get<std::string>(settingValue);
+				}
+				else if (std::holds_alternative<KeyBindToggle>(settingValue))
+				{
+					settingJson = std::get<KeyBindToggle>(settingValue).ToString();
 				}
 				else if (std::holds_alternative<ImColor>(settingValue))
 				{

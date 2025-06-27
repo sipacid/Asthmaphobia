@@ -105,6 +105,14 @@ void FeatureManager::OnDraw() const
 	}
 }
 
+void FeatureManager::ProcessHotkeys()
+{
+	for (const auto& feature : Features | std::views::values)
+	{
+		feature->ProcessHotkeys();
+	}
+}
+
 void FeatureManager::OnMenu() const
 {
 	static FeatureCategory selectedCategory = Player;

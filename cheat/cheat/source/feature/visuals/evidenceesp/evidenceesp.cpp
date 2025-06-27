@@ -60,7 +60,6 @@ void EvidenceESP::OnDraw()
 			continue;
 
 		// 4 billion iq check to make sure we aren't trying to draw disturbed salt; because the phasmophobia devs are fucking retarded
-		// https://git.girl.lgbt/sipacid/Asthmaphobia/issues/4
 		if (info.IsCursedItem && info.Text == "Voodoo Doll")
 		{
 			const auto localisedName = Helper::SystemStringToString(*evidence->Fields.MediaValues->Fields.LocalisedNameKey);
@@ -83,6 +82,7 @@ void EvidenceESP::OnMenu()
 	constexpr auto colorEditFlags = ImGuiColorEditFlags_NoInputs;
 
 	ImGui::Checkbox("Enabled##evidenceESP", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 
 	ImGui::Checkbox("Cursed item##evidenceESP-cursedItem", &std::get<bool>(CursedItemEnabledSetting->GetValue()));
 	ImGui::SameLine();

@@ -11,6 +11,7 @@ ForceCard::ForceCard() : Feature("ForceCard", "Force a specific tarot card", Fea
 void ForceCard::OnMenu()
 {
 	ImGui::Checkbox("Enabled##tarotCardModifier", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 	const char* tarotCardList[] = {"Fool", "Wheel Of Fortune", "Tower", "Devil", "Death", "Hermit", "Moon", "Sun", "High Priestess", "Hanged Man"};
 	ImGui::Combo("Forced type##tarotCardModifier", &std::get<int>(ForcedTypeSetting->GetValue()), tarotCardList, IM_ARRAYSIZE(tarotCardList));
 }

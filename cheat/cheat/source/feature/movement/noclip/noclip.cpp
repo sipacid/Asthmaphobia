@@ -1,5 +1,4 @@
 #include "noclip.h"
-
 #include "source/menu/menu.h"
 
 using namespace Asthmaphobia::Features::Movement;
@@ -13,6 +12,7 @@ NoClip::NoClip() : Feature("NoClip", "Allows you to walk through walls.", Featur
 void NoClip::OnMenu()
 {
 	ImGui::Checkbox("Enabled##noClip", &std::get<bool>(EnabledSetting->GetValue()));
+	DrawHotkeyUI();
 	ImGui::SliderFloat("Speed##noClip", &std::get<float>(SpeedSetting->GetValue()), 0.0f, 10.0f, "%.1f");
 }
 
