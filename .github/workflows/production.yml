@@ -72,7 +72,9 @@ jobs:
 
   deploy:
     needs: [build-website, build-cheat]
-    environment: production
+    environment:
+      name: production
+      url: "https://asthmaphobia.xyz"
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     name: Deploy to Production
