@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      artifact-name:
+        description: "Name of the uploaded artifact"
+        value: ${{ jobs.build-cheat.outputs.artifact-name }}
+
+jobs:
+  build-cheat:
+    runs-on: windows-latest
+    name: Build Cheat DLL
+    outputs:
+      artifact-name: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup Visual Studio Components
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "[17.0,18.0)"
+          vs-prerelease: false
+          msbuild-architecture: x64
+
+      - name: Build Cheat DLL
+        run: msbuild /m /p:Configuration=Release ./cheat
+
+      - name: Upload Cheat DLL Artifact
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: cheat-dll
+          path: cheat/x64/Release/cheat.dll
