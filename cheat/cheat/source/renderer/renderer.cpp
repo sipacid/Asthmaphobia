@@ -20,16 +20,13 @@ Renderer::~Renderer()
 
 void Renderer::SetGameResources(IDXGISwapChain* swapChain, ID3D11Device* device, ID3D11DeviceContext* context)
 {
-	// Clean up any existing resources first
 	if (Swapchain || Device || Context || TargetView)
 		Cleanup();
 
-	// Set the game's actual resources
 	Swapchain = swapChain;
 	Device = device;
 	Context = context;
 
-	// These are references, not owned by us, so we don't increment ref count
 	GameResourcesInitialized = true;
 }
 
@@ -52,7 +49,6 @@ bool Renderer::CreateRenderTargetView()
 
 bool Renderer::InitializeSwapChain()
 {
-	// Only initialize enough to get the Present function
 	WNDCLASSEX wc{0};
 	wc.cbSize = sizeof(wc);
 	wc.lpfnWndProc = DefWindowProc;
@@ -111,14 +107,12 @@ bool Renderer::InitializeSwapChain()
 		{
 			success = true;
 
-			// Just get the Present function
 			if (tempSwapchain)
 			{
 				void** vmt = *reinterpret_cast<void***>(tempSwapchain);
 				PresentFunction = static_cast<Id3DPresent>(vmt[8]);
 			}
 
-			// Release temporary resources - we'll get the real ones from the game
 			if (tempContext) tempContext->Release();
 			if (tempDevice) tempDevice->Release();
 			if (tempSwapchain) tempSwapchain->Release();
@@ -127,7 +121,6 @@ bool Renderer::InitializeSwapChain()
 		}
 	}
 
-	// Clean up the temporary window
 	DestroyWindow(hwnd);
 	UnregisterClass(wc.lpszClassName, wc.hInstance);
 

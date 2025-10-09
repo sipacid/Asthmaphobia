@@ -8,6 +8,27 @@
 
 using namespace Asthmaphobia;
 
+static void SafeRenderFrame()
+{
+	__try
+	{
+		if (menu.Open)
+		{
+			Menu::Render();
+		}
+
+		if (globalRunning)
+		{
+			GetFeatureManagerInstance().OnDraw();
+			Notifications::RenderNotifications();
+		}
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		LOG_WARN("Access violation caught in render loop - skipping frame");
+	}
+}
+
 HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
 	auto& hooking = GetHookingInstance();
@@ -16,29 +37,25 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 	if (!menu.Initialized)
 	{
 		ID3D11Device* device = nullptr;
-		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void**>(&device))))
+		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), reinterpret_cast<void **>(&device))))
 		{
-			// Initialize device context
 			ID3D11DeviceContext* context = nullptr;
 			device->GetImmediateContext(&context);
 
-			// Set the game's resources in the renderer
 			renderer.SetGameResources(pSwapChain, device, context);
 
-			// Get the window handle from the swap chain
 			DXGI_SWAP_CHAIN_DESC description;
 			pSwapChain->GetDesc(&description);
 			renderer.Window = description.OutputWindow;
 
-			// Set up render target view
 			if (!renderer.CreateRenderTargetView())
 			{
 				LOG_ERROR("Failed to create render target view");
-				if (context) context->Release();
+				if (context)
+					context->Release();
 				return hooking.OriginalPresent(pSwapChain, SyncInterval, Flags);
 			}
 
-			// Initialize ImGui
 			ImGui::CreateContext();
 			ImGui_ImplWin32_Init(renderer.Window);
 			ImGui_ImplDX11_Init(device, context);
@@ -46,18 +63,15 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 			ImGui::LoadIniSettingsFromDisk((Helper::GetAsthmaphobiaDirectory() + "\\menu.ini").c_str());
 			ImGui::GetIO().FontGlobalScale = dpiScale;
 
-			// Set up window procedure hook
 			hooking.OriginalWndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(
 				renderer.Window,
 				GWLP_WNDPROC,
-				reinterpret_cast<LONG_PTR>(HkWndProc)
-			));
+				reinterpret_cast<LONG_PTR>(HkWndProc)));
 
-			// Initialize the menu
 			Menu::Initialize();
 
-			// Allow these references to be released
-			if (context) context->Release();
+			if (context)
+				context->Release();
 		}
 		else
 		{
@@ -65,33 +79,18 @@ HRESULT __stdcall Hooks::HkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval
 		}
 	}
 
-	// Start ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	// Render menu if open
-	if (menu.Open)
-	{
-		Menu::Render();
-	}
+	SafeRenderFrame();
 
-	// Render features and notifications
-	if (globalRunning)
-	{
-		GetFeatureManagerInstance().OnDraw();
-		Notifications::RenderNotifications();
-	}
-
-	// End ImGui frame and render
 	ImGui::EndFrame();
 	ImGui::Render();
 
-	// Get the device context and render target view from the renderer
 	ID3D11DeviceContext* context = renderer.GetContext();
 	ID3D11RenderTargetView* targetView = renderer.GetTargetView();
 
-	// Render the ImGui draw data
 	if (context && targetView)
 	{
 		context->OMSetRenderTargets(1, &targetView, nullptr);
