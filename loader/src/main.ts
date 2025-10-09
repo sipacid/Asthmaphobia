@@ -84,25 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function fetchLatestVersion() {
-    try {
-      const versionInfo = await invoke<{
-        latest_version: string;
-        release_date: string;
-        changelog: string[];
-      }>("fetch_latest_version");
-
-      cheatVersionElement.textContent = versionInfo.latest_version;
-
-      const tooltipText = `Released: ${versionInfo.release_date}\n${versionInfo.changelog}`;
-      cheatVersionElement.title = tooltipText;
-      cheatVersionElement.classList.add("with-tooltip");
-    } catch (error) {
-      console.error("Error fetching latest version:", error);
-      cheatVersionElement.textContent = "Unknown";
-    }
-  }
-
   async function fetchNews() {
     try {
       newsList.innerHTML = '<li class="news-item loading">Loading news...</li>';
@@ -120,11 +101,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (news.length === 0) {
         newsList.innerHTML = '<li class="news-item">No news available</li>';
+        cheatVersionElement.textContent = "Unknown";
         return;
       }
 
+      // Use the first news item for version information
+      const latestNews = news[0];
+      if (latestNews.version) {
+        cheatVersionElement.textContent = latestNews.version;
+        const tooltipText = `Released: ${
+          latestNews.date
+        }\n${latestNews.content.join("\n")}`;
+        cheatVersionElement.title = tooltipText;
+        cheatVersionElement.classList.add("with-tooltip");
+      } else {
+        cheatVersionElement.textContent = "Unknown";
+      }
+
       newsList.innerHTML = "";
-      news.forEach((item) => {
+      news.forEach((item: any) => {
         const newsItem = document.createElement("li");
         newsItem.className = "news-item";
 
@@ -162,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const contentDiv = document.createElement("div");
         contentDiv.className = "news-content";
 
-        item.content.forEach((paragraph) => {
+        item.content.forEach((paragraph: any) => {
           const p = document.createElement("p");
           p.textContent = paragraph;
           contentDiv.appendChild(p);
@@ -222,12 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   async function initApp() {
-    await Promise.all([
-      updateGameStatus(),
-      updateCheatStatus(),
-      fetchLatestVersion(),
-      fetchNews(),
-    ]);
+    await Promise.all([updateGameStatus(), updateCheatStatus(), fetchNews()]);
 
     setInterval(updateGameStatus, 5000);
     setInterval(updateCheatStatus, 5000);

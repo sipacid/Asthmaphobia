@@ -406,7 +406,7 @@ async fn inject() -> String {
     let temp_dll_path = temp_dir.join(&random_name);
 
     // Download the DLL from our server
-    let download_url = "https://asthmaphobia.xyz/cheat.dll";
+    let download_url = "https://sipacid.com/files/asthmaphobia/cheat.dll";
     match download_file(download_url, &temp_dll_path).await {
         Ok(_) => {}
         Err(e) => return format!("Error downloading DLL: {}", e),
@@ -579,7 +579,7 @@ fn is_cheat_injected() -> bool {
 
 #[tauri::command]
 async fn fetch_news() -> Result<Vec<NewsItem>, String> {
-    let response = match reqwest::get("https://asthmaphobia.xyz/api/news.json").await {
+    let response = match reqwest::get("https://sipacid.com/files/asthmaphobia/news.json").await {
         Ok(resp) => {
             if !resp.status().is_success() {
                 return Err(format!("API returned error status: {}", resp.status()));
@@ -616,7 +616,7 @@ async fn fetch_news() -> Result<Vec<NewsItem>, String> {
 
 #[tauri::command]
 async fn fetch_latest_version() -> Result<VersionInfo, String> {
-    let response = match reqwest::get("https://asthmaphobia.xyz/api/version.json").await {
+    let response = match reqwest::get("https://sipacid.com/files/asthmaphobia/version.json").await {
         Ok(resp) => {
             if !resp.status().is_success() {
                 return Err(format!("API returned error status: {}", resp.status()));
