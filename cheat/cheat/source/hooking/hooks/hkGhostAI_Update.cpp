@@ -13,7 +13,6 @@ void Hooks::hkGhostAI_Update(SDK::GhostAI* ghostAI, SDK::MethodInfo* methodInfo)
 	{
 		GetFeatureManagerInstance().GetFeature<Features::Ghost::GhostModifier>("Ghost::GhostModifier")->OnGhostAIUpdate(ghostAI, methodInfo);
 		GetFeatureManagerInstance().GetFeature<Features::Ghost::Interactor>("Ghost::Interactor")->OnGhostAIUpdate(ghostAI, methodInfo);
-		GetFeatureManagerInstance().GetFeature<Features::CursedItems::CursedItemModifier>("CursedItems::CursedItemModifier")->OnGhostAIUpdate(ghostAI, methodInfo);
 	}
 
 	SDK::GhostAI_Update_ptr(ghostAI, methodInfo);

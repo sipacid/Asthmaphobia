@@ -1,37 +1,13 @@
 #include "curseditemmodifier.h"
 
-#include "libraries/imgui/imgui_internal.h"
-
 using namespace Asthmaphobia::Features::CursedItems;
 
 CursedItemModifier::CursedItemModifier() : Feature("CursedItem Modifier", "Modify cursed item behaviour", FeatureCategory::CursedItems)
 {
-	CustomMessageSetting = std::make_unique<Setting>("CustomMessage", "Custom ouija board message", "meow");
-	Settings_->AddSetting(CustomMessageSetting);
 }
 
 void CursedItemModifier::OnMenu()
 {
-	ImGui::InputText("Custom Ouija Board Message##cursedItemModifierMessage", MessageBuffer, IM_ARRAYSIZE(MessageBuffer));
-	ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-	if (ImGui::Button("Send message##cursedItemModifierMessage"))
-	{
-		if (GameState::cursedItemController == nullptr)
-		{
-			AddNotification(MESSAGE_MUST_BE_INGAME, Notifications::NotificationType::Error, 3.0f);
-		}
-		else if (!Helper::IsLocalMasterClient())
-		{
-			AddNotification(MESSAGE_MUST_BE_HOST, Notifications::NotificationType::Error, 3.0f);
-		}
-		else
-		{
-			CustomMessageSetting->SetValue(std::string(MessageBuffer));
-			SendOuijaBoardMessage = true;
-		}
-	}
-	ImGui::PopItemFlag();
-
 	if (ImGui::Button("Break cursed items##cursedItems"))
 	{
 		if (GameState::cursedItemController == nullptr)
@@ -92,16 +68,6 @@ void CursedItemModifier::OnMenu()
 	}
 	if (ImGui::IsItemHovered())
 		ImGui::SetTooltip("This will use the following cursed items: Music Box, Tarot Cards (1 card) and the Haunted Mirror.");
-}
-
-// TODO: fix this shit
-void CursedItemModifier::OnGhostAIUpdate(SDK::GhostAI* ghost, SDK::MethodInfo* methodInfo)
-{
-	if (!SendOuijaBoardMessage || GameState::cursedItemController->Fields.OuijaBoard == nullptr) return;
-
-	SDK::OuijaBoard_SendMessage_ptr(GameState::cursedItemController->Fields.OuijaBoard, Helper::StringToSystemString(std::get<std::string>(CustomMessageSetting->GetValue())),
-	                                nullptr);
-	SendOuijaBoardMessage = false;
 }
 
 bool CursedItemModifier::DoesCursedItemExist(const SDK::CursedItemType cursedItemType)
