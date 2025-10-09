@@ -29,11 +29,13 @@ namespace SDK
 		void* Field3; // ???
 		void* Field1; // ???
 		void* Field2; // UnityEvent
+		void* Field4; // UnityEvent
 		float AverageGameSanity;
 		void* SpeechRecognitionController; // ???
 		LevelController* LevelController;
 		void* MultiplayerController; // MultiplayerController
 		bool AllPlayersAreConnected;
+		bool Field5;
 		int PlayerReadyCount;
 		void* HandMaterial; // Material
 		bool HasDrawnHighPriestess;
