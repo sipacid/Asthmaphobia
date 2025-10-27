@@ -27,6 +27,7 @@ namespace Asthmaphobia
 		static bool hkLevelValues_IsPerfectGame(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
 		static void hkDeadZoneController_Awake(SDK::DeadZoneController* deadZoneController, SDK::MethodInfo* methodInfo);
 		static void hkCursedItemController_Awake(SDK::CursedItemController* cursedItemController, SDK::MethodInfo* methodInfo);
+		static void hkObjectiveManager_Update(SDK::ObjectiveManager* objectiveManager, SDK::MethodInfo* methodInfo);
 		static void hkPhotonObjectInteract_Start(SDK::PhotonObjectInteract* photonObjectInteract, SDK::MethodInfo* methodInfo);
 	};
 }

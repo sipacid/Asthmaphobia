@@ -253,7 +253,7 @@ namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitial
 #include "PhotonObjectInteract.h"
 #include "PhotonView.h"
 #include "Network.h"
-#include "OuijaBoard.h"
+#include "ObjectiveManager.h"
 #include "Matrix4x4.h"
 #include "PhysicsCharacterController.h"
 #include "FirstPersonController.h"

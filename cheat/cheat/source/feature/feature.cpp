@@ -12,6 +12,7 @@
 #include "exploits/leavepeople/leavepeople.h"
 #include "exploits/pickup/pickup.h"
 #include "exploits/rewardmodifier/rewardmodifier.h"
+#include "exploits/objectivemanager/objectivemanager.h"
 #include "ghost/ghostmodifier/ghostmodifier.h"
 #include "ghost/interactor/interactor.h"
 #include "movement/infinitestamina/infinitestamina.h"
@@ -65,6 +66,7 @@ FeatureManager::FeatureManager()
 	AddFeature("Exploits::RewardModifier", std::make_unique<Features::Exploits::RewardModifier>());
 	AddFeature("Exploits::FreeMouseLook", std::make_unique<Features::Exploits::FreeMouseLook>());
 	AddFeature("Exploits::Pickup", std::make_unique<Features::Exploits::Pickup>());
+	AddFeature("Exploits::ObjectiveManager", std::make_unique<Features::Exploits::ObjectiveManager>());
 
 	AddFeature("Movement::InfiniteStamina", std::make_unique<Features::Movement::InfiniteStamina>());
 	AddFeature("Movement::NoClip", std::make_unique<Features::Movement::NoClip>());
@@ -120,11 +122,9 @@ void FeatureManager::OnMenu() const
 
 	ImGui::Columns(2, "MenuColumns", false);
 
-	// Side panel
 	ImGui::SetColumnWidth(0, SIDE_PANEL_WIDTH);
 	ImGui::BeginGroup();
 	{
-		// Draw all category buttons
 		for (const auto& [category, name] : CATEGORY_TO_STRING)
 		{
 			const bool isSelected = selectedCategory == category;
@@ -140,7 +140,6 @@ void FeatureManager::OnMenu() const
 	}
 	ImGui::EndGroup();
 
-	// Main content area
 	ImGui::NextColumn();
 	ImGui::BeginChild("MainContent", ImVec2(0, 0), false);
 	{
@@ -149,7 +148,6 @@ void FeatureManager::OnMenu() const
 
 		if (selectedCategory == MenuSettings)
 		{
-			// Settings content
 			if (ImGui::Button("License"))
 			{
 				ImGui::OpenPopup("License Information");

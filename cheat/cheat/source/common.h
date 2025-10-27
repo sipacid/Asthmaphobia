@@ -26,7 +26,7 @@ namespace Asthmaphobia
 #ifdef _DEBUG
 		"[DEV] Asthmaphobia";
 #else
-		"Asthmaphobia";
+	"Asthmaphobia";
 #endif
 
 	inline auto buildDate = __DATE__;

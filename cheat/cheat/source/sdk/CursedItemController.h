@@ -44,7 +44,7 @@ namespace SDK
 	struct CursedItemControllerFields
 	{
 		MonoBehaviourFields MonoBehaviourFields;
-		OuijaBoard* OuijaBoard; // OuijaBoard
+		void* OuijaBoard; // OuijaBoard
 		void* MusicBox; // MusicBox
 		void* TarotCards; // TarotCards
 		void* SummoningCircle; // SummoningCircle

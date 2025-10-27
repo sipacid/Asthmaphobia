@@ -50,6 +50,7 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hooking.AddHook("LevelValues_IsPerfectGame", &SDK::LevelValues_IsPerfectGame_ptr, Hooks::hkLevelValues_IsPerfectGame);
 		hooking.AddHook("DeadZoneController_Awake", &SDK::DeadZoneController_Awake_ptr, Hooks::hkDeadZoneController_Awake);
 		hooking.AddHook("CursedItemController_Awake", &SDK::CursedItemController_Awake_ptr, Hooks::hkCursedItemController_Awake);
+		hooking.AddHook("ObjectiveManager_Update", &SDK::ObjectiveManager_Update_ptr, Hooks::hkObjectiveManager_Update);
 		hooking.AddHook("PhotonObjectInteract_Start", &SDK::PhotonObjectInteract_Start_ptr, Hooks::hkPhotonObjectInteract_Start);
 
 		if (hooking.ApplyHooks() != Hooking::HookResult::Success)

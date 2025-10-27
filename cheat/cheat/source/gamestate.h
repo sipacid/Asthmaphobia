@@ -11,6 +11,7 @@ namespace Asthmaphobia::GameState
 	inline SDK::DeadZoneController* deadZoneController;
 	inline SDK::CursedItemController* cursedItemController;
 	inline SDK::EMFData* emfData;
+	inline SDK::ObjectiveManager* objectiveManager;
 	inline bool isHunting = false;
 
 	inline void Reset()
@@ -22,6 +23,7 @@ namespace Asthmaphobia::GameState
 		deadZoneController = nullptr;
 		cursedItemController = nullptr;
 		emfData = nullptr;
+		objectiveManager = nullptr;
 		isHunting = false;
 	}
 }

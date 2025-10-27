@@ -327,9 +327,6 @@
     <ClInclude Include="source\feature\exploits\pickup\pickup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\sdk\OuijaBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\memory\memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -340,6 +337,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\menu\inpututil\inpututil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\feature\exploits\objectivemanager\objectivemanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\ObjectiveManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -540,6 +543,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\menu\inpututil\inpututil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\exploits\objectivemanager\objectivemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkObjectiveManager_Update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

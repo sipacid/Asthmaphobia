@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -181,6 +181,7 @@
     <ClCompile Include="source\feature\ghost\interactor\interactor.cpp" />
     <ClCompile Include="source\feature\exploits\antikick\antikick.cpp" />
     <ClCompile Include="source\feature\player\customname\customname.cpp" />
+    <ClCompile Include="source\feature\exploits\objectivemanager\objectivemanager.cpp" />
     <ClCompile Include="source\feature\world\doormodifier\doormodifier.cpp" />
     <ClCompile Include="source\feature\exploits\freemouselook\freemouselook.cpp" />
     <ClCompile Include="source\feature\exploits\pickup\pickup.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp" />
     <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkObjectiveManager_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPauseMenuController_Leave.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPhotonObjectInteract_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPlayerStamina_Update.cpp" />
@@ -229,6 +231,7 @@
     <ClInclude Include="source\feature\ghost\interactor\interactor.h" />
     <ClInclude Include="source\feature\exploits\antikick\antikick.h" />
     <ClInclude Include="source\feature\player\customname\customname.h" />
+    <ClInclude Include="source\feature\exploits\objectivemanager\objectivemanager.h" />
     <ClInclude Include="source\feature\world\doormodifier\doormodifier.h" />
     <ClInclude Include="source\feature\exploits\freemouselook\freemouselook.h" />
     <ClInclude Include="source\feature\exploits\pickup\pickup.h" />
@@ -296,7 +299,7 @@
     <ClInclude Include="source\sdk\MonoBehaviour.h" />
     <ClInclude Include="source\sdk\MouseLook.h" />
     <ClInclude Include="source\sdk\Network.h" />
-    <ClInclude Include="source\sdk\OuijaBoard.h" />
+    <ClInclude Include="source\sdk\ObjectiveManager.h" />
     <ClInclude Include="source\sdk\PauseMenuController.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
     <ClInclude Include="source\sdk\PhotonObjectInteract.h" />

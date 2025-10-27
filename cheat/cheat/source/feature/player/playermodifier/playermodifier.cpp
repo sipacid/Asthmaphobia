@@ -12,9 +12,6 @@ void PlayerModifier::OnMenu()
 	if (!players)
 		return ImGui::Text("You must be in-game to view this.");
 
-	static int selectedPlayerIndex = -1;
-
-	// Player list as tabs
 	ImGui::BeginTabBar("PlayerTabs");
 	for (int playerIndex = 0; playerIndex < players->Fields.Size; playerIndex++)
 	{
@@ -23,18 +20,15 @@ void PlayerModifier::OnMenu()
 		const bool isLocalPlayer = player == Helper::GetLocalPlayer();
 		const bool isDead = player->Fields.IsDead;
 
-		// Create tab label with status indicators
 		std::string tabLabel = playerName;
 		if (isLocalPlayer) tabLabel += " [Local]";
 		if (isDead) tabLabel += " [Dead]";
 
 		if (ImGui::BeginTabItem(tabLabel.c_str()))
 		{
-			selectedPlayerIndex = playerIndex;
 			const auto localPlayer = Helper::GetLocalPlayer();
 			const bool isLocalMasterClient = Helper::IsLocalMasterClient();
 
-			// Player info
 			ImGui::Text("Status: %s", player->Fields.IsDead ? "Dead" : "Alive");
 			ImGui::Text("Sanity: %d%%", static_cast<int>(100.f - Helper::GetPlayerInsanity(player)));
 
@@ -43,7 +37,6 @@ void PlayerModifier::OnMenu()
 
 			ImGui::Separator();
 
-			// Actions
 			if (!isLocalPlayer)
 			{
 				if (ImGui::Button("Teleport to Player", ImVec2(-1, 0)))
