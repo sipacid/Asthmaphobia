@@ -33,6 +33,5 @@ namespace Asthmaphobia::Features::World
 
 		static void DoorLoop(Mode mode, bool enabled, SDK::DoorArray* doorArray);
 		static void Run(Mode mode, bool enabled);
-		static void Test();
 	};
 }

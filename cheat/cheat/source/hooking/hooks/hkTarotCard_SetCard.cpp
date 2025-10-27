@@ -8,7 +8,7 @@ void Hooks::hkTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType ty
 {
 	LOG_CALL("Called TarotCard_SetCard");
 	if (globalRunning)
-		return GetFeatureManagerInstance().GetFeature<Features::CursedItems::ForceCard>("CursedItems::ForceCard")->OnTarotCard_SetCard(tarotCard, type, methodInfo);
+		return GetFeatureManagerInstance().GetFeature<Features::CursedItems::ForceCard>("CursedItems::ForceCard")->OnTarotCardSetCard(tarotCard, type, methodInfo);
 
 	return SDK::TarotCard_SetCard_ptr(tarotCard, type, methodInfo);
 }

@@ -23,7 +23,7 @@ namespace Asthmaphobia::Features::Movement
 
 		void OnMenu() override;
 
-		void OnFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);
+		void OnFirstPersonControllerUpdate(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);
 
 	private:
 		const float DefaultWalkSpeed = 1.6f;

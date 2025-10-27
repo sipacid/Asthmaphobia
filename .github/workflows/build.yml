@@ -47,12 +47,6 @@ jobs:
           vs-prerelease: false
           msbuild-architecture: x64
 
-      - name: Retarget Solution
-        run: |
-          $devenvPath = & "${env:ProgramFiles}\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find Common7\IDE\devenv.com
-          & $devenvPath ./cheat/Asthmaphobia.sln /Upgrade
-        shell: pwsh
-
       - name: Build Cheat DLL
         run: msbuild /m /p:Configuration=Release /p:PlatformToolset=v143 ./cheat
 

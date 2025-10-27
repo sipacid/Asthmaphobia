@@ -6,11 +6,8 @@ namespace Asthmaphobia::Features::Ghost
 	class GhostModifier final : public Feature
 	{
 	public:
-		GhostModifier();
-
-		~GhostModifier() override
-		{
-		}
+		explicit GhostModifier();
+		~GhostModifier() override = default;
 
 		void OnEnable() override
 		{

@@ -23,7 +23,7 @@ namespace Asthmaphobia::Features::CursedItems
 
 		void OnMenu() override;
 
-		void OnTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo) const;
+		void OnTarotCardSetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo) const;
 
 	private:
 		std::shared_ptr<Setting> ForcedTypeSetting;

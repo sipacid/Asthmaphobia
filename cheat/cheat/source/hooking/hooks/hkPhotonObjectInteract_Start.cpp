@@ -9,7 +9,7 @@ void Hooks::hkPhotonObjectInteract_Start(SDK::PhotonObjectInteract* photonObject
 	LOG_CALL("Called PhotonObjectInteract_Start");
 	if (globalRunning)
 	{
-		GetFeatureManagerInstance().GetFeature<Features::Exploits::Pickup>("Exploits::Pickup")->OnPhotonObjectInteract_Start(photonObjectInteract, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Exploits::Pickup>("Exploits::Pickup")->OnPhotonObjectInteractStart(photonObjectInteract, methodInfo);
 	}
 
 	SDK::PhotonObjectInteract_Start_ptr(photonObjectInteract, methodInfo);

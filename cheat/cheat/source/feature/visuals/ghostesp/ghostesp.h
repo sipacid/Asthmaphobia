@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Visuals
 	class GhostESP final : public Feature
 	{
 	public:
-		GhostESP();
+		explicit GhostESP();
 		~GhostESP() override = default;
 
 		void OnEnable() override

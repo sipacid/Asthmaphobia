@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Visuals
 	class PlayerESP final : public Feature
 	{
 	public:
-		PlayerESP();
+		explicit PlayerESP();
 		~PlayerESP() override = default;
 
 		void OnEnable() override

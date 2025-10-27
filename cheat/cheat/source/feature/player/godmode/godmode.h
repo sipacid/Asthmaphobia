@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Player
 	class GodMode final : public Feature
 	{
 	public:
-		GodMode();
+		explicit GodMode();
 		~GodMode() override = default;
 
 		void OnEnable() override

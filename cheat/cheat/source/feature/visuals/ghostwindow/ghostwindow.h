@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Visuals
 	class GhostWindow final : public Feature
 	{
 	public:
-		GhostWindow();
+		explicit GhostWindow();
 		~GhostWindow() override = default;
 
 		void OnEnable() override

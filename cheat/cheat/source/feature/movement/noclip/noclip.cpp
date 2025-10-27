@@ -16,7 +16,7 @@ void NoClip::OnMenu()
 	ImGui::SliderFloat("Speed##noClip", &std::get<float>(SpeedSetting->GetValue()), 0.0f, 10.0f, "%.1f");
 }
 
-void NoClip::OnFirstPersonController_Update(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo*) const
+void NoClip::OnFirstPersonControllerUpdate(const SDK::FirstPersonController* firstPersonController, SDK::MethodInfo*) const
 {
 	const auto& enabled = std::get<bool>(EnabledSetting->GetValue());
 	const auto controller = firstPersonController->Fields.CharacterController;

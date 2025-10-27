@@ -16,7 +16,7 @@ void ForceCard::OnMenu()
 	ImGui::Combo("Forced type##tarotCardModifier", &std::get<int>(ForcedTypeSetting->GetValue()), tarotCardList, IM_ARRAYSIZE(tarotCardList));
 }
 
-void ForceCard::OnTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo) const
+void ForceCard::OnTarotCardSetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo) const
 {
 	if (!std::get<bool>(EnabledSetting->GetValue()))
 		return SDK::TarotCard_SetCard_ptr(tarotCard, type, methodInfo);

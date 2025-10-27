@@ -21,7 +21,7 @@ void CursedItemModifier::OnMenu()
 		else
 		{
 			if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
-				SDK::CursedItem_BreakItem_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
+				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
 
 			if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
 				SDK::CursedItem_BreakItem_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);
@@ -54,7 +54,7 @@ void CursedItemModifier::OnMenu()
 		else
 		{
 			if (DoesCursedItemExist(SDK::CursedItemType::OuijaBoard))
-				SDK::CursedItem_Use_ptr(reinterpret_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
+				SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.OuijaBoard), nullptr);
 
 			if (DoesCursedItemExist(SDK::CursedItemType::MusicBox))
 				SDK::CursedItem_Use_ptr(static_cast<SDK::CursedItem*>(GameState::cursedItemController->Fields.MusicBox), nullptr);

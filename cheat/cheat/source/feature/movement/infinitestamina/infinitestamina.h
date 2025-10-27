@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Movement
 	class InfiniteStamina final : public Feature
 	{
 	public:
-		InfiniteStamina();
+		explicit InfiniteStamina();
 		~InfiniteStamina() override = default;
 
 		void OnEnable() override
@@ -23,6 +23,6 @@ namespace Asthmaphobia::Features::Movement
 
 		void OnMenu() override;
 
-		void OnPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const;
+		void OnPlayerStaminaUpdate(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo) const;
 	};
 }

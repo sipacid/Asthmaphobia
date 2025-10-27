@@ -11,9 +11,9 @@ void Hooks::hkFirstPersonController_Update(SDK::FirstPersonController* firstPers
 	LOG_CALL("Called FirstPersonController_Update");
 	if (globalRunning)
 	{
-		GetFeatureManagerInstance().GetFeature<Features::Movement::Speed>("Movement::Speed")->OnFirstPersonController_Update(firstPersonController, methodInfo);
-		GetFeatureManagerInstance().GetFeature<Features::Movement::NoClip>("Movement::NoClip")->OnFirstPersonController_Update(firstPersonController, methodInfo);
-		GetFeatureManagerInstance().GetFeature<Features::Exploits::FreeMouseLook>("Exploits::FreeMouseLook")->OnFirstPersonController_Update(
+		GetFeatureManagerInstance().GetFeature<Features::Movement::Speed>("Movement::Speed")->OnFirstPersonControllerUpdate(firstPersonController, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Movement::NoClip>("Movement::NoClip")->OnFirstPersonControllerUpdate(firstPersonController, methodInfo);
+		GetFeatureManagerInstance().GetFeature<Features::Exploits::FreeMouseLook>("Exploits::FreeMouseLook")->OnFirstPersonControllerUpdate(
 			firstPersonController, methodInfo);
 	}
 

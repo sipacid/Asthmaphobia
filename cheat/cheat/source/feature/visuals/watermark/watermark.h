@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Visuals
 	class Watermark final : public Feature
 	{
 	public:
-		Watermark();
+		explicit Watermark();
 		~Watermark() override = default;
 
 		void OnEnable() override

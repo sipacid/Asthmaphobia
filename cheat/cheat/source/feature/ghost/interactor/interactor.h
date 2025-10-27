@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Ghost
 	class Interactor final : public Feature
 	{
 	public:
-		Interactor();
+		explicit Interactor();
 		~Interactor() override = default;
 
 		void OnEnable() override

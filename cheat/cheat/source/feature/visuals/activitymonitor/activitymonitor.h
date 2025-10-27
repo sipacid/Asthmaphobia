@@ -6,7 +6,7 @@ namespace Asthmaphobia::Features::Visuals
 	class ActivityMonitor final : public Feature
 	{
 	public:
-		ActivityMonitor();
+		explicit ActivityMonitor();
 		~ActivityMonitor() override = default;
 
 		void OnEnable() override
