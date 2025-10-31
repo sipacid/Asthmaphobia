@@ -19,15 +19,16 @@ namespace Asthmaphobia
 		static void hkFuseBox_Start(SDK::FuseBox* fuseBox, SDK::MethodInfo* methodInfo);
 		static bool hkExitlevel_ThereAreAlivePlayersOutsideTheTruck(SDK::ExitLevel* exitLevel, SDK::MethodInfo* methodInfo);
 		static void hkServerManager_KickPlayerNetworked(SDK::ServerManager* serverManager, bool a1, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
-		static std::nullptr_t hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, bool revive, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
-		static void hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo);
 		static void hkFirstPersonController_Update(SDK::FirstPersonController* firstPersonController, SDK::MethodInfo* methodInfo);
 		static void hkTarotCard_SetCard(SDK::TarotCard* tarotCard, SDK::TarotCardType type, SDK::MethodInfo* methodInfo);
-		static int32_t hkLevelValues_GetInvestigationBonus(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
+		static int32_t hkLevelValues_GetInvestigationBonusReward(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
 		static bool hkLevelValues_IsPerfectGame(SDK::LevelValues* levelValues, SDK::MethodInfo* methodInfo);
 		static void hkDeadZoneController_Awake(SDK::DeadZoneController* deadZoneController, SDK::MethodInfo* methodInfo);
 		static void hkCursedItemController_Awake(SDK::CursedItemController* cursedItemController, SDK::MethodInfo* methodInfo);
 		static void hkObjectiveManager_Update(SDK::ObjectiveManager* objectiveManager, SDK::MethodInfo* methodInfo);
+		static void hkPCDisablePlayerComponents_Start(SDK::PCDisablePlayerComponents* pcDisablePlayerComponents, SDK::MethodInfo* methodInfo);
 		static void hkPhotonObjectInteract_Start(SDK::PhotonObjectInteract* photonObjectInteract, SDK::MethodInfo* methodInfo);
+		static std::nullptr_t hkPlayer_StartKillingPlayerNetworked(SDK::Player* player, bool revive, void* photonMessageInfo, SDK::MethodInfo* methodInfo);
+		static void hkPlayerStamina_Update(SDK::PlayerStamina* playerStamina, SDK::MethodInfo* methodInfo);
 	};
 }

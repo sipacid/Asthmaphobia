@@ -45,12 +45,13 @@ extern "C" __declspec(dllexport) DWORD WINAPI AsthmaphobiaThread()
 		hooking.AddHook("PlayerStamina_Update", &SDK::PlayerStamina_Update_ptr, Hooks::hkPlayerStamina_Update);
 		hooking.AddHook("FirstPersonController_Update", &SDK::FirstPersonController_Update_ptr, Hooks::hkFirstPersonController_Update);
 		hooking.AddHook("TarotCard_SetCard", &SDK::TarotCard_SetCard_ptr, Hooks::hkTarotCard_SetCard);
-		hooking.AddHook("LevelValues_InvestigationBonusReward", &SDK::LevelValues_GetInvestigationBonus_ptr,
-		                Hooks::hkLevelValues_GetInvestigationBonus);
+		hooking.AddHook("LevelValues_InvestigationBonusReward", &SDK::LevelValues_GetInvestigationBonusReward_ptr,
+		                Hooks::hkLevelValues_GetInvestigationBonusReward);
 		hooking.AddHook("LevelValues_IsPerfectGame", &SDK::LevelValues_IsPerfectGame_ptr, Hooks::hkLevelValues_IsPerfectGame);
 		hooking.AddHook("DeadZoneController_Awake", &SDK::DeadZoneController_Awake_ptr, Hooks::hkDeadZoneController_Awake);
 		hooking.AddHook("CursedItemController_Awake", &SDK::CursedItemController_Awake_ptr, Hooks::hkCursedItemController_Awake);
 		hooking.AddHook("ObjectiveManager_Update", &SDK::ObjectiveManager_Update_ptr, Hooks::hkObjectiveManager_Update);
+		hooking.AddHook("PCDisablePlayerComponents_Start", &SDK::PCDisablePlayerComponents_Start_ptr, Hooks::hkPCDisablePlayerComponents_Start);
 		hooking.AddHook("PhotonObjectInteract_Start", &SDK::PhotonObjectInteract_Start_ptr, Hooks::hkPhotonObjectInteract_Start);
 
 		if (hooking.ApplyHooks() != Hooking::HookResult::Success)

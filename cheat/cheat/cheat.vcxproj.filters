@@ -345,6 +345,15 @@
     <ClInclude Include="source\sdk\ObjectiveManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\feature\visuals\fullbright\fullbright.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\PCDisablePlayerComponents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -491,7 +500,7 @@
     <ClCompile Include="source\feature\player\customname\customname.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp">
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonusReward.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\feature\exploits\rewardmodifier\rewardmodifier.cpp">
@@ -549,6 +558,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\hooking\hooks\hkObjectiveManager_Update.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\feature\visuals\fullbright\fullbright.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\hooking\hooks\hkPCDisablePlayerComponents_Start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

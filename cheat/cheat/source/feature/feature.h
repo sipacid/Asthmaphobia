@@ -122,7 +122,7 @@ namespace Asthmaphobia
 			}
 		}
 
-		void DrawHotkeyUI()
+		void DrawHotkeyUI() const
 		{
 			ImGui::SameLine();
 
