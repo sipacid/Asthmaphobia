@@ -182,6 +182,7 @@
     <ClCompile Include="source\feature\exploits\antikick\antikick.cpp" />
     <ClCompile Include="source\feature\player\customname\customname.cpp" />
     <ClCompile Include="source\feature\exploits\objectivemanager\objectivemanager.cpp" />
+    <ClCompile Include="source\feature\visuals\fullbright\fullbright.cpp" />
     <ClCompile Include="source\feature\world\doormodifier\doormodifier.cpp" />
     <ClCompile Include="source\feature\exploits\freemouselook\freemouselook.cpp" />
     <ClCompile Include="source\feature\exploits\pickup\pickup.cpp" />
@@ -213,10 +214,11 @@
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Hunting.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkGhostAI_Update.cpp" />
-    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonus.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkLevelValues_GetInvestigationBonusReward.cpp" />
     <ClCompile Include="source\hooking\hooks\hkMapController_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkObjectiveManager_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPauseMenuController_Leave.cpp" />
+    <ClCompile Include="source\hooking\hooks\hkPCDisablePlayerComponents_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPhotonObjectInteract_Start.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPlayerStamina_Update.cpp" />
     <ClCompile Include="source\hooking\hooks\hkPlayer_StartKillingPlayerNetworked.cpp" />
@@ -232,6 +234,7 @@
     <ClInclude Include="source\feature\exploits\antikick\antikick.h" />
     <ClInclude Include="source\feature\player\customname\customname.h" />
     <ClInclude Include="source\feature\exploits\objectivemanager\objectivemanager.h" />
+    <ClInclude Include="source\feature\visuals\fullbright\fullbright.h" />
     <ClInclude Include="source\feature\world\doormodifier\doormodifier.h" />
     <ClInclude Include="source\feature\exploits\freemouselook\freemouselook.h" />
     <ClInclude Include="source\feature\exploits\pickup\pickup.h" />
@@ -290,6 +293,7 @@
     <ClInclude Include="source\sdk\LevelController.h" />
     <ClInclude Include="source\sdk\LevelRoom.h" />
     <ClInclude Include="source\sdk\LevelValues.h" />
+    <ClInclude Include="source\sdk\Light.h" />
     <ClInclude Include="source\sdk\LineRenderer.h" />
     <ClInclude Include="source\sdk\MainManager.h" />
     <ClInclude Include="source\sdk\MapController.h" />
@@ -301,6 +305,7 @@
     <ClInclude Include="source\sdk\Network.h" />
     <ClInclude Include="source\sdk\ObjectiveManager.h" />
     <ClInclude Include="source\sdk\PauseMenuController.h" />
+    <ClInclude Include="source\sdk\PCDisablePlayerComponents.h" />
     <ClInclude Include="source\sdk\PhotonNetwork.h" />
     <ClInclude Include="source\sdk\PhotonObjectInteract.h" />
     <ClInclude Include="source\sdk\PhotonView.h" />

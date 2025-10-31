@@ -58,6 +58,27 @@ namespace Asthmaphobia
 		virtual void OnDraw() = 0;
 		virtual void OnMenu() = 0;
 
+		void Update()
+		{
+			const bool currentEnabled = std::get<bool>(EnabledSetting->GetValue());
+
+			if (currentEnabled != WasEnabled)
+			{
+				if (currentEnabled)
+				{
+					LOG_INFO(std::format("[{}] Enabled", Name));
+					OnEnable();
+				}
+				else
+				{
+					LOG_INFO(std::format("[{}] Disabled", Name));
+					OnDisable();
+				}
+
+				WasEnabled = currentEnabled;
+			}
+		}
+
 		static std::unordered_map<std::string, bool>& GetCapturingStates()
 		{
 			static std::unordered_map<std::string, bool> capturingStates;
@@ -122,7 +143,7 @@ namespace Asthmaphobia
 			}
 		}
 
-		void DrawHotkeyUI()
+		void DrawHotkeyUI() const
 		{
 			ImGui::SameLine();
 
@@ -152,6 +173,7 @@ namespace Asthmaphobia
 		std::shared_ptr<Setting> EnabledSetting;
 		std::shared_ptr<Setting> ToggleHotkeySetting;
 		std::unique_ptr<Settings> Settings_;
+		bool WasEnabled = false;
 	};
 
 	class FeatureManager

@@ -44,9 +44,7 @@ namespace Asthmaphobia
 	class Settings
 	{
 	public:
-		Settings()
-		{
-		}
+		Settings() = default;
 
 		void AddSetting(std::shared_ptr<Setting> setting)
 		{

@@ -24,6 +24,7 @@
 #include "player/playermodifier/playermodifier.h"
 #include "visuals/activitymonitor/activitymonitor.h"
 #include "visuals/evidenceesp/evidenceesp.h"
+#include "visuals/fullbright/fullbright.h"
 #include "visuals/fuseboxesp/fuseboxesp.h"
 #include "visuals/ghostesp/ghostesp.h"
 #include "visuals/ghostwindow/ghostwindow.h"
@@ -59,6 +60,7 @@ FeatureManager::FeatureManager()
 	AddFeature("Visuals::GhostESP", std::make_unique<Features::Visuals::GhostESP>());
 	AddFeature("Visuals::PlayerESP", std::make_unique<Features::Visuals::PlayerESP>());
 	AddFeature("Visuals::EvidenceESP", std::make_unique<Features::Visuals::EvidenceESP>());
+	AddFeature("Visuals::FullBright", std::make_unique<Features::Visuals::FullBright>());
 	AddFeature("Visuals::FuseBoxESP", std::make_unique<Features::Visuals::FuseBoxESP>());
 
 	AddFeature("Exploits::LeavePeople", std::make_unique<Features::Exploits::LeavePeople>());
@@ -100,6 +102,9 @@ void FeatureManager::OnDraw() const
 {
 	for (const auto& feature : Features | std::views::values)
 	{
+		// Terrible way to check for isEnabled changes, but at the moment I don't give a fuck
+		feature->Update();
+
 		if (feature->IsEnabled())
 		{
 			feature->OnDraw();

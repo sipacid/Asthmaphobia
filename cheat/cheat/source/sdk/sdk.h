@@ -255,6 +255,8 @@ namespace { struct NAME##_registrar { NAME##_registrar() { IL2CPP::methodInitial
 #include "Network.h"
 #include "ObjectiveManager.h"
 #include "Matrix4x4.h"
+#include "Light.h"
+#include "PCDisablePlayerComponents.h"
 #include "PhysicsCharacterController.h"
 #include "FirstPersonController.h"
 #include "Collider.h"
