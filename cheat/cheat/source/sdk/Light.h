@@ -23,11 +23,11 @@ namespace SDK
 	struct Light;
 
 	DECLARE_METHOD_POINTER(Light_Set_Type, void(*)(SDK::Light* light, LightType lightType, SDK::MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Light",
-		"set_type", 1)
+	                       "set_type", 1)
 
 	DECLARE_METHOD_POINTER(Light_Set_Intensity, void(*)(SDK::Light* light, float intensity, SDK::MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Light",
 	                       "set_intensity", 1)
 
 	DECLARE_METHOD_POINTER(Light_Set_Shadows, void(*)(SDK::Light* light, LightShadows lightShadows, SDK::MethodInfo* methodInfo), "UnityEngine.CoreModule", "UnityEngine", "Light",
-		"set_shadows", 1)
+	                       "set_shadows", 1)
 }

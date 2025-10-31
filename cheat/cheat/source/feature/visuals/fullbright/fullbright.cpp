@@ -6,6 +6,16 @@ FullBright::FullBright() : Feature("FullBright", "Makes the entire map fully lit
 {
 }
 
+void FullBright::OnEnable()
+{
+	Notifications::AddNotification("[FullBright] Will be activated on next world load", Notifications::NotificationType::Info, 3.0f);
+}
+
+void FullBright::OnDisable()
+{
+	Notifications::AddNotification("[FullBright] Will be deactivated on next world load", Notifications::NotificationType::Info, 3.0f);
+}
+
 void FullBright::OnMenu()
 {
 	ImGui::Checkbox("Enabled##fullBright", &std::get<bool>(EnabledSetting->GetValue()));

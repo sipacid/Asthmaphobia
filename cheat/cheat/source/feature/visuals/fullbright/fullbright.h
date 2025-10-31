@@ -9,13 +9,9 @@ namespace Asthmaphobia::Features::Visuals
 		explicit FullBright();
 		~FullBright() override = default;
 
-		void OnEnable() override
-		{
-		}
+		void OnEnable() override;
 
-		void OnDisable() override
-		{
-		}
+		void OnDisable() override;
 
 		void OnDraw() override
 		{

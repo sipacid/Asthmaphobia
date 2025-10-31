@@ -102,6 +102,9 @@ void FeatureManager::OnDraw() const
 {
 	for (const auto& feature : Features | std::views::values)
 	{
+		// Terrible way to check for isEnabled changes, but at the moment I don't give a fuck
+		feature->Update();
+
 		if (feature->IsEnabled())
 		{
 			feature->OnDraw();
