@@ -51,7 +51,7 @@ void PlayerModifier::OnMenu()
 					{
 						isLocalMasterClient
 							? SDK::Player_StartKillingPlayer_ptr(player, nullptr)
-							: SDK::Player_KillPlayer_ptr(player, true, nullptr);
+							: SDK::Player_KillPlayer_ptr(player, nullptr);
 					}
 				}
 

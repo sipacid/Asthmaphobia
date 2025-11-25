@@ -102,7 +102,7 @@ namespace SDK
 		ListPlayerFields Fields;
 	};
 
-	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, bool revive, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 1)
+	DECLARE_METHOD_POINTER(Player_KillPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "KillPlayer", 0)
 
 	DECLARE_METHOD_POINTER(Player_StartKillingPlayer, void(*)(Player* player, MethodInfo* methodInfo), "Assembly-CSharp", "", "Player", "StartKillingPlayer", 0)
 
